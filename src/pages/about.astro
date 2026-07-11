@@ -6,19 +6,19 @@ import CTASection from "../components/CTASection.astro";
 const beliefs = [
   {
     title: "Specific beats generic",
-    body: "Content that names your market, your competitors, and the exact person you sell to travels. Content that could belong to anyone gets scrolled past.",
+    body: "Content that names your market, your competitors, and the one person you sell to travels. Content that could belong to any brand in your category gets scrolled past.",
   },
   {
-    title: "The internet has enough slop",
-    body: "Machine-made, say-nothing content is everywhere now. People can feel the difference. We make the kind that a person clearly thought about and stands behind.",
+    title: "The internet has enough AI slop",
+    body: "Say-nothing, made-in-bulk content is everywhere now, and audiences have learned to tune it out. We make the kind a person researched, wrote, and put their name on.",
   },
   {
-    title: "The first minutes decide everything",
-    body: "A post lives or dies in the first hour, on the hook and the early replies. We treat those minutes as the work, not an afterthought.",
+    title: "The first hour decides everything",
+    body: "A post lives or dies on the hook and the first hour of replies. We staff those minutes and answer in real time, instead of shipping and walking away.",
   },
   {
     title: "You should be selling, not posting",
-    body: "Being everywhere every day is a full-time job. Your job is serving the people we bring you. Ours is the rest of it.",
+    body: "Running an audience across five platforms is a full-time job. Yours is closing the people it sends you. The posting, the replies, and the reporting are ours.",
   },
 ];
 
@@ -30,8 +30,8 @@ const people = [
     // Photo to add: place a square image at public/about/jay.jpg (min 480x480).
     photo: "/about/jay.jpg",
     bio: [
-      "Jay founds Ilai and builds the software behind it. Around 20 years in IT infrastructure and automation taught him to make small systems do the work of big ones.",
-      "He builds the research and publishing engines that let a two-person studio run a full content operation across every platform, so people spend their time on judgment, not busywork.",
+      "Jay founded Ilai and builds the software behind it. Twenty years in IT infrastructure and automation taught him to make a lean setup carry the load of a much larger one.",
+      "He writes the research and publishing engines that let a senior US team run a full content operation across every platform, so the people stay on the parts that need judgment and skip the busywork.",
     ],
   },
   {
@@ -41,8 +41,8 @@ const people = [
     // Photo to add: place a square image at public/about/jj.jpg (min 480x480).
     photo: "/about/jj.jpg",
     bio: [
-      "JJ leads social and community. He sets the voice for each brand we work with and makes sure every piece sounds like the person it belongs to.",
-      "He runs the first-response engagement in the minutes that decide whether a post spreads, and keeps the whole feed feeling like one consistent, human account.",
+      "JJ leads social and community. He sets the voice for every brand we work with and checks each piece against it, so a caption reads like the person, not like an agency.",
+      "He runs first-response engagement in the first hour after a post goes live, when replies decide whether it spreads, and keeps every platform sounding like one account run by one person.",
     ],
   },
 ];
@@ -50,30 +50,30 @@ const people = [
 const compare = [
   {
     them: "Guesses what might work and posts it",
-    us: "Researches your market and audience, then aims every piece",
+    us: "Researches your market and audience first, then writes each piece to a target",
   },
   {
     them: "A different tone on every platform",
-    us: "One voice everywhere, built with you and held to",
+    us: "One voice on every platform, set with you and checked on every piece",
   },
   {
     them: "Content shipped on autopilot",
-    us: "A person approves every piece before it goes out",
+    us: "A senior person reviews and approves every piece before it goes out",
   },
   {
-    them: "A monthly PDF report, weeks late",
-    us: "A live dashboard, refreshed on its own, that you watch it work on",
+    them: "A monthly PDF report that lands weeks late",
+    us: "A live dashboard that updates as the work runs, open to you any time",
   },
   {
-    them: "Promises sales it cannot control",
-    us: "Reports the interest and intent it surfaces, and hands off at your funnel",
+    them: "Promises sales it can't control",
+    us: "Reports the interest and intent it surfaces, then hands off at your funnel",
   },
 ];
 ---
 
 <Layout
   title="About — Ilai Collective"
-  description="Ilai Collective is a small, senior US team that grows the audience you sell to. Human-led and human-gated: people set the voice and approve every piece, while research and publishing software we built ourselves lets a small team move like a big one."
+  description="Ilai Collective is a senior US content studio that grows the audience you sell to. Human-led and human-gated: people set the voice and approve every piece, and research and publishing software we built ourselves lets a two-person team run a full operation across every platform."
   path="/about"
 >
   <!-- ============ HERO ============ -->
@@ -87,8 +87,8 @@ const compare = [
       </h1>
       <p class="lead hero__lead" data-reveal data-reveal-delay="2">
         Ilai is human-led and human-gated. People set the voice, write the angles,
-        and approve everything before it ships. The software we built just lets a
-        small, senior team move like a big one.
+        and approve everything before it ships. The software we built ourselves lets a
+        two-person senior team run a content operation the size of a full department.
       </p>
     </div>
   </section>
@@ -98,8 +98,8 @@ const compare = [
     <div class="container">
       <SectionHeader
         eyebrow="What we believe"
-        title="A few things we hold to on every account"
-        lead="These aren't slogans. They decide what we make, what we refuse to make, and how we spend the hours."
+        title="A few rules we hold to on every account"
+        lead="These decide what we make, what we turn down, and where the hours go each week."
       />
       <div class="grid grid-2 beliefs__grid">
         {
@@ -123,8 +123,8 @@ const compare = [
     <div class="container">
       <SectionHeader
         eyebrow="The people"
-        title="Two people run this, and both of them are senior"
-        lead="No account managers, no hand-offs to juniors. The people who build the systems and set the voice are the people on your work."
+        title="Two senior people run this, and they run your account"
+        lead="No account managers, no hand-off to juniors. The person who builds the systems and the person who sets the voice are the two doing your work."
       />
       <div class="grid grid-2 people__grid">
         {
@@ -169,7 +169,7 @@ const compare = [
       <SectionHeader
         eyebrow="How we're different"
         title="What a normal agency does, and what we do instead"
-        lead="Most of the gap comes down to one thing: research and software let us do by hand what agencies fake with volume."
+        lead="The gap comes down to research and our own software, which let us do by hand what most agencies paper over with volume."
       />
       <div class="compare" data-reveal>
         <div class="compare__headrow" aria-hidden="true">
@@ -236,14 +236,14 @@ const compare = [
         <span class="eyebrow eyebrow--pill manifesto__pill">Our standard</span>
         <h2 class="manifesto__title">Human-led. Human-gated.</h2>
         <p class="manifesto__lead">
-          Underneath the work sit research and publishing engines we built ourselves,
-          the kind that usually take a whole department. They do the heavy lifting so a
-          small team can cover every platform.
+          Under the work sit research and publishing engines we built ourselves, the kind
+          that usually take a whole department to run. They carry the volume so a two-person
+          team can cover every platform without cutting corners.
         </p>
         <p class="manifesto__body">
-          People stay in charge of the parts that matter. We direct the strategy, set the
-          voice, and sign off on every piece before it ships. That is how the quality holds
-          at scale, and why the work sounds like you and not like a machine guessing.
+          People stay in charge of everything that carries a name. We direct the strategy,
+          set the voice, and sign off on every piece before it ships. That is how the quality
+          holds at scale, and why the work sounds like you instead of like software filling space.
         </p>
       </div>
     </div>

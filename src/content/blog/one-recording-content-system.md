@@ -37,13 +37,13 @@ The system works because each step feeds the next. Skip the order and you rebuil
 
 ## What the expert actually does each week
 
-This is the part that sells the system: the time cost.
+Here is the full time cost for the person in front of the camera:
 
 - Record: about 90 minutes, once
 - Review and approve clips and copy: about 60 minutes
 - Reply to the best comments: about 30 minutes
 
-Under three hours a week for a presence that looks full-time. The heavy lifting, the cutting, the writing, the scheduling, the platform-specific rework, is production work that runs on its own once the recording exists.
+Under three hours a week for a presence that looks full-time. The cutting, the writing, the scheduling, and the platform-specific rework are production work that runs once the recording exists.
 
 ## Why one recording beats posting daily
 

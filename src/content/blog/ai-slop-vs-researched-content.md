@@ -18,13 +18,13 @@ Slop is content produced to fill a slot rather than to say something. You can sp
 - It could have been written about any brand in the category
 - It reads smooth and leaves nothing behind
 
-The problem is not that a machine touched it. Software helps good teams move faster every day. The problem is that no one had a specific point to make, so the output has no point to find.
+The failure has nothing to do with a machine touching it. Software helps good teams move faster every day. Slop fails because no one had a specific point to make, so the output has no point to find.
 
 ## Why slop does not grow an audience
 
 Growth on any platform now runs on reactions in the first few minutes. Saves, shares, replies, watch time. Slop earns none of those because there is nothing to react to. A reader cannot save advice they have heard a hundred times or share a post that names nothing.
 
-There is a second cost that is easy to miss. Publishing filler trains your audience to scroll past you. Once someone learns that your posts are safe to ignore, they ignore the good ones too. A brand can quietly teach its own followers not to look.
+There is a second cost that is easy to miss. Publishing filler trains your audience to scroll past you. Once someone learns that your posts are safe to ignore, they ignore the good ones too. A brand can teach its own followers not to look.
 
 ## What researched content does differently
 
@@ -60,6 +60,6 @@ If a piece fails all three, it is slop, and it will not convert no matter how of
 
 ## The concrete takeaway
 
-Slop loses because it gives the audience nothing to react to and quietly teaches them to scroll past you. Researched content wins because it is specific, aimed, and has a view. Post less, but make every piece name something real.
+Slop loses because it gives the audience nothing to react to and teaches them to scroll past you. Researched content wins because it is specific, aimed, and has a view. Post less, but make every piece name something real.
 
 If you want your content judged against that bar before it ships, that standard is the one we hold on every piece, and we will show you what it looks like on a first call.

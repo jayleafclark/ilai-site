@@ -13,24 +13,24 @@ const steps = [
   {
     n: "01",
     t: "We research you before we meet",
-    d: "We study your brand, your market, and the people you sell to, so we walk in already knowing your audience.",
+    d: "We study your brand, your market, and the people you sell to, so we come to the call already knowing your audience.",
   },
   {
     n: "02",
     t: "We show you what we found",
-    d: "On the call we walk you through the teardown and where your audience actually is, platform by platform.",
+    d: "On the call we walk you through the teardown and where your audience is, platform by platform, and what we'd post first.",
   },
   {
     n: "03",
     t: "If it's a fit, we build month one",
-    d: "We set your voice and content system, then start publishing. You approve everything before it ships.",
+    d: "We set your voice, build the content system, and start publishing. You approve everything before it ships.",
   },
 ];
 ---
 
 <Layout
-  title="Book a call — Ilai Collective"
-  description="Book a call with Ilai Collective and get a free teardown of your brand, market, and audience. A real US team, human-led content built to grow the audience you'll sell to. Engagements start at $5,500/mo, pilot month $1,950 fully credited."
+  title="Book a call | Ilai Collective"
+  description="Book a call with Ilai Collective and get a free teardown of your brand, market, and audience. A real US team building human-led content that grows the audience you'll sell to. Pilot month $1,950 fully credited, engagements from $5,500/mo."
   path="/contact"
 >
   <section class="contact section">
@@ -41,14 +41,15 @@ const steps = [
         <h1 class="form-col__title">Book a call</h1>
         <p class="lead form-col__lead">
           We'll bring a free teardown of your brand, your market, and your
-          audience to the first call. No obligation, and the teardown is yours
-          to keep.
+          audience to the first call. Real research before you pay us anything.
+          No obligation, and the teardown is yours to keep.
         </p>
 
         <!--
-          SETUP: replace REPLACE_WITH_FORM_ID below with your Formspree endpoint
-          (or a Basin / Web3Forms endpoint). This is a static site, so the form
-          posts to a third-party form backend. Nothing else needs changing.
+          SETUP: this is a static site, so the form posts to a third-party
+          backend. Replace the REPLACE_WITH_FORM_ID action below with your real
+          endpoint from Formspree (formspree.io/f/xxxx), Basin, or Web3Forms.
+          Nothing else needs changing.
         -->
         <form
           class="lead-form"
@@ -103,8 +104,12 @@ const steps = [
 
           <div class="field">
             <label for="audience">What do you do, and who do you sell to?</label>
-            <textarea id="audience" name="what_you_do" rows="4" required
-            ></textarea>
+            <textarea
+              id="audience"
+              name="what_you_do"
+              rows="4"
+              placeholder="Your work, your offer, and the people you want to reach."
+              required></textarea>
           </div>
 
           <div class="field">
@@ -149,8 +154,8 @@ const steps = [
           </button>
 
           <p class="lead-form__fine">
-            No obligation. The teardown is free, and it's yours whether or not
-            we work together.
+            No obligation. The teardown is free and it's yours to keep, whether
+            or not we work together. We usually reply within one business day.
           </p>
           <p class="lead-form__mail">
             Prefer email? <a href="mailto:hello@ilaicollective.com"
@@ -199,7 +204,7 @@ const steps = [
           </div>
 
           <p class="trust">
-            A real US team. Human-led, research-driven, software-aided. You
+            A real US team, led by people and grounded in research. You see and
             approve everything before it ships.
           </p>
 
@@ -223,7 +228,7 @@ const steps = [
               </svg>
             </span>
             <span class="scheduler__text"
-              >Scheduling link goes here once your call calendar is live.</span
+              >Send the form and we'll email you a time that works.</span
             >
           </div>
         </div>
@@ -235,12 +240,10 @@ const steps = [
   <section class="reassure section--mist">
     <div class="container reassure__inner" data-reveal>
       <p class="reassure__line">
-        Every claim on this site is a real client result. We report interest and
-        intent, and hand off at the funnel. No AI slop, no guessing.
+        We build the audience you'll sell to, track the interest and intent it
+        creates, and hand off at your funnel so your team can close.
       </p>
-      <a href="/work/dr-caroline-leaf" class="reassure__link"
-        >See the proof for yourself →</a
-      >
+      <a href="/work/dr-caroline-leaf" class="reassure__link">See how it works →</a>
     </div>
   </section>
 </Layout>

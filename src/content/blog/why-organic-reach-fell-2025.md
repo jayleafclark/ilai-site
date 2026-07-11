@@ -31,7 +31,7 @@ Broad content gets a thin slice of a huge feed. Specific content gets a large sl
 
 ### They treated the first hour as the whole game
 
-A post's fate is mostly decided in the first 30 to 60 minutes. The accounts that grew showed up in that window, replied to every early comment in their own voice, and gave the post the signal it needed to travel. Scheduling and walking away is where most reach quietly leaks out.
+A post's fate is mostly decided in the first 30 to 60 minutes. The accounts that grew showed up in that window, replied to every early comment in their own voice, and gave the post the signal it needed to travel. Scheduling and walking away is where most reach leaks out.
 
 ### They published everywhere from one strong idea
 
