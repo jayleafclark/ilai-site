@@ -2361,7 +2361,9 @@ const comments = [
       display: none;
     }
     .hslide__inner {
-      padding: var(--sp-7) var(--sp-5) var(--sp-7);
+      /* sp-7 doesn't exist -> the whole padding collapsed to 0 and the content
+         jammed against the card edges. Real, comfortable inner padding: */
+      padding: var(--sp-6) var(--sp-5) var(--sp-8);
     }
     .hslide__title {
       margin-top: var(--sp-3);
