@@ -59,7 +59,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
             >
               {post.data.cover && (
                 <span class="postcard__cover">
-                  <img src={`${base}${post.data.cover}`} alt="" loading="lazy" width="1200" height="630" />
+                  <img src={`${base}${post.data.cover}?v=2`} alt="" loading="lazy" width="1200" height="630" />
                 </span>
               )}
               {post.data.tags?.[0] && (

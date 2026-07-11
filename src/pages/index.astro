@@ -473,10 +473,10 @@ const comments = [
               <span class="hiwviz__pulse"></span>
               <span>One recording</span>
             </div>
-            <div class="hiwviz__flow" aria-hidden="true"></div>
+            <div class="hiwviz__flow" aria-hidden="true"><span class="hiwviz__signal"></span></div>
             <div class="hiwviz__grid">
               {Array.from({ length: 15 }).map((_, k) => (
-                <span class="hiwviz__cell" style={`--d:${(k % 5) * 0.28 + Math.floor(k / 5) * 0.14}s`}></span>
+                <span class="hiwviz__cell" style={`--i:${k}`}></span>
               ))}
             </div>
             <div class="hiwviz__foot">
@@ -1775,18 +1775,31 @@ const comments = [
     font-weight: 700;
     font-size: 0.82rem;
   }
+  /* One synchronized master timeline so the whole card tells a single story:
+     the recording pulses -> a signal travels down the connector -> the grid
+     lights up in a staggered cascade (one input fanning into many outputs) ->
+     the footer total lights -> everything eases back and repeats. */
+  .hiwviz { --loop: 7.6s; }
   .hiwviz__pulse {
     position: relative;
     width: 9px; height: 9px; border-radius: 50%; background: #fff;
+    animation: hiwPulseCore var(--loop) var(--ease) infinite;
   }
   .hiwviz__pulse::after {
     content: "";
     position: absolute; inset: -5px; border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    animation: hiwPulse 2.2s var(--ease-out) infinite;
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    animation: hiwPulseRing var(--loop) var(--ease-out) infinite;
   }
-  @keyframes hiwPulse {
+  /* the source only "emits" at the top of each loop, then rests */
+  @keyframes hiwPulseCore {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5); }
+    4% { transform: scale(1.25); box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.55); }
+    12%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+  }
+  @keyframes hiwPulseRing {
     0% { opacity: 0.9; transform: scale(0.7); }
+    12% { opacity: 0; transform: scale(2); }
     100% { opacity: 0; transform: scale(2); }
   }
   .hiwviz__flow {
@@ -1794,6 +1807,22 @@ const comments = [
     height: 22px; margin: 6px 0 var(--sp-4) 12px;
     border-left: 2px dashed rgba(255, 255, 255, 0.22);
     width: 2px;
+  }
+  /* a bright dot that travels DOWN the dotted connector into the grid */
+  .hiwviz__signal {
+    position: absolute; left: 50%; top: 0;
+    width: 7px; height: 7px; margin-left: -4.5px; border-radius: 50%;
+    background: var(--coral);
+    box-shadow: 0 0 9px 2px rgba(28, 107, 74, 0.75);
+    opacity: 0;
+    animation: hiwSignal var(--loop) var(--ease) infinite;
+  }
+  @keyframes hiwSignal {
+    0% { top: 0; opacity: 0; transform: scale(0.6); }
+    3% { opacity: 1; transform: scale(1); }
+    12% { top: 100%; opacity: 1; transform: scale(1); }
+    16% { top: 100%; opacity: 0; transform: scale(1.6); }
+    100% { top: 100%; opacity: 0; transform: scale(1); }
   }
   .hiwviz__grid {
     position: relative;
@@ -1805,16 +1834,42 @@ const comments = [
   .hiwviz__cell {
     aspect-ratio: 1;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    animation: hiwCell 3.6s var(--ease) infinite;
-    animation-delay: var(--d);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    transform-origin: center;
+    /* cascade begins once the signal reaches the grid (~14% of the loop) and
+       each tile "produces" in sequence; delay derived from tile index */
+    animation: hiwCell var(--loop) var(--ease) infinite;
+    animation-delay: calc(0.9s + var(--i) * 0.16s);
   }
   @keyframes hiwCell {
-    0%, 100% { background: rgba(255, 255, 255, 0.1); transform: scale(0.9); }
-    18% { background: var(--coral); transform: scale(1); }
-    45% { background: rgba(230, 169, 196, 0.55); }
-    70% { background: rgba(255, 255, 255, 0.14); }
+    /* percentages are small because the active flash is a brief moment inside
+       the long shared loop; the rest of the time the tile rests dim */
+    0%, 100% {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.14);
+      transform: scale(1);
+    }
+    4% {
+      background: var(--coral);
+      border-color: transparent;
+      transform: scale(1.14);
+      box-shadow: 0 4px 14px -4px rgba(28, 107, 74, 0.7);
+    }
+    9% {
+      background: rgba(230, 169, 196, 0.55);
+      border-color: rgba(230, 169, 196, 0.5);
+      transform: scale(1.04);
+    }
+    26% {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: scale(1);
+    }
+    /* hold the "produced" state until the loop resets, so the eye sees the
+       grid fill up, then gently clear */
+    82% { background: rgba(255, 255, 255, 0.16); transform: scale(1); }
+    94% { background: rgba(255, 255, 255, 0.08); transform: scale(1); }
   }
   .hiwviz__foot {
     position: relative; z-index: 1;
@@ -1822,10 +1877,25 @@ const comments = [
     margin-top: var(--sp-5); padding-top: var(--sp-4);
     border-top: 1px solid rgba(255, 255, 255, 0.12);
     font-size: 0.8rem; color: rgba(255, 255, 255, 0.7);
+    animation: hiwFoot var(--loop) var(--ease) infinite;
+  }
+  /* the total lights up softly once the cascade has filled the grid */
+  @keyframes hiwFoot {
+    0%, 46% { color: rgba(255, 255, 255, 0.7); }
+    58% { color: rgba(255, 255, 255, 0.98); }
+    82% { color: rgba(255, 255, 255, 0.98); }
+    94%, 100% { color: rgba(255, 255, 255, 0.7); }
   }
   .hiwviz__dot {
     width: 7px; height: 7px; border-radius: 50%; background: var(--coral);
     box-shadow: 0 0 0 4px rgba(28, 107, 74, 0.3);
+    animation: hiwFootDot var(--loop) var(--ease) infinite;
+  }
+  @keyframes hiwFootDot {
+    0%, 46% { box-shadow: 0 0 0 4px rgba(28, 107, 74, 0.3); transform: scale(1); }
+    58% { box-shadow: 0 0 0 6px rgba(28, 107, 74, 0.45); transform: scale(1.25); }
+    82% { box-shadow: 0 0 0 6px rgba(28, 107, 74, 0.45); transform: scale(1.15); }
+    94%, 100% { box-shadow: 0 0 0 4px rgba(28, 107, 74, 0.3); transform: scale(1); }
   }
   @media (min-width: 900px) {
     .hiw__top {
@@ -1833,8 +1903,19 @@ const comments = [
       gap: var(--sp-12);
     }
   }
+  /* Calm static state: grid reads as filled/produced, nothing moves */
   @media (prefers-reduced-motion: reduce) {
-    .hiwviz__pulse::after, .hiwviz__cell { animation: none; }
+    .hiwviz__pulse,
+    .hiwviz__pulse::after,
+    .hiwviz__signal,
+    .hiwviz__cell,
+    .hiwviz__foot,
+    .hiwviz__dot { animation: none; }
+    .hiwviz__signal { opacity: 0; }
+    .hiwviz__cell {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
   }
   .hiw__head .lead {
     margin-top: var(--sp-4);

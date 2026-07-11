@@ -469,7 +469,9 @@ const why = [
   .herocard__body {
     position: relative;
     z-index: 2;
-    max-width: 62ch;
+    max-width: 800px;
+    margin-inline: auto;
+    text-align: center;
   }
   .herocard__title {
     margin-top: var(--sp-4);
@@ -484,7 +486,8 @@ const why = [
   }
   .herocard__lead {
     margin-top: var(--sp-5);
-    max-width: 56ch;
+    margin-inline: auto;
+    max-width: 60ch;
     color: rgba(255, 255, 255, 0.82);
     font-size: var(--fs-lead);
     line-height: 1.5;
@@ -492,6 +495,7 @@ const why = [
   .herocard__actions {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: var(--sp-3);
     margin-top: var(--sp-6);
   }
@@ -508,7 +512,8 @@ const why = [
     position: relative;
     z-index: 2;
     list-style: none;
-    margin-top: clamp(2rem, 4vw, 3rem);
+    margin: clamp(2rem, 4vw, 3rem) auto 0;
+    max-width: 920px;
     display: grid;
     gap: var(--sp-3);
   }
@@ -559,6 +564,26 @@ const why = [
     border-color: rgba(201, 162, 92, 0.5);
     box-shadow: 0 0 0 1px rgba(201, 162, 92, 0.3), 0 10px 30px -14px rgba(201, 162, 92, 0.6);
   }
+
+  /* Traveling signal: the highlight moves through 01 -> 05 and loops.
+     Every node runs the same keyframe, offset by --i so exactly one reads
+     "active" at a time. 5 steps x 2.1s = 10.5s loop (~2.1s per step). */
+  .flowviz__node .flowviz__pill {
+    animation: flowpill 10.5s linear infinite;
+    animation-delay: calc(var(--i) * 2.1s - 10.5s);
+  }
+  @keyframes flowpill {
+    0%, 20% {
+      background: rgba(201, 162, 92, 0.16);
+      border-color: rgba(201, 162, 92, 0.5);
+      box-shadow: 0 0 0 1px rgba(201, 162, 92, 0.3), 0 10px 30px -14px rgba(201, 162, 92, 0.6);
+    }
+    26%, 100% {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.14);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0), 0 0 0 rgba(201, 162, 92, 0);
+    }
+  }
   @media (min-width: 900px) {
     .flowviz {
       grid-template-columns: repeat(5, 1fr);
@@ -579,13 +604,15 @@ const why = [
     .flowviz__prog {
       display: block;
       height: 100%;
-      width: 0;
+      width: 100%;
       border-radius: 999px;
       background: linear-gradient(90deg, var(--gold), var(--coral-soft));
-      transition: width 1.6s var(--ease) 0.3s;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 1.6s var(--ease) 0.3s;
     }
     .herocard.is-visible .flowviz__prog {
-      width: 100%;
+      transform: scaleX(1);
     }
     .flowviz__node {
       position: relative;
@@ -615,6 +642,24 @@ const why = [
       background: var(--gold);
       border-color: var(--gold);
       box-shadow: 0 0 0 5px rgba(201, 162, 92, 0.25);
+    }
+    /* Traveling node: the filled dot moves along the connector in step
+       with the pill highlight (same 10.5s loop, same --i stagger). */
+    .flowviz__node::before {
+      animation: flownode 10.5s linear infinite;
+      animation-delay: calc(var(--i) * 2.1s - 10.5s);
+    }
+    @keyframes flownode {
+      0%, 20% {
+        background: var(--gold);
+        border-color: var(--gold);
+        box-shadow: 0 0 0 5px rgba(201, 162, 92, 0.25);
+      }
+      26%, 100% {
+        background: var(--charcoal);
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 0 0 rgba(201, 162, 92, 0);
+      }
     }
     .flowviz__pill {
       margin-top: 34px;
@@ -1097,6 +1142,10 @@ const why = [
 
   @media (prefers-reduced-motion: reduce) {
     .herocard__glow, .dcd__scan, .mea__pulse { animation: none; }
+    /* Stop the traveling signal; leave step 01 highlighted via .is-active. */
+    .flowviz__node .flowviz__pill,
+    .flowviz__node::before { animation: none; }
+    .flowviz__prog { transition: none; transform: scaleX(1); }
   }
 
   /* ==================================================================
