@@ -30,11 +30,17 @@
   --coral-ink: #8a4a34;
   --coral-soft: #e0a48f; /* lighter terracotta for gradients */
 
-  /* --- Accompanying: dusty blue --- */
-  --brand: #6f93ac;
+  /* --- Accompanying / playful accents --- */
+  --brand: #6f93ac; /* dusty blue */
   --brand-deep: #557790;
   --brand-night: #2c4757;
   --brand-tint: #e9eff3;
+  --green: #6fae8b; /* sage */
+  --green-tint: #e6f1ea;
+  --gold: #e0a552; /* warm gold */
+  --gold-tint: #f8ecd6;
+  --plum: #9d7bab; /* soft plum */
+  --plum-tint: #efe8f3;
 
   /* Dr. Leaf co-brand raspberry — case-study section only */
   --drleaf: #ce5a7a;

@@ -9,50 +9,53 @@ const features = [
   {
     t: "Researched, not guessed",
     s: "Every piece aimed at the people you sell to.",
+    c: "var(--coral)", bg: "var(--coral-tint)",
     icon: `<circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="2" fill="currentColor"/>`,
   },
   {
     t: "Human-led, human-gated",
     s: "People set the voice and sign off on everything.",
+    c: "var(--brand)", bg: "var(--brand-tint)",
     icon: `<path d="M10 2l6 2.5v5c0 4-2.7 6.3-6 7.5-3.3-1.2-6-3.5-6-7.5v-5L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.2 10l2 2 3.6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
   {
     t: "Everywhere, one voice",
     s: "One recording, published across up to 13 platforms.",
+    c: "var(--green)", bg: "var(--green-tint)",
     icon: `<circle cx="10" cy="10" r="2.2" fill="currentColor"/><path d="M5.5 5.5a6.5 6.5 0 000 9M14.5 5.5a6.5 6.5 0 010 9M3 3a10 10 0 000 14M17 3a10 10 0 010 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>`,
   },
 ];
 
 const growth = [
-  { p: "Facebook", v: "+359%", pct: 100 },
-  { p: "Instagram", v: "+155%", pct: 62 },
-  { p: "YouTube", v: "+42%", pct: 30 },
-  { p: "TikTok", v: "+39%", pct: 26 },
+  { p: "Facebook", v: "+359%", pct: 100, c: "var(--brand)" },
+  { p: "Instagram", v: "+155%", pct: 62, c: "var(--coral-soft)" },
+  { p: "YouTube", v: "+42%", pct: 30, c: "var(--gold)" },
+  { p: "TikTok", v: "+39%", pct: 26, c: "var(--green)" },
 ];
 
 const stats = [
   {
-    value: 205, suffix: "M+", label: "Impressions in 12 months",
+    value: 205, suffix: "M+", label: "Impressions in 12 months", c: "var(--coral)", bg: "var(--coral-tint)",
     icon: `<path d="M3 17V9M8.5 17V4M14 17v-6M19.5 17V7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
   },
   {
-    value: 90, suffix: "K+", label: "New followers",
+    value: 90, suffix: "K+", label: "New followers", c: "var(--brand)", bg: "var(--brand-tint)",
     icon: `<circle cx="8" cy="7" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M3 18a5 5 0 0110 0M15 5a3 3 0 010 6M19 18a4.5 4.5 0 00-3-4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
   },
   {
-    value: 8, suffix: "", label: "Platforms managed",
+    value: 8, suffix: "", label: "Platforms managed", c: "var(--green)", bg: "var(--green-tint)",
     icon: `<rect x="3" y="3" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="12.5" y="3" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="12.5" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="12.5" y="12.5" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/>`,
   },
   {
-    value: 0, prefix: "$", label: "Spent on ads",
+    value: 0, prefix: "$", label: "Spent on ads", c: "var(--gold)", bg: "var(--gold-tint)",
     icon: `<circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 7v8M8.5 9.2c0-1.2 1.1-1.9 2.5-1.9s2.5.6 2.5 1.8-1.1 1.6-2.5 1.9-2.5.7-2.5 1.9 1.1 1.8 2.5 1.8 2.5-.7 2.5-1.9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>`,
   },
 ];
 
 const services = [
-  { tag: "Podcasts & video", d: "Full episode edits, clips, long-form YouTube, show notes, and SEO. Record once, get a month of content.", tone: "navy" },
-  { tag: "Short-form & reels", d: "Scroll-stopping clips cut from every episode and fanned out across each platform, in your voice.", tone: "blue" },
-  { tag: "Publishing & engagement", d: "Posted everywhere on schedule, with first-response community engagement in the minutes that decide reach.", tone: "navy2" },
+  { tag: "Podcasts & video", d: "Full episode edits, clips, long-form YouTube, show notes, and SEO. Record once, get a month of content.", tone: "teal", viz: "wave" },
+  { tag: "Short-form & reels", d: "Scroll-stopping clips cut from every episode and fanned out across each platform, in your voice.", tone: "terra", viz: "reel" },
+  { tag: "Publishing & engagement", d: "Posted everywhere on schedule, with first-response community engagement in the minutes that decide reach.", tone: "blue", viz: "grid" },
 ];
 
 const posts = [
@@ -181,7 +184,7 @@ const posts = [
       <div class="herofeatures">
         {features.map((f, i) => (
           <article class="feat" data-reveal data-reveal-delay={String(i + 1)}>
-            <span class="feat__ico" aria-hidden="true">
+            <span class="feat__ico" aria-hidden="true" style={`color:${f.c};background:${f.bg}`}>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" set:html={f.icon} />
             </span>
             <div>
@@ -231,8 +234,8 @@ const posts = [
           {growth.map((g) => (
             <li class="growth__row">
               <span class="growth__p">{g.p}</span>
-              <span class="growth__track"><span class="growth__fill" style={`--w:${g.pct}%`}></span></span>
-              <span class="growth__v">{g.v}</span>
+              <span class="growth__track"><span class="growth__fill" style={`--w:${g.pct}%;background:${g.c}`}></span></span>
+              <span class="growth__v" style={`color:${g.c}`}>{g.v}</span>
             </li>
           ))}
         </ul>
@@ -250,7 +253,7 @@ const posts = [
       <div class="statspanel" data-reveal>
         {stats.map((s) => (
           <div class="statp">
-            <span class="statp__ico" aria-hidden="true">
+            <span class="statp__ico" aria-hidden="true" style={`color:${s.c};background:${s.bg}`}>
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" set:html={s.icon} />
             </span>
             <div>
@@ -289,6 +292,23 @@ const posts = [
           <article class={`svc svc--${s.tone}`} data-reveal data-reveal-delay={String(i + 1)}>
             <div class="svc__media" aria-hidden="true">
               <span class="svc__num">{`0${i + 1}`}</span>
+              {s.viz === "wave" && (
+                <div class="viz-wave">
+                  {[10, 22, 40, 28, 54, 34, 62, 44, 30, 50, 24, 38, 16].map((h) => <span style={`--h:${h}px`}></span>)}
+                </div>
+              )}
+              {s.viz === "reel" && (
+                <div class="viz-reel">
+                  <span class="viz-reel__play"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M5 3.5l7 4.5-7 4.5z"/></svg></span>
+                  <span class="viz-reel__bar"></span>
+                  <span class="viz-reel__cap"></span>
+                </div>
+              )}
+              {s.viz === "grid" && (
+                <div class="viz-grid">
+                  {Array.from({ length: 6 }).map((_, k) => <span class={k === 2 ? "on" : ""}></span>)}
+                </div>
+              )}
             </div>
             <div class="svc__body">
               <h3>{s.tag}</h3>
@@ -861,9 +881,12 @@ const posts = [
   .growth__fill {
     display: block;
     height: 100%;
-    width: var(--w);
+    width: 0;
     border-radius: 999px;
-    background: linear-gradient(90deg, var(--coral), var(--coral-soft));
+    transition: width 1s var(--ease);
+  }
+  .clientcard.is-visible .growth__fill {
+    width: var(--w);
   }
   .growth__v {
     font-family: var(--font-accent);
@@ -965,20 +988,94 @@ const posts = [
   }
   .svc__media {
     position: relative;
-    min-height: 150px;
+    min-height: 172px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     padding: var(--sp-5);
+    overflow: hidden;
   }
-  .svc--navy .svc__media { background: linear-gradient(150deg, var(--navy), var(--navy-3)); }
-  .svc--blue .svc__media { background: linear-gradient(150deg, var(--coral), var(--coral-soft)); }
-  .svc--navy2 .svc__media { background: linear-gradient(150deg, var(--navy-2), var(--navy)); }
+  .svc--teal .svc__media { background: linear-gradient(150deg, var(--charcoal), var(--charcoal-3)); }
+  .svc--terra .svc__media { background: linear-gradient(150deg, var(--coral), var(--coral-soft)); }
+  .svc--blue .svc__media { background: linear-gradient(150deg, var(--brand), #9db8c9); }
   .svc__num {
+    position: absolute;
+    top: var(--sp-4);
+    left: var(--sp-5);
     font-family: var(--font-accent);
-    font-weight: 700;
-    font-size: 2rem;
-    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
     letter-spacing: -0.03em;
+  }
+  /* Podcast waveform */
+  .viz-wave {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 70px;
+  }
+  .viz-wave span {
+    width: 4px;
+    height: var(--h);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.85);
+    animation: wave 1.4s var(--ease) infinite alternate;
+  }
+  .viz-wave span:nth-child(2n) { animation-delay: 0.2s; opacity: 0.7; }
+  .viz-wave span:nth-child(3n) { animation-delay: 0.4s; opacity: 0.85; }
+  @keyframes wave { to { transform: scaleY(0.55); } }
+  /* Reel card */
+  .viz-reel {
+    width: 96px;
+    height: 118px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+  }
+  .viz-reel__play {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--coral);
+  }
+  .viz-reel__bar,
+  .viz-reel__cap {
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .viz-reel__cap { width: 66%; }
+  /* Publish grid */
+  .viz-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    width: 116px;
+  }
+  .viz-grid span {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.32);
+  }
+  .viz-grid span.on {
+    background: #fff;
+    animation: gridpulse 2s var(--ease) infinite;
+  }
+  @keyframes gridpulse { 50% { opacity: 0.5; } }
+  @media (prefers-reduced-motion: reduce) {
+    .viz-wave span, .viz-grid span.on { animation: none; }
   }
   .svc__body {
     background: var(--paper);
@@ -1198,9 +1295,9 @@ const posts = [
     height: 150px;
     padding: var(--sp-4);
   }
-  .postcard__thumb--0 { background: linear-gradient(150deg, var(--navy), var(--navy-3)); }
+  .postcard__thumb--0 { background: linear-gradient(150deg, var(--charcoal), var(--charcoal-3)); }
   .postcard__thumb--1 { background: linear-gradient(150deg, var(--coral), var(--coral-soft)); }
-  .postcard__thumb--2 { background: linear-gradient(150deg, var(--navy-2), var(--blue)); }
+  .postcard__thumb--2 { background: linear-gradient(150deg, var(--green), #9ac9b0); }
   .postcard__tag {
     display: inline-block;
     padding: 5px 12px;
