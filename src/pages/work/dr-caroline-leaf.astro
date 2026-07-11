@@ -1157,6 +1157,11 @@ const indLen = 1400;
     letter-spacing: 0.08em; text-transform: uppercase;
   }
   .ds-testi__cap p { margin-top: var(--sp-2); color: var(--muted); font-size: var(--fs-sm); max-width: 40ch; }
+  /* Below 900 the testimonial stacks under the chips; cap its height so the
+     "coming soon" placeholder doesn't become a huge empty box on phone/tablet. */
+  @media (max-width: 899px) {
+    .ds-testi__frame { aspect-ratio: 16 / 9; max-height: 240px; }
+  }
   @media (min-width: 900px) {
     .ds-yoy__lower { grid-template-columns: 1.15fr 0.85fr; gap: var(--sp-12); }
   }

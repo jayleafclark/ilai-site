@@ -896,12 +896,18 @@ const pricing = [
     background: var(--coral-tint);
     color: var(--coral-ink);
   }
-  @media (min-width: 900px) {
+  /* Go two-column at tablet (760) so the viz sits beside the copy instead of
+     leaving big side-voids in the full-width shell; widen the gap on desktop. */
+  @media (min-width: 760px) {
     .wwd-svc__grid {
       grid-template-columns: 1.05fr 0.95fr;
-      gap: var(--sp-12);
+      gap: var(--sp-8);
+      align-items: center;
     }
     .wwd-svc--alt .wwd-svc__copy { order: 2; }
+  }
+  @media (min-width: 1000px) {
+    .wwd-svc__grid { gap: var(--sp-12); }
   }
 
   /* ---- Viz shell (colored / slate / white / dark variety) ---- */
@@ -1328,7 +1334,7 @@ const pricing = [
   .wwd-vdash__chart span {
     flex: 1; border-radius: 4px 4px 2px 2px;
     background: linear-gradient(180deg, var(--coral), var(--coral-soft));
-    transform: scaleY(0.15); transform-origin: bottom;
+    transform: scaleY(0.5); transform-origin: bottom;
     transition: transform 0.7s var(--ease);
   }
   /* once revealed, the chart keeps ticking like live data */
