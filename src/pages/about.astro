@@ -31,32 +31,31 @@ const beliefs = [
   },
 ];
 
-const people = [
+// Anonymous team credentials (no names, no photos).
+const credentials = [
   {
-    name: "Jay Leaf-Clark",
-    initials: "JL",
-    role: "Founder",
+    t: "20+ years of operating",
+    s: "Our team has spent two decades leading, building, and growing organizations, not just posting to them.",
     c: "var(--coral)",
-    // Photo to add: place a square image at public/about/jay.jpg (min 480x480).
-    photo: "/about/jay.jpg",
-    tags: ["Research engine", "Publishing software", "~20 years in IT"],
-    bio: [
-      "Jay founded Ilai and builds the software behind it. Twenty years in IT infrastructure and automation taught him to make a lean setup carry the load of a much larger one.",
-      "He writes the in-house research and publishing engines that let a senior US team run a full content operation across every platform, so the people stay on the parts that need judgment and skip the busywork.",
-    ],
+    icon: `<path d="M10 2.5l2.2 4.7 5.1.7-3.7 3.6.9 5.1L10 14.2 5.5 16.6l.9-5.1L2.7 7.9l5.1-.7L10 2.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>`,
   },
   {
-    name: "JJ Leaf-Clark",
-    initials: "JJ",
-    role: "Social, community, and voice",
-    c: "var(--brand-deep)",
-    // Photo to add: place a square image at public/about/jj.jpg (min 480x480).
-    photo: "/about/jj.jpg",
-    tags: ["Voice", "Community", "First-hour engagement"],
-    bio: [
-      "JJ leads social and community. He sets the voice for every brand we work with and checks each piece against it, so a caption reads like the person, not like an agency.",
-      "He runs first-response engagement in the first hour after a post goes live, when replies decide whether it spreads, and keeps every platform sounding like one account run by one person.",
-    ],
+    t: "Technical and creative",
+    s: "The people who build the software and the people who set the voice are on the same team, so nothing gets lost in a hand-off.",
+    c: "var(--pink-ink)",
+    icon: `<path d="M6.5 4.5L2.5 8.5l4 4M13.5 4.5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.5 3l-3 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>`,
+  },
+  {
+    t: "Proven at real scale",
+    s: "Our work is trusted by creators and brands whose audiences run into the millions, across every major platform.",
+    c: "var(--charcoal)",
+    icon: `<path d="M3 15.5L8 10l3.5 3L17 6.5M17 6.5V11M17 6.5H12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
+  },
+  {
+    t: "Senior hands only",
+    s: "No account managers, no hand-off to juniors. The people who plan and make the work are the ones who run your account.",
+    c: "pearl",
+    icon: `<path d="M10 2l6 2.5v5c0 4-2.7 6.3-6 7.5-3.3-1.2-6-3.5-6-7.5v-5L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.2 10l2 2 3.6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
 ];
 
@@ -97,7 +96,7 @@ const stats = [
     icon: `<rect x="3" y="3" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.7"/><rect x="12.5" y="3" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="12.5" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.7"/><rect x="12.5" y="12.5" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.7"/>`,
   },
   {
-    value: 2, suffix: "", label: "Senior people on your account", c: "var(--plum)",
+    value: 20, suffix: "+", label: "Years building organizations", c: "var(--plum)",
     icon: `<circle cx="7" cy="8" r="2.8" stroke="currentColor" stroke-width="1.7"/><circle cx="14" cy="8" r="2.8" stroke="currentColor" stroke-width="1.7"/><path d="M3 17c0-2.4 1.8-4 4-4s4 1.6 4 4M11 17c0-2.4 1.8-4 4-4s4 1.6 4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>`,
   },
 ];
@@ -123,7 +122,7 @@ const stats = [
         senior US team run a content operation the size of a full department.
       </p>
       <div class="hero__cta" data-reveal data-reveal-delay="3">
-        <a href="#people" class="btn btn--signal">Meet the people<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
+        <a href="#people" class="btn btn--signal">Meet the team<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
         <a href="/contact" class="btn btn--ghost">Book a call</a>
       </div>
     </div>
@@ -156,36 +155,53 @@ const stats = [
 
   <!-- ============ THE PEOPLE ============ -->
   <section class="section" id="people">
-    <div class="container">
-      <div class="people__head" data-reveal>
-        <span class="eyebrow eyebrow--star">The people</span>
-        <h2 class="people__hh">Two senior people run this, and <span class="hl">they run your account.</span></h2>
-        <p class="lead people__lead">
-          No account managers, no hand-off to juniors. The person who builds the systems
-          and the person who sets the voice are the two doing your work.
+    <div class="container team__grid">
+      <div class="team__copy" data-reveal>
+        <span class="eyebrow eyebrow--star">The team</span>
+        <h2 class="team__hh">A senior team that has <span class="hl">done this before.</span></h2>
+        <p class="lead team__lead">
+          We keep the studio small and senior on purpose. Our team brings over 20 years of
+          leading, building, and growing organizations, with the technical and the creative
+          side under one roof. The people who plan and make the work are the ones who run
+          your account.
         </p>
-      </div>
-      <div class="people__grid">
-        {people.map((p, i) => (
-          <article class="pcard" data-reveal data-reveal-delay={String((i % 2) + 1)}>
-            <div class="pcard__top">
-              <span class="pcard__avatar" aria-hidden="true" style={`--ic:${p.c}`}>
-                <span class="pcard__mono">{p.initials}</span>
-                <img class="pcard__img" src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/${p.photo.replace(/^\//, "")}`} alt="" loading="lazy" onerror="this.remove()" />
+        <ul class="team__pillars">
+          {credentials.map((c) => (
+            <li class="team__pillar">
+              <span class={`team__ico${c.c === "pearl" ? " ico--pearl" : ""}`} aria-hidden="true" style={c.c === "pearl" ? "" : `--ic:${c.c}`}>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" set:html={c.icon} />
               </span>
-              <div class="pcard__id">
-                <h3 class="pcard__name">{p.name}</h3>
-                <span class="pcard__role">{p.role}</span>
+              <div>
+                <h3 class="team__pt">{c.t}</h3>
+                <p class="team__ps">{c.s}</p>
               </div>
-            </div>
-            <div class="pcard__bio">
-              {p.bio.map((para) => <p>{para}</p>)}
-            </div>
-            <ul class="pcard__tags">
-              {p.tags.map((t) => <li style={`--ic:${p.c}`}>{t}</li>)}
-            </ul>
-          </article>
-        ))}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Distinctive graphic: two strengths, one team -->
+      <div class="team__viz" data-reveal data-reveal-delay="1" aria-hidden="true">
+        <div class="tcv">
+          <div class="tcv__cap">Two strengths, one team</div>
+          <div class="tcv__row">
+            <span class="tcv__ic">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M6.5 4.5L2.5 8.5l4 4M13.5 4.5l4 4-4 4M11.5 3l-3 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div class="tcv__meta"><b>Technical</b><span class="tcv__bar"><i style="--w:94%"></i></span></div>
+          </div>
+          <div class="tcv__row">
+            <span class="tcv__ic tcv__ic--pink">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2.5l2.2 4.7 5.1.7-3.7 3.6.9 5.1L10 14.2 5.5 16.6l.9-5.1L2.7 7.9l5.1-.7L10 2.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </span>
+            <div class="tcv__meta"><b>Creative</b><span class="tcv__bar"><i class="tcv__bar--pink" style="--w:90%"></i></span></div>
+          </div>
+          <div class="tcv__merge"><span></span><span></span></div>
+          <div class="tcv__out">
+            <span class="tcv__outk">One senior team</span>
+            <span class="tcv__outd">Both, under one roof, on every account</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -424,128 +440,108 @@ const stats = [
     }
   }
 
-  /* ---------- The people ---------- */
-  .people__head {
-    max-width: 48ch;
-    margin-bottom: var(--sp-10);
+  /* ---------- The team (anonymous credentials) ---------- */
+  .team__grid {
+    display: grid;
+    gap: var(--sp-10);
+    align-items: start;
   }
-  .people__hh {
+  .team__hh {
     margin-top: var(--sp-4);
     font-size: var(--fs-h2);
     font-weight: 600;
     letter-spacing: var(--tracking-tight);
   }
-  .people__lead {
-    margin-top: var(--sp-4);
-  }
-  .people__grid {
+  .team__lead { margin-top: var(--sp-4); max-width: 52ch; }
+  .team__pillars {
+    list-style: none;
+    margin-top: var(--sp-8);
     display: grid;
-    gap: var(--grid-gap);
-  }
-  .pcard {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-5);
-    padding: clamp(1.5rem, 3vw, 2.25rem);
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--r-card-lg);
-    box-shadow: var(--shadow-card);
-    transition:
-      transform var(--dur-base) var(--ease),
-      box-shadow var(--dur-base) var(--ease);
-  }
-  .pcard:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-float);
-  }
-  .pcard__top {
-    display: flex;
-    align-items: center;
     gap: var(--sp-5);
   }
-  .pcard__avatar {
-    position: relative;
+  .team__pillar {
+    display: flex;
+    gap: var(--sp-4);
+    align-items: flex-start;
+  }
+  .team__ico {
     flex: none;
     display: grid;
     place-items: center;
-    width: 78px;
-    height: 78px;
-    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    color: #fff;
+    background: linear-gradient(140deg, var(--ic), color-mix(in srgb, var(--ic) 55%, #ffffff));
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 10px 20px -8px var(--ic);
+  }
+  .team__pt { font-size: var(--fs-h3); }
+  .team__ps { margin-top: var(--sp-2); font-size: var(--fs-sm); color: var(--muted); line-height: 1.55; }
+
+  /* Distinctive "two strengths, one team" graphic */
+  .team__viz { position: sticky; top: 6rem; }
+  .tcv {
+    position: relative;
+    padding: clamp(1.75rem, 3vw, 2.5rem);
+    border-radius: var(--r-card-lg);
+    background: linear-gradient(150deg, var(--charcoal), var(--charcoal-2));
+    box-shadow: var(--shadow-float);
     overflow: hidden;
-    color: #fff;
-    background: linear-gradient(140deg, var(--ic), color-mix(in srgb, var(--ic) 52%, #ffffff));
-    box-shadow:
-      inset 0 1px 1px rgba(255, 255, 255, 0.5),
-      0 12px 24px -12px var(--ic);
   }
-  .pcard__mono {
-    font-family: var(--font-accent);
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: -0.02em;
-    color: #fff;
-  }
-  /* Photo sits on top of the monogram. If the file is missing, onerror removes
-     it and the monogram shows through, so the card always looks intentional. */
-  .pcard__img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .pcard__name {
-    font-size: var(--fs-h3);
-  }
-  .pcard__role {
-    display: inline-block;
-    margin-top: var(--sp-1);
-    font-family: var(--font-accent);
-    font-size: var(--fs-eyebrow);
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .pcard__bio {
-    display: grid;
-    gap: var(--sp-3);
-  }
-  .pcard__bio p {
-    font-size: var(--fs-sm);
-    color: var(--muted);
-  }
-  .pcard__tags {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-2);
-    margin-top: auto;
-    padding-top: var(--sp-2);
-  }
-  .pcard__tags li {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    border-radius: var(--r-pill);
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--ink-2);
-    background: color-mix(in srgb, var(--ic) 12%, var(--paper));
-    border: 1px solid color-mix(in srgb, var(--ic) 22%, transparent);
-  }
-  .pcard__tags li::before {
+  .tcv::after {
     content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--ic);
+    position: absolute; top: -30%; right: -10%;
+    width: 60%; height: 120%;
+    background: radial-gradient(50% 50% at 50% 40%, rgba(201, 162, 92, 0.24), transparent 70%);
+    pointer-events: none;
   }
-  @media (min-width: 820px) {
-    .people__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .tcv__cap {
+    position: relative; z-index: 1;
+    font-family: var(--font-accent); font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5);
+    margin-bottom: var(--sp-5);
+  }
+  .tcv__row {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; gap: var(--sp-4);
+    margin-bottom: var(--sp-4);
+  }
+  .tcv__ic {
+    flex: none; display: grid; place-items: center;
+    width: 40px; height: 40px; border-radius: 12px;
+    background: var(--coral); color: #fff;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  }
+  .tcv__ic--pink { background: var(--pink-ink); }
+  .tcv__meta { flex: 1; }
+  .tcv__meta b { display: block; color: #fff; font-family: var(--font-accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; }
+  .tcv__bar { display: block; height: 8px; border-radius: 999px; background: rgba(255, 255, 255, 0.12); overflow: hidden; }
+  .tcv__bar i {
+    display: block; height: 100%; width: 0; border-radius: 999px; background: var(--coral-soft);
+    transition: width 1.1s var(--ease);
+  }
+  .tcv__bar i.tcv__bar--pink { background: var(--pink); }
+  .is-visible .tcv__bar i { width: var(--w); }
+  .tcv__merge {
+    position: relative; z-index: 1;
+    display: flex; justify-content: center; gap: 6px; margin: var(--sp-4) 0;
+  }
+  .tcv__merge span {
+    width: 2px; height: 22px; border-radius: 2px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.4), transparent);
+  }
+  .tcv__merge span:first-child { transform: rotate(20deg); }
+  .tcv__merge span:last-child { transform: rotate(-20deg); }
+  .tcv__out {
+    position: relative; z-index: 1;
+    padding: var(--sp-5); border-radius: var(--r-card);
+    background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.14);
+    text-align: center;
+  }
+  .tcv__outk { display: block; font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; color: #fff; }
+  .tcv__outd { display: block; margin-top: 4px; font-size: var(--fs-sm); color: rgba(255, 255, 255, 0.6); }
+  @media (min-width: 900px) {
+    .team__grid { grid-template-columns: 1.1fr 0.9fr; gap: var(--sp-12); }
   }
 
   /* ---------- Stat row ---------- */

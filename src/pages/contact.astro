@@ -60,12 +60,12 @@ const pricing = [
     <div class="container contact__grid">
       <!-- ============ LEFT: THE FORM ============ -->
       <div class="form-col" data-reveal>
-        <span class="eyebrow eyebrow--pill">Start here</span>
-        <h1 class="form-col__title">Book a call</h1>
+        <span class="eyebrow eyebrow--pill">The waitlist</span>
+        <h1 class="form-col__title">We're fully booked<br />right now.</h1>
         <p class="lead form-col__lead">
-          We'll bring a free teardown of your brand, your market, and your
-          audience to the first call. Real research before you pay us anything.
-          No obligation, and the teardown is yours to keep.
+          We take on a small number of clients at a time so the work stays senior and
+          hands-on, and every spot is currently full. Join the waitlist and we'll reach out
+          the moment one opens, with a free teardown of your brand, market, and audience.
         </p>
 
         <div class="formcard">
@@ -78,107 +78,22 @@ const pricing = [
               </svg>
             </span>
             <div>
-              <p class="formcard__t">Tell us about you</p>
-              <p class="formcard__s">Takes about a minute. We reply within one business day.</p>
+              <p class="formcard__t">The studio is at capacity</p>
+              <p class="formcard__s">We take a limited number of clients. Join the waitlist below.</p>
             </div>
           </div>
 
-          <!--
-            SETUP: this is a static site, so the form posts to a third-party
-            backend. Replace the REPLACE_WITH_FORM_ID action below with your real
-            endpoint from Formspree (formspree.io/f/xxxx), Basin, or Web3Forms.
-            Nothing else needs changing.
-          -->
-          <form
-            class="lead-form"
-            action="https://formspree.io/f/REPLACE_WITH_FORM_ID"
-            method="POST"
-          >
-            <!-- Honeypot: real people leave this empty; bots fill it. -->
-            <div class="hp" aria-hidden="true">
-              <label for="company-website">Company website</label>
-              <input
-                type="text"
-                id="company-website"
-                name="_gotcha"
-                tabindex="-1"
-                autocomplete="off"
-              />
-            </div>
-
-            <div class="field">
-              <label for="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                autocomplete="name"
-                required
-              />
-            </div>
-
-            <div class="field">
-              <label for="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                autocomplete="email"
-                required
-              />
-            </div>
-
-            <div class="field">
-              <label for="platform">Website or main platform</label>
-              <input
-                type="url"
-                id="platform"
-                name="website_or_platform"
-                placeholder="https://"
-                inputmode="url"
-                required
-              />
-            </div>
-
-            <div class="field">
-              <label for="audience">What do you do, and who do you sell to?</label>
-              <textarea
-                id="audience"
-                name="what_you_do"
-                rows="4"
-                placeholder="Your work, your offer, and the people you want to reach."
-                required></textarea>
-            </div>
-
-            <div class="field">
-              <label for="budget">Monthly budget</label>
-              <div class="select-wrap">
-                <select id="budget" name="monthly_budget" required>
-                  <option value="" disabled selected>Choose a range</option>
-                  {budgets.map((b) => <option value={b}>{b}</option>)}
-                </select>
-                <span class="select-caret" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path
-                      d="M3.5 5.25L7 8.75L10.5 5.25"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"></path>
-                  </svg>
-                </span>
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="notes">
-                Anything else? <span class="field__opt">Optional</span>
-              </label>
-              <textarea id="notes" name="anything_else" rows="3"></textarea>
-            </div>
-
-            <button type="submit" class="btn btn--signal lead-form__submit">
-              Request my free teardown
+          <div class="capacity">
+            <p class="capacity__p">
+              Leave your email and a line about your work. When a spot opens, you'll be first
+              to hear, and you'll get a free teardown of your brand, market, and audience,
+              yours to keep whether or not we end up working together.
+            </p>
+            <a
+              class="btn btn--pink capacity__cta"
+              href="mailto:hello@ilaicollective.com?subject=Ilai%20waitlist&body=Tell%20us%20about%20your%20work%2C%20who%20you%20sell%20to%2C%20and%20where%20you%20want%20to%20grow.%0A%0AWebsite%20or%20main%20platform%3A%0A"
+            >
+              Join the waitlist
               <span class="btn__arrow" aria-hidden="true">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path
@@ -189,18 +104,13 @@ const pricing = [
                     stroke-linejoin="round"></path>
                 </svg>
               </span>
-            </button>
-
-            <p class="lead-form__fine">
-              No obligation. The teardown is free and it's yours to keep, whether
-              or not we work together. We usually reply within one business day.
-            </p>
+            </a>
             <p class="lead-form__mail">
-              Prefer email? <a href="mailto:hello@ilaicollective.com"
+              Prefer to reach us directly? <a href="mailto:hello@ilaicollective.com"
                 >hello@ilaicollective.com</a
               >
             </p>
-          </form>
+          </div>
         </div>
       </div>
 
@@ -329,7 +239,7 @@ const pricing = [
             </svg>
           </span>
           <span class="scheduler__text"
-            >Send the form and we'll email you a time that works.</span
+            >Join the waitlist and we'll email you the moment a spot opens.</span
           >
         </div>
       </aside>
@@ -456,6 +366,21 @@ const pricing = [
     font-size: var(--fs-sm);
     color: var(--muted);
   }
+
+  /* ---------- Capacity / waitlist ---------- */
+  .capacity {
+    position: relative;
+    display: grid;
+    gap: var(--sp-5);
+    justify-items: start;
+  }
+  .capacity__p {
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    color: var(--ink-2);
+    max-width: 46ch;
+  }
+  .capacity__cta { margin-top: var(--sp-1); }
 
   /* ---------- Form ---------- */
   .lead-form {
