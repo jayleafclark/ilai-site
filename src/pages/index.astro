@@ -1312,10 +1312,11 @@ const comments = [
   }
   .btn--ghost-dark {
     --btn-fg: #fff;
-    border-color: rgba(255, 255, 255, 0.28);
+    border-color: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.08);
   }
   .btn--ghost-dark:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.16);
   }
 
   /* Floating feature cards */
@@ -2382,9 +2383,10 @@ const comments = [
       justify-content: center;
       min-height: 48px;
     }
-    /* Feature cards: tighter, pulled up less aggressively */
+    /* Feature cards sit BELOW the hero on phones (no negative overlap that
+       collided with the hero card's rounded bottom). */
     .herofeatures {
-      margin-top: -2.25rem;
+      margin-top: var(--sp-4);
       gap: var(--sp-3);
     }
     .feat {

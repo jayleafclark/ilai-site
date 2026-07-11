@@ -919,8 +919,8 @@ const pricing = [
     display: flex;
     align-items: center;
     gap: var(--sp-3);
-    min-height: 56px;
-    padding: var(--sp-4) 0;
+    min-height: 52px;
+    padding: var(--sp-3) 0;
     list-style: none;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
@@ -956,9 +956,11 @@ const pricing = [
     flex: none;
     display: grid;
     place-items: center;
-    width: 32px;
-    height: 32px;
-    color: var(--muted);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    color: var(--coral);
+    background: var(--coral-tint);
     transition: transform var(--dur-base, 0.25s) var(--ease);
   }
   .wwd-acc[open] .wwd-acc__chev { transform: rotate(180deg); }
@@ -1621,6 +1623,9 @@ const pricing = [
     }
     /* The last service closes the list with a bottom rule. */
     .wwd-svc:last-of-type .wwd-acc { border-bottom: 1px solid var(--line); }
+    /* Rows are a connected list — keep them always visible so scrolling never
+       shows empty bands where an un-revealed row sits. */
+    .wwd-svc .wwd-acc { opacity: 1 !important; transform: none !important; }
   }
 
   /* ============ Mobile refinements (<= 640px) ============ */
@@ -1702,9 +1707,10 @@ const pricing = [
           d.open = true;
         });
       } else {
-        // Collapse on entering mobile so the list is short by default.
-        accs.forEach((d) => {
-          d.open = false;
+        // Mobile: open the first service by default so the pattern is obvious
+        // and the section leads with real content; collapse the rest.
+        accs.forEach((d, i) => {
+          d.open = i === 0;
         });
       }
     };

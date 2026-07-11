@@ -189,6 +189,13 @@ const links = [
      text can never bleed through or sit legibly under the fixed header.
      The translucent blur look is kept for desktop only. --- */
   @media (max-width: 899px) {
+    /* Frost the whole fixed band (not just the pill) so content scrolling
+       through the top strip + side gutters is obscured, never sliced/bleeding. */
+    .nav {
+      background: rgba(241, 243, 238, 0.72);
+      backdrop-filter: saturate(140%) blur(12px);
+      -webkit-backdrop-filter: saturate(140%) blur(12px);
+    }
     .nav__pill {
       /* Near-solid powder-white; opacity high enough that scrolled body
          text behind it reads as a clean surface, not a see-through panel. */
