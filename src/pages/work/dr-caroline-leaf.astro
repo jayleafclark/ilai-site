@@ -154,7 +154,7 @@ const indLen = 1400;
           platforms, with <span class="ds-hero__accent">zero spent on ads.</span>
         </p>
         <div class="ds-hero__actions" data-reveal data-reveal-delay="3">
-          <a href="/contact" class="btn btn--signal">
+          <a href="/contact" class="btn btn--pink">
             Book a call<span class="btn__arrow" aria-hidden="true" set:html={arrow} />
           </a>
           <a href="/method" class="btn btn--ghost">See the method</a>
@@ -267,20 +267,36 @@ const indLen = 1400;
         }
       </div>
 
-      <div class="ds-chips" data-reveal data-reveal-delay="2">
-        <p class="ds-chips__title">Where the growth came from, by platform</p>
-        <div class="ds-chips__grid">
-          {
-            yoyChips.map((c, i) => (
-              <div class="ds-chip" style={`--d:${i * 80}ms`}>
-                <span class="ds-chip__val" data-count={c.value} data-prefix="+" data-suffix="%">+{c.value}%</span>
-                <span class="ds-chip__meta">
-                  <strong>{c.platform}</strong> {c.metric}
-                </span>
-              </div>
-            ))
-          }
+      <div class="ds-yoy__lower">
+        <div class="ds-chips" data-reveal data-reveal-delay="2">
+          <p class="ds-chips__title">Where the growth came from, by platform</p>
+          <div class="ds-chips__grid">
+            {
+              yoyChips.map((c, i) => (
+                <div class="ds-chip" style={`--d:${i * 80}ms`}>
+                  <span class="ds-chip__val" data-count={c.value} data-prefix="+" data-suffix="%">+{c.value}%</span>
+                  <span class="ds-chip__meta">
+                    <strong>{c.platform}</strong> {c.metric}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
         </div>
+
+        <!-- Testimonial video placeholder -->
+        <figure class="ds-testi" data-reveal data-reveal-delay="3">
+          <div class="ds-testi__frame">
+            <span class="ds-testi__play" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5l11 6.5-11 6.5z"/></svg>
+            </span>
+            <span class="ds-testi__soon">Coming soon</span>
+          </div>
+          <figcaption class="ds-testi__cap">
+            <span class="eyebrow eyebrow--dot ds-dot">In her words</span>
+            <p>A short video testimonial from the client, landing here soon.</p>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -1055,10 +1071,45 @@ const indLen = 1400;
   }
 
   /* ---------- YoY chips ---------- */
-  .ds-chips {
+  .ds-yoy__lower {
     margin-top: var(--sp-12);
     padding-top: var(--sp-8);
     border-top: 1px solid var(--line);
+    display: grid;
+    gap: var(--sp-8);
+    align-items: start;
+  }
+  .ds-chips { }
+  /* Testimonial video placeholder */
+  .ds-testi { margin: 0; display: grid; gap: var(--sp-4); align-content: start; }
+  .ds-testi__frame {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--r-card-lg);
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(60% 80% at 80% 15%, color-mix(in srgb, var(--pink) 26%, transparent), transparent 70%),
+      linear-gradient(150deg, var(--charcoal), var(--charcoal-2));
+    box-shadow: var(--shadow-card);
+  }
+  .ds-testi__play {
+    display: grid; place-items: center;
+    width: 62px; height: 62px; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92); color: var(--charcoal);
+    box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.5);
+  }
+  .ds-testi__soon {
+    position: absolute; top: var(--sp-4); left: var(--sp-4);
+    padding: 5px 12px; border-radius: var(--r-pill);
+    background: var(--pink); color: var(--charcoal);
+    font-family: var(--font-accent); font-size: 0.64rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .ds-testi__cap p { margin-top: var(--sp-2); color: var(--muted); font-size: var(--fs-sm); max-width: 40ch; }
+  @media (min-width: 900px) {
+    .ds-yoy__lower { grid-template-columns: 1.15fr 0.85fr; gap: var(--sp-12); }
   }
   .ds-chips__title {
     font-family: var(--font-accent);

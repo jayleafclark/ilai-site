@@ -629,7 +629,7 @@ const why = [
   .herostats {
     position: relative;
     z-index: 3;
-    margin-top: -2.5rem;
+    margin-top: var(--sp-6);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--sp-4);
@@ -664,7 +664,7 @@ const why = [
   @media (min-width: 800px) {
     .herostats {
       grid-template-columns: repeat(4, 1fr);
-      margin-top: -3rem;
+      margin-top: var(--sp-6);
     }
   }
 
@@ -832,7 +832,7 @@ const why = [
   }
   .stepcard {
     width: 100%;
-    max-width: 460px;
+    max-width: 560px;
     border-radius: var(--r-card);
     overflow: hidden;
     background: var(--paper);
@@ -868,8 +868,8 @@ const why = [
   }
   .stepcard--ink .stepcard__url { color: rgba(255, 255, 255, 0.55); }
   .stepcard__core {
-    padding: var(--sp-6);
-    min-height: 288px;
+    padding: var(--sp-8);
+    min-height: 340px;
     display: flex;
     align-items: center;
   }
