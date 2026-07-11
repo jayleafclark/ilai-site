@@ -1075,13 +1075,20 @@ const pricing = [
     padding: 12px 14px; border-radius: 14px;
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 8px 20px -12px rgba(10, 26, 20, 0.5);
-    animation: wwd-slidein 0.6s var(--ease-out) both;
+    animation: wwd-alertcycle 5.4s var(--ease) infinite;
   }
-  .wwd-valert:nth-child(1) { animation-delay: 0.05s; }
-  .wwd-valert:nth-child(2) { animation-delay: 0.2s; }
-  .wwd-valert:nth-child(3) { animation-delay: 0.35s; }
-  @keyframes wwd-slidein { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
-  .wwd-valert__dot { flex: none; width: 9px; height: 9px; border-radius: 50%; }
+  .wwd-valert:nth-child(1) { animation-delay: 0s; }
+  .wwd-valert:nth-child(2) { animation-delay: 0.5s; }
+  .wwd-valert:nth-child(3) { animation-delay: 1s; }
+  @keyframes wwd-alertcycle {
+    0% { opacity: 0; transform: translateX(14px); }
+    9% { opacity: 1; transform: none; }
+    86% { opacity: 1; transform: none; }
+    97% { opacity: 0; transform: translateX(-8px); }
+    100% { opacity: 0; }
+  }
+  .wwd-valert__dot { flex: none; width: 9px; height: 9px; border-radius: 50%; animation: wwd-dotpulse 1.8s var(--ease) infinite; }
+  @keyframes wwd-dotpulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.55); opacity: 0.5; } }
   .wwd-valert b { display: block; font-size: 0.82rem; color: var(--ink); font-weight: 600; }
   .wwd-valert span { font-size: 0.72rem; color: var(--muted); }
 
@@ -1094,8 +1101,10 @@ const pricing = [
   }
   .wwd-vsearch__q {
     flex: 1; height: 8px; border-radius: 999px;
-    background: var(--line-2);
+    background: var(--coral-soft); transform-origin: left;
+    animation: wwd-type 3.8s steps(22) infinite;
   }
+  @keyframes wwd-type { 0% { transform: scaleX(0.04); } 55% { transform: scaleX(1); } 92% { transform: scaleX(1); } 100% { transform: scaleX(0.04); } }
   .wwd-vsearch__result {
     display: grid; gap: 8px;
     padding: 16px; border-radius: 14px;
@@ -1109,7 +1118,9 @@ const pricing = [
     background: var(--green-tint); color: var(--coral-ink);
     font-family: var(--font-accent); font-size: 0.6rem; font-weight: 700;
     letter-spacing: 0.08em; text-transform: uppercase;
+    animation: wwd-badgepulse 3.8s var(--ease) infinite;
   }
+  @keyframes wwd-badgepulse { 0%, 58%, 100% { transform: scale(1); box-shadow: none; } 66% { transform: scale(1.12); box-shadow: 0 0 0 4px var(--green-tint); } }
   .wwd-vsearch__title { height: 11px; width: 82%; border-radius: 999px; background: var(--coral); opacity: 0.85; }
   .wwd-vsearch__url { height: 7px; width: 46%; border-radius: 999px; background: var(--green); opacity: 0.6; }
   .wwd-vsearch__snip { height: 7px; width: 100%; border-radius: 999px; background: var(--line-2); }
@@ -1141,6 +1152,7 @@ const pricing = [
     background: var(--plum-tint); color: var(--plum);
     font-family: var(--font-accent); font-size: 0.62rem; font-weight: 700;
     letter-spacing: 0.06em; text-transform: uppercase;
+    animation: wwd-badgepulse 4.2s var(--ease) infinite;
   }
   .wwd-vessay__meta { font-size: 0.72rem; color: var(--muted); }
 
@@ -1213,8 +1225,9 @@ const pricing = [
   .wwd-vdash__refresh { font-size: 0.74rem; color: var(--muted); }
 
   @media (prefers-reduced-motion: reduce) {
-    .wwd-vwave span, .wwd-vreel__prog i, .wwd-valert,
-    .wwd-vsched__cell, .wwd-vbrand__swatches span,
+    .wwd-vwave span, .wwd-vreel__prog i, .wwd-valert, .wwd-valert__dot,
+    .wwd-vsched__cell, .wwd-vbrand__swatches span, .wwd-vsearch__q,
+    .wwd-vsearch__badge, .wwd-vessay__save,
     .is-visible .wwd-vdash__chart span { animation: none; }
     .wwd-bar i { transition: none; }
   }
