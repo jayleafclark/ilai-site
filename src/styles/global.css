@@ -155,7 +155,22 @@ p {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--signal);
+  background: var(--amber);
+}
+.eyebrow--star::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  flex: none;
+  background: var(--amber);
+  -webkit-mask: var(--star-mask) center / contain no-repeat;
+  mask: var(--star-mask) center / contain no-repeat;
+}
+:root {
+  --star-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0c.6 6.3 5.7 11.4 12 12-6.3.6-11.4 5.7-12 12-.6-6.3-5.7-11.4-12-12C6.3 11.4 11.4 6.3 12 0z'/%3E%3C/svg%3E");
+}
+.eyebrow--ondark {
+  color: rgba(255, 255, 255, 0.72);
 }
 
 /* --- Display type helpers --- */
@@ -218,19 +233,32 @@ p {
 .btn:hover .btn__arrow {
   transform: translate(3px, -3px);
 }
-/* Primary CTA = solid black (per brand refs). */
+/* Primary CTA = amber (the brand signature). Dark text on amber. */
 .btn--signal {
-  --btn-bg: var(--ink);
+  --btn-bg: var(--amber);
+  --btn-fg: var(--amber-ink);
 }
 .btn--signal:hover {
-  --btn-bg: #26262e;
+  --btn-bg: var(--amber-hover);
 }
-/* Blue-accent button, for when a primary-color CTA is wanted on light bg. */
+.btn--signal .btn__arrow {
+  background: rgba(26, 24, 21, 0.14);
+}
+/* Blue variant */
 .btn--blue {
-  --btn-bg: var(--signal);
+  --btn-bg: var(--blue);
+  --btn-fg: #fff;
 }
 .btn--blue:hover {
-  --btn-bg: var(--signal-hover);
+  --btn-bg: var(--blue-hover);
+}
+/* Dark/ink button */
+.btn--dark {
+  --btn-bg: var(--ink);
+  --btn-fg: #fff;
+}
+.btn--dark:hover {
+  --btn-bg: #322e28;
 }
 .btn--ghost {
   --btn-bg: transparent;
@@ -239,28 +267,29 @@ p {
   padding: 13px 22px;
 }
 .btn--ghost:hover {
-  background: var(--mist);
+  background: rgba(26, 24, 21, 0.05);
 }
 .btn--light {
   --btn-bg: #fff;
   --btn-fg: var(--ink);
 }
 .btn--light .btn__arrow {
-  background: rgba(22, 22, 26, 0.08);
+  background: rgba(26, 24, 21, 0.1);
 }
 
 /* --- Card (double-bezel) --- */
 .card {
-  background: var(--canvas);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--r-card);
   padding: var(--sp-6);
+  box-shadow: var(--shadow-card);
   transition:
     transform var(--dur-base) var(--ease),
     box-shadow var(--dur-base) var(--ease);
 }
 .card--shell {
-  background: var(--mist);
+  background: var(--sand);
   border-radius: var(--r-card);
   padding: 6px;
 }
@@ -274,7 +303,49 @@ p {
 }
 .card--hover:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-float);
+}
+/* Dynamic colored card variants */
+.card--dark {
+  background: var(--ink);
+  color: var(--on-dark);
+  border-color: transparent;
+}
+.card--dark h1,
+.card--dark h2,
+.card--dark h3,
+.card--dark h4 {
+  color: #fff;
+}
+.card--blue {
+  background: var(--blue);
+  color: rgba(255, 255, 255, 0.82);
+  border-color: transparent;
+}
+.card--blue h1,
+.card--blue h2,
+.card--blue h3 {
+  color: #fff;
+}
+.card--amber {
+  background: var(--amber);
+  color: var(--amber-ink);
+  border-color: transparent;
+}
+.card--amber h1,
+.card--amber h2,
+.card--amber h3 {
+  color: var(--ink);
+}
+.card--navy {
+  background: var(--blue-deep);
+  color: rgba(255, 255, 255, 0.8);
+  border-color: transparent;
+}
+.card--navy h1,
+.card--navy h2,
+.card--navy h3 {
+  color: #fff;
 }
 
 /* --- Hairline divider --- */
@@ -346,7 +417,7 @@ p {
 /* --- Browser-chrome frame (embedded UI mockups) --- */
 .chrome {
   border-radius: var(--r-card);
-  background: var(--canvas);
+  background: var(--paper);
   border: 1px solid var(--line);
   box-shadow: var(--shadow-float);
   overflow: hidden;
@@ -382,9 +453,9 @@ p {
   flex-direction: column;
   gap: 2px;
   padding: 12px 16px;
-  background: var(--canvas);
+  background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 16px;
   box-shadow: var(--shadow-float);
 }
 .statchip__num {

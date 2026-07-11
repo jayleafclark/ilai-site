@@ -1,53 +1,72 @@
 /* ============================================================
-   Ilai Collective — Design Tokens
+   Ilai Collective — Design Tokens  (v2: warm cream + amber + dynamic cards)
    Single source of truth. See BrandGuidelines.md / Design.md.
    ============================================================ */
 
 :root {
   /* --- Color --- */
-  --ink: #111114;
-  --ink-2: #33333a;
-  --muted: #6b6b73;
-  --canvas: #ffffff;
-  --mist: #f5f4f1;
-  --sand: #ecebe4;
-  --line: #e8e6e0;
-  --line-2: #d9d7cf;
+  /* Warm cream base, near-black ink, amber primary, blue secondary. Cards
+     use dynamic colors: charcoal, white, amber, blue. */
+  --ink: #1a1815; /* text, dark cards, dark buttons */
+  --ink-2: #4a463d; /* strong secondary text */
+  --muted: #7b7568; /* muted warm grey text */
+  --canvas: #f7f2e8; /* page background (warm cream) */
+  --paper: #ffffff; /* white cards */
+  --sand: #efe7d5; /* deeper cream panel */
+  --line: #e7dece; /* hairline on cream */
+  --line-2: #d8ceba; /* stronger hairline */
+  --on-dark: rgba(255, 255, 255, 0.72); /* body text on charcoal cards */
+  --on-dark-soft: rgba(255, 255, 255, 0.14); /* hairlines on charcoal */
 
-  /* Accent = primary blue (the "signal"). Used for links, pills, bars, emphasis. */
-  --signal: #1b4dff;
-  --signal-hover: #1339cc;
-  --signal-tint: #e7ecff;
-  --signal-ink: #0b2ca6;
+  /* Amber — primary accent (CTAs, highlights, the hero chip) */
+  --amber: #f5b333;
+  --amber-hover: #e7a41d;
+  --amber-tint: #fbe8c2;
+  --amber-ink: #6f4e0c; /* text on amber */
 
-  /* Primary-color pops. Use sparingly (logo, tags, small accents). */
-  --pop-red: #f5402c;
-  --pop-yellow: #ffc63d;
-  --pop-blue: #1b4dff;
+  /* Blue — secondary/dynamic accent (cards, links, data) */
+  --blue: #2f6bff;
+  --blue-hover: #1f57e6;
+  --blue-tint: #e7efff;
+  --blue-deep: #0f2c53; /* navy card */
 
+  /* Dr. Leaf co-brand raspberry — case-study section only */
   --drleaf: #e03064;
   --drleaf-tint: #fdeaf1;
+
+  /* Section alt background (light cream) */
+  --mist: #f0e8d9;
+
+  /* Back-compat aliases — subpages pending the v2 redesign still read these.
+     Map the old single "signal" accent onto the new amber primary. */
+  --signal: #cf8f13; /* amber, darkened for contrast on cream/white */
+  --signal-hover: var(--amber-hover);
+  --signal-tint: var(--amber-tint);
+  --signal-ink: var(--amber-ink);
+  --pop-red: #f5402c;
+  --pop-yellow: var(--amber);
+  --pop-blue: var(--blue);
 
   /* --- Typography --- */
   --font-sans: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-accent: "Space Grotesk", "Figtree", monospace;
 
-  --fs-display: clamp(2.75rem, 6vw + 1rem, 5.5rem);
-  --fs-h1: clamp(2.25rem, 3.5vw + 1rem, 3.75rem);
-  --fs-h2: clamp(1.75rem, 2vw + 1rem, 2.75rem);
+  --fs-display: clamp(2.85rem, 6.2vw + 1rem, 5.75rem);
+  --fs-h1: clamp(2.35rem, 3.6vw + 1rem, 4rem);
+  --fs-h2: clamp(1.9rem, 2.4vw + 1rem, 3rem);
   --fs-h3: clamp(1.25rem, 1vw + 1rem, 1.6rem);
-  --fs-lead: clamp(1.125rem, 0.6vw + 1rem, 1.375rem);
+  --fs-lead: clamp(1.05rem, 0.5vw + 1rem, 1.3rem);
   --fs-body: 1.0625rem;
   --fs-sm: 0.9375rem;
-  --fs-eyebrow: 0.75rem;
+  --fs-eyebrow: 0.72rem;
 
-  --tracking-display: -0.03em;
+  --tracking-display: -0.035em;
   --tracking-tight: -0.02em;
-  --tracking-eyebrow: 0.18em;
+  --tracking-eyebrow: 0.16em;
 
-  --lh-tight: 1.08;
-  --lh-snug: 1.2;
-  --lh-body: 1.62;
+  --lh-tight: 1.04;
+  --lh-snug: 1.16;
+  --lh-body: 1.6;
 
   /* --- Spacing (4px base) --- */
   --sp-1: 4px;
@@ -61,7 +80,7 @@
   --sp-12: 96px;
   --sp-16: 128px;
 
-  --section-y: clamp(5rem, 10vw, 10rem);
+  --section-y: clamp(4.5rem, 8vw, 8rem);
   --maxw: 1200px;
   --maxw-wide: 1320px;
   --maxw-prose: 68ch;
@@ -69,20 +88,21 @@
 
   /* --- Radius --- */
   --r-pill: 999px;
-  --r-card: 20px;
-  --r-card-inner: 15px;
-  --r-input: 12px;
-  --r-media: 16px;
+  --r-card: 24px;
+  --r-card-lg: 30px;
+  --r-card-inner: 18px;
+  --r-input: 14px;
+  --r-media: 20px;
 
   /* --- Elevation --- */
   --shadow-card:
-    rgba(22, 22, 26, 0.03) 0 0 0 1px,
-    rgba(22, 22, 26, 0.04) 0 2px 8px,
-    rgba(22, 22, 26, 0.08) 0 12px 28px -12px;
+    rgba(26, 24, 21, 0.03) 0 0 0 1px,
+    rgba(26, 24, 21, 0.05) 0 2px 8px,
+    rgba(26, 24, 21, 0.06) 0 14px 30px -14px;
   --shadow-float:
-    rgba(22, 22, 26, 0.04) 0 0 0 1px,
-    rgba(22, 22, 26, 0.06) 0 6px 16px,
-    rgba(22, 22, 26, 0.12) 0 18px 40px -16px;
+    rgba(26, 24, 21, 0.04) 0 0 0 1px,
+    rgba(26, 24, 21, 0.07) 0 8px 20px,
+    rgba(26, 24, 21, 0.12) 0 24px 48px -20px;
   --inset-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.6);
 
   /* --- Motion --- */
