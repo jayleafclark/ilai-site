@@ -2374,14 +2374,23 @@ const comments = [
     }
     /* Two hero CTAs: stacked, full-width, comfortable 48px tap targets */
     .hslide__actions {
-      margin-top: var(--sp-6);
+      margin-top: var(--sp-5);
       flex-direction: column;
-      gap: var(--sp-3);
+      align-items: stretch;
+      gap: var(--sp-4);
     }
-    .hslide__actions .btn {
+    /* Primary is full-width; secondary is a smaller centered pill so the two
+       buttons don't dominate the hero card or crowd each other. */
+    .hslide__actions .btn--pink {
       width: 100%;
       justify-content: center;
-      min-height: 48px;
+      min-height: 50px;
+    }
+    .hslide__actions .btn--ghost-dark {
+      width: auto;
+      align-self: center;
+      min-height: 44px;
+      padding: 11px 20px;
     }
     /* Feature cards sit BELOW the hero on phones (no negative overlap that
        collided with the hero card's rounded bottom). */

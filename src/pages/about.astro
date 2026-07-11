@@ -363,6 +363,26 @@ const stats = [
     justify-content: center;
     margin-top: var(--sp-8);
   }
+  /* Mobile: primary button full-width, secondary a lighter centered pill with
+     more breathing room between them. Desktop is untouched. */
+  @media (max-width: 640px) {
+    .hero__cta {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--sp-4);
+    }
+    .hero__cta .btn--signal {
+      width: 100%;
+      min-height: 50px;
+      justify-content: center;
+    }
+    .hero__cta .btn--ghost {
+      align-self: center;
+      width: auto;
+      min-height: 44px;
+      padding: 11px 20px;
+    }
+  }
 
   /* ---------- Beliefs (dark band, glass cards) ---------- */
   .beliefs-sec {

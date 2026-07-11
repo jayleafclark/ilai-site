@@ -656,6 +656,26 @@ const pricing = [
     gap: var(--sp-3);
     margin-top: var(--sp-6);
   }
+  /* Mobile: primary button full-width, secondary a lighter centered pill with
+     more breathing room between them. Desktop is untouched. */
+  @media (max-width: 640px) {
+    .wwd-herocard__actions {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--sp-4);
+    }
+    .wwd-herocard__actions .btn--pink {
+      width: 100%;
+      min-height: 50px;
+      justify-content: center;
+    }
+    .wwd-herocard__actions .btn--ghost-dark {
+      align-self: center;
+      width: auto;
+      min-height: 44px;
+      padding: 11px 20px;
+    }
+  }
   .wwd-herocard__visual {
     position: relative;
     z-index: 2;

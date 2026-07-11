@@ -187,13 +187,21 @@ const why = [
         <section class={sectionClass} id={`step-0${i + 1}`} style={`--st:${s.accent}`}>
           <div class="container">
             <div class={`step__row${flip ? " step__row--flip" : ""}`}>
-              <div class="step__text" data-reveal>
-                <div class="step__head">
-                  <span class="step__n" style={`--ac:${s.accent}`}>{s.n}</span>
-                  <span class="step__rule" aria-hidden="true"></span>
-                  <span class="step__of">Step {s.n} of 05</span>
-                </div>
-                <h2 class="step__name">{s.name}</h2>
+              <details class="step__text step__acc" data-reveal open={i === 0}>
+                <summary class="step__accsummary">
+                  <span class="step__head">
+                    <span class="step__n" style={`--ac:${s.accent}`}>{s.n}</span>
+                    <span class="step__rule" aria-hidden="true"></span>
+                    <span class="step__of">Step {s.n} of 05</span>
+                  </span>
+                  <span class="step__accname">
+                    <span class="step__name">{s.name}</span>
+                    <span class="step__accchev" style={`--ac:${s.accent}`} aria-hidden="true">
+                      <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                  </span>
+                </summary>
+                <div class="step__accbody">
                 <p class="step__promise">{s.promise}</p>
                 <p class="step__body">{s.body}</p>
 
@@ -230,7 +238,8 @@ const why = [
                   <span class="step__outlabel">Outcome</span>
                   {s.outcome}
                 </p>
-              </div>
+                </div>
+              </details>
 
               <div class="step__visual" data-reveal data-reveal-delay="1" aria-hidden="true">
                 <div class={`stepcard${ink ? " stepcard--ink" : ""}`} style={`--ac:${s.accent}`}>
@@ -1312,16 +1321,27 @@ const why = [
       font-size: 1rem;
       line-height: 1.55;
     }
-    /* Full-width, easy-to-tap CTAs stacked */
+    /* CTAs stacked and centered: the pink primary is the wide (but capped)
+       action; the ghost secondary hugs its label underneath as a smaller,
+       quiet link. Fluid so it reads the same at 390px and 430px — never a
+       giant slab, never edge-to-edge. */
     .herocard__actions {
       flex-direction: column;
-      align-items: stretch;
-      gap: var(--sp-3);
+      align-items: center;
+      gap: var(--sp-4);
     }
-    .herocard__actions .btn {
+    .herocard__actions .btn--pink {
       width: 100%;
+      max-width: 24rem;
       justify-content: center;
-      min-height: 48px;
+      min-height: 50px;
+    }
+    .herocard__actions .btn--ghost-dark {
+      width: auto;
+      max-width: 100%;
+      justify-content: center;
+      min-height: 44px;
+      padding: 11px clamp(1rem, 5vw, 1.5rem);
     }
 
     /* ---- Flow timeline: readable stacked pills ---- */
@@ -1388,4 +1408,172 @@ const why = [
     .why__grid { gap: var(--sp-5); }
     .whycard { padding: 1.5rem 1.35rem; }
   }
+
+  /* ==================================================================
+     MOBILE STEP ACCORDION (<= 760px)
+     Each step's copy is a <details>; the summary is the tappable row
+     (number badge + step title + chevron), tapping expands the promise,
+     checklist, and outcome. Step 01 is open by default (open attr in markup;
+     the script enforces single-open on mobile). Desktop (>=760px) below
+     dissolves all of this with display:contents so the layout is unchanged.
+  ================================================================== */
+  @media (max-width: 760px) {
+    /* Force the copy block visible regardless of data-reveal so collapsed
+       rows never leave empty scroll bands waiting on the reveal observer. */
+    .step__acc[data-reveal] {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .step__acc { display: block; }
+
+    .step__accsummary {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.5rem, 3vw, var(--sp-3));
+      min-height: 48px;
+      padding: clamp(0.75rem, 3.5vw, 1rem) 0;
+      list-style: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      border-top: 1px solid var(--line);
+    }
+    .step__accsummary::-webkit-details-marker { display: none; }
+    .step__accsummary::marker { content: ""; }
+    .step__accsummary:focus-visible {
+      outline: 2px solid var(--ac, var(--coral));
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+    /* On dark (Direct) step the hairline needs to read on the deep field. */
+    .section--ink .step__accsummary { border-top-color: rgba(255, 255, 255, 0.14); }
+
+    /* Compact the head: hide the rule + "STEP 0X OF 05" line, keep the number
+       badge leading the row so it stays tight. */
+    .step__accsummary .step__head {
+      flex: none;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .step__accsummary .step__rule,
+    .step__accsummary .step__of { display: none; }
+    .step__accsummary .step__n {
+      font-size: clamp(1.25rem, 5.5vw, 1.5rem);
+      line-height: 1;
+    }
+
+    .step__accname {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: clamp(0.5rem, 3vw, var(--sp-3));
+      min-width: 0;
+    }
+    .step__accsummary .step__name {
+      flex: 1;
+      min-width: 0;
+      margin-top: 0;
+      font-size: clamp(1.2rem, 5.5vw, 1.4rem);
+      line-height: 1.15;
+      text-wrap: balance;
+    }
+    .step__accchev {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: clamp(30px, 8.5vw, 34px);
+      height: clamp(30px, 8.5vw, 34px);
+      border-radius: 50%;
+      color: #fff;
+      background: var(--ac, var(--coral));
+      transition: transform var(--dur-base, 0.25s) var(--ease);
+    }
+    .step__acc[open] .step__accchev { transform: rotate(180deg); }
+
+    /* Expanded content sits under the row; keep it tight, not the airy
+       desktop rhythm. */
+    .step__accbody { padding: var(--sp-3) 0 var(--sp-4); }
+    .step__accbody .step__promise { margin-top: 0; }
+
+    /* Close the hairline rhythm at the last step so the section border isn't
+       doubled up. */
+    .step__row { gap: 0; }
+  }
+
+  @media (min-width: 760px) {
+    /* --- Desktop bypass: dissolve the accordion so the original stacked copy
+       (head, name, promise, body, cols, outcome) renders exactly as before,
+       always expanded and non-interactive. --- */
+    .step__acc { display: block; }              /* stays the grid column */
+    .step__accsummary,
+    .step__accname,
+    .step__accbody { display: contents; }       /* children flow as before */
+    .step__accsummary { cursor: default; }
+    .step__accchev { display: none; }
+  }
 </style>
+
+<script>
+  // Mobile accordion controller for the five step blocks.
+  // - Desktop (>=760px): every <details> is forced open and stays open, so the
+  //   CSS `display:contents` bypass renders the original stacked step layout.
+  // - Mobile (<=760px): steps start collapsed except 01; opening one closes the
+  //   others (single-open) and hash links (#step-03) open + scroll the target.
+  (() => {
+    const accs = Array.from(
+      document.querySelectorAll<HTMLDetailsElement>(".step .step__acc"),
+    );
+    if (!accs.length) return;
+    const desktop = window.matchMedia("(min-width: 760px)");
+
+    const syncToViewport = () => {
+      if (desktop.matches) {
+        // Force-open on desktop; layout is driven entirely by CSS.
+        accs.forEach((d) => {
+          d.open = true;
+        });
+      } else {
+        // Mobile: lead with step 01 open, collapse the rest.
+        accs.forEach((d, i) => {
+          d.open = i === 0;
+        });
+      }
+    };
+
+    // Single-open behaviour on mobile only.
+    accs.forEach((d) => {
+      d.addEventListener("toggle", () => {
+        if (desktop.matches || !d.open) return;
+        accs.forEach((o) => {
+          if (o !== d) o.open = false;
+        });
+      });
+    });
+
+    // Open the targeted step when arriving via #step-0N (mobile only; desktop
+    // is always open).
+    const openFromHash = () => {
+      const id = location.hash.replace("#", "");
+      if (!id) return;
+      const section = document.getElementById(id);
+      const d = section && section.querySelector<HTMLDetailsElement>(".step__acc");
+      if (d && !desktop.matches) {
+        d.open = true;
+        d.querySelector<HTMLElement>(".step__accsummary")?.scrollIntoView({
+          block: "start",
+          behavior: "smooth",
+        });
+      }
+    };
+
+    syncToViewport();
+    if (desktop.addEventListener) {
+      desktop.addEventListener("change", syncToViewport);
+    } else {
+      // Safari <14 fallback
+      desktop.addListener(syncToViewport);
+    }
+    window.addEventListener("hashchange", openFromHash);
+    openFromHash();
+  })();
+</script>

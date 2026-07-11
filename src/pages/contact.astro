@@ -928,6 +928,18 @@ const pricing = [
     }
   }
 
+  /* Mobile: keep the single "Join the waitlist" button a sensible size — a
+     comfortable tap height, full-width up to a capped max so it never reads as
+     an oversized slab. Desktop is untouched. */
+  @media (max-width: 640px) {
+    .capacity__cta {
+      width: 100%;
+      max-width: 22rem;
+      min-height: 50px;
+      justify-content: center;
+    }
+  }
+
   /* ---------- Mobile polish (<= 560px) ---------- */
   @media (max-width: 560px) {
     /* Pull the hero closer to the nav so the fold shows the waitlist card sooner. */
