@@ -577,8 +577,12 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
   /* ---- Carousel ---- */
   .herocar {
     position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
   .herocar__vp {
+    flex: 1;
     overflow: hidden;
     border-radius: var(--r-card-lg);
     box-shadow: var(--shadow-float);
@@ -590,6 +594,7 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
   }
   .herocar__track {
     display: flex;
+    height: 100%;
     transition: transform var(--dur-slow) var(--ease);
     will-change: transform;
   }
@@ -969,7 +974,7 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
   .cmt__txt b { display: block; font-size: 0.72rem; color: var(--ink); }
   .cmt__txt span { font-size: 0.74rem; color: var(--muted); line-height: 1.35; }
   .cmt__badge { position: absolute; top: 9px; right: 11px; font-size: 0.58rem; font-family: var(--font-accent); color: var(--muted); }
-  .cmt__badge--lead { color: #fff; background: var(--pink); padding: 2px 8px; border-radius: 999px; }
+  .cmt__badge--lead { color: #fff; background: var(--pink-ink); padding: 2px 8px; border-radius: 999px; }
 
   .herocard__lead {
     margin-top: var(--sp-5);
@@ -1046,7 +1051,7 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
     }
   }
   .hero__logos {
-    margin-top: auto;
+    margin-top: var(--sp-6);
     padding-top: clamp(1.5rem, 3vw, 2.5rem);
   }
 

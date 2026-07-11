@@ -370,8 +370,8 @@ const indLen = 1400;
             ))}
             <path class="ds-graph__area" d={herArea} fill="url(#dsHerFill)" />
             <path class="ds-graph__ind" d={indPath} fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 6" style={`--len:${indLen}`} />
-            <path class="ds-graph__her" d={herPath} fill="none" stroke="var(--pink)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style={`--len:${herLen}`} />
-            <circle class="ds-graph__enddot" cx={xAt(n - 1)} cy={yAt(herPts[n - 1])} r="6" fill="var(--pink)" />
+            <path class="ds-graph__her" d={herPath} fill="none" stroke="var(--pink-ink)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style={`--len:${herLen}`} />
+            <circle class="ds-graph__enddot" cx={xAt(n - 1)} cy={yAt(herPts[n - 1])} r="6" fill="var(--pink-ink)" />
           </svg>
           <span class="ds-graph__endtag ds-graph__endtag--her">+204% reach</span>
           <span class="ds-graph__endtag ds-graph__endtag--ind">-12% average</span>
@@ -615,7 +615,7 @@ const indLen = 1400;
   }
   .ds-pill {
     background: var(--pink-tint);
-    color: var(--pink);
+    color: var(--pink-ink);
   }
   .ds-hero__title {
     margin-top: var(--sp-5);
@@ -630,7 +630,7 @@ const indLen = 1400;
     font-family: var(--font-accent);
     font-size: var(--fs-body);
     font-weight: 500;
-    color: var(--pink);
+    color: var(--pink-ink);
   }
   .ds-hero__lead {
     margin-top: var(--sp-5);
@@ -720,7 +720,7 @@ const indLen = 1400;
     font-weight: 700;
     font-size: clamp(3rem, 8vw, 5rem);
     letter-spacing: 0.04em;
-    color: var(--pink);
+    color: var(--pink-ink);
     opacity: 0.55;
   }
   .ds-portrait__img:not([src]),
@@ -1003,7 +1003,7 @@ const indLen = 1400;
     font-weight: 700;
     font-size: var(--fs-h3);
     letter-spacing: -0.02em;
-    color: var(--pink);
+    color: var(--pink-ink);
     font-variant-numeric: tabular-nums;
   }
   .ds-bar__track {
@@ -1032,9 +1032,9 @@ const indLen = 1400;
   }
   .ds-bar__fill {
     width: 33%;
-    background: linear-gradient(90deg, var(--pink), #f0567f);
+    background: linear-gradient(90deg, var(--pink), var(--pink-ink));
     transition: width 1200ms var(--ease);
-    box-shadow: 0 10px 24px -14px var(--pink);
+    box-shadow: 0 10px 24px -14px var(--pink-ink);
   }
   /* This year = (100 + grow), scaled against ~305 */
   [data-reveal].is-visible .ds-bar__fill {
@@ -1101,7 +1101,7 @@ const indLen = 1400;
     font-weight: 700;
     font-size: clamp(1.5rem, 3vw, 2rem);
     letter-spacing: -0.02em;
-    color: var(--pink);
+    color: var(--pink-ink);
     line-height: 1;
     font-variant-numeric: tabular-nums;
   }
@@ -1147,7 +1147,7 @@ const indLen = 1400;
     height: 4px;
     border-radius: 999px;
   }
-  .ds-graph__key--her .ds-graph__swatch { background: var(--pink); }
+  .ds-graph__key--her .ds-graph__swatch { background: var(--pink-ink); }
   .ds-graph__key--ind .ds-graph__swatch {
     background: repeating-linear-gradient(90deg, var(--muted) 0 5px, transparent 5px 11px);
   }
@@ -1381,7 +1381,7 @@ const indLen = 1400;
     font-weight: 700;
     font-size: var(--fs-eyebrow);
     letter-spacing: 0.08em;
-    color: var(--pink);
+    color: var(--pink-ink);
   }
   .ds-reason__k {
     margin-top: var(--sp-2);
@@ -1479,7 +1479,7 @@ const indLen = 1400;
   }
   [data-reveal].is-visible .ds-ctx-bar__fill { width: var(--w); }
   .ds-ctx-bar--down .ds-ctx-bar__fill { background: rgba(255, 255, 255, 0.4); }
-  .ds-ctx-bar--up .ds-ctx-bar__fill { background: linear-gradient(90deg, var(--pink), #ff7aa6); }
+  .ds-ctx-bar--up .ds-ctx-bar__fill { background: linear-gradient(90deg, var(--pink-ink), var(--pink)); }
   .ds-ctx-row__v {
     font-family: var(--font-accent);
     font-weight: 700;
@@ -1544,7 +1544,7 @@ const indLen = 1400;
     padding: 4px 11px;
     border-radius: 999px;
     background: var(--pink-tint);
-    color: var(--pink);
+    color: var(--pink-ink);
     font-family: var(--font-accent);
     font-size: 0.72rem;
     font-weight: 700;
@@ -1589,7 +1589,7 @@ const indLen = 1400;
     font-size: var(--fs-sm);
     letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
-    color: var(--pink);
+    color: var(--pink-ink);
     opacity: 0.7;
   }
   .ds-dash__cap {

@@ -46,8 +46,9 @@
   --gold-tint: #f0e7d3;
   --plum: #c07a58; /* terracotta */
   --plum-tint: #f3e2d7;
-  --pink: #d92e82; /* power pink (a smidge darker) — cute accent */
-  --pink-tint: #fbe3ef;
+  --pink: #e6a9c4; /* powder pink — soft, cute accent */
+  --pink-tint: #f8ebf1;
+  --pink-ink: #b06388; /* deeper dusty rose for pink text/badges (contrast) */
 
   --drleaf: #ce5a7a;
   --drleaf-tint: #f8e7ec;
