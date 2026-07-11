@@ -218,10 +218,18 @@ p {
 .btn:hover .btn__arrow {
   transform: translate(3px, -3px);
 }
+/* Primary CTA = solid black (per brand refs). */
 .btn--signal {
-  --btn-bg: var(--signal);
+  --btn-bg: var(--ink);
 }
 .btn--signal:hover {
+  --btn-bg: #26262e;
+}
+/* Blue-accent button, for when a primary-color CTA is wanted on light bg. */
+.btn--blue {
+  --btn-bg: var(--signal);
+}
+.btn--blue:hover {
   --btn-bg: var(--signal-hover);
 }
 .btn--ghost {

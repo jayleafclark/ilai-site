@@ -34,7 +34,7 @@ const links = [
     </button>
   </div>
 
-  <div class="nav__mobile" data-mobile hidden>
+  <div class="nav__mobile" data-mobile>
     {links.map((l) => <a href={l.href}>{l.label}</a>)}
     <a href="/contact" class="btn btn--signal">Book a call</a>
   </div>
@@ -124,7 +124,7 @@ const links = [
 
   .nav__mobile {
     pointer-events: auto;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: var(--sp-3);
     width: 100%;
@@ -149,6 +149,10 @@ const links = [
     justify-content: center;
   }
 
+  .nav__mobile.is-open {
+    display: flex;
+  }
+
   @media (min-width: 900px) {
     .nav__links,
     .nav__cta {
@@ -156,6 +160,9 @@ const links = [
     }
     .nav__burger {
       display: none;
+    }
+    .nav__mobile {
+      display: none !important;
     }
   }
 </style>
@@ -166,7 +173,7 @@ const links = [
   burger?.addEventListener("click", () => {
     const open = burger.getAttribute("aria-expanded") === "true";
     burger.setAttribute("aria-expanded", String(!open));
-    if (mobile) mobile.hidden = open;
+    if (mobile) mobile.classList.toggle("is-open", !open);
   });
 
   // Subtle lift on scroll

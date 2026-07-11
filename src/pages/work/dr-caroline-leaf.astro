@@ -135,6 +135,7 @@ const reasons = [
           loading="eager"
           width="640"
           height="800"
+          onerror="this.style.display='none'"
         />
         <div class="ds-portrait__fallback" aria-hidden="true">
           <span class="ds-portrait__mono">CL</span>
@@ -386,6 +387,7 @@ const reasons = [
             loading="lazy"
             width="1280"
             height="720"
+            onerror="this.style.display='none'"
           />
           <div class="ds-dash__fallback" aria-hidden="true">
             <span class="ds-dash__mono">Year-in-review dashboard</span>

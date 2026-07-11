@@ -5,19 +5,25 @@
 
 :root {
   /* --- Color --- */
-  --ink: #16161a;
-  --ink-2: #3d3d46;
-  --muted: #6b6b75;
+  --ink: #111114;
+  --ink-2: #33333a;
+  --muted: #6b6b73;
   --canvas: #ffffff;
-  --mist: #f6f5f2;
-  --sand: #efede7;
-  --line: #e7e5df;
+  --mist: #f5f4f1;
+  --sand: #ecebe4;
+  --line: #e8e6e0;
   --line-2: #d9d7cf;
 
-  --signal: #4b3fe4;
-  --signal-hover: #3a2fc4;
-  --signal-tint: #eceaff;
-  --signal-ink: #2a2199;
+  /* Accent = primary blue (the "signal"). Used for links, pills, bars, emphasis. */
+  --signal: #1b4dff;
+  --signal-hover: #1339cc;
+  --signal-tint: #e7ecff;
+  --signal-ink: #0b2ca6;
+
+  /* Primary-color pops. Use sparingly (logo, tags, small accents). */
+  --pop-red: #f5402c;
+  --pop-yellow: #ffc63d;
+  --pop-blue: #1b4dff;
 
   --drleaf: #e03064;
   --drleaf-tint: #fdeaf1;
