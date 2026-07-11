@@ -1444,8 +1444,38 @@ const why = [
       outline-offset: 3px;
       border-radius: 8px;
     }
-    /* On dark (Direct) step the hairline needs to read on the deep field. */
-    .section--ink .step__accsummary { border-top-color: rgba(255, 255, 255, 0.14); }
+    /* ---- Neutralize the dark (Direct / .section--ink) row so the accordion
+       reads as ONE uniform light list. On desktop this row is a full-bleed deep
+       forest band alternating with the light steps; on mobile that dark band
+       collides with the light rows above and below it, so here we strip the row
+       back to the light-mode surface + colors and let its own accent (--ac,
+       green) drive the number/tick exactly like every other row. ---- */
+    .step.section--ink { background: transparent; }
+    /* Ambient wash tints the row dark — quiet it so it matches the light rows. */
+    .section--ink.step::before { opacity: 0.5; }
+    /* Number: coral/green accent like the other rows, not gold. */
+    .section--ink .step__n { color: var(--ac, var(--coral)); }
+    /* Head + eyebrow reset (eyebrow is hidden on mobile, reset for safety). */
+    .section--ink .step__of { color: var(--muted); }
+    .section--ink .step__rule { background: var(--line-2); }
+    /* Copy back to dark-on-light. */
+    .section--ink .step__promise { color: var(--ink); }
+    .section--ink .step__body { color: var(--ink-2); }
+    .section--ink .step__item { color: var(--ink-2); }
+    .section--ink .step__item--you { color: var(--muted); }
+    .section--ink .step__coltag { color: var(--ac, var(--coral)); }
+    .section--ink .step__coltag--muted { color: var(--muted); }
+    .section--ink .step__dot { background: var(--line-2); }
+    .section--ink .step__outlabel { color: var(--ac, var(--coral)); }
+    /* Outcome callout: light accent-tinted panel, dark text (matches non-ink). */
+    .section--ink .step__outcome {
+      background: color-mix(in srgb, var(--ac, var(--coral)) 8%, var(--paper));
+      border-color: color-mix(in srgb, var(--ac, var(--coral)) 22%, transparent);
+      border-left-color: var(--ac, var(--coral));
+      color: var(--ink);
+    }
+    /* Light hairline divider on the summary row (was white-on-dark). */
+    .section--ink .step__accsummary { border-top-color: var(--line); }
 
     /* Compact the head: hide the rule + "STEP 0X OF 05" line, keep the number
        badge leading the row so it stays tight. */

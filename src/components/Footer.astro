@@ -158,10 +158,20 @@ const year = new Date().getFullYear();
     }
   }
 
+  /* Mobile: give the dark footer more top padding so the preceding saturated
+     band (pink CTA, or the light .reassure band on /contact) has clear space
+     before the dark field begins — no two bands crashing at a tight seam.
+     Sits at 640px to match the CTA-side bottom-padding fix. Desktop untouched. */
+  @media (max-width: 640px) {
+    .footer {
+      padding-top: var(--sp-10);
+    }
+  }
+
   /* --- Mobile (phones): stack cleanly, give links room to breathe --- */
   @media (max-width: 560px) {
     .footer {
-      padding-block: var(--sp-12) var(--sp-8);
+      padding-block: var(--sp-10) var(--sp-8);
     }
     .footer__top {
       gap: var(--sp-8);

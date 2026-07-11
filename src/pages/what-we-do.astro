@@ -1704,6 +1704,12 @@ const pricing = [
     .wwd-price--feature { padding-top: var(--sp-8); }
     .wwd-price__v { font-size: clamp(1.9rem, 8vw, 2.4rem); }
     .wwd-price__foot .btn { width: 100%; justify-content: center; }
+
+    /* Seam: the light social-icon platform strip meets the dark .wwd-scope
+       (section--ink) band at 0px. Add air on both sides of the light->dark
+       break so the bands don't crash. Desktop untouched. */
+    .wwd-pstrip { padding-bottom: var(--sp-10); }
+    .wwd-scope.section { padding-top: var(--sp-10); }
   }
 </style>
 

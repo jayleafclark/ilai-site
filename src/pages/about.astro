@@ -868,6 +868,9 @@ const stats = [
        dominate the fold. The desktop <br> is tuned for a wider measure. */
     .hero {
       padding-top: clamp(6rem, 24vw, 9rem);
+      /* Air below the light hero before the dark .beliefs-sec band so the
+         light->dark seam doesn't collide. Desktop untouched. */
+      padding-bottom: var(--sp-10);
     }
     .hero__title {
       font-size: clamp(2rem, 9.5vw, 2.9rem);
@@ -957,6 +960,12 @@ const stats = [
     }
     .team__grid {
       gap: 0;
+    }
+    /* Air above the light Team section, which follows the dark .manifesto band
+       elsewhere and (here) sits after the dark .beliefs-sec -> the dark->light
+       seam needs breathing room. Desktop untouched. */
+    #people.section {
+      padding-top: var(--sp-10);
     }
 
     /* Stats: 2-up grid crowds the 4th cell ("Years building organizations")

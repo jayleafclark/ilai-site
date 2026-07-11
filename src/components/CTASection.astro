@@ -102,4 +102,13 @@ const {
     color: rgba(18, 53, 39, 0.6);
     margin-top: var(--sp-2);
   }
+
+  /* Mobile: the pink CTA band butts straight up against the dark-green footer,
+     two saturated bands crashing at the seam. Add clear canvas below the pink
+     block so the color break has air before the footer. Desktop untouched. */
+  @media (max-width: 640px) {
+    .cta.section {
+      padding-bottom: var(--sp-10);
+    }
+  }
 </style>
