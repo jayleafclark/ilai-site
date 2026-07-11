@@ -171,7 +171,7 @@ const stats = [
             <div class="pcard__top">
               <span class="pcard__avatar" aria-hidden="true" style={`--ic:${p.c}`}>
                 <span class="pcard__mono">{p.initials}</span>
-                <img class="pcard__img" src={p.photo} alt="" loading="lazy" onerror="this.remove()" />
+                <img class="pcard__img" src={`${import.meta.env.BASE_URL}${p.photo.replace(/^\//, "")}`} alt="" loading="lazy" onerror="this.remove()" />
               </span>
               <div class="pcard__id">
                 <h3 class="pcard__name">{p.name}</h3>

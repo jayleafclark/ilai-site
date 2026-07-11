@@ -2,6 +2,8 @@
 import Layout from "../../layouts/Layout.astro";
 import CTASection from "../../components/CTASection.astro";
 
+const arrow = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
 // ---- Headline numbers (12 months) ----
 const headline = [
   { value: 205, suffix: "M+", label: "Impressions in 12 months" },
@@ -39,36 +41,43 @@ const platforms = [
   {
     name: "Facebook",
     glyph: "facebook",
-    stat: "523K",
+    stat: 523,
+    suffix: "K",
     statLabel: "followers",
-    lines: ["Up 28K this year", "76M impressions this year", "Reach +359% year over year"],
+    lines: ["Up 28K this year", "76M impressions this year", "Reach up 359% year over year"],
   },
   {
     name: "Instagram",
     glyph: "instagram",
-    stat: "932K",
+    stat: 932,
+    suffix: "K",
     statLabel: "followers",
-    lines: ["Up 46K this year", "129M impressions this year", "The biggest audience"],
+    lines: ["Up 46K this year", "129M impressions this year", "Her biggest single audience"],
     feature: true,
   },
   {
     name: "YouTube",
     glyph: "youtube",
-    stat: "1.26M",
+    stat: 1.26,
+    decimals: 2,
+    suffix: "M",
     statLabel: "views",
     lines: ["100K watch hours", "11K new subscribers", "4.1% click-through rate"],
   },
   {
     name: "TikTok",
     glyph: "tiktok",
-    stat: "+39%",
+    stat: 39,
+    prefix: "+",
+    suffix: "%",
     statLabel: "follower growth",
-    lines: ["Fastest-growing of her eight platforms", "Built from a standing start", "Followers up 39% year over year"],
+    lines: ["Fastest-growing of her platforms", "Built from a standing start", "Followers up 39% year over year"],
   },
   {
-    name: "X, Threads, Bluesky, Substack",
+    name: "X · Threads · Bluesky · Substack",
     glyph: "quartet",
-    stat: "4",
+    stat: 4,
+    suffix: "",
     statLabel: "more platforms",
     lines: ["Her voice, adapted for each feed", "Written and published by people", "One idea, shaped for where it lands"],
   },
@@ -79,20 +88,47 @@ const reasons = [
   {
     k: "Researched, not guessed",
     d: "Every piece is grounded in her market, her audience of women 35 to 50, and what they actually respond to. Specific beats generic on every platform.",
+    c: "var(--pink)",
+    icon: `<circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="2" fill="currentColor"/>`,
   },
   {
     k: "Human-led, human-gated",
     d: "A real US team writes the angles and signs off on every piece before it ships. Software carries the load. The judgment stays with people.",
+    c: "var(--green)",
+    icon: `<path d="M10 2l6 2.5v5c0 4-2.7 6.3-6 7.5-3.3-1.2-6-3.5-6-7.5v-5L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.2 10l2 2 3.6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
   {
-    k: "Published everywhere, one voice",
-    d: "One idea, adapted for 8 platforms and posted in a single voice we built with her and hold to on every feed.",
+    k: "Everywhere, one voice",
+    d: "One idea, adapted for eight platforms and posted in a single voice we built with her and hold to on every feed.",
+    c: "var(--brand)",
+    icon: `<circle cx="10" cy="10" r="2.2" fill="currentColor"/><path d="M5.5 5.5a6.5 6.5 0 000 9M14.5 5.5a6.5 6.5 0 010 9M3 3a10 10 0 000 14M17 3a10 10 0 010 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>`,
   },
   {
     k: "The first minutes decide",
     d: "An engagement engine answers her community in her voice in the first minutes, the window that decides whether a post travels or stalls.",
+    c: "var(--plum)",
+    icon: `<circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 5.5V10l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
 ];
+
+// ---- Growth chart data (indexed, last year = 100) ----
+// Her line climbs to ~305; the industry line drifts down to ~86.
+const herPts = [100, 118, 142, 160, 188, 214, 236, 258, 276, 292, 305];
+const indPts = [100, 99, 97, 96, 94, 93, 91, 90, 89, 87, 86];
+const W = 620;
+const H = 260;
+const PAD = 10;
+const n = herPts.length;
+const maxY = 320;
+const xAt = (i: number) => PAD + (i / (n - 1)) * (W - PAD * 2);
+const yAt = (v: number) => H - PAD - (v / maxY) * (H - PAD * 2);
+const toPath = (pts: number[]) =>
+  pts.map((v, i) => `${i === 0 ? "M" : "L"}${xAt(i).toFixed(1)} ${yAt(v).toFixed(1)}`).join(" ");
+const herPath = toPath(herPts);
+const indPath = toPath(indPts);
+const herArea = `${herPath} L${xAt(n - 1).toFixed(1)} ${H - PAD} L${xAt(0).toFixed(1)} ${H - PAD} Z`;
+const herLen = 1400; // approx path length for draw animation
+const indLen = 1400;
 ---
 
 <Layout
@@ -106,45 +142,65 @@ const reasons = [
     <div class="container ds-hero__inner">
       <div class="ds-hero__copy">
         <span class="eyebrow eyebrow--pill ds-pill" data-reveal>Case study</span>
-        <h1 class="ds-hero__title display" data-reveal data-reveal-delay="1">
+        <h1 class="ds-hero__title" data-reveal data-reveal-delay="1">
           Dr. Caroline Leaf
         </h1>
         <p class="ds-hero__role" data-reveal data-reveal-delay="1">
           Neuroscientist, mental-health author, and podcast host.
         </p>
-        <p class="lead ds-hero__lead" data-reveal data-reveal-delay="2">
+        <p class="ds-hero__lead" data-reveal data-reveal-delay="2">
           In 12 months her reach and engagement roughly tripled. In the same year most
-          accounts went backwards. Ilai has run her entire content operation across 8
-          platforms, with zero spent on ads.
+          accounts went backwards. Ilai runs her entire content operation across eight
+          platforms, with <span class="ds-hero__accent">zero spent on ads.</span>
         </p>
+        <div class="ds-hero__actions" data-reveal data-reveal-delay="3">
+          <a href="/contact" class="btn btn--signal">
+            Book a call<span class="btn__arrow" aria-hidden="true" set:html={arrow} />
+          </a>
+          <a href="/method" class="btn btn--ghost">See the method</a>
+        </div>
         <div class="ds-hero__meta" data-reveal data-reveal-delay="3">
           <span class="ds-hero__metaitem">8 platforms</span>
-          <span class="ds-hero__dot" aria-hidden="true"></span>
+          <span class="ds-hero__mdot" aria-hidden="true"></span>
           <span class="ds-hero__metaitem">12 months</span>
-          <span class="ds-hero__dot" aria-hidden="true"></span>
+          <span class="ds-hero__mdot" aria-hidden="true"></span>
           <span class="ds-hero__metaitem">$0 on ads</span>
         </div>
       </div>
 
-      <!-- Portrait slot: client drops the headshot at /work/dr-caroline-leaf.jpg -->
-      <figure class="ds-portrait" data-reveal data-reveal-delay="2">
-        <img
-          src="/work/dr-caroline-leaf.jpg"
-          alt="Dr. Caroline Leaf"
-          class="ds-portrait__img"
-          loading="eager"
-          width="640"
-          height="800"
-          onerror="this.style.display='none'"
-        />
-        <div class="ds-portrait__fallback" aria-hidden="true">
-          <span class="ds-portrait__mono">CL</span>
+      <!-- Portrait: /work/dr-caroline-leaf.jpg -->
+      <div class="ds-hero__portraitwrap" data-reveal data-reveal-delay="2">
+        <figure class="ds-portrait">
+          <span class="ds-portrait__ring" aria-hidden="true"></span>
+          <img
+            src={`${import.meta.env.BASE_URL}work/dr-caroline-leaf.jpg`}
+            alt="Dr. Caroline Leaf"
+            class="ds-portrait__img"
+            loading="eager"
+            width="640"
+            height="800"
+            onerror="this.style.display='none'"
+          />
+          <div class="ds-portrait__fallback" aria-hidden="true">
+            <span class="ds-portrait__mono">CL</span>
+          </div>
+        </figure>
+
+        <!-- Floating stat chip over the photo -->
+        <div class="ds-float" aria-hidden="true">
+          <span class="ds-float__spark">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 12l3.5-4 2.5 2.5L13 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 4h-3M13 4v3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div>
+            <span class="ds-float__num">+210%</span>
+            <span class="ds-float__lab">Engagement, year over year</span>
+          </div>
         </div>
-      </figure>
+      </div>
     </div>
   </section>
 
-  <!-- ============ HEADLINE NUMBERS ============ -->
+  <!-- ============ HEADLINE NUMBERS BAND ============ -->
   <section class="ds-band">
     <div class="container">
       <div class="ds-band__grid">
@@ -158,7 +214,7 @@ const reasons = [
                 data-prefix={s.prefix ?? ""}
                 data-suffix={s.suffix ?? ""}
               >
-                {s.prefix ?? ""}0{s.suffix ?? ""}
+                {(s.prefix ?? "") + (s.decimals ? s.value.toFixed(s.decimals) : "0") + (s.suffix ?? "")}
               </div>
               <div class="ds-stat__label">{s.label}</div>
             </div>
@@ -180,9 +236,7 @@ const reasons = [
         <h2 class="ds-challenge__title">
           A serious expert, eight platforms, and no time to be everywhere.
         </h2>
-      </div>
-      <div class="ds-challenge__body" data-reveal data-reveal-delay="1">
-        <p class="lead">
+        <p class="lead ds-challenge__lead">
           Dr. Leaf reaches an audience that skews women 35 to 50 who come to her for careful,
           researched work on the mind. That audience is spread across eight platforms, each
           with its own format, rhythm, and voice. Showing up on all of them, every day, in her
@@ -196,15 +250,40 @@ const reasons = [
           directing every call.
         </p>
       </div>
+
+      <!-- Visual: one recording fans out to eight platforms -->
+      <div class="ds-fan" data-reveal data-reveal-delay="1" aria-hidden="true">
+        <div class="ds-fan__card">
+          <span class="ds-fan__src">
+            <span class="ds-fan__srcic">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="5" width="11" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M13.5 8.5L18 6v8l-4.5-2.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </span>
+            <span>
+              <b>One recording</b>
+              <i>filmed in a single sitting</i>
+            </span>
+          </span>
+          <span class="ds-fan__pipe"></span>
+          <div class="ds-fan__grid">
+            {["Facebook","Instagram","YouTube","TikTok","X","Threads","Bluesky","Substack"].map((p, k) => (
+              <span class="ds-fan__chip" style={`--d:${k * 90}ms`}>{p}</span>
+            ))}
+          </div>
+          <div class="ds-fan__foot">
+            <span class="ds-fan__dot"></span>
+            One voice, eight feeds, published by people
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ============ YEAR-OVER-YEAR GROWTH ============ -->
+  <!-- ============ YEAR OVER YEAR ============ -->
   <section class="section ds-yoy">
     <div class="container">
       <div class="ds-sechead" data-reveal>
         <span class="eyebrow eyebrow--dot ds-dot">Year over year</span>
-        <h2 class="ds-sechead__title">She moved in the opposite direction from the industry.</h2>
+        <h2 class="ds-sechead__title">She moved the opposite way from the industry.</h2>
         <p class="lead ds-sechead__lead">
           The cleanest like-for-like comparison, this year against last. Reach and engagement
           both roughly tripled.
@@ -217,7 +296,12 @@ const reasons = [
             <div class="ds-bar">
               <div class="ds-bar__head">
                 <span class="ds-bar__label">{b.label}</span>
-                <span class="ds-bar__pct">+{b.pct}%</span>
+                <span
+                  class="ds-bar__pct"
+                  data-count={b.pct}
+                  data-prefix="+"
+                  data-suffix="%"
+                >+{b.pct}%</span>
               </div>
               <div class="ds-bar__track" role="img" aria-label={`${b.label} up ${b.pct}% year over year`}>
                 <div class="ds-bar__base">
@@ -237,9 +321,9 @@ const reasons = [
         <p class="ds-chips__title">Where the growth came from, by platform</p>
         <div class="ds-chips__grid">
           {
-            yoyChips.map((c) => (
-              <div class="ds-chip">
-                <span class="ds-chip__val">+{c.value}%</span>
+            yoyChips.map((c, i) => (
+              <div class="ds-chip" style={`--d:${i * 80}ms`}>
+                <span class="ds-chip__val" data-count={c.value} data-prefix="+" data-suffix="%">+{c.value}%</span>
                 <span class="ds-chip__meta">
                   <strong>{c.platform}</strong> {c.metric}
                 </span>
@@ -251,8 +335,58 @@ const reasons = [
     </div>
   </section>
 
-  <!-- ============ PLATFORM BY PLATFORM ============ -->
+  <!-- ============ GROWTH CHART: DOWN vs UP ============ -->
   <section class="section section--mist">
+    <div class="container">
+      <div class="ds-sechead" data-reveal>
+        <span class="eyebrow eyebrow--dot ds-dot">The divergence</span>
+        <h2 class="ds-sechead__title">The field went down. She went up.</h2>
+        <p class="lead ds-sechead__lead">
+          Both lines start at the same point twelve months ago. One follows the industry
+          average. The other is Dr. Leaf.
+        </p>
+      </div>
+
+      <figure class="ds-graph" data-reveal data-reveal-delay="1">
+        <div class="ds-graph__legend">
+          <span class="ds-graph__key ds-graph__key--her">
+            <span class="ds-graph__swatch"></span>Dr. Caroline Leaf
+          </span>
+          <span class="ds-graph__key ds-graph__key--ind">
+            <span class="ds-graph__swatch"></span>Industry average
+          </span>
+        </div>
+        <div class="ds-graph__plot">
+          <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" role="img" aria-label="Dr. Leaf's reach roughly tripled over twelve months while the industry average declined">
+            <defs>
+              <linearGradient id="dsHerFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--pink)" stop-opacity="0.30" />
+                <stop offset="1" stop-color="var(--pink)" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <!-- gridlines -->
+            {[0.25, 0.5, 0.75].map((g) => (
+              <line x1={PAD} x2={W - PAD} y1={PAD + g * (H - PAD * 2)} y2={PAD + g * (H - PAD * 2)} stroke="var(--line-2)" stroke-width="1" stroke-dasharray="3 5" />
+            ))}
+            <path class="ds-graph__area" d={herArea} fill="url(#dsHerFill)" />
+            <path class="ds-graph__ind" d={indPath} fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 6" style={`--len:${indLen}`} />
+            <path class="ds-graph__her" d={herPath} fill="none" stroke="var(--pink)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style={`--len:${herLen}`} />
+            <circle class="ds-graph__enddot" cx={xAt(n - 1)} cy={yAt(herPts[n - 1])} r="6" fill="var(--pink)" />
+          </svg>
+          <span class="ds-graph__endtag ds-graph__endtag--her">+204% reach</span>
+          <span class="ds-graph__endtag ds-graph__endtag--ind">-12% average</span>
+          <span class="ds-graph__starttag">Same start · 12 months ago</span>
+        </div>
+        <figcaption class="ds-graph__cap muted">
+          Reach indexed to 100 twelve months ago. Industry line reflects the 2025 average
+          organic decline of roughly 12%.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ PLATFORM BY PLATFORM ============ -->
+  <section class="section">
     <div class="container">
       <div class="ds-sechead" data-reveal>
         <span class="eyebrow eyebrow--dot ds-dot">Platform by platform</span>
@@ -274,42 +408,50 @@ const reasons = [
                 <span class="ds-pcard__glyph" aria-hidden="true">
                   {p.glyph === "facebook" && (
                     <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
-                      <path d="M14 8.5V7c0-.83.67-1.5 1.5-1.5H17M14 8.5H11.5M14 8.5V19M14 8.5H16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+                      <path d="M14 8.5V7c0-.83.67-1.5 1.5-1.5H17M14 8.5H11.5M14 8.5V19M14 8.5H16.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" />
                     </svg>
                   )}
                   {p.glyph === "instagram" && (
                     <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
-                      <rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="1.5" />
-                      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.5" />
-                      <circle cx="16.5" cy="7.5" r="1" fill="currentColor" />
+                      <rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="1.6" />
+                      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.6" />
+                      <circle cx="16.5" cy="7.5" r="1.1" fill="currentColor" />
                     </svg>
                   )}
                   {p.glyph === "youtube" && (
                     <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
-                      <rect x="3" y="6" width="18" height="12" rx="3.5" stroke="currentColor" stroke-width="1.5" />
-                      <path d="M10.5 9.5l4 2.5-4 2.5v-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                      <rect x="3" y="6" width="18" height="12" rx="3.5" stroke="currentColor" stroke-width="1.6" />
+                      <path d="M10.5 9.5l4 2.5-4 2.5v-5z" fill="currentColor" />
                     </svg>
                   )}
                   {p.glyph === "tiktok" && (
                     <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
-                      <path d="M13 4v10.5a3.5 3.5 0 11-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                      <path d="M13 4c.5 2.5 2 4 4.5 4.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M13 4v10.5a3.5 3.5 0 11-3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M13 4c.5 2.5 2 4 4.5 4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                   )}
                   {p.glyph === "quartet" && (
                     <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
-                      <circle cx="8" cy="8" r="2.4" stroke="currentColor" stroke-width="1.5" />
-                      <circle cx="16" cy="8" r="2.4" stroke="currentColor" stroke-width="1.5" />
-                      <circle cx="8" cy="16" r="2.4" stroke="currentColor" stroke-width="1.5" />
-                      <circle cx="16" cy="16" r="2.4" stroke="currentColor" stroke-width="1.5" />
+                      <circle cx="8" cy="8" r="2.4" stroke="currentColor" stroke-width="1.6" />
+                      <circle cx="16" cy="8" r="2.4" stroke="currentColor" stroke-width="1.6" />
+                      <circle cx="8" cy="16" r="2.4" stroke="currentColor" stroke-width="1.6" />
+                      <circle cx="16" cy="16" r="2.4" stroke="currentColor" stroke-width="1.6" />
                     </svg>
                   )}
                 </span>
                 <h3 class="ds-pcard__name">{p.name}</h3>
               </div>
               <div class="ds-pcard__stat">
-                <span class="ds-pcard__num">{p.stat}</span>
+                <span
+                  class="ds-pcard__num"
+                  data-count={p.stat}
+                  data-decimals={p.decimals ?? 0}
+                  data-prefix={p.prefix ?? ""}
+                  data-suffix={p.suffix ?? ""}
+                >
+                  {(p.prefix ?? "") + (p.decimals ? p.stat.toFixed(p.decimals) : p.stat) + (p.suffix ?? "")}
+                </span>
                 <span class="ds-pcard__statlabel">{p.statLabel}</span>
               </div>
               <ul class="ds-pcard__lines">
@@ -323,44 +465,76 @@ const reasons = [
   </section>
 
   <!-- ============ WHY IT WORKED ============ -->
-  <section class="section">
+  <section class="section section--mist">
     <div class="container">
       <div class="ds-sechead" data-reveal>
         <span class="eyebrow eyebrow--dot ds-dot">Why it worked</span>
         <h2 class="ds-sechead__title">Four things generic agencies skip.</h2>
+        <p class="lead ds-sechead__lead">
+          The growth is not luck. It comes from four commitments baked into the Signal Method.
+        </p>
       </div>
       <div class="ds-reasons">
         {
           reasons.map((r, i) => (
-            <div class="ds-reason" data-reveal data-reveal-delay={String((i % 2) + 1)}>
-              <span class="ds-reason__n">{String(i + 1).padStart(2, "0")}</span>
+            <article class="ds-reason" data-reveal data-reveal-delay={String((i % 2) + 1)}>
+              <span class="ds-reason__ico" style={`--ic:${r.c}`} aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 20 20" fill="none" set:html={r.icon} />
+              </span>
               <div class="ds-reason__body">
+                <span class="ds-reason__n">{String(i + 1).padStart(2, "0")}</span>
                 <h3 class="ds-reason__k">{r.k}</h3>
                 <p class="ds-reason__d muted">{r.d}</p>
               </div>
-            </div>
+            </article>
           ))
         }
       </div>
     </div>
   </section>
 
-  <!-- ============ INDUSTRY CONTEXT CALLOUT ============ -->
+  <!-- ============ INDUSTRY CONTEXT PULL-QUOTE (dark) ============ -->
   <section class="section ds-context-wrap">
     <div class="container">
       <div class="ds-context" data-reveal>
-        <span class="eyebrow eyebrow--pill ds-pill ds-context__pill">The context</span>
-        <p class="ds-context__quote">
-          Across the industry in 2025, the average account&rsquo;s reach fell about
-          <span class="ds-context__hl">12%</span> and engagement dropped close to
-          <span class="ds-context__hl">28%</span>. The typical Facebook page now reaches
-          only 1 to 2% of its own followers. Against that, Dr. Leaf&rsquo;s reach and
-          engagement roughly <span class="ds-context__hl">tripled</span>.
-        </p>
-        <p class="ds-context__foot">
-          She grew at a size where most accounts flatten out, in a year the whole field
-          shrank.
-        </p>
+        <div class="ds-context__glow" aria-hidden="true"></div>
+        <div class="ds-context__main">
+          <span class="eyebrow eyebrow--pill ds-pill ds-context__pill">The context</span>
+          <p class="ds-context__quote">
+            Across the industry in 2025, the average account&rsquo;s reach fell about
+            <span class="ds-context__hl">12%</span> and engagement dropped close to
+            <span class="ds-context__hl">28%</span>. The typical Facebook page now reaches
+            only 1 to 2% of its own followers. Against that, Dr. Leaf&rsquo;s reach and
+            engagement roughly <span class="ds-context__hl">tripled</span>.
+          </p>
+          <p class="ds-context__foot">
+            She grew at a size where most accounts flatten out, in a year the whole field
+            shrank.
+          </p>
+        </div>
+        <div class="ds-context__panel" aria-hidden="true">
+          <div class="ds-ctx-row">
+            <span class="ds-ctx-row__lab">Industry reach</span>
+            <span class="ds-ctx-bar ds-ctx-bar--down"><span class="ds-ctx-bar__fill" style="--w:14%"></span></span>
+            <span class="ds-ctx-row__v ds-ctx-row__v--down">-12%</span>
+          </div>
+          <div class="ds-ctx-row">
+            <span class="ds-ctx-row__lab">Industry eng.</span>
+            <span class="ds-ctx-bar ds-ctx-bar--down"><span class="ds-ctx-bar__fill" style="--w:9%"></span></span>
+            <span class="ds-ctx-row__v ds-ctx-row__v--down">-28%</span>
+          </div>
+          <div class="ds-ctx-div"></div>
+          <div class="ds-ctx-row">
+            <span class="ds-ctx-row__lab">Her reach</span>
+            <span class="ds-ctx-bar ds-ctx-bar--up"><span class="ds-ctx-bar__fill" style="--w:100%"></span></span>
+            <span class="ds-ctx-row__v ds-ctx-row__v--up">+204%</span>
+          </div>
+          <div class="ds-ctx-row">
+            <span class="ds-ctx-row__lab">Her eng.</span>
+            <span class="ds-ctx-bar ds-ctx-bar--up"><span class="ds-ctx-bar__fill" style="--w:100%"></span></span>
+            <span class="ds-ctx-row__v ds-ctx-row__v--up">+210%</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -378,11 +552,11 @@ const reasons = [
             <i></i><i></i><i></i>
           </span>
           <span class="ds-dash__bar">dashboard.ilaicollective.com</span>
+          <span class="ds-dash__live"><span class="ds-dash__pulse"></span>Live</span>
         </div>
         <div class="ds-dash__screen">
-          <!-- Dashboard slot: client drops the screenshot at /work/dashboard-year-review.png -->
           <img
-            src="/work/dashboard-year-review.png"
+            src={`${import.meta.env.BASE_URL}work/dashboard-year-review.png`}
             alt="Dr. Caroline Leaf year-in-review dashboard"
             class="ds-dash__img"
             loading="lazy"
@@ -407,8 +581,9 @@ const reasons = [
 <style>
   /* ============================================================
      Dr. Caroline Leaf case study
-     Co-brand: --drleaf raspberry as the section accent.
-     Ilai --signal stays reserved for the primary CTA (in CTASection).
+     Co-brand accent: --pink (Dr. Leaf's brand). Primary CTA stays
+     Ilai forest green (btn--signal, in CTASection). Balanced with
+     white / mist / forest / slate cards to sit inside the site.
      ============================================================ */
 
   /* ---------- Hero ---------- */
@@ -421,42 +596,58 @@ const reasons = [
   .ds-hero__mesh {
     position: absolute;
     inset: -25% -10% auto -10%;
-    height: 75%;
+    height: 80%;
     background:
-      radial-gradient(38% 55% at 20% 16%, rgba(224, 48, 100, 0.14), transparent 70%),
-      radial-gradient(34% 46% at 84% 10%, rgba(224, 48, 100, 0.08), transparent 70%);
+      radial-gradient(38% 55% at 18% 14%, color-mix(in srgb, var(--pink) 16%, transparent), transparent 70%),
+      radial-gradient(34% 46% at 86% 8%, color-mix(in srgb, var(--pink) 9%, transparent), transparent 70%);
     filter: blur(8px);
     animation: dsDrift 24s var(--ease) infinite alternate;
     pointer-events: none;
   }
   @keyframes dsDrift {
-    to {
-      transform: translate3d(0, 20px, 0) scale(1.05);
-    }
+    to { transform: translate3d(0, 20px, 0) scale(1.05); }
   }
   .ds-hero__inner {
     position: relative;
     display: grid;
-    gap: var(--sp-8);
+    gap: var(--sp-10);
     align-items: center;
   }
   .ds-pill {
-    background: var(--drleaf-tint);
-    color: var(--drleaf);
+    background: var(--pink-tint);
+    color: var(--pink);
   }
   .ds-hero__title {
     margin-top: var(--sp-5);
+    font-family: var(--font-display);
+    font-size: var(--fs-display);
+    font-weight: 600;
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-display);
   }
   .ds-hero__role {
     margin-top: var(--sp-4);
     font-family: var(--font-accent);
     font-size: var(--fs-body);
     font-weight: 500;
-    color: var(--drleaf);
+    color: var(--pink);
   }
   .ds-hero__lead {
     margin-top: var(--sp-5);
-    max-width: 46ch;
+    max-width: 48ch;
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .ds-hero__accent {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .ds-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    margin-top: var(--sp-6);
   }
   .ds-hero__meta {
     display: flex;
@@ -471,7 +662,7 @@ const reasons = [
     font-weight: 500;
     color: var(--ink-2);
   }
-  .ds-hero__dot {
+  .ds-hero__mdot {
     width: 5px;
     height: 5px;
     border-radius: 50%;
@@ -479,17 +670,34 @@ const reasons = [
   }
 
   /* ---------- Portrait ---------- */
+  .ds-hero__portraitwrap {
+    position: relative;
+    max-width: 440px;
+    width: 100%;
+    justify-self: start;
+  }
   .ds-portrait {
     position: relative;
     aspect-ratio: 4 / 5;
-    border-radius: var(--r-media);
+    border-radius: var(--r-card-lg);
     overflow: hidden;
-    border: 1px solid var(--line);
-    background: linear-gradient(155deg, var(--drleaf-tint), var(--mist) 65%, var(--sand));
-    box-shadow: var(--shadow-card);
-    max-width: 460px;
-    width: 100%;
-    justify-self: start;
+    padding: 6px;
+    background: linear-gradient(155deg, color-mix(in srgb, var(--pink) 55%, #fff), var(--pink-tint) 55%, var(--mist));
+    box-shadow:
+      0 30px 60px -30px rgba(217, 46, 130, 0.4),
+      var(--shadow-float);
+  }
+  .ds-portrait__ring {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.8), transparent 40%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 3;
   }
   .ds-portrait__img {
     position: relative;
@@ -497,33 +705,86 @@ const reasons = [
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: calc(var(--r-card-lg) - 6px);
   }
   .ds-portrait__fallback {
     position: absolute;
-    inset: 0;
+    inset: 6px;
+    border-radius: calc(var(--r-card-lg) - 6px);
     display: grid;
     place-items: center;
+    background: linear-gradient(155deg, var(--pink-tint), var(--mist) 65%, var(--sand));
   }
   .ds-portrait__mono {
     font-family: var(--font-accent);
     font-weight: 700;
     font-size: clamp(3rem, 8vw, 5rem);
     letter-spacing: 0.04em;
-    color: var(--drleaf);
-    opacity: 0.5;
+    color: var(--pink);
+    opacity: 0.55;
   }
-  /* Broken/missing image hides itself so the styled fallback shows through */
   .ds-portrait__img:not([src]),
   .ds-portrait__img[src=""] {
     display: none;
   }
 
+  /* Floating stat chip over the photo */
+  .ds-float {
+    position: absolute;
+    left: -18px;
+    bottom: 26px;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: 12px 16px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.6),
+      0 18px 40px -22px rgba(217, 46, 130, 0.5);
+    animation: dsFloat 6s var(--ease) infinite alternate;
+  }
+  .ds-float__spark {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    flex: none;
+    border-radius: 12px;
+    color: #fff;
+    background: linear-gradient(140deg, var(--pink), color-mix(in srgb, var(--pink) 55%, #fff));
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 10px 20px -8px var(--pink);
+  }
+  .ds-float__num {
+    display: block;
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .ds-float__lab {
+    display: block;
+    margin-top: 3px;
+    font-size: 0.74rem;
+    color: var(--muted);
+  }
+  @keyframes dsFloat { to { transform: translateY(-9px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-float, .ds-hero__mesh { animation: none; }
+  }
+
   @media (min-width: 880px) {
     .ds-hero__inner {
-      grid-template-columns: 1.25fr 0.95fr;
+      grid-template-columns: 1.2fr 0.85fr;
       gap: var(--sp-12);
     }
-    .ds-portrait {
+    .ds-hero__portraitwrap {
       justify-self: end;
     }
   }
@@ -540,7 +801,7 @@ const reasons = [
     gap: var(--sp-8) var(--sp-6);
   }
   .ds-stat {
-    border-left: 2px solid var(--drleaf);
+    border-left: 2px solid var(--pink);
     padding-left: var(--sp-5);
   }
   .ds-stat__num {
@@ -574,19 +835,25 @@ const reasons = [
 
   /* ---------- Section head (reused) ---------- */
   .ds-dot::before {
-    background: var(--drleaf);
+    background: var(--pink);
   }
   .ds-sechead {
     display: flex;
     flex-direction: column;
     gap: var(--sp-4);
-    max-width: 44ch;
+    max-width: 46ch;
   }
   .ds-sechead--center {
     align-items: center;
     text-align: center;
     max-width: 52ch;
     margin-inline: auto;
+  }
+  .ds-sechead__title {
+    font-size: var(--fs-h2);
+    font-weight: 600;
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.08;
   }
   .ds-sechead__lead {
     margin-top: var(--sp-1);
@@ -596,6 +863,7 @@ const reasons = [
   .ds-challenge {
     display: grid;
     gap: var(--sp-8);
+    align-items: center;
   }
   .ds-challenge__head {
     display: flex;
@@ -603,21 +871,113 @@ const reasons = [
     gap: var(--sp-4);
   }
   .ds-challenge__title {
-    max-width: 16ch;
+    font-size: var(--fs-h2);
+    font-weight: 600;
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.08;
+    max-width: 18ch;
   }
   .ds-challenge__answer {
-    margin-top: var(--sp-5);
     font-size: var(--fs-body);
     color: var(--ink-2);
+    max-width: 54ch;
+  }
+
+  /* Fan-out visual */
+  .ds-fan {
+    display: flex;
+    justify-content: center;
+  }
+  .ds-fan__card {
+    width: 100%;
+    max-width: 420px;
+    padding: var(--sp-6);
+    border-radius: var(--r-card-lg);
+    background: linear-gradient(160deg, var(--paper), var(--canvas));
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-float);
+  }
+  .ds-fan__src {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+  .ds-fan__srcic {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    border-radius: 13px;
+    color: #fff;
+    background: linear-gradient(140deg, var(--pink), color-mix(in srgb, var(--pink) 55%, #fff));
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 10px 20px -8px var(--pink);
+  }
+  .ds-fan__src b {
+    display: block;
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+  .ds-fan__src i {
+    display: block;
+    font-style: normal;
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  .ds-fan__pipe {
+    display: block;
+    width: 2px;
+    height: 26px;
+    margin: var(--sp-3) 0 var(--sp-4) 21px;
+    background: linear-gradient(180deg, var(--pink), transparent);
+  }
+  .ds-fan__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .ds-fan__chip {
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: var(--mist);
+    border: 1px solid var(--line);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-2);
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 0.5s var(--ease) var(--d),
+      transform 0.5s var(--ease) var(--d);
+  }
+  [data-reveal].is-visible .ds-fan__chip {
+    opacity: 1;
+    transform: none;
+  }
+  .ds-fan__foot {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin-top: var(--sp-5);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--line);
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  .ds-fan__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    flex: none;
   }
   @media (min-width: 900px) {
     .ds-challenge {
-      grid-template-columns: 0.9fr 1.1fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: var(--sp-12);
       align-items: start;
-    }
-    .ds-challenge__title {
-      max-width: 14ch;
     }
   }
 
@@ -643,7 +1003,7 @@ const reasons = [
     font-weight: 700;
     font-size: var(--fs-h3);
     letter-spacing: -0.02em;
-    color: var(--drleaf);
+    color: var(--pink);
     font-variant-numeric: tabular-nums;
   }
   .ds-bar__track {
@@ -666,22 +1026,17 @@ const reasons = [
     overflow: hidden;
   }
   .ds-bar__base {
-    /* last year normalised to 100 -> ~33% of this year's ~304 */
     width: 33%;
     background: var(--line-2);
     color: var(--ink-2);
   }
-  .ds-bar__basetag,
-  .ds-bar__filltag {
-    opacity: 0.9;
-  }
   .ds-bar__fill {
     width: 33%;
-    background: linear-gradient(90deg, var(--drleaf), #f0567f);
-    transition: width 1100ms var(--ease);
+    background: linear-gradient(90deg, var(--pink), #f0567f);
+    transition: width 1200ms var(--ease);
+    box-shadow: 0 10px 24px -14px var(--pink);
   }
-  /* Grow to full when the bar block reveals. --grow is the +% (e.g. 204).
-     This year = 100 + grow, expressed as share of a ~305 scale. */
+  /* This year = (100 + grow), scaled against ~305 */
   [data-reveal].is-visible .ds-bar__fill {
     width: calc((100 + var(--grow)) / 3.05 * 1%);
   }
@@ -690,9 +1045,7 @@ const reasons = [
     font-size: var(--fs-sm);
   }
   @media (prefers-reduced-motion: reduce) {
-    .ds-bar__fill {
-      transition: none;
-    }
+    .ds-bar__fill { transition: none; }
   }
   @media (min-width: 760px) {
     .ds-bars {
@@ -727,14 +1080,28 @@ const reasons = [
     padding: var(--sp-5);
     border: 1px solid var(--line);
     border-radius: var(--r-card);
-    background: var(--canvas);
+    background: var(--paper);
+    box-shadow: var(--shadow-card);
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.5s var(--ease) var(--d),
+      transform 0.5s var(--ease) var(--d),
+      box-shadow var(--dur-base) var(--ease);
+  }
+  [data-reveal].is-visible .ds-chip {
+    opacity: 1;
+    transform: none;
+  }
+  .ds-chip:hover {
+    box-shadow: var(--shadow-float);
   }
   .ds-chip__val {
     font-family: var(--font-accent);
     font-weight: 700;
     font-size: clamp(1.5rem, 3vw, 2rem);
     letter-spacing: -0.02em;
-    color: var(--drleaf);
+    color: var(--pink);
     line-height: 1;
     font-variant-numeric: tabular-nums;
   }
@@ -752,6 +1119,126 @@ const reasons = [
     }
   }
 
+  /* ---------- Growth chart ---------- */
+  .ds-graph {
+    margin-top: var(--sp-10);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border-radius: var(--r-card-lg);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-float);
+  }
+  .ds-graph__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-5);
+    margin-bottom: var(--sp-5);
+  }
+  .ds-graph__key {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--ink-2);
+  }
+  .ds-graph__swatch {
+    width: 22px;
+    height: 4px;
+    border-radius: 999px;
+  }
+  .ds-graph__key--her .ds-graph__swatch { background: var(--pink); }
+  .ds-graph__key--ind .ds-graph__swatch {
+    background: repeating-linear-gradient(90deg, var(--muted) 0 5px, transparent 5px 11px);
+  }
+  .ds-graph__plot {
+    position: relative;
+  }
+  .ds-graph__plot svg {
+    width: 100%;
+    height: clamp(200px, 34vw, 260px);
+    display: block;
+    overflow: visible;
+  }
+  .ds-graph__her {
+    stroke-dasharray: var(--len);
+    stroke-dashoffset: var(--len);
+    transition: stroke-dashoffset 1800ms var(--ease) 0.2s;
+  }
+  /* Industry line keeps its dotted look; reveal by fading in from the left */
+  .ds-graph__ind {
+    opacity: 0;
+    transition: opacity 1400ms var(--ease) 0.4s;
+  }
+  [data-reveal].is-visible .ds-graph__her {
+    stroke-dashoffset: 0;
+  }
+  [data-reveal].is-visible .ds-graph__ind {
+    opacity: 1;
+  }
+  .ds-graph__area {
+    opacity: 0;
+    transition: opacity 900ms var(--ease) 1s;
+  }
+  [data-reveal].is-visible .ds-graph__area { opacity: 1; }
+  .ds-graph__enddot {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: center;
+    transform-box: fill-box;
+    transition:
+      opacity 400ms var(--ease) 1.4s,
+      transform 400ms var(--ease) 1.4s;
+  }
+  [data-reveal].is-visible .ds-graph__enddot {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .ds-graph__endtag,
+  .ds-graph__starttag {
+    position: absolute;
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: var(--fs-sm);
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 500ms var(--ease) 1.5s;
+  }
+  [data-reveal].is-visible .ds-graph__endtag,
+  [data-reveal].is-visible .ds-graph__starttag { opacity: 1; }
+  .ds-graph__endtag--her {
+    top: 0;
+    right: 0;
+    color: #fff;
+    background: var(--pink);
+    box-shadow: 0 10px 24px -12px var(--pink);
+  }
+  .ds-graph__endtag--ind {
+    bottom: 8%;
+    right: 0;
+    color: var(--ink-2);
+    background: var(--mist);
+    border: 1px solid var(--line);
+  }
+  .ds-graph__starttag {
+    left: 0;
+    bottom: 8%;
+    color: var(--muted);
+    background: var(--canvas);
+    border: 1px solid var(--line);
+    font-weight: 500;
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .ds-graph__cap {
+    margin-top: var(--sp-5);
+    font-size: var(--fs-sm);
+    max-width: 60ch;
+  }
+
   /* ---------- Platform cards ---------- */
   .ds-platforms {
     margin-top: var(--sp-10);
@@ -764,20 +1251,21 @@ const reasons = [
     flex-direction: column;
     gap: var(--sp-5);
     padding: var(--sp-6);
-    background: var(--canvas);
+    background: var(--paper);
     border: 1px solid var(--line);
     border-radius: var(--r-card);
+    box-shadow: var(--shadow-card);
     transition:
       transform var(--dur-base) var(--ease),
       box-shadow var(--dur-base) var(--ease);
   }
   .ds-pcard:hover {
     transform: translateY(-4px);
-    box-shadow: var(--shadow-card);
+    box-shadow: var(--shadow-float);
   }
   .ds-pcard--feature {
-    background: linear-gradient(160deg, var(--drleaf-tint), var(--canvas) 70%);
-    border-color: rgba(224, 48, 100, 0.28);
+    background: linear-gradient(160deg, var(--pink-tint), var(--paper) 70%);
+    border-color: color-mix(in srgb, var(--pink) 28%, transparent);
   }
   .ds-pcard__top {
     display: flex;
@@ -787,17 +1275,19 @@ const reasons = [
   .ds-pcard__glyph {
     display: grid;
     place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--drleaf-tint);
-    color: var(--drleaf);
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    color: #fff;
+    background: linear-gradient(140deg, var(--pink), color-mix(in srgb, var(--pink) 55%, #fff));
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 10px 20px -8px var(--pink);
     flex-shrink: 0;
   }
   .ds-pcard__name {
     font-size: var(--fs-h3);
     line-height: var(--lh-snug);
   }
+  .ds-pcard--feature .ds-pcard__name { font-size: 1.35rem; }
   .ds-pcard__stat {
     display: flex;
     align-items: baseline;
@@ -836,7 +1326,7 @@ const reasons = [
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--drleaf);
+    background: var(--pink);
   }
   @media (min-width: 680px) {
     .ds-platforms {
@@ -853,7 +1343,7 @@ const reasons = [
   .ds-reasons {
     margin-top: var(--sp-10);
     display: grid;
-    gap: var(--sp-6);
+    gap: var(--sp-5);
   }
   .ds-reason {
     display: flex;
@@ -861,75 +1351,158 @@ const reasons = [
     padding: var(--sp-6);
     border: 1px solid var(--line);
     border-radius: var(--r-card);
-    background: var(--canvas);
+    background: var(--paper);
+    box-shadow: var(--shadow-card);
+    transition:
+      transform var(--dur-base) var(--ease),
+      box-shadow var(--dur-base) var(--ease);
   }
+  .ds-reason:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-float);
+  }
+  .ds-reason__ico {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    flex: none;
+    border-radius: 14px;
+    color: #fff;
+    background: linear-gradient(140deg, var(--ic), color-mix(in srgb, var(--ic) 55%, #ffffff));
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.5),
+      0 10px 20px -8px var(--ic);
+  }
+  .ds-reason__ico svg { stroke-width: 1.7; }
   .ds-reason__n {
+    display: block;
     font-family: var(--font-accent);
     font-weight: 700;
-    font-size: var(--fs-body);
-    color: var(--drleaf);
-    line-height: 1.2;
-    flex-shrink: 0;
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.08em;
+    color: var(--pink);
   }
   .ds-reason__k {
+    margin-top: var(--sp-2);
     font-size: var(--fs-h3);
   }
   .ds-reason__d {
     margin-top: var(--sp-3);
     font-size: var(--fs-sm);
+    line-height: 1.55;
   }
   @media (min-width: 760px) {
     .ds-reasons {
       grid-template-columns: 1fr 1fr;
-      gap: var(--sp-5);
     }
   }
 
-  /* ---------- Industry context callout ---------- */
+  /* ---------- Industry context pull-quote (dark) ---------- */
   .ds-context {
     position: relative;
     overflow: hidden;
+    display: grid;
+    gap: var(--sp-8);
     padding: clamp(2.25rem, 5vw, 4rem);
     border-radius: 28px;
-    background: var(--ink);
+    background: linear-gradient(150deg, var(--charcoal-2), var(--charcoal) 55%, var(--charcoal-3));
     color: #fff;
     box-shadow: var(--shadow-float);
   }
-  .ds-context::before {
-    content: "";
+  .ds-context__glow {
     position: absolute;
     inset: -40% -20% auto auto;
     width: 60%;
     height: 120%;
-    background: radial-gradient(50% 50% at 70% 30%, rgba(224, 48, 100, 0.4), transparent 70%);
+    background: radial-gradient(50% 50% at 70% 30%, color-mix(in srgb, var(--pink) 42%, transparent), transparent 70%);
     pointer-events: none;
   }
-  .ds-context > * {
-    position: relative;
-    z-index: 1;
-  }
+  .ds-context__main { position: relative; z-index: 1; }
   .ds-context__pill {
-    background: rgba(224, 48, 100, 0.18);
-    color: #ff9bb6;
+    background: color-mix(in srgb, var(--pink) 22%, transparent);
+    color: #ffb0cd;
   }
   .ds-context__quote {
     margin-top: var(--sp-5);
-    font-size: var(--fs-h2);
-    font-weight: 700;
-    line-height: 1.2;
+    font-size: clamp(1.5rem, 2.6vw, 2.15rem);
+    font-weight: 600;
+    line-height: 1.28;
     letter-spacing: var(--tracking-tight);
     color: #fff;
-    max-width: 22ch;
+    max-width: 30ch;
     text-wrap: balance;
   }
   .ds-context__hl {
     color: #ff8fac;
+    font-weight: 700;
   }
   .ds-context__foot {
     margin-top: var(--sp-6);
     font-size: var(--fs-lead);
     color: rgba(255, 255, 255, 0.72);
     max-width: 46ch;
+  }
+  /* mini comparison panel */
+  .ds-context__panel {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: var(--sp-4);
+    padding: var(--sp-6);
+    border-radius: var(--r-card);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .ds-ctx-row {
+    display: grid;
+    grid-template-columns: 6.5em 1fr 3.6em;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+  .ds-ctx-row__lab {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .ds-ctx-bar {
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+  }
+  .ds-ctx-bar__fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    transition: width 1100ms var(--ease) 0.3s;
+  }
+  [data-reveal].is-visible .ds-ctx-bar__fill { width: var(--w); }
+  .ds-ctx-bar--down .ds-ctx-bar__fill { background: rgba(255, 255, 255, 0.4); }
+  .ds-ctx-bar--up .ds-ctx-bar__fill { background: linear-gradient(90deg, var(--pink), #ff7aa6); }
+  .ds-ctx-row__v {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .ds-ctx-row__v--down { color: rgba(255, 255, 255, 0.6); }
+  .ds-ctx-row__v--up { color: #ff8fac; }
+  .ds-ctx-div {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.12);
+    margin: 2px 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-ctx-bar__fill { transition: none; }
+  }
+  @media (min-width: 900px) {
+    .ds-context {
+      grid-template-columns: 1.25fr 0.75fr;
+      align-items: center;
+      gap: var(--sp-10);
+    }
   }
 
   /* ---------- Dashboard slot ---------- */
@@ -963,13 +1536,40 @@ const reasons = [
     font-size: var(--fs-sm);
     color: var(--muted);
   }
+  .ds-dash__live {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--pink-tint);
+    color: var(--pink);
+    font-family: var(--font-accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+  .ds-dash__pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--pink);
+    animation: dsPulse 2s var(--ease) infinite;
+  }
+  @keyframes dsPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-dash__pulse { animation: none; }
+  }
   .ds-dash__screen {
     position: relative;
     aspect-ratio: 16 / 9;
     border: 1px solid var(--line);
     border-radius: 0 0 var(--r-media) var(--r-media);
     overflow: hidden;
-    background: linear-gradient(160deg, var(--drleaf-tint), var(--mist) 60%, var(--sand));
+    background: linear-gradient(160deg, var(--pink-tint), var(--mist) 60%, var(--sand));
   }
   .ds-dash__img {
     position: relative;
@@ -989,7 +1589,7 @@ const reasons = [
     font-size: var(--fs-sm);
     letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
-    color: var(--drleaf);
+    color: var(--pink);
     opacity: 0.7;
   }
   .ds-dash__cap {
