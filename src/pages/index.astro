@@ -113,11 +113,11 @@ const comments = [
             <article class="hslide is-active">
               <div class="hslide__inner">
                 <span class="eyebrow eyebrow--star eyebrow--ondark">The content studio for experts</span>
-                <h1 class="hslide__title">Be everywhere your<br />buyers already are.</h1>
+                <h1 class="hslide__title">350+ posts a month.<br />Everywhere your audience is.</h1>
                 <p class="hslide__lead">
-                  You record once. We turn it into a month of researched, on-brand content
-                  across every platform your buyers use, publish all of it, and answer your
-                  community. Real people, real research, zero AI slop.
+                  We turn one recording into 120+ original pieces and 350+ posts a month,
+                  published across up to 13 platforms in one voice. Real people, real research,
+                  zero AI slop.
                 </p>
                 <div class="hslide__actions">
                   <a href="/contact" class="btn btn--pink">Book a call<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
@@ -159,11 +159,11 @@ const comments = [
             <article class="hslide hslide--2">
               <div class="hslide__inner">
                 <span class="eyebrow eyebrow--star eyebrow--ondark">Podcasts &amp; video</span>
-                <h1 class="hslide__title">You record it once.<br />We make the rest.</h1>
+                <h1 class="hslide__title">One recording.<br />Up to 50 clips.</h1>
                 <p class="hslide__lead">
-                  We write the scripts and shot lists, you sit for one recording, then we edit
-                  the full episode and cut it into vertical clips for every feed. You show up
-                  and talk. We handle everything after that.
+                  We write the scripts, you sit for one recording, then we turn that single
+                  long-form into as many as 50 vertical clips, cut and captioned for every feed.
+                  You record once. Your voice keeps showing up all month.
                 </p>
                 <div class="hslide__actions">
                   <a href="/method" class="btn btn--pink">See how it works<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
@@ -195,8 +195,8 @@ const comments = [
                   </div>
                 </div>
                 <div class="herofloat glass--light">
-                  <span class="herofloat__num">30<span class="herofloat__u">+</span></span>
-                  <span class="herofloat__lab">clips per episode</span>
+                  <span class="herofloat__num">50<span class="herofloat__u"></span></span>
+                  <span class="herofloat__lab">clips per recording</span>
                 </div>
               </div>
             </article>
@@ -237,6 +237,43 @@ const comments = [
               </div>
             </article>
 
+            <!-- Slide 4: newsletters + long-form -->
+            <article class="hslide hslide--4">
+              <div class="hslide__inner">
+                <span class="eyebrow eyebrow--star eyebrow--ondark">Newsletters &amp; essays</span>
+                <h1 class="hslide__title">Your best ideas,<br />made to keep.</h1>
+                <p class="hslide__lead">
+                  We turn your thinking into newsletters and long-form essays your audience
+                  saves, forwards, and subscribes to. It is the channel that turns followers
+                  into a list you own.
+                </p>
+                <div class="hslide__actions">
+                  <a href="/contact" class="btn btn--pink">Book a call<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
+                  <a href="/what-we-do" class="btn btn--ghost btn--ghost-dark">What we do</a>
+                </div>
+              </div>
+              <div class="hslide__visual" aria-hidden="true">
+                <div class="chrome news glass">
+                  <div class="chrome__bar">
+                    <span class="chrome__dot"></span><span class="chrome__dot"></span><span class="chrome__dot"></span>
+                    <span class="chrome__url">Substack · your newsletter</span>
+                  </div>
+                  <div class="news__body">
+                    <span class="news__kicker">This week's essay</span>
+                    <span class="news__title">The one idea your audience keeps coming back for</span>
+                    <span class="news__lines">
+                      <i></i><i></i><i style="width:82%"></i><i style="width:64%"></i>
+                    </span>
+                    <span class="news__sub">Subscribe</span>
+                  </div>
+                </div>
+                <div class="herofloat glass--light">
+                  <span class="herofloat__num">12<span class="herofloat__u">+</span></span>
+                  <span class="herofloat__lab">essays a month</span>
+                </div>
+              </div>
+            </article>
+
           </div>
         </div>
 
@@ -245,6 +282,7 @@ const comments = [
             <button class="herocar__dot is-active" type="button" aria-label="Slide 1"></button>
             <button class="herocar__dot" type="button" aria-label="Slide 2"></button>
             <button class="herocar__dot" type="button" aria-label="Slide 3"></button>
+            <button class="herocar__dot" type="button" aria-label="Slide 4"></button>
           </div>
           <div class="herocar__arrows">
             <button class="herocar__arrow" type="button" data-prev aria-label="Previous slide">
@@ -680,6 +718,56 @@ const comments = [
     background:
       radial-gradient(85% 120% at 80% 20%, rgba(201, 162, 92, 0.5), transparent 62%),
       linear-gradient(135deg, var(--charcoal-2), var(--charcoal-3));
+  }
+  .hslide--4 {
+    background:
+      radial-gradient(78% 112% at 86% 16%, rgba(201, 162, 92, 0.32), transparent 60%),
+      linear-gradient(135deg, var(--charcoal-3), var(--charcoal));
+  }
+  /* Newsletter mock (slide 4) */
+  .news__body {
+    padding: clamp(1rem, 2.4vw, 1.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+  .news__kicker {
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--pink);
+  }
+  .news__title {
+    font-size: 1.14rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #fff;
+    max-width: 26ch;
+  }
+  .news__lines {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 2px;
+  }
+  .news__lines i {
+    display: block;
+    width: 100%;
+    height: 7px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .news__sub {
+    align-self: flex-start;
+    margin-top: var(--sp-2);
+    font-family: var(--font-accent);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--charcoal);
+    background: var(--pink);
+    padding: 7px 16px;
+    border-radius: var(--r-pill);
   }
   .hslide__inner {
     position: relative;

@@ -571,17 +571,66 @@ const indLen = 1400;
           <span class="ds-dash__live"><span class="ds-dash__pulse"></span>Live</span>
         </div>
         <div class="ds-dash__screen">
-          <img
-            src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/work/dashboard-year-review.png`}
-            alt="Dr. Caroline Leaf year-in-review dashboard"
-            class="ds-dash__img"
-            loading="lazy"
-            width="1280"
-            height="720"
-            onerror="this.style.display='none'"
-          />
-          <div class="ds-dash__fallback" aria-hidden="true">
-            <span class="ds-dash__mono">Year-in-review dashboard</span>
+          <div class="dsb" role="img" aria-label="Dr. Caroline Leaf year-in-review dashboard: 205M+ impressions up 204%, 7.9M+ engagements up 210%, 90K+ new followers across 8 platforms">
+            <aside class="dsb__side" aria-hidden="true">
+              <span class="dsb__logo"></span>
+              <span class="dsb__nav is-on"></span>
+              <span class="dsb__nav"></span>
+              <span class="dsb__nav"></span>
+              <span class="dsb__nav"></span>
+              <span class="dsb__nav"></span>
+            </aside>
+            <div class="dsb__main" aria-hidden="true">
+              <div class="dsb__head">
+                <div>
+                  <span class="dsb__h">Year in review</span>
+                  <span class="dsb__sub">Last 12 months · 8 platforms · zero ad spend</span>
+                </div>
+                <span class="dsb__pill">12M</span>
+              </div>
+              <div class="dsb__kpis">
+                <div class="dsb__kpi">
+                  <span class="dsb__kN">205M+</span>
+                  <span class="dsb__kL">Impressions</span>
+                  <span class="dsb__kD">▲ 204%</span>
+                </div>
+                <div class="dsb__kpi">
+                  <span class="dsb__kN">7.9M+</span>
+                  <span class="dsb__kL">Engagements</span>
+                  <span class="dsb__kD">▲ 210%</span>
+                </div>
+                <div class="dsb__kpi">
+                  <span class="dsb__kN">90K+</span>
+                  <span class="dsb__kL">New followers</span>
+                  <span class="dsb__kD">▲ 39%</span>
+                </div>
+              </div>
+              <div class="dsb__card">
+                <div class="dsb__cardhead">
+                  <span class="dsb__cardT">Reach, month over month</span>
+                  <span class="dsb__leg"><i></i>This year</span>
+                </div>
+                <div class="dsb__bars">
+                  {[26, 32, 29, 41, 45, 52, 58, 55, 67, 74, 86, 100].map((h) => (
+                    <span style={`--h:${h}%`}></span>
+                  ))}
+                </div>
+              </div>
+              <div class="dsb__rows">
+                {[
+                  ["Instagram", 92],
+                  ["YouTube", 76],
+                  ["TikTok", 64],
+                  ["X · Threads", 48],
+                  ["Substack", 33],
+                ].map(([p, w]) => (
+                  <div class="dsb__row">
+                    <span class="dsb__rowP">{p}</span>
+                    <span class="dsb__rowbar"><i style={`width:${w}%`}></i></span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
         <figcaption class="ds-dash__cap muted">
@@ -1622,27 +1671,57 @@ const indLen = 1400;
     overflow: hidden;
     background: linear-gradient(160deg, var(--pink-tint), var(--mist) 60%, var(--sand));
   }
-  .ds-dash__img {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .ds-dash__fallback {
+  /* Coded year-in-review dashboard mock */
+  .dsb {
     position: absolute;
     inset: 0;
+    z-index: 1;
     display: grid;
-    place-items: center;
-  }
-  .ds-dash__mono {
+    grid-template-columns: clamp(38px, 5vw, 52px) 1fr;
+    background: #fff;
     font-family: var(--font-accent);
-    font-size: var(--fs-sm);
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: var(--pink-ink);
-    opacity: 0.7;
+    text-align: left;
   }
+  .dsb__side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 0;
+    background: var(--charcoal);
+  }
+  .dsb__logo { width: 18px; height: 18px; border-radius: 6px; background: var(--pink); margin-bottom: 5px; }
+  .dsb__nav { width: 18px; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.18); }
+  .dsb__nav.is-on { background: var(--pink); }
+  .dsb__main {
+    padding: clamp(10px, 2.4vw, 22px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 1.6vw, 15px);
+    min-width: 0;
+  }
+  .dsb__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .dsb__h { display: block; font-size: clamp(0.9rem, 1.9vw, 1.15rem); font-weight: 700; color: var(--charcoal); letter-spacing: -0.01em; }
+  .dsb__sub { display: block; font-size: clamp(0.58rem, 1.1vw, 0.72rem); color: var(--muted); margin-top: 3px; }
+  .dsb__pill { font-size: 0.66rem; font-weight: 600; color: var(--pink-ink); background: var(--pink-tint); padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+  .dsb__kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(6px, 1.4vw, 12px); }
+  .dsb__kpi { border: 1px solid var(--line); border-radius: 12px; padding: clamp(8px, 1.6vw, 14px); background: var(--mist); display: flex; flex-direction: column; gap: 2px; }
+  .dsb__kN { font-size: clamp(0.95rem, 2.5vw, 1.5rem); font-weight: 800; color: var(--charcoal); letter-spacing: -0.02em; line-height: 1; }
+  .dsb__kL { font-size: clamp(0.56rem, 1.1vw, 0.7rem); color: var(--muted); }
+  .dsb__kD { font-size: clamp(0.56rem, 1.1vw, 0.7rem); font-weight: 600; color: var(--coral); margin-top: 2px; }
+  .dsb__card { border: 1px solid var(--line); border-radius: 12px; padding: clamp(8px, 1.6vw, 14px); background: #fff; flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  .dsb__cardhead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .dsb__cardT { font-size: clamp(0.62rem, 1.2vw, 0.75rem); font-weight: 600; color: var(--charcoal); }
+  .dsb__leg { display: flex; align-items: center; gap: 5px; font-size: 0.62rem; color: var(--muted); }
+  .dsb__leg i { width: 8px; height: 8px; border-radius: 2px; background: var(--coral); display: inline-block; }
+  .dsb__bars { flex: 1; display: flex; align-items: flex-end; gap: clamp(3px, 0.8vw, 7px); min-height: 46px; }
+  .dsb__bars span { flex: 1; height: var(--h); border-radius: 4px 4px 0 0; background: linear-gradient(180deg, var(--coral), color-mix(in srgb, var(--coral) 55%, var(--pink))); }
+  .dsb__rows { display: flex; flex-direction: column; gap: clamp(4px, 1vw, 8px); }
+  .dsb__row { display: flex; align-items: center; gap: 8px; }
+  .dsb__rowP { width: clamp(56px, 9vw, 74px); font-size: clamp(0.56rem, 1.1vw, 0.7rem); color: var(--charcoal); flex-shrink: 0; }
+  .dsb__rowbar { flex: 1; height: 7px; border-radius: 4px; background: var(--mist); overflow: hidden; }
+  .dsb__rowbar i { display: block; height: 100%; border-radius: 4px; background: var(--pink); }
+  @media (max-width: 540px) { .dsb__rows { display: none; } }
   .ds-dash__cap {
     margin-top: var(--sp-5);
     text-align: center;
