@@ -1,85 +1,113 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import SectionHeader from "../components/SectionHeader.astro";
 import CTASection from "../components/CTASection.astro";
 
-const flow = ["Decode", "Define", "Direct", "Distribute", "Measure"];
+const arrow = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+const flow = [
+  { k: "Decode", d: "Learn your world" },
+  { k: "Define", d: "Build the system" },
+  { k: "Direct", d: "Script, film, approve" },
+  { k: "Distribute", d: "Publish everywhere" },
+  { k: "Measure", d: "Watch it work" },
+];
 
 const steps = [
   {
     n: "01",
     name: "Decode",
+    accent: "var(--coral)",
     promise: "We learn your world before you pay us a cent.",
-    body: "Every engagement opens with research. We study the people you actually sell to, the competitors already winning their attention, and the offer you're trying to grow. Then we hand you a free teardown of your brand, your market, and your audience so you can see our thinking before you commit.",
-    outputs: [
+    body: "Every engagement opens with research. We study the people you actually sell to, the competitors already winning their attention, and the offer you're trying to grow. Then we hand you a free teardown of your brand, your market, and your audience, so you can see our thinking before you commit.",
+    get: [
       "Free brand, market, and audience teardown",
       "Competitor and category breakdown",
       "The gaps and angles worth owning",
     ],
+    you: ["Answer a short intake", "Read the teardown", "Decide with real evidence"],
+    outcome: "You start with a map of where the attention already is.",
     art: "decode",
   },
   {
     n: "02",
     name: "Define",
+    accent: "var(--brand)",
     promise: "We build the system your content runs on.",
-    body: "With the research in hand, we build the operation that keeps content on-brand at volume. Your voice is documented so every line sounds like you. Your look is fixed with type, color, and reusable templates. We map the content categories you'll own and build a hook library drawn from posts that already perform in your niche.",
-    outputs: [
+    body: "With the research in hand, we build the operation that keeps content on brand at volume. Your voice is documented so every line sounds like you. Your look is fixed with type, color, and reusable templates. We map the content categories you will own and build a hook library drawn from posts that already perform in your niche.",
+    get: [
       "Documented voice guide",
       "Visual system: type, color, templates",
-      "Content categories and niche-tuned hook library",
+      "Content categories and a niche-tuned hook library",
     ],
+    you: ["Share your references", "React to the first drafts", "Sign off on the system"],
+    outcome: "One system that keeps every piece on brand at volume.",
     art: "define",
   },
   {
     n: "03",
     name: "Direct",
+    accent: "var(--green)",
     promise: "We write it. You film once. Nothing ships without your yes.",
     body: "Ilai writes the scripts, shot lists, captions, and copy, so you walk into one filming session knowing exactly what to say. You film that single sitting. Then every piece comes back to you for approval. Nothing goes public until a human on your side signs off. The gate is yours, always.",
-    outputs: [
+    get: [
       "Scripts, shot lists, captions, and copy",
-      "One structured filming session",
-      "Client approval gate on every piece",
+      "A structured one-session shoot plan",
+      "An approval gate on every single piece",
     ],
+    you: ["Film one sitting", "Review each piece", "Approve, or send it back"],
+    outcome: "A month of material from one afternoon on camera.",
     art: "direct",
   },
   {
     n: "04",
     name: "Distribute",
+    accent: "var(--plum)",
     promise: "One approval becomes a presence on every platform.",
     body: "Once you approve, one filming session becomes 120+ pieces a month and 350+ posts across up to 13 platforms, all in one voice, on a schedule built for how each place rewards content. Then we turn on the engagement engine: real replies to your community in the first minutes after a post lands, while that early response still decides whether it travels.",
-    outputs: [
+    get: [
       "Publishing across up to 13 platforms",
       "One voice, on schedule, per platform",
       "First-response community engagement",
     ],
+    you: ["Nothing", "Stay focused on your work", "Answer the leads we flag"],
+    outcome: "You are everywhere, without living online.",
     art: "distribute",
   },
   {
     n: "05",
     name: "Measure",
+    accent: "var(--coral)",
     promise: "A live dashboard, and a clean hand-off at your funnel.",
     body: "You watch everything on a branded dashboard where every metric is pulled straight from the platforms and refreshed on its own. We report the interest and intent we surface, flag the accounts leaning in, and hand off at your funnel. We bring the attention to the door. You close it.",
-    outputs: [
-      "Live, branded, auto-refreshed dashboard",
+    get: [
+      "A live, branded, auto-refreshed dashboard",
       "Interest and intent signals, reported plainly",
-      "Clean hand-off at your funnel",
+      "A clean hand-off at your funnel",
     ],
+    you: ["Open the dashboard", "See what is landing", "Take the warm leads"],
+    outcome: "Every number in one place, refreshed on its own.",
     art: "measure",
   },
 ];
 
-const different = [
+const why = [
   {
-    k: "Researched, not guessed",
-    d: "Every angle is grounded in your market, your competitors, and what your audience actually responds to. We show you the research before the work begins.",
+    t: "Researched, not guessed",
+    s: "Every angle is grounded in your market, your competitors, and what your audience actually responds to. You see the research before the work begins.",
+    c: "var(--coral)",
+    icon: `<circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="2" fill="currentColor"/>`,
   },
   {
-    k: "Human-led, human-gated",
-    d: "A real US team writes your angles and makes every call. Nothing ships until a person on your side approves it. Software carries the load; judgment stays human.",
+    t: "Human-led, human-gated",
+    s: "A real US team writes your angles and makes every call. Nothing ships until a person on your side approves it. Software carries the load; judgment stays human.",
+    c: "var(--green)",
+    icon: `<path d="M10 2l6 2.5v5c0 4-2.7 6.3-6 7.5-3.3-1.2-6-3.5-6-7.5v-5L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.2 10l2 2 3.6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
   {
-    k: "Film once, run a quarter",
-    d: "One filming session becomes 120+ pieces a month across up to 13 platforms. You spend an afternoon on camera. We keep you visible for months after it's over.",
+    t: "Film once, run a quarter",
+    s: "One filming session becomes 120+ pieces a month across up to 13 platforms. You spend an afternoon on camera. We keep you visible for months after it is over.",
+    c: "var(--brand)",
+    icon: `<rect x="2.5" y="5" width="11" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M13.5 8.5L18 6v8l-4.5-2.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>`,
   },
 ];
 ---
@@ -91,62 +119,56 @@ const different = [
 >
   <!-- ============ HERO ============ -->
   <section class="mhero">
-    <div class="mhero__mesh" aria-hidden="true"></div>
-    <div class="container mhero__inner">
-      <span class="eyebrow eyebrow--pill" data-reveal>The Signal Method</span>
-      <h1 class="mhero__title display" data-reveal data-reveal-delay="1">
-        How we turn one recording<br />into <span class="mhero__accent">everywhere.</span>
-      </h1>
-      <p class="lead mhero__lead" data-reveal data-reveal-delay="2">
-        The Signal Method is the spine of how we work. Five steps run the same way
-        for every client, every month: research the audience, build the content
-        system, script and film, publish across up to 13 platforms, and track it all
-        on a live dashboard. Up to 350 posts a month, one voice.
-      </p>
-      <div class="mhero__actions" data-reveal data-reveal-delay="3">
-        <a href="/contact" class="btn btn--signal">
-          Book a call
-          <span class="btn__arrow" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path
-                d="M3 11L11 3M11 3H5M11 3V9"
-                stroke="currentColor"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </svg>
-          </span>
-        </a>
-        <a href="/work/dr-caroline-leaf" class="btn btn--ghost">See the proof</a>
-      </div>
-    </div>
+    <div class="container mhero__wrap">
+      <div class="herocard" data-reveal>
+        <div class="herocard__glow" aria-hidden="true"></div>
+        <div class="herocard__body">
+          <span class="eyebrow eyebrow--star eyebrow--ondark">The Signal Method</span>
+          <h1 class="herocard__title">
+            One recording,<br />a presence <span class="herocard__accent">everywhere.</span>
+          </h1>
+          <p class="herocard__lead">
+            The Signal Method is the spine of how we work. Five steps run the same way for
+            every client, every month: research the audience, build the system, script and
+            film, publish across up to 13 platforms, and track it all on a live dashboard.
+          </p>
+          <div class="herocard__actions">
+            <a href="/contact" class="btn btn--gold">
+              Book a call<span class="btn__arrow" aria-hidden="true" set:html={arrow} />
+            </a>
+            <a href="/work/dr-caroline-leaf" class="btn btn--ghost btn--ghost-dark">See the proof</a>
+          </div>
+        </div>
 
-    <!-- Horizontal 5-node stepper -->
-    <div class="container">
-      <ol class="flow" data-reveal data-reveal-delay="2" aria-label="The five steps of the Signal Method">
-        {
-          flow.map((f, i) => (
-            <li class="flow__node">
-              <a class="flow__link" href={`#step-${String(i + 1).padStart(2, "0")}`}>
-                <span class="flow__num">{String(i + 1).padStart(2, "0")}</span>
-                <span class="flow__name">{f}</span>
+        <!-- Animated 5-node flow -->
+        <ol class="flowviz" data-reveal data-reveal-delay="1" aria-label="The five steps of the Signal Method">
+          <span class="flowviz__line" aria-hidden="true"><span class="flowviz__prog"></span></span>
+          {flow.map((f, i) => (
+            <li class={`flowviz__node${i === 0 ? " is-active" : ""}`} style={`--i:${i}`}>
+              <a class="flowviz__pill" href={`#step-0${i + 1}`}>
+                <span class="flowviz__num">{`0${i + 1}`}</span>
+                <span class="flowviz__k">{f.k}</span>
+                <span class="flowviz__d">{f.d}</span>
               </a>
-              {i < flow.length - 1 && (
-                <span class="flow__arrow" aria-hidden="true">
-                  <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
-                    <path
-                      d="M1 5H18M18 5L14 1.5M18 5L14 8.5"
-                      stroke="currentColor"
-                      stroke-width="1.4"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"></path>
-                  </svg>
-                </span>
-              )}
             </li>
-          ))
-        }
-      </ol>
+          ))}
+        </ol>
+      </div>
+
+      <!-- Floating quick-stats -->
+      <div class="herostats">
+        {[
+          { v: 5, s: "", l: "steps, one system", c: "var(--coral)" },
+          { v: 120, s: "+", l: "pieces a month", c: "var(--brand)" },
+          { v: 13, s: "+", l: "platforms, one voice", c: "var(--green)" },
+          { v: 100, s: "%", l: "human-gated", c: "var(--plum)" },
+        ].map((s, i) => (
+          <div class="herostat" data-reveal data-reveal-delay={String(i + 1)}>
+            <span class="herostat__num" style={`--ic:${s.c}`} data-count={s.v} data-suffix={s.s}>{s.v}{s.s}</span>
+            <span class="herostat__lab">{s.l}</span>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -154,129 +176,221 @@ const different = [
   {
     steps.map((s, i) => {
       const flip = i % 2 === 1;
-      const ink = i === 2; // Direct is the human-gate emphasis block
+      const ink = i === 2; // Direct = the human-gate emphasis block (deep forest)
       const sectionClass = ink
         ? "section section--ink step"
         : flip
           ? "section section--mist step"
           : "section step";
       return (
-        <section class={sectionClass} id={`step-${s.n}`}>
+        <section class={sectionClass} id={`step-0${i + 1}`}>
           <div class="container">
             <div class={`step__row${flip ? " step__row--flip" : ""}`}>
               <div class="step__text" data-reveal>
-                <span class="step__n">{s.n}</span>
+                <div class="step__head">
+                  <span class="step__n" style={`--ac:${s.accent}`}>{s.n}</span>
+                  <span class="step__rule" aria-hidden="true"></span>
+                  <span class="step__of">Step {s.n} of 05</span>
+                </div>
                 <h2 class="step__name">{s.name}</h2>
                 <p class="step__promise">{s.promise}</p>
                 <p class="step__body">{s.body}</p>
-                <ul class="step__outputs">
-                  {s.outputs.map((o) => (
-                    <li class="step__output">
-                      <span class="step__tick" aria-hidden="true">
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                          <path
-                            d="M2.5 7.5L5.5 10.5L11.5 3.5"
-                            stroke="currentColor"
-                            stroke-width="1.6"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                        </svg>
-                      </span>
-                      <span>{o}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div class="step__visual" data-reveal data-reveal-delay="1" aria-hidden="true">
-                <div class={`stepcard stepcard--${s.art}${ink ? " stepcard--ink" : ""}`}>
-                  <div class="stepcard__core">
-                    {s.art === "decode" && (
-                      <div class="viz viz--decode">
-                        <span class="viz__label">Teardown</span>
-                        <div class="viz__bars">
-                          <span style="--h:38%"></span>
-                          <span style="--h:64%"></span>
-                          <span style="--h:52%"></span>
-                          <span style="--h:88%"></span>
-                          <span style="--h:71%"></span>
-                          <span style="--h:46%"></span>
-                        </div>
-                        <div class="viz__scan" />
-                      </div>
-                    )}
-                    {s.art === "define" && (
-                      <div class="viz viz--define">
-                        <span class="viz__label">System</span>
-                        <div class="viz__swatches">
-                          <span class="sw sw--1" />
-                          <span class="sw sw--2" />
-                          <span class="sw sw--3" />
-                        </div>
-                        <div class="viz__type">Aa</div>
-                        <div class="viz__lines">
-                          <span style="--w:90%" />
-                          <span style="--w:66%" />
-                          <span style="--w:78%" />
-                        </div>
-                      </div>
-                    )}
-                    {s.art === "direct" && (
-                      <div class="viz viz--direct">
-                        <span class="viz__label viz__label--light">Approval gate</span>
-                        <div class="viz__doc">
-                          <span style="--w:82%" />
-                          <span style="--w:60%" />
-                          <span style="--w:74%" />
-                          <span style="--w:48%" />
-                        </div>
-                        <div class="viz__stamp">
-                          <span class="viz__stampic">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                              <path
-                                d="M3.5 9.5L7.5 13.5L14.5 4.5"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"></path>
+
+                <div class="step__cols">
+                  <div class="step__col">
+                    <span class="step__coltag" style={`--ac:${s.accent}`}>What you get</span>
+                    <ul class="step__list">
+                      {s.get.map((o) => (
+                        <li class="step__item">
+                          <span class="step__tick" style={`--ac:${s.accent}`} aria-hidden="true">
+                            <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                              <path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                           </span>
-                          Approved by you
+                          <span>{o}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div class="step__col">
+                    <span class="step__coltag step__coltag--muted">What you do</span>
+                    <ul class="step__list">
+                      {s.you.map((o) => (
+                        <li class="step__item step__item--you">
+                          <span class="step__dot" aria-hidden="true"></span>
+                          <span>{o}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <p class="step__outcome" style={`--ac:${s.accent}`}>
+                  <span class="step__outlabel">Outcome</span>
+                  {s.outcome}
+                </p>
+              </div>
+
+              <div class="step__visual" data-reveal data-reveal-delay="1" aria-hidden="true">
+                <div class={`stepcard${ink ? " stepcard--ink" : ""}`} style={`--ac:${s.accent}`}>
+                  <div class="stepcard__bar">
+                    <span class="stepcard__d"></span><span class="stepcard__d"></span><span class="stepcard__d"></span>
+                    <span class="stepcard__url">{s.name.toLowerCase()} · ilai studio</span>
+                  </div>
+                  <div class="stepcard__core">
+
+                    {s.art === "decode" && (
+                      <div class="viz viz--decode">
+                        <div class="dcd__top">
+                          <span class="dcd__title">Audience teardown</span>
+                          <span class="dcd__chip">Free</span>
+                        </div>
+                        <div class="dcd__seg">
+                          {[
+                            { l: "Warm buyers", w: 88 },
+                            { l: "Researching", w: 64 },
+                            { l: "Curious", w: 46 },
+                            { l: "Off-target", w: 22 },
+                          ].map((r, k) => (
+                            <div class="dcd__row">
+                              <span class="dcd__rl">{r.l}</span>
+                              <span class="dcd__track"><span class="dcd__fill" style={`--w:${r.w}%;--d:${k * 120}ms`}></span></span>
+                            </div>
+                          ))}
+                        </div>
+                        <div class="dcd__scanwrap">
+                          <span class="dcd__scanlab">Competitor scan</span>
+                          <ul class="dcd__list">
+                            <li><span class="dcd__ldot" style="background:var(--coral)"></span>Owns the how-to angle</li>
+                            <li><span class="dcd__ldot" style="background:var(--brand)"></span>Weak on proof and stories</li>
+                            <li><span class="dcd__ldot" style="background:var(--green)"></span>Gap: your point of view</li>
+                          </ul>
+                          <span class="dcd__scan"></span>
                         </div>
                       </div>
                     )}
+
+                    {s.art === "define" && (
+                      <div class="viz viz--define">
+                        <div class="def__grid">
+                          <div class="def__panel def__swatches">
+                            <span class="def__ptag">Palette</span>
+                            <div class="def__row">
+                              <span class="def__sw" style="background:var(--coral)"></span>
+                              <span class="def__sw" style="background:var(--charcoal)"></span>
+                              <span class="def__sw" style="background:var(--brand)"></span>
+                              <span class="def__sw" style="background:var(--green)"></span>
+                            </div>
+                          </div>
+                          <div class="def__panel def__type">
+                            <span class="def__ptag">Type</span>
+                            <span class="def__aa">Aa</span>
+                            <span class="def__lines"><span style="--w:92%"></span><span style="--w:70%"></span></span>
+                          </div>
+                        </div>
+                        <div class="def__chips">
+                          <span class="def__ctag">Categories</span>
+                          <div class="def__chiprow">
+                            {["Myths", "How-to", "Proof", "Story", "Hot take"].map((c, k) => (
+                              <span class="def__chip" style={`--d:${k * 90}ms`}>{c}</span>
+                            ))}
+                          </div>
+                        </div>
+                        <div class="def__hooks">
+                          <span class="def__ctag">Hook library</span>
+                          <div class="def__hookrow"><span class="def__hnum">01</span><span class="def__hbar" style="--w:80%"></span></div>
+                          <div class="def__hookrow"><span class="def__hnum">02</span><span class="def__hbar" style="--w:62%"></span></div>
+                          <div class="def__hookrow"><span class="def__hnum">03</span><span class="def__hbar" style="--w:74%"></span></div>
+                        </div>
+                      </div>
+                    )}
+
+                    {s.art === "direct" && (
+                      <div class="viz viz--direct">
+                        <div class="dir__split">
+                          <div class="dir__lane"><span class="dir__lanel">We write</span><span class="dir__lanev">Scripts</span></div>
+                          <span class="dir__arrow"><svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 5h13M14 5l-3.5-3.5M14 5l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                          <div class="dir__lane"><span class="dir__lanel">You film</span><span class="dir__lanev">One sitting</span></div>
+                          <span class="dir__arrow"><svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 5h13M14 5l-3.5-3.5M14 5l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                          <div class="dir__lane dir__lane--gate"><span class="dir__lanel">You approve</span><span class="dir__lanev">The gate</span></div>
+                        </div>
+                        <div class="dir__doc">
+                          <span class="dir__doctitle">Reel script · draft</span>
+                          <span class="dir__line" style="--w:88%"></span>
+                          <span class="dir__line" style="--w:64%"></span>
+                          <span class="dir__line" style="--w:78%"></span>
+                          <span class="dir__line" style="--w:52%"></span>
+                          <div class="dir__stamp">
+                            <span class="dir__stampic">
+                              <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3.5 9.5L7.5 13.5L14.5 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </span>
+                            Approved by you
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     {s.art === "distribute" && (
                       <div class="viz viz--distribute">
-                        <span class="viz__label">Publishing</span>
-                        <div class="viz__hub">
-                          <span class="viz__core" />
-                          {Array.from({ length: 8 }).map((_, k) => (
-                            <span class="viz__spoke" style={`--a:${k * 45}deg`} />
-                          ))}
-                          {Array.from({ length: 8 }).map((_, k) => (
-                            <span class="viz__dot" style={`--a:${k * 45}deg`} />
+                        <div class="dis__fig">
+                          <span class="dis__src">1 recording</span>
+                          <span class="dis__eq">becomes</span>
+                          <span class="dis__out" style={`--ac:${s.accent}`}>30+ posts</span>
+                        </div>
+                        <div class="dis__tiles">
+                          {["a","b","c","a","c","b","b","a","c","a","b","c"].map((t, k) => (
+                            <span class={`dis__tile dis__tile--${t}`} style={`--d:${k * 55}ms`}></span>
                           ))}
                         </div>
-                        <span class="viz__caption">Up to 13 platforms, one voice</span>
+                        <div class="dis__plats">
+                          {["Reels","Shorts","TikTok","X","LinkedIn","Threads"].map((p, k) => (
+                            <span class="dis__plat" style={`--d:${k * 80}ms`}>{p}</span>
+                          ))}
+                        </div>
                       </div>
                     )}
+
                     {s.art === "measure" && (
                       <div class="viz viz--measure">
-                        <span class="viz__label">Live dashboard</span>
-                        <div class="viz__metric">
-                          <span class="viz__mval">350+</span>
-                          <span class="viz__mlabel">Posts a month, auto-tracked</span>
+                        <div class="mea__top">
+                          <div class="mea__kpi">
+                            <span class="mea__kv" data-count="350" data-suffix="+">350+</span>
+                            <span class="mea__kl">posts a month</span>
+                          </div>
+                          <span class="mea__live"><span class="mea__pulse"></span>Live</span>
                         </div>
-                        <svg class="viz__chart" viewBox="0 0 120 44" fill="none" preserveAspectRatio="none">
-                          <path
-                            d="M2 40 L20 34 L38 36 L56 24 L74 26 L92 12 L118 4"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                        </svg>
-                        <span class="viz__live"><span class="viz__pulse" />Refreshing</span>
+                        <div class="mea__chart">
+                          <svg viewBox="0 0 120 46" fill="none" preserveAspectRatio="none">
+                            <defs>
+                              <linearGradient id="meafill" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stop-color="var(--coral)" stop-opacity="0.35"/>
+                                <stop offset="1" stop-color="var(--coral)" stop-opacity="0"/>
+                              </linearGradient>
+                            </defs>
+                            <path class="mea__area" d="M2 42 L20 36 L38 38 L56 26 L74 28 L92 14 L118 6 L118 46 L2 46 Z" fill="url(#meafill)"/>
+                            <path class="mea__stroke" d="M2 42 L20 36 L38 38 L56 26 L74 28 L92 14 L118 6" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
+                        <div class="mea__rows">
+                          {[
+                            { p: "Instagram", w: 92, c: "var(--coral)" },
+                            { p: "TikTok", w: 74, c: "var(--plum)" },
+                            { p: "YouTube", w: 58, c: "var(--brand)" },
+                            { p: "LinkedIn", w: 40, c: "var(--green)" },
+                          ].map((r, k) => (
+                            <div class="mea__row">
+                              <span class="mea__rp">{r.p}</span>
+                              <span class="mea__dots">
+                                {Array.from({ length: 10 }).map((_, d) => (
+                                  <span class={`mea__d${d < Math.round(r.w / 10) ? " on" : ""}`} style={`--c:${r.c};--d:${(k * 10 + d) * 24}ms`}></span>
+                                ))}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     )}
+
                   </div>
                 </div>
               </div>
@@ -287,27 +401,27 @@ const different = [
     })
   }
 
-  <!-- ============ WHAT MAKES IT DIFFERENT ============ -->
-  <section class="section section--mist">
+  <!-- ============ WHY THE METHOD WORKS ============ -->
+  <section class="section why-sec">
     <div class="container">
-      <SectionHeader
-        eyebrow="Why the method holds"
-        title="Three things most content operations skip"
-        lead="The method isn't just a workflow. These are the commitments that make it work."
-        align="center"
-      />
-      <div class="grid grid-3 diff__grid">
-        {
-          different.map((d, i) => (
-            <div class="card--shell diff" data-reveal data-reveal-delay={String((i % 3) + 1)}>
-              <div class="card__core diff__core">
-                <span class="diff__mark" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-                <h3 class="diff__title">{d.k}</h3>
-                <p class="diff__body muted">{d.d}</p>
-              </div>
-            </div>
-          ))
-        }
+      <div class="why__head" data-reveal>
+        <span class="eyebrow eyebrow--star">Why the method works</span>
+        <h2 class="why__h">Three things most content <span class="hl">operations skip.</span></h2>
+        <p class="lead">
+          The method is not just a workflow. These are the commitments that make it hold
+          up, month after month.
+        </p>
+      </div>
+      <div class="why__grid">
+        {why.map((w, i) => (
+          <article class="whycard" data-reveal data-reveal-delay={String(i + 1)}>
+            <span class="whycard__ico" style={`--ic:${w.c}`} aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 20 20" fill="none" set:html={w.icon} />
+            </span>
+            <h3 class="whycard__t">{w.t}</h3>
+            <p class="whycard__s">{w.s}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>
@@ -316,132 +430,245 @@ const different = [
 </Layout>
 
 <style>
-  /* ---------- Hero ---------- */
+  /* ==================================================================
+     HERO
+  ================================================================== */
   .mhero {
-    position: relative;
-    padding-top: clamp(8rem, 16vh, 12rem);
-    padding-bottom: var(--sp-10);
-    overflow: hidden;
+    padding-top: clamp(6.5rem, 11vh, 8.5rem);
+    padding-bottom: clamp(2rem, 5vw, 3.5rem);
   }
-  .mhero__mesh {
-    position: absolute;
-    inset: -20% -10% auto -10%;
-    height: 70%;
+  .mhero__wrap {
+    max-width: calc(var(--maxw) + var(--gutter) * 2);
+  }
+  .herocard {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--r-card-lg);
+    padding: clamp(1.75rem, 4vw, 3.25rem);
+    color: #fff;
+    box-shadow: var(--shadow-float);
     background:
-      radial-gradient(38% 55% at 20% 16%, rgba(75, 63, 228, 0.16), transparent 70%),
-      radial-gradient(32% 44% at 84% 10%, rgba(75, 63, 228, 0.08), transparent 70%),
-      radial-gradient(30% 40% at 62% 38%, rgba(75, 63, 228, 0.07), transparent 70%);
-    filter: blur(6px);
-    animation: mdrift 24s var(--ease) infinite alternate;
+      radial-gradient(78% 120% at 86% 8%, rgba(201, 162, 92, 0.42), transparent 58%),
+      radial-gradient(70% 100% at 6% 96%, rgba(13, 40, 29, 0.9), transparent 62%),
+      linear-gradient(135deg, var(--charcoal-2), var(--charcoal) 55%, var(--charcoal-3));
+  }
+  .herocard__glow {
+    position: absolute;
+    inset: -30% -10% auto auto;
+    width: 60%;
+    height: 80%;
+    background: radial-gradient(50% 50% at 70% 30%, rgba(201, 162, 92, 0.28), transparent 70%);
+    filter: blur(10px);
+    animation: mdrift 22s var(--ease) infinite alternate;
     pointer-events: none;
   }
   @keyframes mdrift {
-    to {
-      transform: translate3d(0, 20px, 0) scale(1.05);
-    }
+    to { transform: translate3d(-14px, 22px, 0) scale(1.08); }
   }
-  .mhero__inner {
+  .herocard__body {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    z-index: 2;
+    max-width: 62ch;
   }
-  .mhero__title {
+  .herocard__title {
+    margin-top: var(--sp-4);
+    font-size: clamp(2.3rem, 4vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: var(--tracking-display);
+    color: #fff;
+  }
+  .herocard__accent {
+    color: var(--gold);
+  }
+  .herocard__lead {
     margin-top: var(--sp-5);
-    max-width: 18ch;
+    max-width: 56ch;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: var(--fs-lead);
+    line-height: 1.5;
   }
-  .mhero__accent {
-    color: var(--signal);
-  }
-  .mhero__lead {
-    margin-top: var(--sp-5);
-    max-width: 60ch;
-    text-align: center;
-  }
-  .mhero__actions {
+  .herocard__actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--sp-3);
-    justify-content: center;
-    margin-top: var(--sp-8);
+    margin-top: var(--sp-6);
+  }
+  .btn--ghost-dark {
+    --btn-fg: #fff;
+    border-color: rgba(255, 255, 255, 0.28);
+  }
+  .btn--ghost-dark:hover {
+    background: rgba(255, 255, 255, 0.1);
   }
 
-  /* ---------- Flow stepper ---------- */
-  .flow {
+  /* ---- Animated 5-node flow ---- */
+  .flowviz {
+    position: relative;
+    z-index: 2;
     list-style: none;
-    margin-top: var(--sp-12);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-3);
-    align-items: stretch;
-  }
-  .flow__node {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    display: grid;
     gap: var(--sp-3);
   }
-  .flow__link {
+  .flowviz__line {
+    display: none;
+  }
+  .flowviz__pill {
+    position: relative;
     display: flex;
     align-items: center;
     gap: var(--sp-3);
-    width: 100%;
-    justify-content: center;
     padding: var(--sp-4) var(--sp-5);
-    border: 1px solid var(--line);
     border-radius: var(--r-pill);
-    background: var(--canvas);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     transition:
-      transform var(--dur-micro) var(--ease),
-      border-color var(--dur-micro) var(--ease),
-      box-shadow var(--dur-micro) var(--ease);
+      transform var(--dur-base) var(--ease),
+      background var(--dur-base) var(--ease),
+      border-color var(--dur-base) var(--ease);
   }
-  .flow__link:hover {
+  .flowviz__pill:hover {
     transform: translateY(-2px);
-    border-color: var(--line-2);
-    box-shadow: var(--shadow-card);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.28);
   }
-  .flow__num {
+  .flowviz__num {
     font-family: var(--font-accent);
-    font-size: var(--fs-sm);
     font-weight: 700;
-    color: var(--signal);
+    font-size: var(--fs-sm);
+    color: var(--gold);
     font-variant-numeric: tabular-nums;
   }
-  .flow__name {
+  .flowviz__k {
+    font-family: var(--font-display);
     font-weight: 600;
-    color: var(--ink);
+    font-size: 1.05rem;
+    color: #fff;
   }
-  .flow__arrow {
-    color: var(--line-2);
-    transform: rotate(90deg);
-    display: grid;
-    place-items: center;
+  .flowviz__d {
+    font-size: var(--fs-sm);
+    color: rgba(255, 255, 255, 0.6);
+    margin-left: auto;
   }
-  @media (min-width: 860px) {
-    .flow {
-      flex-direction: row;
-      align-items: center;
+  .flowviz__node.is-active .flowviz__pill {
+    background: rgba(201, 162, 92, 0.16);
+    border-color: rgba(201, 162, 92, 0.5);
+    box-shadow: 0 0 0 1px rgba(201, 162, 92, 0.3), 0 10px 30px -14px rgba(201, 162, 92, 0.6);
+  }
+  @media (min-width: 900px) {
+    .flowviz {
+      grid-template-columns: repeat(5, 1fr);
       gap: 0;
+      align-items: stretch;
     }
-    .flow__node {
-      flex-direction: row;
-      flex: 1;
+    .flowviz__line {
+      display: block;
+      position: absolute;
+      left: 6%;
+      right: 6%;
+      top: 22px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      overflow: hidden;
     }
-    .flow__link {
-      width: auto;
-      flex: 1;
-      padding: var(--sp-4) var(--sp-4);
+    .flowviz__prog {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--gold), var(--coral-soft));
+      transition: width 1.6s var(--ease) 0.3s;
     }
-    .flow__arrow {
-      transform: none;
-      flex: 0 0 auto;
-      margin-inline: var(--sp-2);
+    .herocard.is-visible .flowviz__prog {
+      width: 100%;
+    }
+    .flowviz__node {
+      position: relative;
+      padding: 0 6px;
+    }
+    .flowviz__pill {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      height: 100%;
+      padding: var(--sp-4);
+    }
+    .flowviz__node::before {
+      content: "";
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--charcoal);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      z-index: 3;
+    }
+    .flowviz__node.is-active::before {
+      background: var(--gold);
+      border-color: var(--gold);
+      box-shadow: 0 0 0 5px rgba(201, 162, 92, 0.25);
+    }
+    .flowviz__pill {
+      margin-top: 34px;
+    }
+    .flowviz__d {
+      margin-left: 0;
     }
   }
 
-  /* ---------- Step rows ---------- */
+  /* ---- Floating quick-stats ---- */
+  .herostats {
+    position: relative;
+    z-index: 3;
+    margin-top: -2.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-4);
+    padding: 0 clamp(0.5rem, 3vw, 2rem);
+  }
+  .herostat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--sp-5);
+    border-radius: var(--r-card);
+    background: rgba(255, 255, 255, 0.66);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.6),
+      0 18px 40px -24px rgba(29, 42, 35, 0.4);
+  }
+  .herostat__num {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ic, var(--ink));
+  }
+  .herostat__lab {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  @media (min-width: 800px) {
+    .herostats {
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: -3rem;
+    }
+  }
+
+  /* ==================================================================
+     STEP ROWS
+  ================================================================== */
   .step__row {
     display: grid;
     gap: var(--sp-8);
@@ -449,32 +676,46 @@ const different = [
   }
   @media (min-width: 900px) {
     .step__row {
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 1.02fr 0.98fr;
       gap: var(--sp-12);
     }
-    .step__row--flip .step__text {
-      order: 2;
-    }
-    .step__row--flip .step__visual {
-      order: 1;
-    }
+    .step__row--flip .step__text { order: 2; }
+    .step__row--flip .step__visual { order: 1; }
+  }
+  .step__head {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
   }
   .step__n {
     font-family: var(--font-accent);
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1;
-    color: var(--signal);
-    display: block;
+    color: var(--ac, var(--coral));
   }
-  .section--ink .step__n {
-    color: #fff;
-    opacity: 0.9;
+  .section--ink .step__n { color: var(--gold); }
+  .step__rule {
+    flex: 1;
+    height: 1px;
+    background: var(--line-2);
+    max-width: 80px;
   }
+  .section--ink .step__rule { background: rgba(255, 255, 255, 0.2); }
+  .step__of {
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .section--ink .step__of { color: rgba(255, 255, 255, 0.55); }
   .step__name {
     margin-top: var(--sp-4);
     font-size: var(--fs-h2);
+    font-weight: 600;
+    letter-spacing: var(--tracking-tight);
   }
   .step__promise {
     margin-top: var(--sp-3);
@@ -483,355 +724,407 @@ const different = [
     line-height: 1.4;
     color: var(--ink);
   }
-  .section--ink .step__promise {
-    color: #fff;
-  }
+  .section--ink .step__promise { color: #fff; }
   .step__body {
     margin-top: var(--sp-4);
     font-size: var(--fs-body);
     color: var(--ink-2);
     max-width: 52ch;
   }
-  .section--ink .step__body {
-    color: rgba(255, 255, 255, 0.72);
-  }
-  .step__outputs {
-    list-style: none;
+  .section--ink .step__body { color: rgba(255, 255, 255, 0.72); }
+
+  .step__cols {
     margin-top: var(--sp-6);
+    display: grid;
+    gap: var(--sp-5);
+  }
+  @media (min-width: 560px) {
+    .step__cols { grid-template-columns: 1fr 1fr; gap: var(--sp-6); }
+  }
+  .step__coltag {
+    display: inline-block;
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--ac, var(--coral));
+  }
+  .step__coltag--muted { color: var(--muted); }
+  .section--ink .step__coltag { color: var(--gold); }
+  .section--ink .step__coltag--muted { color: rgba(255, 255, 255, 0.5); }
+  .step__list {
+    list-style: none;
+    margin-top: var(--sp-3);
     display: grid;
     gap: var(--sp-3);
   }
-  .step__output {
+  .step__item {
     display: flex;
     align-items: flex-start;
     gap: var(--sp-3);
     font-size: var(--fs-sm);
     color: var(--ink-2);
   }
-  .section--ink .step__output {
-    color: rgba(255, 255, 255, 0.82);
-  }
+  .section--ink .step__item { color: rgba(255, 255, 255, 0.82); }
   .step__tick {
     flex: 0 0 auto;
     display: grid;
     place-items: center;
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background: var(--signal-tint);
-    color: var(--signal-ink);
+    color: #fff;
+    background: var(--ac, var(--coral));
     margin-top: 1px;
   }
-  .section--ink .step__tick {
-    background: rgba(255, 255, 255, 0.14);
-    color: #fff;
+  .step__dot {
+    flex: 0 0 auto;
+    width: 7px;
+    height: 7px;
+    margin-top: 7px;
+    border-radius: 50%;
+    background: var(--line-2);
   }
+  .section--ink .step__dot { background: rgba(255, 255, 255, 0.4); }
+  .step__item--you { color: var(--muted); }
+  .section--ink .step__item--you { color: rgba(255, 255, 255, 0.66); }
 
-  /* ---------- Step visual (double-bezel) ---------- */
+  .step__outcome {
+    margin-top: var(--sp-6);
+    padding: var(--sp-4) var(--sp-5);
+    border-radius: var(--r-input);
+    background: color-mix(in srgb, var(--ac, var(--coral)) 8%, var(--paper));
+    border: 1px solid color-mix(in srgb, var(--ac, var(--coral)) 22%, transparent);
+    border-left: 3px solid var(--ac, var(--coral));
+    font-size: var(--fs-sm);
+    color: var(--ink);
+  }
+  .section--mist .step__outcome {
+    background: color-mix(in srgb, var(--ac, var(--coral)) 10%, var(--paper));
+  }
+  .section--ink .step__outcome {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.14);
+    border-left-color: var(--gold);
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .step__outlabel {
+    display: inline-block;
+    margin-right: var(--sp-2);
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ac, var(--coral));
+  }
+  .section--ink .step__outlabel { color: var(--gold); }
+
+  /* ==================================================================
+     STEP VISUAL CARD (browser-chrome frame)
+  ================================================================== */
   .step__visual {
     display: flex;
     justify-content: center;
   }
   .stepcard {
     width: 100%;
-    max-width: 440px;
-    background: var(--mist);
+    max-width: 460px;
     border-radius: var(--r-card);
-    padding: 6px;
+    overflow: hidden;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-float);
   }
   .stepcard--ink {
-    background: rgba(255, 255, 255, 0.06);
+    background: #0f1a15;
+    border-color: rgba(255, 255, 255, 0.12);
   }
-  .stepcard__core {
-    background: var(--canvas);
-    border: 1px solid var(--line);
-    border-radius: var(--r-card-inner);
-    box-shadow: var(--inset-highlight);
-    padding: var(--sp-8);
-    min-height: 260px;
-    display: grid;
-    place-content: center;
-  }
-  .stepcard--ink .stepcard__core {
-    background: #101015;
-    border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: none;
-  }
-
-  .viz {
+  .stepcard__bar {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: var(--sp-4);
-    width: 100%;
+    gap: 6px;
+    padding: 11px 14px;
+    background: var(--mist);
+    border-bottom: 1px solid var(--line);
   }
-  .viz__label {
-    font-family: var(--font-accent);
-    font-size: var(--fs-eyebrow);
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: var(--muted);
+  .stepcard--ink .stepcard__bar {
+    background: rgba(255, 255, 255, 0.06);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
   }
-  .viz__label--light {
-    color: rgba(255, 255, 255, 0.55);
-  }
-
-  /* Decode: research bars + scan */
-  .viz--decode {
-    position: relative;
-    width: 100%;
-  }
-  .viz__bars {
-    display: flex;
-    align-items: flex-end;
-    gap: var(--sp-3);
-    height: 120px;
-    width: 100%;
-    justify-content: center;
-  }
-  .viz__bars span {
-    width: 22px;
-    height: var(--h);
-    border-radius: 6px 6px 3px 3px;
-    background: linear-gradient(180deg, var(--signal), var(--signal-tint));
-  }
-  .viz__bars span:nth-child(4) {
-    background: linear-gradient(180deg, var(--signal), var(--signal-hover));
-  }
-  .viz__scan {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 40px;
-    height: 2px;
-    background: var(--signal);
-    opacity: 0.35;
-    animation: scan 3.4s var(--ease) infinite alternate;
-  }
-  @keyframes scan {
-    to {
-      transform: translateY(76px);
-    }
-  }
-
-  /* Define: swatches + type + lines */
-  .viz--define {
-    width: 100%;
-  }
-  .viz__swatches {
-    display: flex;
-    gap: var(--sp-2);
-  }
-  .sw {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-  }
-  .sw--1 {
-    background: var(--signal);
-  }
-  .sw--2 {
-    background: var(--ink);
-  }
-  .sw--3 {
-    background: var(--sand);
-    border: 1px solid var(--line);
-  }
-  .viz__type {
-    font-weight: 800;
-    font-size: 2.4rem;
-    letter-spacing: -0.04em;
-    color: var(--ink);
-    line-height: 1;
-  }
-  .viz__lines {
-    display: grid;
-    gap: var(--sp-2);
-    width: 70%;
-  }
-  .viz__lines span {
-    height: 8px;
-    width: var(--w);
-    border-radius: var(--r-pill);
+  .stepcard__d {
+    width: 9px; height: 9px; border-radius: 50%;
     background: var(--line-2);
   }
-
-  /* Direct: document + approval stamp */
-  .viz--direct {
-    width: 100%;
+  .stepcard--ink .stepcard__d { background: rgba(255, 255, 255, 0.2); }
+  .stepcard__url {
+    margin-left: 8px;
+    font-family: var(--font-accent);
+    font-size: 0.72rem;
+    color: var(--muted);
   }
-  .viz__doc {
-    display: grid;
-    gap: var(--sp-3);
-    width: 100%;
+  .stepcard--ink .stepcard__url { color: rgba(255, 255, 255, 0.55); }
+  .stepcard__core {
+    padding: var(--sp-6);
+    min-height: 288px;
+    display: flex;
+    align-items: center;
+  }
+  .viz { width: 100%; }
+
+  /* ---- 01 Decode ---- */
+  .viz--decode { display: grid; gap: var(--sp-5); }
+  .dcd__top { display: flex; align-items: center; justify-content: space-between; }
+  .dcd__title { font-family: var(--font-accent); font-weight: 600; font-size: 0.95rem; color: var(--ink); }
+  .dcd__chip {
+    padding: 3px 11px; border-radius: 999px;
+    background: var(--coral); color: #fff;
+    font-family: var(--font-accent); font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .dcd__seg { display: grid; gap: 10px; }
+  .dcd__row { display: grid; grid-template-columns: 6.5em 1fr; align-items: center; gap: var(--sp-3); }
+  .dcd__rl { font-size: 0.78rem; color: var(--muted); }
+  .dcd__track { height: 9px; border-radius: 999px; background: var(--mist); overflow: hidden; }
+  .dcd__fill {
+    display: block; height: 100%; width: 0; border-radius: 999px;
+    background: linear-gradient(90deg, var(--coral), var(--coral-soft));
+    transition: width 1s var(--ease) var(--d);
+  }
+  .stepcard.is-visible .dcd__fill,
+  .step__visual.is-visible .dcd__fill { width: var(--w); }
+  .dcd__scanwrap {
+    position: relative; overflow: hidden;
+    padding: var(--sp-4);
+    border-radius: var(--r-input);
+    background: var(--mist);
+    border: 1px solid var(--line);
+  }
+  .dcd__scanlab {
+    font-family: var(--font-accent); font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--muted);
+  }
+  .dcd__list { list-style: none; margin-top: 10px; display: grid; gap: 8px; }
+  .dcd__list li { display: flex; align-items: center; gap: var(--sp-3); font-size: 0.8rem; color: var(--ink-2); }
+  .dcd__ldot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .dcd__scan {
+    position: absolute; left: 0; right: 0; top: 0; height: 34px;
+    background: linear-gradient(180deg, rgba(28, 107, 74, 0.14), transparent);
+    border-bottom: 1.5px solid rgba(28, 107, 74, 0.4);
+    animation: dcdscan 3.4s var(--ease) infinite alternate;
+  }
+  @keyframes dcdscan { to { transform: translateY(72px); } }
+
+  /* ---- 02 Define ---- */
+  .viz--define { display: grid; gap: var(--sp-4); }
+  .def__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--sp-3); }
+  .def__panel { padding: var(--sp-4); border-radius: var(--r-input); background: var(--mist); border: 1px solid var(--line); }
+  .def__ptag { font-family: var(--font-accent); font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .def__row { display: flex; gap: 8px; margin-top: 10px; }
+  .def__sw { width: 30px; height: 30px; border-radius: 9px; box-shadow: inset 0 1px 1px rgba(255,255,255,0.3); }
+  .def__type { display: flex; flex-direction: column; }
+  .def__aa { font-family: var(--font-display); font-weight: 700; font-size: 1.9rem; letter-spacing: -0.04em; color: var(--ink); line-height: 1; margin-top: 6px; }
+  .def__lines { display: grid; gap: 5px; margin-top: 8px; }
+  .def__lines span { height: 5px; width: var(--w); border-radius: 999px; background: var(--line-2); }
+  .def__chips, .def__hooks { display: grid; gap: 8px; }
+  .def__ctag { font-family: var(--font-accent); font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .def__chiprow { display: flex; flex-wrap: wrap; gap: 6px; }
+  .def__chip {
+    padding: 6px 12px; border-radius: 999px;
+    background: var(--brand-tint); color: var(--brand-night);
+    font-size: 0.76rem; font-weight: 600;
+    opacity: 0; transform: translateY(6px);
+    transition: opacity 0.5s var(--ease) var(--d), transform 0.5s var(--ease) var(--d);
+  }
+  .step__visual.is-visible .def__chip { opacity: 1; transform: none; }
+  .def__hookrow { display: flex; align-items: center; gap: var(--sp-3); }
+  .def__hnum { font-family: var(--font-accent); font-weight: 700; font-size: 0.72rem; color: var(--brand-deep); }
+  .def__hbar { flex: 1; height: 8px; border-radius: 999px; background: linear-gradient(90deg, var(--brand), var(--brand-tint)); width: 0; transition: width 0.9s var(--ease); }
+  .def__hookrow:nth-child(2) .def__hbar { transition-delay: 0.15s; }
+  .def__hookrow:nth-child(3) .def__hbar { transition-delay: 0.3s; }
+  .step__visual.is-visible .def__hbar { width: var(--w); }
+
+  /* ---- 03 Direct (on dark) ---- */
+  .viz--direct { display: grid; gap: var(--sp-5); }
+  .dir__split { display: flex; align-items: stretch; gap: 6px; }
+  .dir__lane {
+    flex: 1; display: flex; flex-direction: column; gap: 3px;
+    padding: 10px 8px; border-radius: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    text-align: center;
+  }
+  .dir__lane--gate {
+    background: rgba(79, 164, 126, 0.18);
+    border-color: rgba(79, 164, 126, 0.5);
+  }
+  .dir__lanel { font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255, 255, 255, 0.55); }
+  .dir__lanev { font-family: var(--font-accent); font-weight: 600; font-size: 0.82rem; color: #fff; }
+  .dir__arrow { display: grid; place-items: center; color: rgba(255, 255, 255, 0.4); flex: 0 0 auto; }
+  .dir__doc {
+    position: relative;
     padding: var(--sp-5);
     border-radius: var(--r-input);
     background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
-  .viz__doc span {
-    height: 8px;
-    width: var(--w);
-    border-radius: var(--r-pill);
-    background: rgba(255, 255, 255, 0.16);
+  .dir__doctitle {
+    display: block; margin-bottom: 12px;
+    font-family: var(--font-accent); font-size: 0.7rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5);
   }
-  .viz__stamp {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--sp-2);
-    padding: 8px 14px;
-    border-radius: var(--r-pill);
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    color: #fff;
-    font-size: var(--fs-sm);
-    font-weight: 600;
+  .dir__line { display: block; height: 8px; width: var(--w); border-radius: 999px; background: rgba(255, 255, 255, 0.16); margin-bottom: 9px; }
+  .dir__stamp {
+    display: inline-flex; align-items: center; gap: var(--sp-2);
+    margin-top: 10px; padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(79, 164, 126, 0.16);
+    border: 1px solid rgba(79, 164, 126, 0.45);
+    color: #fff; font-size: 0.82rem; font-weight: 600;
+    transform: rotate(-4deg) scale(0.85);
+    opacity: 0;
+    transition: transform 0.6s var(--ease) 0.4s, opacity 0.6s var(--ease) 0.4s;
   }
-  .viz__stampic {
-    display: grid;
-    place-items: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--signal);
-    color: #fff;
+  .step__visual.is-visible .dir__stamp { transform: rotate(-4deg) scale(1); opacity: 1; }
+  .dir__stampic {
+    display: grid; place-items: center; width: 22px; height: 22px;
+    border-radius: 50%; background: var(--green); color: #fff;
   }
 
-  /* Distribute: hub and spokes */
-  .viz--distribute {
-    width: 100%;
+  /* ---- 04 Distribute ---- */
+  .viz--distribute { display: grid; gap: var(--sp-5); }
+  .dis__fig { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+  .dis__src { font-family: var(--font-accent); font-weight: 700; font-size: 1.05rem; color: var(--ink); }
+  .dis__eq { font-size: 0.82rem; color: var(--muted); }
+  .dis__out { font-family: var(--font-accent); font-weight: 700; font-size: 1.6rem; letter-spacing: -0.03em; color: var(--ac, var(--plum)); }
+  .dis__tiles { display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; }
+  .dis__tile {
+    aspect-ratio: 1; border-radius: 8px;
+    opacity: 0; transform: scale(0.6);
+    transition: opacity 0.4s var(--ease) var(--d), transform 0.4s var(--ease) var(--d);
   }
-  .viz__hub {
-    position: relative;
-    width: 150px;
-    height: 150px;
+  .step__visual.is-visible .dis__tile { opacity: 1; transform: none; }
+  .dis__tile--a { background: color-mix(in srgb, var(--plum) 65%, white); }
+  .dis__tile--b { background: color-mix(in srgb, var(--brand) 62%, white); }
+  .dis__tile--c { background: color-mix(in srgb, var(--green) 58%, white); }
+  .dis__plats { display: flex; flex-wrap: wrap; gap: 6px; }
+  .dis__plat {
+    padding: 6px 12px; border-radius: 999px;
+    background: var(--mist); border: 1px solid var(--line);
+    font-size: 0.75rem; font-weight: 600; color: var(--ink-2);
+    opacity: 0; transform: translateY(6px);
+    transition: opacity 0.5s var(--ease) var(--d), transform 0.5s var(--ease) var(--d);
   }
-  .viz__core {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 44px;
-    height: 44px;
-    margin: -22px 0 0 -22px;
-    border-radius: 50%;
-    background: var(--signal);
-    box-shadow: 0 0 0 6px var(--signal-tint);
-  }
-  .viz__spoke {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 60px;
-    height: 1.5px;
-    background: var(--line-2);
-    transform-origin: 0 50%;
-    transform: rotate(var(--a));
-  }
-  .viz__dot {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 12px;
-    height: 12px;
-    margin: -6px 0 0 -6px;
-    border-radius: 50%;
-    background: var(--canvas);
-    border: 1.5px solid var(--signal);
-    transform: rotate(var(--a)) translateX(60px);
-    transform-origin: 50% 50%;
-  }
-  .viz__caption {
-    font-size: var(--fs-sm);
-    color: var(--muted);
-  }
+  .step__visual.is-visible .dis__plat { opacity: 1; transform: none; }
 
-  /* Measure: live metric + chart */
-  .viz--measure {
-    width: 100%;
+  /* ---- 05 Measure ---- */
+  .viz--measure { display: grid; gap: var(--sp-5); }
+  .mea__top { display: flex; align-items: center; justify-content: space-between; }
+  .mea__kpi { display: flex; flex-direction: column; }
+  .mea__kv { font-family: var(--font-accent); font-weight: 700; font-size: 2rem; letter-spacing: -0.04em; line-height: 1; color: var(--ink); }
+  .mea__kl { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
+  .mea__live {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 11px; border-radius: 999px;
+    background: var(--coral-tint); color: var(--coral-ink);
+    font-size: 0.72rem; font-weight: 600;
   }
-  .viz__metric {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--sp-1);
+  .mea__pulse {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--coral);
+    animation: meapulse 2s var(--ease) infinite;
   }
-  .viz__mval {
-    font-family: var(--font-accent);
-    font-size: 2.6rem;
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    line-height: 1;
-    color: var(--ink);
+  @keyframes meapulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.75); } }
+  .mea__chart {
+    padding: var(--sp-3);
+    border-radius: var(--r-input);
+    background: var(--mist);
+    border: 1px solid var(--line);
   }
-  .viz__mlabel {
-    font-size: var(--fs-sm);
-    color: var(--muted);
+  .mea__chart svg { width: 100%; height: 52px; display: block; }
+  .mea__stroke {
+    stroke-dasharray: 260;
+    stroke-dashoffset: 260;
+    transition: stroke-dashoffset 1.6s var(--ease) 0.2s;
   }
-  .viz__chart {
-    width: 100%;
-    height: 48px;
-    color: var(--signal);
+  .step__visual.is-visible .mea__stroke { stroke-dashoffset: 0; }
+  .mea__area { opacity: 0; transition: opacity 1s var(--ease) 0.9s; }
+  .step__visible .mea__area,
+  .step__visual.is-visible .mea__area { opacity: 1; }
+  .mea__rows { display: grid; gap: 9px; }
+  .mea__row { display: grid; grid-template-columns: 5.5em 1fr; align-items: center; gap: var(--sp-3); }
+  .mea__rp { font-size: 0.76rem; color: var(--muted); }
+  .mea__dots { display: flex; gap: 4px; }
+  .mea__d {
+    width: 100%; max-width: 12px; height: 8px; border-radius: 3px;
+    background: var(--mist); flex: 1;
   }
-  .viz__live {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--sp-2);
-    font-size: var(--fs-sm);
-    font-weight: 500;
-    color: var(--muted);
+  .mea__d.on {
+    background: var(--c, var(--coral));
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.3s var(--ease) var(--d), transform 0.3s var(--ease) var(--d);
   }
-  .viz__pulse {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--signal);
-    animation: pulse 2s var(--ease) infinite;
-  }
-  @keyframes pulse {
-    0%,
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.4;
-      transform: scale(0.8);
-    }
-  }
+  .step__visual.is-visible .mea__d.on { opacity: 1; transform: none; }
 
   @media (prefers-reduced-motion: reduce) {
-    .mhero__mesh,
-    .viz__scan,
-    .viz__pulse {
-      animation: none;
-    }
+    .herocard__glow, .dcd__scan, .mea__pulse { animation: none; }
   }
 
-  /* ---------- What makes it different ---------- */
-  .diff__grid {
-    margin-top: var(--sp-10);
+  /* ==================================================================
+     WHY THE METHOD WORKS
+  ================================================================== */
+  .why__head {
+    max-width: 52ch;
+    margin-bottom: var(--sp-10);
   }
-  .diff {
-    height: 100%;
+  .why__h {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h2);
+    font-weight: 600;
+    letter-spacing: var(--tracking-tight);
   }
-  .diff__core {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  .why__head .lead { margin-top: var(--sp-4); }
+  .why__grid {
+    display: grid;
+    gap: var(--grid-gap);
   }
-  .diff__mark {
-    font-family: var(--font-accent);
-    font-size: var(--fs-sm);
-    font-weight: 700;
-    color: var(--signal);
-    font-variant-numeric: tabular-nums;
+  .whycard {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border-radius: var(--r-card);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+    transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
   }
-  .diff__title {
-    margin-top: var(--sp-3);
+  .whycard:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-float);
+  }
+  .whycard__ico {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    color: #fff;
+    background: linear-gradient(140deg, var(--ic), color-mix(in srgb, var(--ic) 55%, #ffffff));
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.5),
+      0 10px 20px -8px var(--ic);
+  }
+  .whycard__ico svg { stroke-width: 1.7; }
+  .whycard__t {
+    margin-top: var(--sp-4);
     font-size: var(--fs-h3);
   }
-  .diff__body {
+  .whycard__s {
     margin-top: var(--sp-3);
     font-size: var(--fs-sm);
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  @media (min-width: 820px) {
+    .why__grid { grid-template-columns: repeat(3, 1fr); }
   }
 </style>

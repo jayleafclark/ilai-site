@@ -1,36 +1,63 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import SectionHeader from "../components/SectionHeader.astro";
 import CTASection from "../components/CTASection.astro";
+import PlatformStrip from "../components/PlatformStrip.astro";
 
-const platforms = [
-  "YouTube",
-  "Instagram",
-  "TikTok",
-  "X",
-  "Threads",
-  "Bluesky",
-  "Facebook",
-  "LinkedIn",
-  "Substack",
-  "Pinterest",
+const arrow = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+// Capability stat band (premium gradient icons, varied colors)
+const stats = [
+  {
+    value: 120, suffix: "+", label: "Original pieces a month", c: "var(--coral)",
+    icon: `<path d="M4 15.5L14 5.5l3.5 3.5L7.5 19H4v-3.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12.5 7l3.5 3.5" stroke="currentColor" stroke-width="1.6"/>`,
+  },
+  {
+    value: 350, suffix: "+", label: "Posts published a month", c: "var(--brand)",
+    icon: `<path d="M3.5 11L19 4l-6 15-2.5-6-7-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>`,
+  },
+  {
+    value: 13, suffix: "+", label: "Platforms, one voice", c: "var(--green)",
+    icon: `<rect x="3" y="3" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="12.5" y="3" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="12.5" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="12.5" y="12.5" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/>`,
+  },
+  {
+    value: 8, suffix: "", label: "Engagement-engine platforms", c: "var(--plum)",
+    icon: `<path d="M4 5.5h16v9H10l-4 3.5v-3.5H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>`,
+  },
 ];
 
+// Eight services. tone drives the card surface (colored / slate / white variety).
+// viz drives the unique mini mockup rendered in the media panel.
 const services = [
   {
     n: "01",
     eyebrow: "Podcast production",
-    title: "Record once, get a month of content",
-    body: "You sit down for one recording. We hand back a finished episode, everywhere it needs to be. A clean long-form edit with the filler and false starts cut, studio-grade sound, and burned-in captions, plus six to twelve vertical clips that carry the show across feeds all month.",
+    title: "You record once. We do the rest.",
+    body: "You sit down for one recording. Then we go to work: a clean long-form edit with the filler and false starts cut, studio-grade sound, burned-in captions, show notes, chapters, and six to twelve vertical clips hand-cut to carry the show across every feed all month. It is a lot of work. That is the point of hiring a studio.",
     bullets: [
       "Full episode edit: filler removed, studio audio, on-screen captions",
       "Long-form YouTube cut plus a standalone audio version",
       "Show notes, SEO title and description, chapter and ad-break timestamps",
       "Six to twelve vertical reels and clips cut from every episode",
     ],
+    c: "var(--coral)", tone: "dark", viz: "wave",
+    icon: `<path d="M10 2.5a3 3 0 013 3v5a3 3 0 11-6 0v-5a3 3 0 013-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4.5 9.5v.6a5.5 5.5 0 0011 0v-.6M10 15.6V18M7 18h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
   },
   {
     n: "02",
+    eyebrow: "Short-form & reels",
+    title: "Scroll-stopping clips, in your voice",
+    body: "Every episode is mined for its sharpest moments and cut into vertical clips built to travel. Each one gets a hook, captions, and a rhythm tuned to the platform it lands on, so the same idea earns attention on TikTok, Reels, and Shorts alike.",
+    bullets: [
+      "Six to twelve reels cut from every recording",
+      "Hook, captions, and pacing tuned per platform",
+      "Cut in your voice, never generic filler",
+      "Fanned out across every short-form feed",
+    ],
+    c: "var(--plum)", tone: "terra", viz: "reel",
+    icon: `<rect x="3.5" y="3.5" width="13" height="13" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 7.2l4 2.8-4 2.8z" fill="currentColor"/>`,
+  },
+  {
+    n: "03",
     eyebrow: "Multi-platform publishing",
     title: "One idea, adapted for up to 13 platforms",
     body: "A post that lands on Instagram falls flat on LinkedIn. We take one idea and rewrite it for each platform's format, length, and audience, then publish it on a schedule in one consistent voice. You show up daily on every channel without touching a scheduler.",
@@ -40,9 +67,11 @@ const services = [
       "One documented voice across every account",
       "Posted on a set schedule so the feed never goes quiet",
     ],
+    c: "var(--brand)", tone: "slate", viz: "scheduler",
+    icon: `<rect x="3" y="4.5" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 8h14M6.5 3v3M13.5 3v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
   },
   {
-    n: "03",
+    n: "04",
     eyebrow: "Audience, market & competitor research",
     title: "We aim every piece before we make it",
     body: "We study who you sell to, what your competitors publish, and which hooks, formats, and topics actually perform in your niche. Then every script and caption is pointed at a real audience instead of guessed at. This is the Decode phase of the Signal Method, and it starts with a free teardown.",
@@ -52,9 +81,11 @@ const services = [
       "The hooks, formats, and topics already proven to travel in your niche",
       "A free teardown before you commit a dollar",
     ],
+    c: "var(--green)", tone: "white", viz: "chart",
+    icon: `<circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M13.5 13.5L17.5 17.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6.5 9.5l1.7 1.7L12 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
   {
-    n: "04",
+    n: "05",
     eyebrow: "Brand & voice",
     title: "A voice we document, never machine-guess",
     body: "We learn how you actually sound and write it down, so every line reads like you on your best day. Then we build the look around it: type, color, templates, content categories, and a hook library your whole feed pulls from. It holds up across 350 posts a month.",
@@ -64,9 +95,11 @@ const services = [
       "Named content categories so the feed has a clear rhythm",
       "A growing hook library every post draws from",
     ],
+    c: "var(--brand)", tone: "white", viz: "brand",
+    icon: `<path d="M4 16l6-11 6 11M6.5 12h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
   {
-    n: "05",
+    n: "06",
     eyebrow: "Engagement engine",
     title: "The first minutes that decide if a post travels",
     body: "The first replies to a post shape how far it spreads. We answer your community in your voice across 8 platforms in those opening minutes, so momentum builds instead of stalling. Along the way we surface the intent signals hiding in your comments and DMs.",
@@ -76,21 +109,25 @@ const services = [
       "Buying-intent signals pulled from comments and DMs",
       "A community that reads as tended by a person, because it is",
     ],
-  },
-  {
-    n: "06",
-    eyebrow: "SEO & GEO content",
-    title: "Found by Google, cited by AI assistants",
-    body: "We write keyword-researched articles built to rank, then add the layer that gets you quoted by AI. On-page SEO, structured data, and an llms.txt file mean ChatGPT, Claude, and Perplexity can find, read, and cite you when someone asks about your field.",
-    bullets: [
-      "Keyword-researched articles aimed at real search demand",
-      "On-page SEO plus structured data for rich results",
-      "An llms.txt file so AI assistants can read and cite your pages",
-      "Found on Google and cited by ChatGPT, Claude, and Perplexity",
-    ],
+    c: "var(--coral)", tone: "dark", viz: "alerts",
+    icon: `<path d="M10 3a6 6 0 016 6v3l1.5 3H2.5L4 12V9a6 6 0 016-6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 16.5a2 2 0 004 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
   },
   {
     n: "07",
+    eyebrow: "SEO & GEO content",
+    title: "Found by Google, cited by AI assistants",
+    body: "We write keyword-researched articles built to rank, then add the layer that gets you quoted by AI. On-page SEO, structured data, and an llms.txt file mean the major assistants can find, read, and cite you when someone asks about your field.",
+    bullets: [
+      "Keyword-researched articles aimed at real search demand",
+      "On-page SEO plus structured data for rich results",
+      "An llms.txt file so assistants can read and cite your pages",
+      "Found on Google and cited when someone asks about your field",
+    ],
+    c: "var(--green)", tone: "white", viz: "search",
+    icon: `<circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.6"/><path d="M12.8 12.8L17.5 17.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
+  },
+  {
+    n: "08",
     eyebrow: "Newsletter & long-form essays",
     title: "Your best ideas, made to keep",
     body: "Some ideas deserve more than a caption. We turn your strongest thinking into Substack and newsletter essays a reader saves, forwards, and comes back to. It is the format that builds the deepest trust with the audience you are growing.",
@@ -100,9 +137,11 @@ const services = [
       "Written in your documented voice, edited to publish-ready",
       "The channel that turns followers into a subscriber list you own",
     ],
+    c: "var(--plum)", tone: "terra", viz: "essay",
+    icon: `<path d="M5 3.5h7l3 3v10a1 1 0 01-1 1H5a1 1 0 01-1-1v-12a1 1 0 011-1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 9h6M7 12h6M7 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
   },
   {
-    n: "08",
+    n: "09",
     eyebrow: "Live analytics dashboard",
     title: "Watch it work in real time",
     body: "You get a branded portal where every number is pulled straight from the platform APIs and refreshed on the hour. No screenshots, no monthly slide deck, no waiting on a report. Open it whenever you want and see exactly what is moving.",
@@ -112,7 +151,8 @@ const services = [
       "Refreshed on the hour, never typed in by hand",
       "One view across every platform we run for you",
     ],
-    hasDashboard: true,
+    c: "var(--brand)", tone: "dashboard", viz: "dashboard",
+    icon: `<rect x="3" y="4" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 12.5v-2M10 12.5v-4M13.5 12.5v-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
   },
 ];
 
@@ -137,199 +177,287 @@ const pricing = [
 
 <Layout
   title="What we do — Ilai Collective"
-  description="Ilai Collective runs your entire content operation: podcast production, publishing across up to 13 platforms, audience and competitor research, brand and voice, community engagement, SEO and GEO articles, newsletters, and a live analytics dashboard. Human-led, research-driven. Starts with a free teardown."
+  description="Ilai Collective runs your entire content operation: podcast production, short-form and reels, publishing across up to 13 platforms, audience and competitor research, brand and voice, community engagement, SEO and GEO articles, newsletters, and a live analytics dashboard. Human-led, research-driven. Starts with a free teardown."
   path="/what-we-do"
 >
   <!-- ============ HERO ============ -->
   <section class="wwd-hero">
-    <div class="wwd-hero__mesh" aria-hidden="true"></div>
-    <div class="container wwd-hero__inner">
-      <span class="eyebrow eyebrow--pill" data-reveal>What we do</span>
-      <h1 class="wwd-hero__title display" data-reveal data-reveal-delay="1">
-        One studio for your entire<br />content operation
-      </h1>
-      <p class="lead wwd-hero__lead" data-reveal data-reveal-delay="2">
-        Eight services that turn one recording into a month of content: 120+ original
-        pieces, published across up to 13 platforms in your voice, and measured on a
-        dashboard you can watch live. People make every call. In-house software lets a
-        small team run at the output of a big one.
-      </p>
-      <div class="wwd-hero__actions" data-reveal data-reveal-delay="3">
-        <a href="/contact" class="btn btn--signal">
-          Book a call
-          <span class="btn__arrow" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path
-                d="M3 11L11 3M11 3H5M11 3V9"
-                stroke="currentColor"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </svg>
-          </span>
-        </a>
-        <a href="#services" class="btn btn--ghost">See the eight services</a>
+    <div class="container">
+      <div class="wwd-herocard" data-reveal>
+        <div class="wwd-herocard__glow" aria-hidden="true"></div>
+        <div class="wwd-herocard__inner">
+          <span class="eyebrow eyebrow--star eyebrow--ondark">What we do</span>
+          <h1 class="wwd-herocard__title">
+            One studio for your entire<br /><span class="hl-gold">content operation.</span>
+          </h1>
+          <p class="wwd-herocard__lead">
+            Nine services that turn one recording into a month of content: 120+ original
+            pieces, published across up to 13 platforms in your voice, and measured on a
+            dashboard you can watch live. People make every call. In-house software lets a
+            small team run at the output of a big one.
+          </p>
+          <div class="wwd-herocard__actions">
+            <a href="/contact" class="btn btn--gold">
+              Book a call<span class="btn__arrow" aria-hidden="true" set:html={arrow} />
+            </a>
+            <a href="#services" class="btn btn--ghost btn--ghost-dark">See the nine services</a>
+          </div>
+        </div>
+        <div class="wwd-herocard__visual" aria-hidden="true">
+          <div class="chrome wwd-hmock">
+            <div class="chrome__bar">
+              <span class="chrome__dot"></span><span class="chrome__dot"></span><span class="chrome__dot"></span>
+              <span class="chrome__url">one recording · fanned out</span>
+            </div>
+            <div class="chrome__body">
+              <div class="wwd-hmock__src">
+                <span class="wwd-hmock__srcdot"></span>
+                <span class="wwd-hmock__srctx">1 recording</span>
+              </div>
+              <div class="wwd-hmock__grid">
+                {["a","b","c","a","c","b","b","a","c","b","a","c"].map((t) => (
+                  <span class={`wwd-hmock__cell wwd-hmock__cell--${t}`}></span>
+                ))}
+              </div>
+              <div class="wwd-hmock__foot">
+                <span class="wwd-hmock__pill">Scheduled</span>
+                <span class="wwd-hmock__note">350+ posts / month</span>
+              </div>
+            </div>
+          </div>
+          <div class="wwd-herofloat glass--light">
+            <span class="wwd-herofloat__num">30<span class="wwd-herofloat__u">+</span></span>
+            <span class="wwd-herofloat__lab">pieces per recording</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CAPABILITY STAT BAND ============ -->
+  <section class="wwd-statsec">
+    <div class="container">
+      <div class="wwd-statpanel" data-reveal>
+        {stats.map((s) => (
+          <div class="wwd-statp">
+            <span class="wwd-statp__ico" aria-hidden="true" style={`--ic:${s.c}`}>
+              <svg width="22" height="22" viewBox="0 0 20 20" fill="none" set:html={s.icon} />
+            </span>
+            <div>
+              <div class="wwd-statp__num" data-count={s.value} data-decimals="0" data-suffix={s.suffix}>
+                {s.value.toLocaleString("en-US") + s.suffix}
+              </div>
+              <div class="wwd-statp__lab">{s.label}</div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- ============ SERVICE INDEX STRIP ============ -->
-  <section class="wwd-index">
+  <section class="wwd-index" id="services">
     <div class="container">
       <ol class="wwd-index__list" data-reveal>
-        {
-          services.map((s) => (
-            <li class="wwd-index__item">
-              <a href={`#service-${s.n}`}>
-                <span class="wwd-index__n">{s.n}</span>
-                <span class="wwd-index__k">{s.eyebrow}</span>
-              </a>
-            </li>
-          ))
-        }
+        {services.map((s) => (
+          <li class="wwd-index__item">
+            <a href={`#service-${s.n}`}>
+              <span class="wwd-index__n">{s.n}</span>
+              <span class="wwd-index__k">{s.eyebrow}</span>
+            </a>
+          </li>
+        ))}
       </ol>
     </div>
   </section>
 
-  <!-- ============ SERVICES (one detailed section each) ============ -->
-  {
-    services.map((s, i) => (
-      <section
-        class={`section wwd-svc ${i % 2 === 1 ? "section--mist" : ""}`}
-        id={`service-${s.n}`}
-      >
-        <div class="container wwd-svc__grid">
-          <div class="wwd-svc__copy" data-reveal>
-            <div class="wwd-svc__head">
+  <!-- ============ SERVICES (one detailed block each) ============ -->
+  {services.map((s, i) => (
+    <section
+      class={`section wwd-svc ${i % 2 === 1 ? "section--mist" : ""}`}
+      id={`service-${s.n}`}
+    >
+      <div class="container wwd-svc__grid">
+        <div class="wwd-svc__copy" data-reveal>
+          <div class="wwd-svc__head">
+            <span class="wwd-svc__ico" aria-hidden="true" style={`--ic:${s.c}`}>
+              <svg width="21" height="21" viewBox="0 0 20 20" fill="none" set:html={s.icon} />
+            </span>
+            <div class="wwd-svc__headtx">
               <span class="wwd-svc__n">{s.n}</span>
               <span class="eyebrow eyebrow--dot">{s.eyebrow}</span>
             </div>
-            <h2 class="wwd-svc__title">{s.title}</h2>
-            <p class="lead wwd-svc__body">{s.body}</p>
           </div>
+          <h2 class="wwd-svc__title">{s.title}</h2>
+          <p class="lead wwd-svc__body">{s.body}</p>
+          <ul class="wwd-svc__list">
+            {s.bullets.map((b) => (
+              <li>
+                <span class="wwd-svc__check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M2.5 7.5L6 11L11.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-          {s.hasDashboard ? (
-            <div class="wwd-svc__aside" data-reveal data-reveal-delay="1">
-              <div class="card--shell wwd-dash">
-                <div class="card__core wwd-dash__core">
-                  <div class="wwd-browser" aria-hidden="true">
-                    <div class="wwd-browser__bar">
-                      <span class="wwd-browser__dot" />
-                      <span class="wwd-browser__dot" />
-                      <span class="wwd-browser__dot" />
-                      <span class="wwd-browser__url">yourbrand.ilaicollective.com · sample view</span>
-                    </div>
-                    <div class="wwd-browser__body">
-                      <div class="wwd-dash__stats">
-                        <div class="wwd-dash__stat">
-                          <span class="wwd-dash__lbl">Posts this month</span>
-                          <span class="wwd-dash__num">
-                            <span
-                              data-count="350"
-                              data-suffix="+"
-                              data-decimals="0"
-                            >
-                              0
-                            </span>
-                          </span>
-                        </div>
-                        <div class="wwd-dash__stat">
-                          <span class="wwd-dash__lbl">Platforms live</span>
-                          <span class="wwd-dash__num">
-                            <span
-                              data-count="13"
-                              data-suffix=""
-                              data-decimals="0"
-                            >
-                              0
-                            </span>
-                          </span>
-                        </div>
-                      </div>
-                      <div class="wwd-dash__chart">
-                        <span style="height:38%" />
-                        <span style="height:52%" />
-                        <span style="height:44%" />
-                        <span style="height:67%" />
-                        <span style="height:59%" />
-                        <span style="height:81%" />
-                        <span style="height:73%" />
-                        <span style="height:96%" />
-                      </div>
-                      <div class="wwd-dash__foot">
-                        <span class="wwd-dash__pill">Live</span>
-                        <span class="wwd-dash__note">Refreshed on the hour</span>
-                      </div>
-                    </div>
+        <div class="wwd-svc__aside" data-reveal data-reveal-delay="1">
+          <div class={`wwd-viz wwd-viz--${s.tone}`}>
+            <span class="wwd-viz__tag">{`0${i + 1}`.slice(-2)}</span>
+
+            {s.viz === "wave" && (
+              <div class="wwd-vwave">
+                {[12,26,44,30,58,38,66,48,32,54,26,42,18,50,30,60,40,24].map((h) => (
+                  <span style={`--h:${h}px`}></span>
+                ))}
+              </div>
+            )}
+
+            {s.viz === "reel" && (
+              <div class="wwd-vreel">
+                <span class="wwd-vreel__phone">
+                  <span class="wwd-vreel__play">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M5 3.5l7 4.5-7 4.5z"/></svg>
+                  </span>
+                  <span class="wwd-vreel__cap"></span>
+                  <span class="wwd-vreel__cap wwd-vreel__cap--s"></span>
+                  <span class="wwd-vreel__prog"><i></i></span>
+                </span>
+                <span class="wwd-vreel__side">
+                  <span></span><span></span><span></span>
+                </span>
+              </div>
+            )}
+
+            {s.viz === "scheduler" && (
+              <div class="wwd-vsched">
+                <div class="wwd-vsched__cols">
+                  {["Mon","Tue","Wed","Thu","Fri"].map((d) => <span>{d}</span>)}
+                </div>
+                <div class="wwd-vsched__grid">
+                  {["a","b","","c","a","","c","a","b","b","","c","a","c","b","","b","a","c",""].map((t) => (
+                    <span class={t ? `wwd-vsched__cell wwd-vsched__cell--${t}` : "wwd-vsched__cell is-empty"}></span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {s.viz === "chart" && (
+              <div class="wwd-vchart">
+                <div class="wwd-vchart__bars">
+                  {[{p:88,c:"var(--coral)"},{p:64,c:"var(--brand)"},{p:100,c:"var(--green)"},{p:48,c:"var(--plum)"}].map((b) => (
+                    <span class="wwd-bar"><i style={`--w:${b.p}%;background:${b.c}`}></i></span>
+                  ))}
+                </div>
+                <div class="wwd-vchart__legend">
+                  <span>Audience</span><span>Competitors</span><span>Proven hooks</span><span>Gaps</span>
+                </div>
+              </div>
+            )}
+
+            {s.viz === "brand" && (
+              <div class="wwd-vbrand">
+                <div class="wwd-vbrand__swatches">
+                  {["var(--coral)","var(--charcoal)","var(--brand)","var(--green)","var(--plum)"].map((c) => (
+                    <span style={`background:${c}`}></span>
+                  ))}
+                </div>
+                <div class="wwd-vbrand__type">
+                  <span class="wwd-vbrand__aa">Aa</span>
+                  <div class="wwd-vbrand__lines">
+                    <span></span><span></span><span class="wwd-vbrand__lines--s"></span>
                   </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            <div class="wwd-svc__aside" data-reveal data-reveal-delay="1">
-              <ul class="wwd-svc__list">
-                {s.bullets.map((b) => (
-                  <li>
-                    <span class="wwd-svc__check" aria-hidden="true">
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path
-                          d="M2.5 7.5L6 11L11.5 3.5"
-                          stroke="currentColor"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                    </span>
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
+            )}
 
-        {s.hasDashboard && (
-          <div class="container">
-            <ul class="wwd-svc__list wwd-svc__list--wide" data-reveal>
-              {s.bullets.map((b) => (
-                <li>
-                  <span class="wwd-svc__check" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path
-                        d="M2.5 7.5L6 11L11.5 3.5"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </span>
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
+            {s.viz === "alerts" && (
+              <div class="wwd-valerts">
+                <div class="wwd-valert"><span class="wwd-valert__dot" style="background:var(--green)"></span><div><b>Replied to a comment</b><span>Instagram · 2 min</span></div></div>
+                <div class="wwd-valert"><span class="wwd-valert__dot" style="background:var(--brand)"></span><div><b>First-response sent</b><span>TikTok · in your voice</span></div></div>
+                <div class="wwd-valert"><span class="wwd-valert__dot" style="background:var(--plum)"></span><div><b>Intent signal flagged</b><span>from a DM · sent to you</span></div></div>
+              </div>
+            )}
+
+            {s.viz === "search" && (
+              <div class="wwd-vsearch">
+                <div class="wwd-vsearch__bar">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <span class="wwd-vsearch__q"></span>
+                </div>
+                <div class="wwd-vsearch__result">
+                  <span class="wwd-vsearch__badge">Cited</span>
+                  <span class="wwd-vsearch__title"></span>
+                  <span class="wwd-vsearch__url"></span>
+                  <span class="wwd-vsearch__snip"></span>
+                  <span class="wwd-vsearch__snip wwd-vsearch__snip--s"></span>
+                </div>
+              </div>
+            )}
+
+            {s.viz === "essay" && (
+              <div class="wwd-vessay">
+                <span class="wwd-vessay__kicker">The newsletter</span>
+                <span class="wwd-vessay__h"></span>
+                <span class="wwd-vessay__h wwd-vessay__h--s"></span>
+                <div class="wwd-vessay__body">
+                  <span></span><span></span><span></span><span class="wwd-vessay__body--s"></span>
+                </div>
+                <div class="wwd-vessay__foot">
+                  <span class="wwd-vessay__save">Saved</span>
+                  <span class="wwd-vessay__meta">6 min read</span>
+                </div>
+              </div>
+            )}
+
+            {s.viz === "dashboard" && (
+              <div class="wwd-vdash">
+                <div class="wwd-vdash__bar">
+                  <span class="chrome__dot"></span><span class="chrome__dot"></span><span class="chrome__dot"></span>
+                  <span class="wwd-vdash__url">yourbrand.ilaicollective.com</span>
+                </div>
+                <div class="wwd-vdash__body">
+                  <div class="wwd-vdash__stats">
+                    <div class="wwd-vdash__stat">
+                      <span class="wwd-vdash__lbl">Posts this month</span>
+                      <span class="wwd-vdash__num"><span data-count="350" data-suffix="+" data-decimals="0">0</span></span>
+                    </div>
+                    <div class="wwd-vdash__stat">
+                      <span class="wwd-vdash__lbl">Platforms live</span>
+                      <span class="wwd-vdash__num"><span data-count="13" data-decimals="0">0</span></span>
+                    </div>
+                  </div>
+                  <div class="wwd-vdash__chart">
+                    {[38,52,44,67,59,81,73,96].map((h) => <span style={`height:${h}%`}></span>)}
+                  </div>
+                  <div class="wwd-vdash__foot">
+                    <span class="wwd-vdash__live">Live</span>
+                    <span class="wwd-vdash__refresh">Refreshed on the hour</span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-        )}
-      </section>
-    ))
-  }
+        </div>
+      </div>
+    </section>
+  ))}
 
-  <!-- ============ PLATFORMS BAND ============ -->
-  <section class="wwd-platforms">
-    <div class="container">
-      <p class="wwd-platforms__label" data-reveal>Published across</p>
-      <ul class="wwd-platforms__list" data-reveal data-reveal-delay="1">
-        {platforms.map((p) => <li>{p}</li>)}
-      </ul>
+  <!-- ============ PLATFORM STRIP ============ -->
+  <section class="wwd-pstrip">
+    <div class="container" data-reveal>
+      <PlatformStrip label="One voice, published across" />
     </div>
   </section>
 
-  <!-- ============ SCOPE / BOUNDARY ============ -->
+  <!-- ============ FUNNEL / HANDOFF ============ -->
   <section class="section section--ink wwd-scope">
     <div class="container wwd-scope__inner">
       <div class="wwd-scope__copy" data-reveal>
-        <span class="eyebrow eyebrow--dot">Where we hand off</span>
+        <span class="eyebrow eyebrow--star eyebrow--ondark">Where we hand off</span>
         <h2 class="wwd-scope__title">
           We fill the top of your funnel and tell you what's converting to interest.
         </h2>
@@ -339,63 +467,59 @@ const pricing = [
           We report interest and intent. We never claim your sales as ours.
         </p>
       </div>
-      <ol class="wwd-scope__flow" data-reveal data-reveal-delay="1">
-        <li class="wwd-scope__step">
-          <span class="wwd-scope__stepn">Us</span>
-          <span class="wwd-scope__stepk">Reach</span>
-          <span class="wwd-scope__stepd">Original content, everywhere, daily.</span>
-        </li>
-        <li class="wwd-scope__step">
-          <span class="wwd-scope__stepn">Us</span>
-          <span class="wwd-scope__stepk">Interest</span>
-          <span class="wwd-scope__stepd">Engagement and buying-intent signals surfaced.</span>
-        </li>
-        <li class="wwd-scope__step wwd-scope__step--handoff">
-          <span class="wwd-scope__stepn">You</span>
-          <span class="wwd-scope__stepk">The close</span>
-          <span class="wwd-scope__stepd">Your offer, your sale. We hand off here.</span>
-        </li>
-      </ol>
+      <div class="wwd-funnel" data-reveal data-reveal-delay="1">
+        <div class="wwd-fstep wwd-fstep--reach">
+          <div class="wwd-fstep__row">
+            <span class="wwd-fstep__who">Us</span>
+            <span class="wwd-fstep__k">Reach</span>
+          </div>
+          <span class="wwd-fstep__d">Original content, everywhere, daily.</span>
+          <span class="wwd-fstep__bar"><i style="--w:100%"></i></span>
+        </div>
+        <div class="wwd-fstep wwd-fstep--interest">
+          <div class="wwd-fstep__row">
+            <span class="wwd-fstep__who">Us</span>
+            <span class="wwd-fstep__k">Interest</span>
+          </div>
+          <span class="wwd-fstep__d">Engagement and buying-intent signals surfaced.</span>
+          <span class="wwd-fstep__bar"><i style="--w:66%"></i></span>
+        </div>
+        <div class="wwd-fstep wwd-fstep--close">
+          <div class="wwd-fstep__row">
+            <span class="wwd-fstep__who wwd-fstep__who--you">You</span>
+            <span class="wwd-fstep__k">The close</span>
+          </div>
+          <span class="wwd-fstep__d">Your offer, your sale. We hand off here.</span>
+          <span class="wwd-fstep__bar"><i style="--w:34%;background:#fff"></i></span>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ============ PRICING STRIP ============ -->
   <section class="section wwd-pricing">
     <div class="container">
-      <SectionHeader
-        eyebrow="Pricing"
-        title="See it run before you commit"
-        lead="Every engagement opens with a free teardown, then a pilot month you can walk away from. No annual contract, no lock-in on day one."
-        align="center"
-      />
+      <div class="wwd-price__head" data-reveal>
+        <span class="eyebrow eyebrow--star">Starts at</span>
+        <h2 class="wwd-price__h">See it run <span class="hl">before you commit.</span></h2>
+        <p class="lead wwd-price__lead">
+          Every engagement opens with a free teardown, then a pilot month you can walk away
+          from. No annual contract, no lock-in on day one.
+        </p>
+      </div>
       <div class="wwd-price__grid">
-        {
-          pricing.map((p, i) => (
-            <div
-              class={`card wwd-price ${i === 2 ? "wwd-price--feature" : ""}`}
-              data-reveal
-              data-reveal-delay={String(i + 1)}
-            >
-              <span class="wwd-price__k">{p.k}</span>
-              <span class="wwd-price__v">{p.v}</span>
-              <p class="wwd-price__d muted">{p.d}</p>
-            </div>
-          ))
-        }
+        {pricing.map((p, i) => (
+          <div class={`wwd-price ${i === 2 ? "wwd-price--feature" : ""}`} data-reveal data-reveal-delay={String(i + 1)}>
+            {i === 2 && <span class="wwd-price__flag">The full studio</span>}
+            <span class="wwd-price__k">{p.k}</span>
+            <span class="wwd-price__v">{p.v}</span>
+            <p class="wwd-price__d muted">{p.d}</p>
+          </div>
+        ))}
       </div>
       <div class="wwd-price__foot" data-reveal>
         <a href="/contact" class="btn btn--signal">
-          Book a call
-          <span class="btn__arrow" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path
-                d="M3 11L11 3M11 3H5M11 3V9"
-                stroke="currentColor"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </svg>
-          </span>
+          Book a call<span class="btn__arrow" aria-hidden="true" set:html={arrow} />
         </a>
         <p class="wwd-price__fine muted">
           The pilot month is fully credited toward your first engagement.
@@ -408,63 +532,217 @@ const pricing = [
 </Layout>
 
 <style>
-  /* ---------- Hero ---------- */
+  /* ============ Hero ============ */
   .wwd-hero {
-    position: relative;
-    padding-top: clamp(7rem, 15vh, 11rem);
-    padding-bottom: var(--sp-6);
-    overflow: hidden;
+    padding-top: clamp(6.5rem, 10vh, 8.5rem);
+    padding-bottom: clamp(1rem, 3vw, 2rem);
   }
-  .wwd-hero__mesh {
-    position: absolute;
-    inset: -25% -10% auto -10%;
-    height: 70%;
+  .wwd-herocard {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    gap: var(--sp-8);
+    align-items: center;
+    padding: clamp(1.9rem, 4vw, 3.5rem);
+    border-radius: var(--r-card-lg);
+    color: #fff;
     background:
-      radial-gradient(38% 55% at 24% 16%, rgba(75, 63, 228, 0.16), transparent 70%),
-      radial-gradient(32% 44% at 80% 10%, rgba(75, 63, 228, 0.08), transparent 70%);
-    filter: blur(6px);
-    animation: wwd-drift 24s var(--ease) infinite alternate;
+      radial-gradient(80% 120% at 85% 10%, rgba(201, 162, 92, 0.42), transparent 58%),
+      radial-gradient(70% 90% at 6% 94%, rgba(13, 40, 29, 0.9), transparent 62%),
+      linear-gradient(135deg, var(--charcoal-2), var(--charcoal) 55%, var(--charcoal-3));
+    box-shadow: var(--shadow-float);
+  }
+  .wwd-herocard__glow {
+    position: absolute;
+    top: -30%;
+    right: -10%;
+    width: 60%;
+    height: 120%;
+    background: radial-gradient(50% 50% at 50% 40%, rgba(201, 162, 92, 0.28), transparent 70%);
     pointer-events: none;
   }
-  @keyframes wwd-drift {
-    to {
-      transform: translate3d(0, 20px, 0) scale(1.05);
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .wwd-hero__mesh {
-      animation: none;
-    }
-  }
-  .wwd-hero__inner {
+  .wwd-herocard__inner {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    z-index: 2;
+    max-width: 620px;
   }
-  .wwd-hero__title {
+  .wwd-herocard__title {
+    margin-top: var(--sp-4);
+    font-size: clamp(2.3rem, 4vw, 3.4rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: var(--tracking-display);
+    color: #fff;
+  }
+  .wwd-herocard__lead {
     margin-top: var(--sp-5);
-    max-width: 18ch;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+    max-width: 56ch;
   }
-  .wwd-hero__lead {
-    margin-top: var(--sp-5);
-    max-width: 62ch;
-    text-align: center;
-  }
-  .wwd-hero__actions {
+  .wwd-herocard__actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--sp-3);
-    justify-content: center;
-    margin-top: var(--sp-8);
+    margin-top: var(--sp-6);
+  }
+  .wwd-herocard__visual {
+    position: relative;
+    z-index: 2;
+  }
+  .btn--ghost-dark {
+    --btn-fg: #fff;
+    border-color: rgba(255, 255, 255, 0.28);
+  }
+  .btn--ghost-dark:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  /* Hero mock: 1 recording -> many */
+  .wwd-hmock {
+    max-width: 420px;
+    margin-inline: auto;
+  }
+  .wwd-hmock__src {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    border-radius: var(--r-pill);
+    background: var(--coral);
+    color: #fff;
+  }
+  .wwd-hmock__srcdot {
+    width: 8px; height: 8px; border-radius: 50%; background: #fff;
+    box-shadow: 0 0 0 4px rgba(255,255,255,0.28);
+  }
+  .wwd-hmock__srctx {
+    font-family: var(--font-accent); font-weight: 700; font-size: 0.8rem;
+  }
+  .wwd-hmock__grid {
+    margin-top: var(--sp-4);
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 7px;
+  }
+  .wwd-hmock__cell {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity var(--dur-base) var(--ease), transform var(--dur-base) var(--ease);
+  }
+  .is-visible .wwd-hmock__cell { opacity: 1; transform: none; }
+  .wwd-hmock__cell--a { background: color-mix(in srgb, var(--green) 60%, white); }
+  .wwd-hmock__cell--b { background: color-mix(in srgb, var(--brand) 62%, white); }
+  .wwd-hmock__cell--c { background: color-mix(in srgb, var(--plum) 55%, white); }
+  .wwd-hmock__cell:nth-child(1) { transition-delay: 60ms; }
+  .wwd-hmock__cell:nth-child(2) { transition-delay: 100ms; }
+  .wwd-hmock__cell:nth-child(3) { transition-delay: 140ms; }
+  .wwd-hmock__cell:nth-child(4) { transition-delay: 180ms; }
+  .wwd-hmock__cell:nth-child(5) { transition-delay: 220ms; }
+  .wwd-hmock__cell:nth-child(6) { transition-delay: 260ms; }
+  .wwd-hmock__cell:nth-child(7) { transition-delay: 300ms; }
+  .wwd-hmock__cell:nth-child(8) { transition-delay: 340ms; }
+  .wwd-hmock__cell:nth-child(9) { transition-delay: 380ms; }
+  .wwd-hmock__cell:nth-child(10) { transition-delay: 420ms; }
+  .wwd-hmock__cell:nth-child(11) { transition-delay: 460ms; }
+  .wwd-hmock__cell:nth-child(12) { transition-delay: 500ms; }
+  .wwd-hmock__foot {
+    display: flex; align-items: center; gap: var(--sp-3);
+    margin-top: var(--sp-4); padding-top: var(--sp-4);
+    border-top: 1px solid var(--line);
+  }
+  .wwd-hmock__pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; border-radius: var(--r-pill);
+    background: var(--coral-tint); color: var(--coral-ink);
+    font-family: var(--font-accent); font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .wwd-hmock__pill::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--coral);
+  }
+  .wwd-hmock__note { font-size: var(--fs-sm); color: var(--muted); }
+  .wwd-herofloat {
+    position: absolute;
+    left: -20px;
+    bottom: -18px;
+    display: flex; flex-direction: column; gap: 2px;
+    padding: 14px 18px;
+    border-radius: 16px;
+    animation: wwd-float 6s var(--ease) infinite alternate;
+  }
+  .wwd-herofloat__num {
+    font-family: var(--font-accent); font-weight: 700; font-size: 1.6rem;
+    letter-spacing: -0.03em; color: var(--ink);
+  }
+  .wwd-herofloat__u { color: var(--coral); }
+  .wwd-herofloat__lab { font-size: 0.74rem; color: var(--muted); }
+  @keyframes wwd-float { to { transform: translateY(-9px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .wwd-herofloat { animation: none; }
+    .wwd-hmock__cell { opacity: 1; transform: none; }
+  }
+  @media (min-width: 940px) {
+    .wwd-herocard {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: var(--sp-12);
+    }
   }
 
-  /* ---------- Index strip ---------- */
+  /* ============ Capability stat band ============ */
+  .wwd-statsec {
+    padding-block: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .wwd-statpanel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-6);
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    background: var(--mist);
+    border-radius: var(--r-card-lg);
+  }
+  .wwd-statp {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+  }
+  .wwd-statp__ico {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    color: #fff;
+    background: linear-gradient(140deg, var(--ic), color-mix(in srgb, var(--ic) 55%, #ffffff));
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 10px 20px -8px var(--ic);
+  }
+  .wwd-statp__num {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--charcoal);
+    font-variant-numeric: tabular-nums;
+  }
+  .wwd-statp__lab {
+    margin-top: 5px;
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  @media (min-width: 860px) {
+    .wwd-statpanel { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  /* ============ Index strip ============ */
   .wwd-index {
     padding-block: var(--sp-8);
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
+    scroll-margin-top: 5rem;
   }
   .wwd-index__list {
     list-style: none;
@@ -480,259 +758,436 @@ const pricing = [
     color: var(--ink-2);
     transition: color var(--dur-micro) var(--ease);
   }
-  .wwd-index__item a:hover {
-    color: var(--signal);
-  }
+  .wwd-index__item a:hover { color: var(--coral); }
   .wwd-index__n {
     font-family: var(--font-accent);
     font-size: var(--fs-sm);
     font-weight: 700;
-    color: var(--signal);
+    color: var(--coral);
   }
-  .wwd-index__k {
-    font-weight: 600;
-    font-size: var(--fs-sm);
-  }
+  .wwd-index__k { font-weight: 600; font-size: var(--fs-sm); }
   @media (min-width: 720px) {
-    .wwd-index__list {
-      grid-template-columns: repeat(4, 1fr);
-    }
+    .wwd-index__list { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 980px) {
+    .wwd-index__list { grid-template-columns: repeat(5, 1fr); }
   }
 
-  /* ---------- Service section ---------- */
-  .wwd-svc {
-    scroll-margin-top: 6rem;
-  }
+  /* ============ Service block ============ */
+  .wwd-svc { scroll-margin-top: 5rem; }
   .wwd-svc__grid {
     display: grid;
     gap: var(--sp-8);
-    align-items: start;
+    align-items: center;
   }
   .wwd-svc__head {
     display: flex;
     align-items: center;
     gap: var(--sp-4);
   }
+  .wwd-svc__ico {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    color: #fff;
+    background: linear-gradient(140deg, var(--ic), color-mix(in srgb, var(--ic) 55%, #ffffff));
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 10px 20px -8px var(--ic);
+  }
+  .wwd-svc__ico svg { stroke-width: 1.6; }
+  .wwd-svc__headtx { display: flex; align-items: center; gap: var(--sp-3); }
   .wwd-svc__n {
     font-family: var(--font-accent);
     font-size: var(--fs-h3);
     font-weight: 700;
-    color: var(--signal);
+    color: var(--coral);
     letter-spacing: -0.02em;
   }
   .wwd-svc__title {
     margin-top: var(--sp-5);
-    max-width: 16ch;
+    max-width: 18ch;
   }
   .wwd-svc__body {
-    margin-top: var(--sp-5);
-    max-width: 50ch;
+    margin-top: var(--sp-4);
+    max-width: 52ch;
   }
   .wwd-svc__list {
     list-style: none;
+    margin-top: var(--sp-6);
     display: grid;
-    gap: var(--sp-4);
+    gap: var(--sp-3);
   }
   .wwd-svc__list li {
     display: flex;
     align-items: flex-start;
     gap: var(--sp-3);
     color: var(--ink-2);
-    font-size: var(--fs-body);
+    font-size: var(--fs-sm);
     line-height: 1.5;
   }
   .wwd-svc__check {
     flex: none;
     display: grid;
     place-items: center;
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     margin-top: 1px;
     border-radius: 50%;
-    background: var(--signal-tint);
-    color: var(--signal-ink);
-  }
-  .wwd-svc__list--wide {
-    margin-top: var(--sp-8);
-    grid-template-columns: 1fr;
-    gap: var(--sp-4);
-  }
-  @media (min-width: 640px) {
-    .wwd-svc__list--wide {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--sp-4) var(--sp-8);
-    }
+    background: var(--coral-tint);
+    color: var(--coral-ink);
   }
   @media (min-width: 900px) {
     .wwd-svc__grid {
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.05fr 0.95fr;
       gap: var(--sp-12);
-      align-items: center;
     }
-    .wwd-svc:nth-of-type(even) .wwd-svc__copy {
-      order: 2;
-    }
+    .wwd-svc:nth-of-type(even) .wwd-svc__copy { order: 2; }
   }
 
-  /* ---------- Dashboard mock ---------- */
-  .wwd-dash {
-    width: 100%;
-  }
-  .wwd-dash__core {
-    padding: var(--sp-2) !important;
-  }
-  .wwd-browser {
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    background: var(--canvas);
-  }
-  .wwd-browser__bar {
+  /* ---- Viz shell (colored / slate / white / dark variety) ---- */
+  .wwd-viz {
+    position: relative;
+    min-height: 300px;
     display: flex;
     align-items: center;
-    gap: 7px;
-    padding: 10px var(--sp-4);
+    justify-content: center;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border-radius: var(--r-card-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+  .wwd-viz__tag {
+    position: absolute;
+    top: var(--sp-5);
+    left: var(--sp-6);
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+    z-index: 2;
+  }
+  .wwd-viz--dark {
+    background:
+      radial-gradient(80% 110% at 82% 12%, rgba(201, 162, 92, 0.28), transparent 60%),
+      linear-gradient(150deg, var(--charcoal), var(--charcoal-2));
+  }
+  .wwd-viz--dark .wwd-viz__tag { color: rgba(255, 255, 255, 0.55); }
+  .wwd-viz--slate {
+    background: linear-gradient(150deg, var(--slate), var(--slate-2));
+  }
+  .wwd-viz--slate .wwd-viz__tag { color: rgba(255, 255, 255, 0.5); }
+  .wwd-viz--terra {
+    background: linear-gradient(150deg, var(--plum), color-mix(in srgb, var(--plum) 70%, #fff));
+  }
+  .wwd-viz--terra .wwd-viz__tag { color: rgba(255, 255, 255, 0.7); }
+  .wwd-viz--white {
+    background: var(--paper);
+    border: 1px solid var(--line);
+  }
+  .wwd-viz--white .wwd-viz__tag { color: var(--line-2); }
+  .wwd-viz--dashboard {
+    background: linear-gradient(150deg, var(--mist), var(--sand));
+  }
+  .wwd-viz--dashboard .wwd-viz__tag { color: rgba(29, 42, 35, 0.24); }
+
+  /* Podcast waveform */
+  .wwd-vwave {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 120px;
+  }
+  .wwd-vwave span {
+    width: 5px;
+    height: var(--h);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.9);
+    animation: wwd-wave 1.5s var(--ease) infinite alternate;
+  }
+  .wwd-vwave span:nth-child(3n) { animation-delay: 0.2s; opacity: 0.75; }
+  .wwd-vwave span:nth-child(3n+1) { animation-delay: 0.4s; opacity: 0.85; }
+  @keyframes wwd-wave { to { transform: scaleY(0.45); } }
+
+  /* Reel card */
+  .wwd-vreel { display: flex; align-items: center; gap: var(--sp-4); }
+  .wwd-vreel__phone {
+    position: relative;
+    width: 120px;
+    height: 210px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 14px;
+  }
+  .wwd-vreel__play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -60%);
+    display: grid; place-items: center;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--plum);
+    box-shadow: 0 8px 20px -8px rgba(0,0,0,0.4);
+  }
+  .wwd-vreel__cap {
+    width: 100%; height: 7px; border-radius: 999px;
+    background: rgba(255, 255, 255, 0.55);
+  }
+  .wwd-vreel__cap--s { width: 62%; align-self: flex-start; }
+  .wwd-vreel__prog {
+    width: 100%; height: 4px; border-radius: 999px;
+    background: rgba(255, 255, 255, 0.28);
+    overflow: hidden;
+  }
+  .wwd-vreel__prog i {
+    display: block; height: 100%; width: 40%; border-radius: 999px;
+    background: #fff;
+    animation: wwd-prog 3.5s var(--ease) infinite;
+  }
+  @keyframes wwd-prog { 0% { width: 8%; } 100% { width: 96%; } }
+  .wwd-vreel__side {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .wwd-vreel__side span {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  /* Scheduler grid */
+  .wwd-vsched { width: 100%; max-width: 300px; }
+  .wwd-vsched__cols {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+    margin-bottom: 10px;
+  }
+  .wwd-vsched__cols span {
+    text-align: center;
+    font-family: var(--font-accent);
+    font-size: 0.62rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .wwd-vsched__grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+  }
+  .wwd-vsched__cell {
+    aspect-ratio: 1; border-radius: 7px;
+  }
+  .wwd-vsched__cell--a { background: color-mix(in srgb, var(--green) 62%, white); }
+  .wwd-vsched__cell--b { background: color-mix(in srgb, var(--brand) 66%, white); }
+  .wwd-vsched__cell--c { background: color-mix(in srgb, var(--coral) 56%, white); }
+  .wwd-vsched__cell.is-empty {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px dashed rgba(255, 255, 255, 0.16);
+  }
+
+  /* Research chart (bars animate on reveal) */
+  .wwd-vchart { width: 100%; max-width: 300px; }
+  .wwd-vchart__bars {
+    display: grid; gap: 14px;
+  }
+  .wwd-bar {
+    display: block; height: 12px; border-radius: 999px;
+    background: var(--mist);
+    overflow: hidden;
+  }
+  .wwd-bar i {
+    display: block; height: 100%; width: 0; border-radius: 999px;
+    transition: width 1s var(--ease);
+  }
+  .is-visible .wwd-bar i { width: var(--w); }
+  .wwd-vchart__legend {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 6px 14px; margin-top: 16px;
+  }
+  .wwd-vchart__legend span {
+    font-size: 0.72rem; color: var(--muted);
+  }
+
+  /* Brand board */
+  .wwd-vbrand { width: 100%; max-width: 300px; display: grid; gap: 18px; }
+  .wwd-vbrand__swatches {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+  }
+  .wwd-vbrand__swatches span {
+    aspect-ratio: 1; border-radius: 10px;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.4);
+  }
+  .wwd-vbrand__type {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px; border-radius: 14px;
+    background: var(--mist);
+  }
+  .wwd-vbrand__aa {
+    font-family: var(--font-display); font-weight: 600; font-size: 2.6rem;
+    line-height: 1; letter-spacing: -0.03em; color: var(--ink);
+  }
+  .wwd-vbrand__lines { flex: 1; display: grid; gap: 8px; }
+  .wwd-vbrand__lines span {
+    height: 8px; border-radius: 999px; background: var(--line-2);
+  }
+  .wwd-vbrand__lines--s { width: 60%; }
+
+  /* Engagement alerts */
+  .wwd-valerts { width: 100%; max-width: 300px; display: grid; gap: 10px; }
+  .wwd-valert {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px; border-radius: 14px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 20px -12px rgba(10, 26, 20, 0.5);
+    animation: wwd-slidein 0.6s var(--ease-out) both;
+  }
+  .wwd-valert:nth-child(1) { animation-delay: 0.05s; }
+  .wwd-valert:nth-child(2) { animation-delay: 0.2s; }
+  .wwd-valert:nth-child(3) { animation-delay: 0.35s; }
+  @keyframes wwd-slidein { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
+  .wwd-valert__dot { flex: none; width: 9px; height: 9px; border-radius: 50%; }
+  .wwd-valert b { display: block; font-size: 0.82rem; color: var(--ink); font-weight: 600; }
+  .wwd-valert span { font-size: 0.72rem; color: var(--muted); }
+
+  /* SEO / GEO search snippet */
+  .wwd-vsearch { width: 100%; max-width: 300px; display: grid; gap: 16px; }
+  .wwd-vsearch__bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 14px; border-radius: 999px;
+    background: var(--mist); color: var(--muted);
+  }
+  .wwd-vsearch__q {
+    flex: 1; height: 8px; border-radius: 999px;
+    background: var(--line-2);
+  }
+  .wwd-vsearch__result {
+    display: grid; gap: 8px;
+    padding: 16px; border-radius: 14px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+  }
+  .wwd-vsearch__badge {
+    justify-self: start;
+    padding: 3px 9px; border-radius: 999px;
+    background: var(--green-tint); color: var(--coral-ink);
+    font-family: var(--font-accent); font-size: 0.6rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .wwd-vsearch__title { height: 11px; width: 82%; border-radius: 999px; background: var(--coral); opacity: 0.85; }
+  .wwd-vsearch__url { height: 7px; width: 46%; border-radius: 999px; background: var(--green); opacity: 0.6; }
+  .wwd-vsearch__snip { height: 7px; width: 100%; border-radius: 999px; background: var(--line-2); }
+  .wwd-vsearch__snip--s { width: 68%; }
+
+  /* Essay / newsletter */
+  .wwd-vessay {
+    width: 100%; max-width: 280px;
+    display: grid; gap: 10px;
+    padding: 20px; border-radius: 16px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 14px 34px -20px rgba(10, 26, 20, 0.5);
+  }
+  .wwd-vessay__kicker {
+    font-family: var(--font-accent); font-size: 0.6rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--plum);
+  }
+  .wwd-vessay__h { height: 13px; border-radius: 999px; background: var(--ink); opacity: 0.85; }
+  .wwd-vessay__h--s { width: 64%; }
+  .wwd-vessay__body { display: grid; gap: 7px; margin-top: 6px; }
+  .wwd-vessay__body span { height: 7px; border-radius: 999px; background: var(--line-2); }
+  .wwd-vessay__body--s { width: 74%; }
+  .wwd-vessay__foot {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--line);
+  }
+  .wwd-vessay__save {
+    padding: 3px 10px; border-radius: 999px;
+    background: var(--plum-tint); color: var(--plum);
+    font-family: var(--font-accent); font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .wwd-vessay__meta { font-size: 0.72rem; color: var(--muted); }
+
+  /* Dashboard mock */
+  .wwd-vdash {
+    width: 100%; max-width: 340px;
+    border-radius: 14px; overflow: hidden;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-float);
+  }
+  .wwd-vdash__bar {
+    display: flex; align-items: center; gap: 7px;
+    padding: 10px 14px;
     background: var(--mist);
     border-bottom: 1px solid var(--line);
   }
-  .wwd-browser__dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: var(--line-2);
-  }
-  .wwd-browser__url {
-    margin-left: var(--sp-3);
-    font-family: var(--font-accent);
-    font-size: 0.7rem;
-    letter-spacing: 0.02em;
+  .wwd-vdash__url {
+    margin-left: 8px;
+    font-family: var(--font-accent); font-size: 0.66rem;
     color: var(--muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
-  .wwd-browser__body {
-    padding: var(--sp-6);
-    display: grid;
-    gap: var(--sp-6);
+  .wwd-vdash__body { padding: 18px; display: grid; gap: 16px; }
+  .wwd-vdash__stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .wwd-vdash__lbl {
+    font-family: var(--font-accent); font-size: 0.6rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
   }
-  .wwd-dash__stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--sp-5);
+  .wwd-vdash__num {
+    display: block; margin-top: 4px;
+    font-family: var(--font-accent); font-weight: 700;
+    font-size: 1.7rem; letter-spacing: -0.03em; line-height: 1;
+    color: var(--ink); font-variant-numeric: tabular-nums;
   }
-  .wwd-dash__stat {
-    display: grid;
-    gap: var(--sp-2);
+  .wwd-vdash__chart {
+    display: flex; align-items: flex-end; gap: 6px; height: 72px;
   }
-  .wwd-dash__lbl {
-    font-family: var(--font-accent);
-    font-size: var(--fs-eyebrow);
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: var(--muted);
+  .wwd-vdash__chart span {
+    flex: 1; border-radius: 4px 4px 2px 2px;
+    background: linear-gradient(180deg, var(--coral), var(--coral-soft));
+    transform: scaleY(0.15); transform-origin: bottom;
+    transition: transform 0.7s var(--ease);
   }
-  .wwd-dash__num {
-    font-family: var(--font-accent);
-    font-weight: 700;
-    font-size: clamp(1.75rem, 4vw, 2.4rem);
-    letter-spacing: -0.03em;
-    line-height: 1;
-    color: var(--ink);
-    font-variant-numeric: tabular-nums;
+  .is-visible .wwd-vdash__chart span { transform: none; }
+  .wwd-vdash__chart span:nth-child(2) { transition-delay: 0.05s; }
+  .wwd-vdash__chart span:nth-child(3) { transition-delay: 0.1s; }
+  .wwd-vdash__chart span:nth-child(4) { transition-delay: 0.15s; }
+  .wwd-vdash__chart span:nth-child(5) { transition-delay: 0.2s; }
+  .wwd-vdash__chart span:nth-child(6) { transition-delay: 0.25s; }
+  .wwd-vdash__chart span:nth-child(7) { transition-delay: 0.3s; }
+  .wwd-vdash__chart span:nth-child(8) { transition-delay: 0.35s; background: linear-gradient(180deg, var(--charcoal-3), var(--coral)); }
+  .wwd-vdash__foot {
+    display: flex; align-items: center; gap: 10px;
+    padding-top: 12px; border-top: 1px solid var(--line);
   }
-  .wwd-dash__chart {
-    display: flex;
-    align-items: flex-end;
-    gap: var(--sp-3);
-    height: 96px;
-    padding-top: var(--sp-2);
+  .wwd-vdash__live {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; border-radius: 999px;
+    background: var(--coral-tint); color: var(--coral-ink);
+    font-family: var(--font-accent); font-size: 0.64rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
   }
-  .wwd-dash__chart span {
-    flex: 1;
-    border-radius: 5px 5px 2px 2px;
-    background: linear-gradient(
-      180deg,
-      var(--signal),
-      var(--signal-tint)
-    );
-    opacity: 0.9;
+  .wwd-vdash__live::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--coral);
   }
-  .wwd-dash__chart span:last-child {
-    background: var(--signal);
-    opacity: 1;
-  }
-  .wwd-dash__foot {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-3);
-    padding-top: var(--sp-4);
-    border-top: 1px solid var(--line);
-  }
-  .wwd-dash__pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    border-radius: var(--r-pill);
-    background: var(--signal-tint);
-    color: var(--signal-ink);
-    font-family: var(--font-accent);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .wwd-dash__pill::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--signal);
-  }
-  .wwd-dash__note {
-    font-size: var(--fs-sm);
-    color: var(--muted);
+  .wwd-vdash__refresh { font-size: 0.74rem; color: var(--muted); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wwd-vwave span, .wwd-vreel__prog i, .wwd-valert { animation: none; }
+    .wwd-bar i, .is-visible .wwd-vdash__chart span { transition: none; }
   }
 
-  /* ---------- Platforms band ---------- */
-  .wwd-platforms {
-    padding-block: var(--sp-12);
-    border-top: 1px solid var(--line);
-  }
-  .wwd-platforms__label {
-    font-family: var(--font-accent);
-    font-size: var(--fs-eyebrow);
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: var(--muted);
-    text-align: center;
-  }
-  .wwd-platforms__list {
-    list-style: none;
-    margin-top: var(--sp-6);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--sp-4) var(--sp-8);
-  }
-  .wwd-platforms__list li {
-    font-family: var(--font-accent);
-    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
-    font-weight: 500;
-    color: var(--ink-2);
-    letter-spacing: -0.01em;
-  }
+  /* ============ Platform strip ============ */
+  .wwd-pstrip { padding-block: var(--sp-12); border-top: 1px solid var(--line); }
 
-  /* ---------- Scope / boundary ---------- */
-  .wwd-scope__inner {
-    display: grid;
-    gap: var(--sp-10);
-  }
-  .wwd-scope__title {
-    margin-top: var(--sp-4);
-    max-width: 20ch;
-  }
+  /* ============ Funnel / handoff ============ */
+  .wwd-scope__inner { display: grid; gap: var(--sp-10); }
+  .wwd-scope__title { margin-top: var(--sp-4); max-width: 20ch; }
   .wwd-scope__body {
     margin-top: var(--sp-5);
     max-width: 50ch;
@@ -740,67 +1195,88 @@ const pricing = [
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.72);
   }
-  .wwd-scope__flow {
-    list-style: none;
-    display: grid;
-    gap: var(--sp-4);
-  }
-  .wwd-scope__step {
+  .wwd-funnel { display: grid; gap: var(--sp-4); }
+  .wwd-fstep {
     display: grid;
     gap: var(--sp-2);
     padding: var(--sp-6);
     border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: var(--r-card);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.04);
   }
-  .wwd-scope__step--handoff {
-    border-color: rgba(75, 63, 228, 0.55);
-    background: rgba(75, 63, 228, 0.12);
+  .wwd-fstep--close {
+    border-color: rgba(201, 162, 92, 0.55);
+    background: rgba(201, 162, 92, 0.12);
   }
-  .wwd-scope__stepn {
-    font-family: var(--font-accent);
-    font-size: var(--fs-eyebrow);
-    font-weight: 700;
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: var(--signal);
-  }
-  .wwd-scope__step--handoff .wwd-scope__stepn {
+  .wwd-fstep__row { display: flex; align-items: center; gap: var(--sp-3); }
+  .wwd-fstep__who {
+    padding: 3px 10px; border-radius: 999px;
+    background: rgba(28, 107, 74, 0.35);
+    font-family: var(--font-accent); font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
     color: #fff;
   }
-  .wwd-scope__stepk {
-    font-size: var(--fs-h3);
-    font-weight: 700;
-    color: #fff;
+  .wwd-fstep__who--you { background: var(--gold); color: var(--charcoal); }
+  .wwd-fstep__k { font-size: var(--fs-h3); font-weight: 700; color: #fff; }
+  .wwd-fstep__d { font-size: var(--fs-sm); color: rgba(255, 255, 255, 0.66); }
+  .wwd-fstep__bar {
+    display: block; height: 8px; border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1); overflow: hidden;
+    margin-top: var(--sp-2);
   }
-  .wwd-scope__stepd {
-    font-size: var(--fs-sm);
-    color: rgba(255, 255, 255, 0.66);
+  .wwd-fstep__bar i {
+    display: block; height: 100%; width: 0; border-radius: 999px;
+    background: var(--coral);
+    transition: width 1.1s var(--ease);
   }
+  .is-visible .wwd-fstep__bar i { width: var(--w); }
+  .wwd-fstep--interest .wwd-fstep__bar i { transition-delay: 0.15s; }
+  .wwd-fstep--close .wwd-fstep__bar i { transition-delay: 0.3s; }
   @media (min-width: 900px) {
     .wwd-scope__inner {
       grid-template-columns: 1fr 1fr;
       gap: var(--sp-12);
       align-items: center;
     }
-    .wwd-scope__flow {
-      grid-template-columns: 1fr;
-    }
   }
 
-  /* ---------- Pricing ---------- */
+  /* ============ Pricing ============ */
+  .wwd-price__head {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; gap: var(--sp-4);
+    max-width: 56ch; margin-inline: auto;
+  }
+  .wwd-price__h {
+    font-size: var(--fs-h2); font-weight: 600;
+    letter-spacing: var(--tracking-tight);
+  }
+  .wwd-price__lead { text-align: center; }
   .wwd-price__grid {
     margin-top: var(--sp-10);
     display: grid;
     gap: var(--sp-6);
   }
   .wwd-price {
-    display: grid;
-    gap: var(--sp-3);
+    position: relative;
+    display: grid; gap: var(--sp-3);
     align-content: start;
+    padding: var(--sp-8) var(--sp-6);
+    border-radius: var(--r-card);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
   }
   .wwd-price--feature {
-    border-color: var(--signal);
+    background: linear-gradient(155deg, var(--charcoal), var(--charcoal-2));
+    border-color: transparent;
+    box-shadow: var(--shadow-float);
+  }
+  .wwd-price__flag {
+    position: absolute; top: -12px; left: var(--sp-6);
+    padding: 5px 12px; border-radius: 999px;
+    background: var(--gold); color: var(--charcoal);
+    font-family: var(--font-accent); font-size: 0.64rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
     box-shadow: var(--shadow-card);
   }
   .wwd-price__k {
@@ -810,9 +1286,7 @@ const pricing = [
     text-transform: uppercase;
     color: var(--muted);
   }
-  .wwd-price--feature .wwd-price__k {
-    color: var(--signal-ink);
-  }
+  .wwd-price--feature .wwd-price__k { color: var(--gold); }
   .wwd-price__v {
     font-family: var(--font-accent);
     font-weight: 700;
@@ -821,24 +1295,17 @@ const pricing = [
     line-height: 1;
     color: var(--ink);
   }
-  .wwd-price__d {
-    font-size: var(--fs-sm);
-    line-height: 1.5;
-  }
+  .wwd-price--feature .wwd-price__v { color: #fff; }
+  .wwd-price__d { font-size: var(--fs-sm); line-height: 1.5; }
+  .wwd-price--feature .wwd-price__d { color: rgba(255, 255, 255, 0.7); }
   .wwd-price__foot {
     margin-top: var(--sp-8);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--sp-3);
-    text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+    gap: var(--sp-3); text-align: center;
   }
-  .wwd-price__fine {
-    font-size: var(--fs-sm);
-  }
+  .wwd-price__fine { font-size: var(--fs-sm); }
   @media (min-width: 760px) {
-    .wwd-price__grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+    .wwd-price__grid { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
+    .wwd-price--feature { transform: translateY(-8px); }
   }
 </style>

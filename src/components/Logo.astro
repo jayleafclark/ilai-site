@@ -1,23 +1,23 @@
 ---
-// Ilai wordmark + three-leaf sprout mark (matches the supplied logo).
+// Ilai three-leaf sprout mark (matches supplied logo) + wordmark.
+// Broad side leaves + narrow upright center leaf. Center leaf is power-pink.
 export interface Props {
   variant?: "ink" | "light";
 }
 const { variant = "ink" } = Astro.props;
 const wordColor = variant === "light" ? "#ffffff" : "var(--ink)";
-const markColor = variant === "light" ? "#ffffff" : "var(--coral)";
-// One slender leaf, pointed at both ends, base at local origin (0,0), tip up.
-const leaf =
-  "M0 -11.5 C 1.9 -7.5 1.9 -3.2 0 0 C -1.9 -3.2 -1.9 -7.5 0 -11.5 Z";
+const leafColor = variant === "light" ? "#ffffff" : "var(--coral)";
+// Broad side leaf: base at local origin (0,0), tip pointing up.
+const sideLeaf = "M0 -12 C 4.4 -7 4.4 -2 0 0 C -4.4 -2 -4.4 -7 0 -12 Z";
+// Narrow upright center leaf.
+const centerLeaf = "M12 5.6 C 13.5 9.2 13.5 13.4 12 16.8 C 10.5 13.4 10.5 9.2 12 5.6 Z";
 ---
 
 <a href="/" class="logo" aria-label="Ilai Collective home">
   <svg class="logo__mark" width="30" height="28" viewBox="0 0 24 24" aria-hidden="true">
-    <g fill={markColor}>
-      <path d={leaf} transform="translate(12 20) rotate(-56) scale(1.05)" />
-      <path d={leaf} transform="translate(12 20) scale(0.78)" />
-      <path d={leaf} transform="translate(12 20) rotate(56) scale(1.05)" />
-    </g>
+    <path d={sideLeaf} transform="translate(12 17.2) rotate(-40)" fill={leafColor} />
+    <path d={sideLeaf} transform="translate(12 17.2) rotate(40)" fill={leafColor} />
+    <path d={centerLeaf} fill="var(--pink)" />
   </svg>
   <span class="logo__word" style={`color:${wordColor}`}>ilai</span>
 </a>

@@ -71,7 +71,7 @@ const year = new Date().getFullYear();
     <hr class="footer__rule" />
     <div class="footer__bottom">
       <p>&copy; {year} Ilai Collective LLC. All rights reserved.</p>
-      <p class="footer__made">Human-led, human-gated.</p>
+      <p class="footer__made">Human-led, human-gated <span class="footer__heart" aria-hidden="true">&hearts;</span></p>
     </div>
   </div>
 </footer>
@@ -141,6 +141,9 @@ const year = new Date().getFullYear();
     gap: var(--sp-4);
     flex-wrap: wrap;
     font-size: var(--fs-sm);
+  }
+  .footer__heart {
+    color: var(--pink);
   }
   @media (min-width: 820px) {
     .footer__top {
