@@ -228,58 +228,8 @@ const indLen = 1400;
     </div>
   </section>
 
-  <!-- ============ THE CHALLENGE ============ -->
-  <section class="section section--mist">
-    <div class="container ds-challenge">
-      <div class="ds-challenge__head" data-reveal>
-        <span class="eyebrow eyebrow--dot ds-dot">The challenge</span>
-        <h2 class="ds-challenge__title">
-          A serious expert, eight platforms, and no time to be everywhere.
-        </h2>
-        <p class="lead ds-challenge__lead">
-          Dr. Leaf reaches an audience that skews women 35 to 50 who come to her for careful,
-          researched work on the mind. That audience is spread across eight platforms, each
-          with its own format, rhythm, and voice. Showing up on all of them, every day, in her
-          voice, is a second full-time job.
-        </p>
-        <p class="ds-challenge__answer">
-          Generic agencies solve this with sameness: the same clip cut nine ways, captions that
-          could belong to anyone. Ilai took on the whole operation instead, run on our Signal
-          Method. We study her market, write in a voice we built with her, publish across all
-          eight platforms, and answer her community in the minutes that matter, with people
-          directing every call.
-        </p>
-      </div>
-
-      <!-- Visual: one recording fans out to eight platforms -->
-      <div class="ds-fan" data-reveal data-reveal-delay="1" aria-hidden="true">
-        <div class="ds-fan__card">
-          <span class="ds-fan__src">
-            <span class="ds-fan__srcic">
-              <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="5" width="11" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M13.5 8.5L18 6v8l-4.5-2.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-            </span>
-            <span>
-              <b>One recording</b>
-              <i>filmed in a single sitting</i>
-            </span>
-          </span>
-          <span class="ds-fan__pipe"></span>
-          <div class="ds-fan__grid">
-            {["Facebook","Instagram","YouTube","TikTok","X","Threads","Bluesky","Substack"].map((p, k) => (
-              <span class="ds-fan__chip" style={`--d:${k * 90}ms`}>{p}</span>
-            ))}
-          </div>
-          <div class="ds-fan__foot">
-            <span class="ds-fan__dot"></span>
-            One voice, eight feeds, published by people
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ YEAR OVER YEAR ============ -->
-  <section class="section ds-yoy">
+  <section class="section section--mist ds-yoy">
     <div class="container">
       <div class="ds-sechead" data-reveal>
         <span class="eyebrow eyebrow--dot ds-dot">Year over year</span>
@@ -330,6 +280,56 @@ const indLen = 1400;
               </div>
             ))
           }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE CHALLENGE ============ -->
+  <section class="section">
+    <div class="container ds-challenge">
+      <div class="ds-challenge__head" data-reveal>
+        <span class="eyebrow eyebrow--dot ds-dot">The challenge</span>
+        <h2 class="ds-challenge__title">
+          A serious expert, eight platforms, and no time to be everywhere.
+        </h2>
+        <p class="lead ds-challenge__lead">
+          Dr. Leaf reaches an audience that skews women 35 to 50 who come to her for careful,
+          researched work on the mind. That audience is spread across eight platforms, each
+          with its own format, rhythm, and voice. Showing up on all of them, every day, in her
+          voice, is a second full-time job.
+        </p>
+        <p class="ds-challenge__answer">
+          Generic agencies solve this with sameness: the same clip cut nine ways, captions that
+          could belong to anyone. Ilai took on the whole operation instead, run on our Signal
+          Method. We study her market, write in a voice we built with her, publish across all
+          eight platforms, and answer her community in the minutes that matter, with people
+          directing every call.
+        </p>
+      </div>
+
+      <!-- Visual: one recording fans out to eight platforms -->
+      <div class="ds-fan" data-reveal data-reveal-delay="1" aria-hidden="true">
+        <div class="ds-fan__card">
+          <span class="ds-fan__src">
+            <span class="ds-fan__srcic">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="5" width="11" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M13.5 8.5L18 6v8l-4.5-2.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </span>
+            <span>
+              <b>One recording</b>
+              <i>filmed in a single sitting</i>
+            </span>
+          </span>
+          <span class="ds-fan__pipe"></span>
+          <div class="ds-fan__grid">
+            {["Facebook","Instagram","YouTube","TikTok","X","Threads","Bluesky","Substack"].map((p, k) => (
+              <span class="ds-fan__chip" style={`--d:${k * 90}ms`}>{p}</span>
+            ))}
+          </div>
+          <div class="ds-fan__foot">
+            <span class="ds-fan__dot"></span>
+            One voice, eight feeds, published by people
+          </div>
         </div>
       </div>
     </div>

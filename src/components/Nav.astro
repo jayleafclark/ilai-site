@@ -3,7 +3,7 @@ import Logo from "./Logo.astro";
 
 const links = [
   { href: "/what-we-do", label: "What we do" },
-  { href: "/method", label: "The Signal Method" },
+  { href: "/method", label: "How it works" },
   { href: "/work/dr-caroline-leaf", label: "Case study" },
   { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
@@ -74,17 +74,39 @@ const links = [
   .nav__links {
     display: none;
     align-items: center;
-    gap: clamp(1rem, 2vw, 1.6rem);
+    gap: clamp(1.1rem, 2.2vw, 1.9rem);
     margin-left: auto;
-    font-size: var(--fs-sm);
+    font-size: 1.02rem;
     font-weight: 500;
   }
   .nav__links a {
+    position: relative;
     color: var(--ink-2);
-    transition: color var(--dur-micro) var(--ease);
+    padding-bottom: 2px;
+    transition:
+      color var(--dur-micro) var(--ease),
+      transform var(--dur-base) var(--ease);
+  }
+  /* animated underline that grows from the left on hover */
+  .nav__links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 2px;
+    width: 100%;
+    border-radius: 2px;
+    background: var(--pink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-out);
   }
   .nav__links a:hover {
     color: var(--ink);
+    transform: translateY(-1px);
+  }
+  .nav__links a:hover::after {
+    transform: scaleX(1);
   }
   .nav__cta {
     display: none;

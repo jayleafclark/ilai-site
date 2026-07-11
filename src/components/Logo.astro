@@ -1,6 +1,6 @@
 ---
 // Ilai three-leaf sprout mark (recreated from the supplied brand logo) + wordmark.
-// Two broad forest-green side leaves + a narrow upright power-pink centre leaf.
+// Two broad forest-green side leaves + a narrow upright powder-pink centre leaf.
 export interface Props {
   variant?: "ink" | "light";
 }
@@ -11,7 +11,9 @@ const src = `${base}/${variant === "light" ? "logo-mark-light.png" : "logo-mark.
 ---
 
 <a href="/" class="logo" aria-label="Ilai Collective home">
-  <img class="logo__mark" src={src} width="38" height="29" alt="" aria-hidden="true" />
+  <span class="logo__markwrap">
+    <img class="logo__mark" src={src} width="38" height="29" alt="" aria-hidden="true" />
+  </span>
   <span class="logo__word" style={`color:${wordColor}`}>ilai</span>
 </a>
 
@@ -22,7 +24,36 @@ const src = `${base}/${variant === "light" ? "logo-mark-light.png" : "logo-mark.
     gap: 10px;
     color: var(--ink);
   }
+  .logo__markwrap {
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+  /* very soft breathing glow behind the mark */
+  .logo__markwrap::before {
+    content: "";
+    position: absolute;
+    inset: -55%;
+    z-index: 0;
+    border-radius: 50%;
+    background: radial-gradient(
+      closest-side,
+      color-mix(in srgb, var(--pink) 55%, transparent),
+      color-mix(in srgb, var(--coral) 22%, transparent) 55%,
+      transparent 75%
+    );
+    filter: blur(6px);
+    opacity: 0.55;
+    animation: logoGlow 4.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes logoGlow {
+    0%, 100% { opacity: 0.4; transform: scale(0.94); }
+    50% { opacity: 0.7; transform: scale(1.06); }
+  }
   .logo__mark {
+    position: relative;
+    z-index: 1;
     height: 29px;
     width: auto;
     display: block;
@@ -36,5 +67,8 @@ const src = `${base}/${variant === "light" ? "logo-mark-light.png" : "logo-mark.
     font-weight: 600;
     font-size: 1.7rem;
     letter-spacing: -0.03em;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .logo__markwrap::before { animation: none; }
   }
 </style>
