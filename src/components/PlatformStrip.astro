@@ -20,14 +20,16 @@ const platforms = [
 
 <div class="pstrip">
   <p class="pstrip__label">{label}</p>
-  <ul class="pstrip__row">
-    {platforms.map((p) => (
-      <li class="pstrip__item" title={p.name}>
-        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true" set:html={p.svg} />
-        <span>{p.name}</span>
-      </li>
-    ))}
-  </ul>
+  <div class="pstrip__marquee">
+    <ul class="pstrip__track">
+      {[...platforms, ...platforms].map((p, i) => (
+        <li class="pstrip__item" title={p.name} aria-hidden={i >= platforms.length ? "true" : undefined}>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true" set:html={p.svg} />
+          <span>{p.name}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
 </div>
 
 <style>
@@ -39,18 +41,40 @@ const platforms = [
     text-transform: uppercase;
     color: var(--muted);
   }
-  .pstrip__row {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: var(--sp-4) var(--sp-6);
+  .pstrip__marquee {
     margin-top: var(--sp-5);
     padding-top: var(--sp-6);
     border-top: 1px solid var(--line);
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .pstrip__track {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-8);
+    width: max-content;
+    animation: pstrip-scroll 38s linear infinite;
+  }
+  .pstrip__marquee:hover .pstrip__track {
+    animation-play-state: paused;
+  }
+  @keyframes pstrip-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pstrip__track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: auto;
+    }
   }
   .pstrip__item {
+    flex: none;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -73,8 +97,8 @@ const platforms = [
     .pstrip__item span {
       display: none;
     }
-    .pstrip__row {
-      gap: var(--sp-5);
+    .pstrip__track {
+      gap: var(--sp-6);
     }
   }
 </style>
