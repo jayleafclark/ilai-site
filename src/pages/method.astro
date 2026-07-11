@@ -184,7 +184,7 @@ const why = [
           ? "section section--mist step"
           : "section step";
       return (
-        <section class={sectionClass} id={`step-0${i + 1}`}>
+        <section class={sectionClass} id={`step-0${i + 1}`} style={`--st:${s.accent}`}>
           <div class="container">
             <div class={`step__row${flip ? " step__row--flip" : ""}`}>
               <div class="step__text" data-reveal>
@@ -671,6 +671,30 @@ const why = [
   /* ==================================================================
      STEP ROWS
   ================================================================== */
+  /* Soft, muted ambient wash behind each step, tinted by its accent */
+  .step { position: relative; overflow: hidden; }
+  .step > .container { position: relative; z-index: 1; }
+  .step::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(40% 56% at 16% 20%, color-mix(in srgb, var(--st, var(--coral)) 13%, transparent), transparent 70%),
+      radial-gradient(36% 52% at 86% 84%, rgba(230, 169, 196, 0.15), transparent 72%);
+    filter: blur(14px);
+    opacity: 0.7;
+    animation: stepdrift 28s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+  .section--ink.step::before { opacity: 0.5; }
+  @keyframes stepdrift {
+    from { transform: translate3d(-1.5%, -1%, 0) scale(1); }
+    to   { transform: translate3d(1.5%, 2.5%, 0) scale(1.06); }
+  }
+  @media (prefers-reduced-motion: reduce) { .step::before { animation: none; } }
+
   .step__row {
     display: grid;
     gap: var(--sp-8);

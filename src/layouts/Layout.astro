@@ -44,14 +44,23 @@ const jsonLd = {
     <script is:inline>
       (function () {
         try {
-          if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function (regs) {
-              regs.forEach(function (r) { r.unregister(); });
-            }).catch(function () {});
-          }
           if (window.caches && caches.keys) {
             caches.keys().then(function (keys) {
               keys.forEach(function (k) { caches.delete(k); });
+            }).catch(function () {});
+          }
+          if ("serviceWorker" in navigator) {
+            var controlled = !!navigator.serviceWorker.controller;
+            navigator.serviceWorker.getRegistrations().then(function (regs) {
+              var had = regs.length > 0;
+              regs.forEach(function (r) { r.unregister(); });
+              // If an old service worker was serving this page from its cache,
+              // unregistering alone won't refresh what's on screen. Reload once
+              // (guarded, so it can never loop) to pull the live page.
+              if ((had || controlled) && !sessionStorage.getItem("__sw_reset")) {
+                sessionStorage.setItem("__sw_reset", "1");
+                location.reload();
+              }
             }).catch(function () {});
           }
         } catch (e) {}
