@@ -1,0 +1,189 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CTASection from "../../components/CTASection.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+
+const fmtDate = (d: Date) =>
+  d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+
+const readingTime = (body: string) => {
+  const words = body.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 220));
+};
+---
+
+<Layout
+  title="Blog — Ilai Collective"
+  description="Notes on building an audience worth selling to. Practical writing on content systems, organic reach, and researched, human-led content from Ilai Collective."
+  path="/blog"
+>
+  <!-- ============ HERO ============ -->
+  <section class="bloghero">
+    <div class="bloghero__mesh" aria-hidden="true"></div>
+    <div class="container bloghero__inner">
+      <span class="eyebrow eyebrow--pill" data-reveal>Blog</span>
+      <h1 class="bloghero__title display" data-reveal data-reveal-delay="1">
+        Notes on building an audience<br />worth <span class="bloghero__accent"
+          >selling to.</span
+        >
+      </h1>
+      <p class="lead bloghero__lead" data-reveal data-reveal-delay="2">
+        Practical writing on content systems, organic reach, and the difference
+        between researched content and filler. No hacks, no theory you can't use
+        by Monday.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ POST GRID ============ -->
+  <section class="section bloglist">
+    <div class="container">
+      <div class="grid grid-3 bloglist__grid">
+        {
+          posts.map((post, i) => (
+            <a
+              href={`/blog/${post.slug}`}
+              class="card card--hover postcard"
+              data-reveal
+              data-reveal-delay={String((i % 3) + 1)}
+            >
+              {post.data.tags?.[0] && (
+                <span class="postcard__chip">{post.data.tags[0]}</span>
+              )}
+              <h2 class="postcard__title">{post.data.title}</h2>
+              <p class="postcard__desc muted">{post.data.description}</p>
+              <div class="postcard__meta">
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {fmtDate(post.data.pubDate)}
+                </time>
+                <span class="postcard__dot" aria-hidden="true">·</span>
+                <span>{readingTime(post.body)} min read</span>
+                <span class="postcard__arrow" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path
+                      d="M3 11L11 3M11 3H5M11 3V9"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Layout>
+
+<style>
+  /* ---------- Hero ---------- */
+  .bloghero {
+    position: relative;
+    padding-top: clamp(8rem, 16vh, 12rem);
+    padding-bottom: var(--sp-6);
+    overflow: hidden;
+  }
+  .bloghero__mesh {
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 70%;
+    background:
+      radial-gradient(38% 55% at 22% 18%, rgba(75, 63, 228, 0.16), transparent 70%),
+      radial-gradient(30% 40% at 78% 12%, rgba(75, 63, 228, 0.08), transparent 70%);
+    filter: blur(6px);
+    pointer-events: none;
+  }
+  .bloghero__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .bloghero__title {
+    margin-top: var(--sp-5);
+    max-width: 20ch;
+  }
+  .bloghero__accent {
+    color: var(--signal);
+  }
+  .bloghero__lead {
+    margin-top: var(--sp-5);
+    max-width: 58ch;
+    text-align: center;
+  }
+
+  /* ---------- List ---------- */
+  .bloglist {
+    padding-top: var(--sp-10);
+  }
+  .bloglist__grid {
+    align-items: stretch;
+  }
+  .postcard {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .postcard__chip {
+    align-self: flex-start;
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    font-weight: 500;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--signal-ink);
+    background: var(--signal-tint);
+    padding: 5px 11px;
+    border-radius: var(--r-pill);
+  }
+  .postcard__title {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h3);
+  }
+  .postcard__desc {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-sm);
+    line-height: 1.55;
+  }
+  .postcard__meta {
+    margin-top: auto;
+    padding-top: var(--sp-5);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-family: var(--font-accent);
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  .postcard__dot {
+    color: var(--line-2);
+  }
+  .postcard__arrow {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    border-radius: 50%;
+    color: var(--signal);
+    background: var(--signal-tint);
+    transition: transform var(--dur-base) var(--ease);
+  }
+  .postcard:hover .postcard__arrow {
+    transform: translate(3px, -3px);
+  }
+</style>

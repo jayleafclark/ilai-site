@@ -1,0 +1,837 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import CTASection from "../components/CTASection.astro";
+
+const flow = ["Decode", "Define", "Direct", "Distribute", "Measure"];
+
+const steps = [
+  {
+    n: "01",
+    name: "Decode",
+    promise: "We learn your world before you pay us a cent.",
+    body: "Every engagement opens with research. We study the people you actually sell to, the competitors already winning their attention, and the offer you're trying to grow. Then we hand you a free teardown of your brand, your market, and your audience so you can see our thinking before you commit.",
+    outputs: [
+      "Free brand, market, and audience teardown",
+      "Competitor and category breakdown",
+      "The gaps and angles worth owning",
+    ],
+    art: "decode",
+  },
+  {
+    n: "02",
+    name: "Define",
+    promise: "We build the system your content runs on.",
+    body: "With the research in hand, we build your content operation. Your voice is documented so every line sounds like you. Your look is set with type, color, and templates. We map the content categories you'll own and build a hook library tuned to what performs in your niche, not generic advice.",
+    outputs: [
+      "Documented voice guide",
+      "Visual system: type, color, templates",
+      "Content categories and niche-tuned hook library",
+    ],
+    art: "define",
+  },
+  {
+    n: "03",
+    name: "Direct",
+    promise: "We write it. You film once. Nothing ships without your yes.",
+    body: "Ilai writes the scripts, shot lists, captions, and copy, so you walk into one filming session knowing exactly what to say. You film that single sitting. Then every piece comes back to you for approval. Nothing goes public until a human on your side signs off. The gate is yours, always.",
+    outputs: [
+      "Scripts, shot lists, captions, and copy",
+      "One structured filming session",
+      "Client approval gate on every piece",
+    ],
+    art: "direct",
+  },
+  {
+    n: "04",
+    name: "Distribute",
+    promise: "One approval becomes a presence on every platform.",
+    body: "Once you approve, we publish across up to 13 platforms under one consistent voice, on a schedule built for how each place rewards content. Then we turn on the engagement engine: real first-response replies to your community in the first minutes after a post lands, when that response decides whether it travels.",
+    outputs: [
+      "Publishing across up to 13 platforms",
+      "One voice, on schedule, per platform",
+      "First-response community engagement",
+    ],
+    art: "distribute",
+  },
+  {
+    n: "05",
+    name: "Measure",
+    promise: "A live dashboard, and a clean hand-off at your funnel.",
+    body: "You watch everything on a branded dashboard where every metric is pulled straight from the platforms and refreshed on its own. We report the interest and intent we surface, name the people leaning in, and hand off at your funnel. We bring the attention to the door. You close it.",
+    outputs: [
+      "Live, branded, auto-refreshed dashboard",
+      "Interest and intent signals, reported plainly",
+      "Clean hand-off at your funnel",
+    ],
+    art: "measure",
+  },
+];
+
+const different = [
+  {
+    k: "Researched, not guessed",
+    d: "Every angle is grounded in your market, your competitors, and what your audience actually responds to. We show you the research before the work begins.",
+  },
+  {
+    k: "Human-led, human-gated",
+    d: "A real US team writes your angles and makes every call. Nothing ships until a person on your side approves it. Software carries the load; judgment stays human.",
+  },
+  {
+    k: "Film once, run a quarter",
+    d: "One filming session becomes months of content across every platform. You spend an afternoon. We keep you visible long after it's over.",
+  },
+];
+---
+
+<Layout
+  title="The Signal Method — Ilai Collective"
+  description="The Signal Method is Ilai's repeatable system for turning one recording into a presence everywhere: Decode, Define, Direct, Distribute, Measure. Research-led, human-gated, tracked on a live dashboard."
+  path="/method"
+>
+  <!-- ============ HERO ============ -->
+  <section class="mhero">
+    <div class="mhero__mesh" aria-hidden="true"></div>
+    <div class="container mhero__inner">
+      <span class="eyebrow eyebrow--pill" data-reveal>The Signal Method</span>
+      <h1 class="mhero__title display" data-reveal data-reveal-delay="1">
+        How we turn one recording<br />into <span class="mhero__accent">everywhere.</span>
+      </h1>
+      <p class="lead mhero__lead" data-reveal data-reveal-delay="2">
+        The Signal Method is the spine of how we work. It's a repeatable system,
+        not a vibe: five steps that take you from research, to a documented content
+        engine, to a presence on every platform you'll sell from. Same steps, every
+        client, every month.
+      </p>
+      <div class="mhero__actions" data-reveal data-reveal-delay="3">
+        <a href="/contact" class="btn btn--signal">
+          Book a call
+          <span class="btn__arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path
+                d="M3 11L11 3M11 3H5M11 3V9"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        </a>
+        <a href="/work/dr-caroline-leaf" class="btn btn--ghost">See the proof</a>
+      </div>
+    </div>
+
+    <!-- Horizontal 5-node stepper -->
+    <div class="container">
+      <ol class="flow" data-reveal data-reveal-delay="2" aria-label="The five steps of the Signal Method">
+        {
+          flow.map((f, i) => (
+            <li class="flow__node">
+              <a class="flow__link" href={`#step-${String(i + 1).padStart(2, "0")}`}>
+                <span class="flow__num">{String(i + 1).padStart(2, "0")}</span>
+                <span class="flow__name">{f}</span>
+              </a>
+              {i < flow.length - 1 && (
+                <span class="flow__arrow" aria-hidden="true">
+                  <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+                    <path
+                      d="M1 5H18M18 5L14 1.5M18 5L14 8.5"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ STEPS ============ -->
+  {
+    steps.map((s, i) => {
+      const flip = i % 2 === 1;
+      const ink = i === 2; // Direct is the human-gate emphasis block
+      const sectionClass = ink
+        ? "section section--ink step"
+        : flip
+          ? "section section--mist step"
+          : "section step";
+      return (
+        <section class={sectionClass} id={`step-${s.n}`}>
+          <div class="container">
+            <div class={`step__row${flip ? " step__row--flip" : ""}`}>
+              <div class="step__text" data-reveal>
+                <span class="step__n">{s.n}</span>
+                <h2 class="step__name">{s.name}</h2>
+                <p class="step__promise">{s.promise}</p>
+                <p class="step__body">{s.body}</p>
+                <ul class="step__outputs">
+                  {s.outputs.map((o) => (
+                    <li class="step__output">
+                      <span class="step__tick" aria-hidden="true">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                          <path
+                            d="M2.5 7.5L5.5 10.5L11.5 3.5"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        </svg>
+                      </span>
+                      <span>{o}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="step__visual" data-reveal data-reveal-delay="1" aria-hidden="true">
+                <div class={`stepcard stepcard--${s.art}${ink ? " stepcard--ink" : ""}`}>
+                  <div class="stepcard__core">
+                    {s.art === "decode" && (
+                      <div class="viz viz--decode">
+                        <span class="viz__label">Teardown</span>
+                        <div class="viz__bars">
+                          <span style="--h:38%"></span>
+                          <span style="--h:64%"></span>
+                          <span style="--h:52%"></span>
+                          <span style="--h:88%"></span>
+                          <span style="--h:71%"></span>
+                          <span style="--h:46%"></span>
+                        </div>
+                        <div class="viz__scan" />
+                      </div>
+                    )}
+                    {s.art === "define" && (
+                      <div class="viz viz--define">
+                        <span class="viz__label">System</span>
+                        <div class="viz__swatches">
+                          <span class="sw sw--1" />
+                          <span class="sw sw--2" />
+                          <span class="sw sw--3" />
+                        </div>
+                        <div class="viz__type">Aa</div>
+                        <div class="viz__lines">
+                          <span style="--w:90%" />
+                          <span style="--w:66%" />
+                          <span style="--w:78%" />
+                        </div>
+                      </div>
+                    )}
+                    {s.art === "direct" && (
+                      <div class="viz viz--direct">
+                        <span class="viz__label viz__label--light">Approval gate</span>
+                        <div class="viz__doc">
+                          <span style="--w:82%" />
+                          <span style="--w:60%" />
+                          <span style="--w:74%" />
+                          <span style="--w:48%" />
+                        </div>
+                        <div class="viz__stamp">
+                          <span class="viz__stampic">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                              <path
+                                d="M3.5 9.5L7.5 13.5L14.5 4.5"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                            </svg>
+                          </span>
+                          Approved by you
+                        </div>
+                      </div>
+                    )}
+                    {s.art === "distribute" && (
+                      <div class="viz viz--distribute">
+                        <span class="viz__label">Publishing</span>
+                        <div class="viz__hub">
+                          <span class="viz__core" />
+                          {Array.from({ length: 8 }).map((_, k) => (
+                            <span class="viz__spoke" style={`--a:${k * 45}deg`} />
+                          ))}
+                          {Array.from({ length: 8 }).map((_, k) => (
+                            <span class="viz__dot" style={`--a:${k * 45}deg`} />
+                          ))}
+                        </div>
+                        <span class="viz__caption">Up to 13 platforms, one voice</span>
+                      </div>
+                    )}
+                    {s.art === "measure" && (
+                      <div class="viz viz--measure">
+                        <span class="viz__label">Live dashboard</span>
+                        <div class="viz__metric">
+                          <span class="viz__mval">205M+</span>
+                          <span class="viz__mlabel">Impressions, auto-refreshed</span>
+                        </div>
+                        <svg class="viz__chart" viewBox="0 0 120 44" fill="none" preserveAspectRatio="none">
+                          <path
+                            d="M2 40 L20 34 L38 36 L56 24 L74 26 L92 12 L118 4"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        </svg>
+                        <span class="viz__live"><span class="viz__pulse" />Refreshing</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    })
+  }
+
+  <!-- ============ WHAT MAKES IT DIFFERENT ============ -->
+  <section class="section section--mist">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Why the method holds"
+        title="Three things most content operations skip"
+        lead="The method isn't just a workflow. These are the commitments that make it work."
+        align="center"
+      />
+      <div class="grid grid-3 diff__grid">
+        {
+          different.map((d, i) => (
+            <div class="card--shell diff" data-reveal data-reveal-delay={String((i % 3) + 1)}>
+              <div class="card__core diff__core">
+                <span class="diff__mark" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                <h3 class="diff__title">{d.k}</h3>
+                <p class="diff__body muted">{d.d}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Layout>
+
+<style>
+  /* ---------- Hero ---------- */
+  .mhero {
+    position: relative;
+    padding-top: clamp(8rem, 16vh, 12rem);
+    padding-bottom: var(--sp-10);
+    overflow: hidden;
+  }
+  .mhero__mesh {
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 70%;
+    background:
+      radial-gradient(38% 55% at 20% 16%, rgba(75, 63, 228, 0.16), transparent 70%),
+      radial-gradient(32% 44% at 84% 10%, rgba(75, 63, 228, 0.08), transparent 70%),
+      radial-gradient(30% 40% at 62% 38%, rgba(75, 63, 228, 0.07), transparent 70%);
+    filter: blur(6px);
+    animation: mdrift 24s var(--ease) infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes mdrift {
+    to {
+      transform: translate3d(0, 20px, 0) scale(1.05);
+    }
+  }
+  .mhero__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .mhero__title {
+    margin-top: var(--sp-5);
+    max-width: 18ch;
+  }
+  .mhero__accent {
+    color: var(--signal);
+  }
+  .mhero__lead {
+    margin-top: var(--sp-5);
+    max-width: 60ch;
+    text-align: center;
+  }
+  .mhero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    justify-content: center;
+    margin-top: var(--sp-8);
+  }
+
+  /* ---------- Flow stepper ---------- */
+  .flow {
+    list-style: none;
+    margin-top: var(--sp-12);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    align-items: stretch;
+  }
+  .flow__node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+  .flow__link {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    width: 100%;
+    justify-content: center;
+    padding: var(--sp-4) var(--sp-5);
+    border: 1px solid var(--line);
+    border-radius: var(--r-pill);
+    background: var(--canvas);
+    transition:
+      transform var(--dur-micro) var(--ease),
+      border-color var(--dur-micro) var(--ease),
+      box-shadow var(--dur-micro) var(--ease);
+  }
+  .flow__link:hover {
+    transform: translateY(-2px);
+    border-color: var(--line-2);
+    box-shadow: var(--shadow-card);
+  }
+  .flow__num {
+    font-family: var(--font-accent);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    color: var(--signal);
+    font-variant-numeric: tabular-nums;
+  }
+  .flow__name {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .flow__arrow {
+    color: var(--line-2);
+    transform: rotate(90deg);
+    display: grid;
+    place-items: center;
+  }
+  @media (min-width: 860px) {
+    .flow {
+      flex-direction: row;
+      align-items: center;
+      gap: 0;
+    }
+    .flow__node {
+      flex-direction: row;
+      flex: 1;
+    }
+    .flow__link {
+      width: auto;
+      flex: 1;
+      padding: var(--sp-4) var(--sp-4);
+    }
+    .flow__arrow {
+      transform: none;
+      flex: 0 0 auto;
+      margin-inline: var(--sp-2);
+    }
+  }
+
+  /* ---------- Step rows ---------- */
+  .step__row {
+    display: grid;
+    gap: var(--sp-8);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .step__row {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: var(--sp-12);
+    }
+    .step__row--flip .step__text {
+      order: 2;
+    }
+    .step__row--flip .step__visual {
+      order: 1;
+    }
+  }
+  .step__n {
+    font-family: var(--font-accent);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--signal);
+    display: block;
+  }
+  .section--ink .step__n {
+    color: #fff;
+    opacity: 0.9;
+  }
+  .step__name {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h2);
+  }
+  .step__promise {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-lead);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .section--ink .step__promise {
+    color: #fff;
+  }
+  .step__body {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-body);
+    color: var(--ink-2);
+    max-width: 52ch;
+  }
+  .section--ink .step__body {
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .step__outputs {
+    list-style: none;
+    margin-top: var(--sp-6);
+    display: grid;
+    gap: var(--sp-3);
+  }
+  .step__output {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-3);
+    font-size: var(--fs-sm);
+    color: var(--ink-2);
+  }
+  .section--ink .step__output {
+    color: rgba(255, 255, 255, 0.82);
+  }
+  .step__tick {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--signal-tint);
+    color: var(--signal-ink);
+    margin-top: 1px;
+  }
+  .section--ink .step__tick {
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+  }
+
+  /* ---------- Step visual (double-bezel) ---------- */
+  .step__visual {
+    display: flex;
+    justify-content: center;
+  }
+  .stepcard {
+    width: 100%;
+    max-width: 440px;
+    background: var(--mist);
+    border-radius: var(--r-card);
+    padding: 6px;
+  }
+  .stepcard--ink {
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .stepcard__core {
+    background: var(--canvas);
+    border: 1px solid var(--line);
+    border-radius: var(--r-card-inner);
+    box-shadow: var(--inset-highlight);
+    padding: var(--sp-8);
+    min-height: 260px;
+    display: grid;
+    place-content: center;
+  }
+  .stepcard--ink .stepcard__core {
+    background: #101015;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+  }
+
+  .viz {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-4);
+    width: 100%;
+  }
+  .viz__label {
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .viz__label--light {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* Decode: research bars + scan */
+  .viz--decode {
+    position: relative;
+    width: 100%;
+  }
+  .viz__bars {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--sp-3);
+    height: 120px;
+    width: 100%;
+    justify-content: center;
+  }
+  .viz__bars span {
+    width: 22px;
+    height: var(--h);
+    border-radius: 6px 6px 3px 3px;
+    background: linear-gradient(180deg, var(--signal), var(--signal-tint));
+  }
+  .viz__bars span:nth-child(4) {
+    background: linear-gradient(180deg, var(--signal), var(--signal-hover));
+  }
+  .viz__scan {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 40px;
+    height: 2px;
+    background: var(--signal);
+    opacity: 0.35;
+    animation: scan 3.4s var(--ease) infinite alternate;
+  }
+  @keyframes scan {
+    to {
+      transform: translateY(76px);
+    }
+  }
+
+  /* Define: swatches + type + lines */
+  .viz--define {
+    width: 100%;
+  }
+  .viz__swatches {
+    display: flex;
+    gap: var(--sp-2);
+  }
+  .sw {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+  .sw--1 {
+    background: var(--signal);
+  }
+  .sw--2 {
+    background: var(--ink);
+  }
+  .sw--3 {
+    background: var(--sand);
+    border: 1px solid var(--line);
+  }
+  .viz__type {
+    font-weight: 800;
+    font-size: 2.4rem;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .viz__lines {
+    display: grid;
+    gap: var(--sp-2);
+    width: 70%;
+  }
+  .viz__lines span {
+    height: 8px;
+    width: var(--w);
+    border-radius: var(--r-pill);
+    background: var(--line-2);
+  }
+
+  /* Direct: document + approval stamp */
+  .viz--direct {
+    width: 100%;
+  }
+  .viz__doc {
+    display: grid;
+    gap: var(--sp-3);
+    width: 100%;
+    padding: var(--sp-5);
+    border-radius: var(--r-input);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .viz__doc span {
+    height: 8px;
+    width: var(--w);
+    border-radius: var(--r-pill);
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .viz__stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: 8px 14px;
+    border-radius: var(--r-pill);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+  }
+  .viz__stampic {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--signal);
+    color: #fff;
+  }
+
+  /* Distribute: hub and spokes */
+  .viz--distribute {
+    width: 100%;
+  }
+  .viz__hub {
+    position: relative;
+    width: 150px;
+    height: 150px;
+  }
+  .viz__core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    margin: -22px 0 0 -22px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 0 6px var(--signal-tint);
+  }
+  .viz__spoke {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 1.5px;
+    background: var(--line-2);
+    transform-origin: 0 50%;
+    transform: rotate(var(--a));
+  }
+  .viz__dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    margin: -6px 0 0 -6px;
+    border-radius: 50%;
+    background: var(--canvas);
+    border: 1.5px solid var(--signal);
+    transform: rotate(var(--a)) translateX(60px);
+    transform-origin: 50% 50%;
+  }
+  .viz__caption {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+
+  /* Measure: live metric + chart */
+  .viz--measure {
+    width: 100%;
+  }
+  .viz__metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-1);
+  }
+  .viz__mval {
+    font-family: var(--font-accent);
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .viz__mlabel {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  .viz__chart {
+    width: 100%;
+    height: 48px;
+    color: var(--signal);
+  }
+  .viz__live {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .viz__pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--signal);
+    animation: pulse 2s var(--ease) infinite;
+  }
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(0.8);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mhero__mesh,
+    .viz__scan,
+    .viz__pulse {
+      animation: none;
+    }
+  }
+
+  /* ---------- What makes it different ---------- */
+  .diff__grid {
+    margin-top: var(--sp-10);
+  }
+  .diff {
+    height: 100%;
+  }
+  .diff__core {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .diff__mark {
+    font-family: var(--font-accent);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    color: var(--signal);
+    font-variant-numeric: tabular-nums;
+  }
+  .diff__title {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-h3);
+  }
+  .diff__body {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-sm);
+  }
+</style>

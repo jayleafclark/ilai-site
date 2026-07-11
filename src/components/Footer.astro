@@ -1,0 +1,151 @@
+---
+import Logo from "./Logo.astro";
+
+const cols = [
+  {
+    title: "Studio",
+    links: [
+      { href: "/what-we-do", label: "What we do" },
+      { href: "/method", label: "The Signal Method" },
+      { href: "/about", label: "About" },
+    ],
+  },
+  {
+    title: "Proof",
+    links: [
+      { href: "/work/dr-caroline-leaf", label: "Dr. Caroline Leaf" },
+      { href: "/blog", label: "Blog" },
+    ],
+  },
+  {
+    title: "Start",
+    links: [
+      { href: "/contact", label: "Book a call" },
+      { href: "mailto:hello@ilaicollective.com", label: "hello@ilaicollective.com" },
+    ],
+  },
+];
+const year = new Date().getFullYear();
+---
+
+<footer class="footer section--ink">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <Logo variant="light" />
+        <p class="footer__tag">Proven to spread.</p>
+        <p class="footer__note">
+          The human-led content studio for experts and personal brands. US-based.
+        </p>
+        <a href="/contact" class="btn btn--light footer__cta">
+          Book a call
+          <span class="btn__arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path
+                d="M3 11L11 3M11 3H5M11 3V9"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+      <div class="footer__cols">
+        {
+          cols.map((col) => (
+            <div class="footer__col">
+              <p class="footer__coltitle">{col.title}</p>
+              <ul>
+                {col.links.map((l) => (
+                  <li>
+                    <a href={l.href}>{l.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <hr class="footer__rule" />
+    <div class="footer__bottom">
+      <p>&copy; {year} Ilai Collective LLC. All rights reserved.</p>
+      <p class="footer__made">Human-led, human-gated.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-block: var(--sp-16) var(--sp-8);
+    background: var(--ink);
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .footer__top {
+    display: grid;
+    gap: var(--sp-10);
+  }
+  .footer__brand {
+    max-width: 34ch;
+  }
+  .footer__tag {
+    margin-top: var(--sp-4);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+  .footer__note {
+    margin-top: var(--sp-2);
+    font-size: var(--fs-sm);
+  }
+  .footer__cta {
+    margin-top: var(--sp-6);
+  }
+  .footer__cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-6);
+  }
+  .footer__coltitle {
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: var(--sp-4);
+  }
+  .footer__col ul {
+    list-style: none;
+    display: grid;
+    gap: var(--sp-3);
+  }
+  .footer__col a {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: var(--fs-sm);
+    transition: color var(--dur-micro) var(--ease);
+  }
+  .footer__col a:hover {
+    color: #fff;
+  }
+  .footer__rule {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 0;
+    margin-block: var(--sp-10) var(--sp-5);
+  }
+  .footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+    font-size: var(--fs-sm);
+  }
+  @media (min-width: 820px) {
+    .footer__top {
+      grid-template-columns: 1.2fr 1.6fr;
+      gap: var(--sp-12);
+    }
+  }
+</style>

@@ -1,0 +1,180 @@
+---
+import Logo from "./Logo.astro";
+
+const links = [
+  { href: "/what-we-do", label: "What we do" },
+  { href: "/method", label: "The Signal Method" },
+  { href: "/work/dr-caroline-leaf", label: "Case study" },
+  { href: "/about", label: "About" },
+  { href: "/blog", label: "Blog" },
+];
+---
+
+<header class="nav" data-nav>
+  <div class="nav__pill">
+    <Logo />
+    <nav class="nav__links" aria-label="Primary">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+    <a href="/contact" class="btn btn--signal nav__cta">
+      Book a call
+      <span class="btn__arrow" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path
+            d="M3 11L11 3M11 3H5M11 3V9"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+      </span>
+    </a>
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false" data-burger>
+      <span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" data-mobile hidden>
+    {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    <a href="/contact" class="btn btn--signal">Book a call</a>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(0.75rem, 2vw, 1.25rem) var(--gutter);
+    pointer-events: none;
+  }
+  .nav__pill {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-5);
+    width: 100%;
+    max-width: var(--maxw);
+    padding: 9px 9px 9px 20px;
+    border-radius: var(--r-pill);
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: saturate(180%) blur(16px);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+    transition:
+      transform var(--dur-base) var(--ease),
+      box-shadow var(--dur-base) var(--ease);
+  }
+  .nav__links {
+    display: none;
+    align-items: center;
+    gap: clamp(1rem, 2vw, 1.6rem);
+    margin-left: auto;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+  }
+  .nav__links a {
+    color: var(--ink-2);
+    transition: color var(--dur-micro) var(--ease);
+  }
+  .nav__links a:hover {
+    color: var(--ink);
+  }
+  .nav__cta {
+    display: none;
+    padding: 10px 10px 10px 18px;
+  }
+  .nav__cta .btn__arrow {
+    width: 26px;
+    height: 26px;
+  }
+
+  .nav__burger {
+    margin-left: auto;
+    display: grid;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    place-content: center;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--line);
+    cursor: pointer;
+  }
+  .nav__burger span {
+    display: block;
+    width: 18px;
+    height: 1.8px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform var(--dur-base) var(--ease);
+  }
+  .nav__burger[aria-expanded="true"] span:first-child {
+    transform: translateY(3.4px) rotate(45deg);
+  }
+  .nav__burger[aria-expanded="true"] span:last-child {
+    transform: translateY(-3.4px) rotate(-45deg);
+  }
+
+  .nav__mobile {
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    width: 100%;
+    max-width: var(--maxw);
+    margin-top: var(--sp-2);
+    padding: var(--sp-5);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: saturate(180%) blur(16px);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-float);
+  }
+  .nav__mobile a:not(.btn) {
+    padding: var(--sp-2) 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__mobile .btn {
+    margin-top: var(--sp-2);
+    justify-content: center;
+  }
+
+  @media (min-width: 900px) {
+    .nav__links,
+    .nav__cta {
+      display: flex;
+    }
+    .nav__burger {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const burger = document.querySelector<HTMLButtonElement>("[data-burger]");
+  const mobile = document.querySelector<HTMLElement>("[data-mobile]");
+  burger?.addEventListener("click", () => {
+    const open = burger.getAttribute("aria-expanded") === "true";
+    burger.setAttribute("aria-expanded", String(!open));
+    if (mobile) mobile.hidden = open;
+  });
+
+  // Subtle lift on scroll
+  const nav = document.querySelector<HTMLElement>("[data-nav] .nav__pill");
+  const onScroll = () => {
+    if (!nav) return;
+    nav.style.boxShadow =
+      window.scrollY > 12 ? "var(--shadow-float)" : "var(--shadow-card)";
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+</script>

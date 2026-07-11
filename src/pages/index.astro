@@ -1,0 +1,861 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import CTASection from "../components/CTASection.astro";
+
+const platforms = [
+  "YouTube",
+  "Instagram",
+  "TikTok",
+  "Substack",
+  "X",
+  "Threads",
+  "Bluesky",
+  "Facebook",
+  "LinkedIn",
+];
+
+const heroStats = [
+  { value: 205, suffix: "M+", label: "Impressions in 12 months" },
+  { value: 7.9, decimals: 1, suffix: "M+", label: "Engagements earned" },
+  { value: 90, suffix: "K+", label: "New followers" },
+  { value: 0, prefix: "$", label: "Spent on ads" },
+];
+
+const services = [
+  {
+    n: "01",
+    title: "Podcast production",
+    body: "Full episode edits, clips, reels, long-form video, show notes, and SEO. You record. We turn one sitting into a month of content.",
+  },
+  {
+    n: "02",
+    title: "Publishing everywhere",
+    body: "One idea, adapted for each platform and posted across up to 13 of them under a single, consistent voice.",
+  },
+  {
+    n: "03",
+    title: "Audience research",
+    body: "We study your market, your competitors, and the people you actually sell to, then aim every piece at them.",
+  },
+  {
+    n: "04",
+    title: "Engagement engine",
+    body: "First-response community engagement in your voice, in the first minutes that decide whether a post travels.",
+  },
+  {
+    n: "05",
+    title: "SEO & GEO content",
+    body: "Keyword-researched articles built to be found by Google and cited by AI assistants like ChatGPT and Claude.",
+  },
+  {
+    n: "06",
+    title: "A live dashboard",
+    body: "Every metric pulled straight from the platforms and refreshed on its own. You watch it work in real time.",
+  },
+];
+
+const method = [
+  { k: "Decode", d: "Your audience, competitors, and offer." },
+  { k: "Define", d: "Your voice, look, and content system." },
+  { k: "Direct", d: "We write, you film, you approve." },
+  { k: "Distribute", d: "Publish everywhere. Turn on engagement." },
+  { k: "Measure", d: "A live dashboard you watch it on." },
+];
+---
+
+<Layout>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero__mesh" aria-hidden="true"></div>
+    <div class="container hero__inner">
+      <span class="eyebrow eyebrow--pill" data-reveal>
+        The human-led content studio
+      </span>
+      <h1 class="hero__title display" data-reveal data-reveal-delay="1">
+        We grow the audience<br />you'll <span class="hero__accent">sell to.</span>
+      </h1>
+      <p class="lead hero__lead" data-reveal data-reveal-delay="2">
+        Ilai learns your brand, your market, and the people you sell to, then makes
+        original content that speaks to them and publishes it everywhere. You film once.
+        We make you impossible to miss.
+      </p>
+      <div class="hero__actions" data-reveal data-reveal-delay="3">
+        <a href="/contact" class="btn btn--signal">
+          Book a call
+          <span class="btn__arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path
+                d="M3 11L11 3M11 3H5M11 3V9"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        </a>
+        <a href="/work/dr-caroline-leaf" class="btn btn--ghost">See the proof</a>
+      </div>
+      <p class="hero__trust" data-reveal data-reveal-delay="4">
+        A real US team. No AI slop. Every claim below is a real client result.
+      </p>
+
+      <!-- Floating dashboard mockup + real stat chips -->
+      <div class="hero__stage" data-reveal data-reveal-delay="4">
+        <div class="statchip hero__chip hero__chip--tl">
+          <span class="statchip__num statchip__num--signal">543K</span>
+          <span class="statchip__label">Top reel reach</span>
+        </div>
+        <div class="statchip hero__chip hero__chip--tr">
+          <span class="statchip__num">8</span>
+          <span class="statchip__label">Platforms, one voice</span>
+        </div>
+
+        <div class="chrome hero__mock" role="img" aria-label="Ilai client analytics dashboard preview showing reach, engagement, and posts published across platforms.">
+          <div class="chrome__bar">
+            <span class="chrome__dot"></span>
+            <span class="chrome__dot"></span>
+            <span class="chrome__dot"></span>
+            <span class="chrome__url">drleaf.ilaicollective.com</span>
+            <span class="hero__live">Live</span>
+          </div>
+          <div class="chrome__body">
+            <div class="mock__row">
+              <div class="mock__tile">
+                <span class="mock__tlabel">Impressions, 30d</span>
+                <span class="mock__tval">27.1M</span>
+                <span class="mock__tup">+18% MoM</span>
+              </div>
+              <div class="mock__tile">
+                <span class="mock__tlabel">Engagements, 30d</span>
+                <span class="mock__tval">1.1M</span>
+                <span class="mock__tup">+22% MoM</span>
+              </div>
+              <div class="mock__tile mock__tile--wide">
+                <span class="mock__tlabel">Posts published</span>
+                <span class="mock__tval">228</span>
+                <span class="mock__tup">this month</span>
+              </div>
+            </div>
+            <div class="mock__chart" aria-hidden="true">
+              <span style="--h: 38%"></span>
+              <span style="--h: 52%"></span>
+              <span style="--h: 46%"></span>
+              <span style="--h: 68%"></span>
+              <span style="--h: 60%"></span>
+              <span style="--h: 82%"></span>
+              <span style="--h: 74%"></span>
+              <span style="--h: 96%"></span>
+            </div>
+            <div class="mock__feed" aria-hidden="true">
+              <span class="mock__pf">YouTube</span>
+              <span class="mock__pf">Instagram</span>
+              <span class="mock__pf">TikTok</span>
+              <span class="mock__pf">Substack</span>
+              <span class="mock__pf mock__pf--more">+4</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="statchip hero__chip hero__chip--br">
+          <span class="statchip__num statchip__num--signal">+204%</span>
+          <span class="statchip__label">Reach, year over year</span>
+        </div>
+        <div class="statchip hero__chip hero__chip--bl">
+          <span class="statchip__num">228</span>
+          <span class="statchip__label">Posts / month</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Platform marquee -->
+    <div class="marquee" aria-label="Platforms we publish to">
+      <div class="marquee__track">
+        {
+          [...platforms, ...platforms].map((p) => (
+            <span class="marquee__item">{p}</span>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HERO STAT RIBBON ============ -->
+  <section class="ribbon">
+    <div class="container">
+      <div class="ribbon__grid" data-reveal>
+        {
+          heroStats.map((s) => (
+            <div class="ribbon__stat">
+              <div
+                class="ribbon__num"
+                data-count={s.value}
+                data-decimals={s.decimals ?? 0}
+                data-prefix={s.prefix ?? ""}
+                data-suffix={s.suffix ?? ""}
+              >
+                {s.prefix ?? ""}0{s.suffix ?? ""}
+              </div>
+              <div class="ribbon__label">{s.label}</div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="ribbon__source">
+        12-month results for Dr. Caroline Leaf, managed by Ilai across 8 platforms.
+        <a href="/work/dr-caroline-leaf">See the full case study →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ THE PROBLEM / PROMISE ============ -->
+  <section class="section section--mist">
+    <div class="container promise">
+      <div class="promise__head" data-reveal>
+        <span class="eyebrow eyebrow--dot">The problem</span>
+        <h2 class="promise__title">
+          You're great at what you do. Being everywhere, every day, is a second full-time job.
+        </h2>
+      </div>
+      <div class="promise__body" data-reveal data-reveal-delay="1">
+        <p class="lead">
+          Growing an audience means showing up on every platform, in the right voice, at the
+          right time, over and over. Most experts don't have the hours, and generic agencies
+          hand back content that sounds like everyone else.
+        </p>
+        <p class="promise__answer">
+          Ilai runs the whole operation. We do the research, write the scripts and captions,
+          publish across every platform, and answer your community, all in a voice we build
+          with you and never hand to a machine to guess. You stay focused on the work only
+          you can do: serving and selling to the people we bring you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="section" id="services">
+    <div class="container">
+      <SectionHeader
+        eyebrow="What we do"
+        title="One studio for your entire content operation"
+        lead="Everything it takes to build and hold an audience, run by people, supported by serious software."
+      />
+      <div class="grid grid-3 services__grid">
+        {
+          services.map((s, i) => (
+            <article
+              class="card card--hover service"
+              data-reveal
+              data-reveal-delay={String((i % 3) + 1)}
+            >
+              <span class="service__n">{s.n}</span>
+              <h3 class="service__title">{s.title}</h3>
+              <p class="service__body muted">{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="services__foot" data-reveal>
+        <a href="/what-we-do" class="btn btn--ghost">Explore every service</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ METHOD ============ -->
+  <section class="section section--ink method">
+    <div class="container">
+      <SectionHeader
+        eyebrow="The Signal Method"
+        title="How we turn one recording into everywhere"
+        align="center"
+      />
+      <ol class="method__steps">
+        {
+          method.map((m, i) => (
+            <li class="method__step" data-reveal data-reveal-delay={String((i % 4) + 1)}>
+              <span class="method__k">{m.k}</span>
+              <span class="method__d">{m.d}</span>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="method__foot" data-reveal>
+        <a href="/method" class="btn btn--light">Walk through the method</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CASE STUDY TEASER ============ -->
+  <section class="section casestudy">
+    <div class="container">
+      <div class="casestudy__box" data-reveal>
+        <div class="casestudy__copy">
+          <span class="eyebrow eyebrow--pill casestudy__pill">Case study</span>
+          <h2 class="casestudy__title">Dr. Caroline Leaf</h2>
+          <p class="lead">
+            A neuroscientist and author with a serious message and no time to be everywhere.
+            In 12 months her reach and engagement roughly tripled, in a year most accounts
+            went backwards.
+          </p>
+          <ul class="casestudy__list">
+            <li><strong>+204%</strong> reach, year over year</li>
+            <li><strong>+210%</strong> engagement, year over year</li>
+            <li><strong>8 platforms</strong> managed, zero on ads</li>
+          </ul>
+          <a href="/work/dr-caroline-leaf" class="btn btn--signal">
+            Read the full story
+            <span class="btn__arrow" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M3 11L11 3M11 3H5M11 3V9"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </span>
+          </a>
+        </div>
+        <div class="casestudy__panel" aria-hidden="true">
+          <div class="casestudy__metric">
+            <span class="casestudy__mlabel">Impressions, this year</span>
+            <span class="casestudy__mval">205M+</span>
+            <span class="casestudy__mnote">Industry average fell ~12%. She tripled.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HUMAN-LED TRUST ============ -->
+  <section class="section section--mist">
+    <div class="container humanled">
+      <SectionHeader
+        eyebrow="Why it works"
+        title="Human-led. Human-gated. Not AI slop."
+        lead="The internet is drowning in generic, machine-made content. Ours is the opposite."
+      />
+      <div class="grid grid-3 humanled__grid">
+        <div class="card human" data-reveal data-reveal-delay="1">
+          <h3>People make every call</h3>
+          <p class="muted">
+            A real US team sets your voice, writes your angles, and approves every piece before
+            it ships. Nothing goes out on autopilot.
+          </p>
+        </div>
+        <div class="card human" data-reveal data-reveal-delay="2">
+          <h3>Serious software behind it</h3>
+          <p class="muted">
+            We built research and publishing engines that let a small team move like a big one.
+            The tools do the heavy lifting. The judgment stays human.
+          </p>
+        </div>
+        <div class="card human" data-reveal data-reveal-delay="3">
+          <h3>Researched, not guessed</h3>
+          <p class="muted">
+            Every piece is grounded in your market, your competitors, and what your audience
+            actually responds to. Specific beats generic, every time.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Layout>
+
+<style>
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    padding-top: clamp(8rem, 16vh, 12rem);
+    padding-bottom: var(--sp-8);
+    overflow: hidden;
+  }
+  .hero__mesh {
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 70%;
+    background:
+      radial-gradient(38% 55% at 22% 18%, rgba(75, 63, 228, 0.18), transparent 70%),
+      radial-gradient(34% 46% at 82% 8%, rgba(224, 48, 100, 0.1), transparent 70%),
+      radial-gradient(30% 40% at 60% 40%, rgba(75, 63, 228, 0.08), transparent 70%);
+    filter: blur(6px);
+    animation: drift 22s var(--ease) infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes drift {
+    to {
+      transform: translate3d(0, 22px, 0) scale(1.05);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__mesh {
+      animation: none;
+    }
+  }
+  .hero__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .hero__title {
+    margin-top: var(--sp-5);
+    max-width: 16ch;
+  }
+  .hero__accent {
+    color: var(--signal);
+  }
+  .hero__lead {
+    margin-top: var(--sp-5);
+    max-width: 56ch;
+    text-align: center;
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    justify-content: center;
+    margin-top: var(--sp-8);
+  }
+  .hero__trust {
+    margin-top: var(--sp-5);
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+
+  /* ---------- Hero mockup stage ---------- */
+  .hero__stage {
+    position: relative;
+    width: 100%;
+    max-width: 760px;
+    margin: var(--sp-10) auto 0;
+  }
+  .hero__mock {
+    position: relative;
+    z-index: 2;
+  }
+  .hero__live {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-accent);
+    font-size: 0.66rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--signal);
+  }
+  .hero__live::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 0 0 rgba(75, 63, 228, 0.5);
+    animation: pulse 2.4s var(--ease) infinite;
+  }
+  @keyframes pulse {
+    70%,
+    100% {
+      box-shadow: 0 0 0 7px rgba(75, 63, 228, 0);
+    }
+  }
+  .mock__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-3);
+  }
+  .mock__tile {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: var(--sp-4);
+    background: var(--mist);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
+  .mock__tile--wide {
+    grid-column: 1 / -1;
+  }
+  .mock__tlabel {
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  .mock__tval {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.05;
+  }
+  .mock__tup {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--signal);
+  }
+  .mock__chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 96px;
+    margin-top: var(--sp-4);
+    padding: var(--sp-4);
+    background: var(--mist);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
+  .mock__chart span {
+    flex: 1;
+    height: var(--h);
+    background: linear-gradient(180deg, var(--signal), color-mix(in srgb, var(--signal) 55%, #fff));
+    border-radius: 5px 5px 3px 3px;
+    opacity: 0.9;
+  }
+  .mock__chart span:last-child {
+    opacity: 1;
+  }
+  .mock__feed {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: var(--sp-4);
+  }
+  .mock__pf {
+    font-family: var(--font-accent);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--ink-2);
+    padding: 6px 12px;
+    background: var(--mist);
+    border: 1px solid var(--line);
+    border-radius: var(--r-pill);
+  }
+  .mock__pf--more {
+    color: var(--muted);
+  }
+  .hero__chip {
+    position: absolute;
+    z-index: 3;
+    animation: float 6s var(--ease) infinite alternate;
+  }
+  .hero__chip--tl {
+    top: -22px;
+    left: -14px;
+  }
+  .hero__chip--tr {
+    top: 40px;
+    right: -14px;
+    animation-delay: 1.2s;
+  }
+  .hero__chip--br {
+    bottom: 46px;
+    right: -20px;
+    animation-delay: 0.6s;
+  }
+  .hero__chip--bl {
+    bottom: -22px;
+    left: -10px;
+    animation-delay: 1.8s;
+  }
+  @keyframes float {
+    to {
+      transform: translateY(-10px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__chip,
+    .hero__live::before {
+      animation: none;
+    }
+  }
+  /* Hide flanking chips on small screens to avoid overlap */
+  @media (max-width: 720px) {
+    .hero__chip--tr,
+    .hero__chip--bl {
+      display: none;
+    }
+    .hero__chip--tl {
+      left: 0;
+      top: -18px;
+    }
+    .hero__chip--br {
+      right: 0;
+      bottom: 30px;
+    }
+  }
+
+  /* ---------- Marquee ---------- */
+  .marquee {
+    margin-top: var(--sp-10);
+    padding-block: var(--sp-5);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+  .marquee__track {
+    display: flex;
+    gap: var(--sp-10);
+    width: max-content;
+    animation: marquee 32s linear infinite;
+  }
+  .marquee__item {
+    font-family: var(--font-accent);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee__track {
+      animation: none;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+
+  /* ---------- Ribbon ---------- */
+  .ribbon {
+    padding-block: var(--sp-12);
+  }
+  .ribbon__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-8) var(--sp-6);
+  }
+  .ribbon__num {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .ribbon__label {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  .ribbon__source {
+    margin-top: var(--sp-8);
+    padding-top: var(--sp-5);
+    border-top: 1px solid var(--line);
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  .ribbon__source a {
+    color: var(--signal);
+    font-weight: 500;
+  }
+  @media (min-width: 820px) {
+    .ribbon__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* ---------- Promise ---------- */
+  .promise {
+    display: grid;
+    gap: var(--sp-8);
+  }
+  .promise__title {
+    max-width: 18ch;
+  }
+  .promise__answer {
+    margin-top: var(--sp-5);
+    font-size: var(--fs-body);
+    color: var(--ink-2);
+  }
+  @media (min-width: 900px) {
+    .promise {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-12);
+      align-items: start;
+    }
+  }
+
+  /* ---------- Services ---------- */
+  .services__grid {
+    margin-top: var(--sp-10);
+  }
+  .service__n {
+    font-family: var(--font-accent);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    color: var(--signal);
+  }
+  .service__title {
+    margin-top: var(--sp-3);
+  }
+  .service__body {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-sm);
+  }
+  .services__foot {
+    margin-top: var(--sp-8);
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ---------- Method ---------- */
+  .method__steps {
+    list-style: none;
+    margin-top: var(--sp-10);
+    display: grid;
+    gap: var(--sp-4);
+    counter-reset: step;
+  }
+  .method__step {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-5);
+    padding: var(--sp-5) var(--sp-6);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--r-card);
+    background: rgba(255, 255, 255, 0.03);
+    counter-increment: step;
+  }
+  .method__step::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: var(--font-accent);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    color: var(--signal);
+  }
+  .method__k {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    color: #fff;
+    min-width: 5.5em;
+  }
+  .method__d {
+    color: rgba(255, 255, 255, 0.66);
+  }
+  .method__foot {
+    margin-top: var(--sp-8);
+    display: flex;
+    justify-content: center;
+  }
+  @media (min-width: 760px) {
+    .method__steps {
+      gap: var(--sp-3);
+    }
+  }
+
+  /* ---------- Case study teaser ---------- */
+  .casestudy__box {
+    display: grid;
+    gap: var(--sp-8);
+    padding: clamp(1.75rem, 4vw, 3rem);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    background: var(--canvas);
+    box-shadow: var(--shadow-card);
+  }
+  .casestudy__pill {
+    background: var(--drleaf-tint);
+    color: var(--drleaf);
+  }
+  .casestudy__title {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h1);
+  }
+  .casestudy__list {
+    list-style: none;
+    margin-top: var(--sp-5);
+    display: grid;
+    gap: var(--sp-3);
+  }
+  .casestudy__list li {
+    padding-left: var(--sp-5);
+    position: relative;
+    color: var(--ink-2);
+  }
+  .casestudy__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--drleaf);
+  }
+  .casestudy__list strong {
+    color: var(--ink);
+  }
+  .casestudy__box .btn {
+    margin-top: var(--sp-6);
+  }
+  .casestudy__panel {
+    display: grid;
+    place-items: center;
+    padding: var(--sp-8);
+    border-radius: var(--r-card);
+    background: linear-gradient(160deg, var(--drleaf-tint), var(--mist));
+  }
+  .casestudy__metric {
+    text-align: center;
+    display: grid;
+    gap: var(--sp-2);
+  }
+  .casestudy__mlabel {
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--drleaf);
+  }
+  .casestudy__mval {
+    font-family: var(--font-accent);
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .casestudy__mnote {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+    max-width: 24ch;
+    margin-inline: auto;
+  }
+  @media (min-width: 900px) {
+    .casestudy__box {
+      grid-template-columns: 1.15fr 1fr;
+      align-items: center;
+      gap: var(--sp-10);
+    }
+  }
+
+  /* ---------- Human-led ---------- */
+  .humanled__grid {
+    margin-top: var(--sp-10);
+  }
+  .human h3 {
+    font-size: var(--fs-h3);
+  }
+  .human p {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-sm);
+  }
+</style>

@@ -1,0 +1,844 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import CTASection from "../components/CTASection.astro";
+
+const platforms = [
+  "YouTube",
+  "Instagram",
+  "TikTok",
+  "X",
+  "Threads",
+  "Bluesky",
+  "Facebook",
+  "LinkedIn",
+  "Substack",
+  "Pinterest",
+];
+
+const services = [
+  {
+    n: "01",
+    eyebrow: "Podcast production",
+    title: "Record once, get a month of content",
+    body: "You sit down for one recording. We hand back a finished episode, everywhere it needs to be. That means a clean long-form edit with the filler and false starts cut, studio-grade sound, and captions, plus the reels and clips that carry the show across feeds all month.",
+    bullets: [
+      "Full episode edit: filler and cleanup, studio audio, on-screen captions",
+      "Long-form YouTube cut plus a standalone audio version",
+      "Show notes, SEO title and description, chapter and break timestamps",
+      "Six to twelve vertical reels and clips cut from every episode",
+    ],
+  },
+  {
+    n: "02",
+    eyebrow: "Multi-platform publishing",
+    title: "One idea, adapted for up to 13 platforms",
+    body: "A post that lands on Instagram dies on LinkedIn. We take one idea and rewrite it for each platform's format, length, and audience, then publish it on a schedule under one consistent voice. You show up daily on every channel without touching a scheduler.",
+    bullets: [
+      "YouTube, Instagram, TikTok, X, Threads, Bluesky, Facebook, LinkedIn, Substack, Pinterest and more",
+      "Format, caption, and hook rewritten per platform, not copy-pasted",
+      "One consistent voice across every account",
+      "Posted on a set schedule so the feed never goes quiet",
+    ],
+  },
+  {
+    n: "03",
+    eyebrow: "Audience, market & competitor research",
+    title: "We aim every piece before we make it",
+    body: "We study who you sell to, what your competitors are doing, and which hooks, formats, and topics actually perform in your niche. Then every script and caption is pointed at a real audience, not guessed at. This is the Decode phase, and it starts with a free teardown.",
+    bullets: [
+      "A map of your audience: who they are, what they want, where they are",
+      "A read on your competitors and the gaps they leave open",
+      "The hooks, formats, and topics proven to travel in your niche",
+      "A free teardown before you commit to anything",
+    ],
+  },
+  {
+    n: "04",
+    eyebrow: "Brand & voice",
+    title: "Nothing ships in a voice a machine guessed",
+    body: "We learn how you actually sound and write it down, so every line reads like you on your best day. Then we build the look around it: type, color, templates, content categories, and a hook library your whole feed pulls from. It stays consistent no matter how much we publish.",
+    bullets: [
+      "A documented voice guide, built with you and approved by you",
+      "Visual identity: type, color, and reusable templates",
+      "Named content categories so the feed has a clear rhythm",
+      "A growing hook library your posts draw from",
+    ],
+  },
+  {
+    n: "05",
+    eyebrow: "Engagement engine",
+    title: "The first minutes that decide if a post travels",
+    body: "The first replies to a post shape how far it spreads. We answer your community in your voice across 8 platforms in those opening minutes, so momentum builds instead of stalling. Along the way we surface the intent signals hiding in your comments and DMs.",
+    bullets: [
+      "First-response replies in your voice across 8 platforms",
+      "Coverage in the opening minutes that move a post",
+      "Intent signals surfaced from comments and DMs",
+      "A community that feels tended, not automated",
+    ],
+  },
+  {
+    n: "06",
+    eyebrow: "SEO & GEO content",
+    title: "Found by Google, cited by AI assistants",
+    body: "We write keyword-researched articles built to rank, then add the layer that gets you quoted by AI. On-page SEO, structured data, and an llms.txt file mean ChatGPT, Claude, and Perplexity can find, read, and cite you when someone asks about your field.",
+    bullets: [
+      "Keyword-researched articles aimed at real search demand",
+      "On-page SEO plus structured data for rich results",
+      "An llms.txt file so AI assistants can read and cite you",
+      "Findable on Google and recommended by ChatGPT, Claude, and Perplexity",
+    ],
+  },
+  {
+    n: "07",
+    eyebrow: "Newsletter & long-form essays",
+    title: "Your best ideas, made to keep",
+    body: "Some ideas deserve more than a caption. We turn your strongest thinking into Substack and newsletter essays that a reader saves, forwards, and comes back to. It is the format that builds the deepest trust with the audience you are growing.",
+    bullets: [
+      "Long-form essays for Substack and your newsletter",
+      "Built from the ideas already proving out in your content",
+      "Written in your documented voice, edited to publish-ready",
+      "The channel that turns followers into a real readership",
+    ],
+  },
+  {
+    n: "08",
+    eyebrow: "Live analytics dashboard",
+    title: "Watch it work in real time",
+    body: "You get a branded, per-client portal where every number is pulled straight from the platform APIs and refreshed automatically. No screenshots, no monthly slide deck, no waiting. Open it whenever you want and see exactly what is moving.",
+    bullets: [
+      "A branded portal built for your brand alone",
+      "Every metric pulled straight from the platform APIs",
+      "Refreshed automatically, never updated by hand",
+      "One view across every platform we run for you",
+    ],
+    hasDashboard: true,
+  },
+];
+
+const pricing = [
+  {
+    k: "Free teardown",
+    v: "$0",
+    d: "A read on your brand, market, and audience. Yours to keep whether or not we work together.",
+  },
+  {
+    k: "Pilot month",
+    v: "$1,950",
+    d: "One month to see the operation run. Fully credited toward your first engagement.",
+  },
+  {
+    k: "Engagements",
+    v: "$5,500/mo",
+    d: "The full studio: research, production, publishing, engagement, and your live dashboard.",
+  },
+];
+---
+
+<Layout
+  title="What we do — Ilai Collective"
+  description="Ilai Collective runs your entire content operation: podcast production, publishing across up to 13 platforms, audience and competitor research, brand and voice, community engagement, SEO and GEO articles, newsletters, and a live analytics dashboard. Human-led, research-driven. Starts with a free teardown."
+  path="/what-we-do"
+>
+  <!-- ============ HERO ============ -->
+  <section class="wwd-hero">
+    <div class="wwd-hero__mesh" aria-hidden="true"></div>
+    <div class="container wwd-hero__inner">
+      <span class="eyebrow eyebrow--pill" data-reveal>What we do</span>
+      <h1 class="wwd-hero__title display" data-reveal data-reveal-delay="1">
+        One studio for your entire<br />content operation
+      </h1>
+      <p class="lead wwd-hero__lead" data-reveal data-reveal-delay="2">
+        Eight services that together take one recording and turn it into a month of
+        content, published everywhere, in your voice, and measured on a dashboard you
+        can watch live. People make every call. Serious in-house software lets a small
+        team move like a big one.
+      </p>
+      <div class="wwd-hero__actions" data-reveal data-reveal-delay="3">
+        <a href="/contact" class="btn btn--signal">
+          Book a call
+          <span class="btn__arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path
+                d="M3 11L11 3M11 3H5M11 3V9"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        </a>
+        <a href="#services" class="btn btn--ghost">See the eight services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICE INDEX STRIP ============ -->
+  <section class="wwd-index">
+    <div class="container">
+      <ol class="wwd-index__list" data-reveal>
+        {
+          services.map((s) => (
+            <li class="wwd-index__item">
+              <a href={`#service-${s.n}`}>
+                <span class="wwd-index__n">{s.n}</span>
+                <span class="wwd-index__k">{s.eyebrow}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES (one detailed section each) ============ -->
+  {
+    services.map((s, i) => (
+      <section
+        class={`section wwd-svc ${i % 2 === 1 ? "section--mist" : ""}`}
+        id={`service-${s.n}`}
+      >
+        <div class="container wwd-svc__grid">
+          <div class="wwd-svc__copy" data-reveal>
+            <div class="wwd-svc__head">
+              <span class="wwd-svc__n">{s.n}</span>
+              <span class="eyebrow eyebrow--dot">{s.eyebrow}</span>
+            </div>
+            <h2 class="wwd-svc__title">{s.title}</h2>
+            <p class="lead wwd-svc__body">{s.body}</p>
+          </div>
+
+          {s.hasDashboard ? (
+            <div class="wwd-svc__aside" data-reveal data-reveal-delay="1">
+              <div class="card--shell wwd-dash">
+                <div class="card__core wwd-dash__core">
+                  <div class="wwd-browser" aria-hidden="true">
+                    <div class="wwd-browser__bar">
+                      <span class="wwd-browser__dot" />
+                      <span class="wwd-browser__dot" />
+                      <span class="wwd-browser__dot" />
+                      <span class="wwd-browser__url">yourbrand.ilaicollective.com</span>
+                    </div>
+                    <div class="wwd-browser__body">
+                      <div class="wwd-dash__stats">
+                        <div class="wwd-dash__stat">
+                          <span class="wwd-dash__lbl">Impressions</span>
+                          <span class="wwd-dash__num">
+                            <span
+                              data-count="205"
+                              data-suffix="M+"
+                              data-decimals="0"
+                            >
+                              0
+                            </span>
+                          </span>
+                        </div>
+                        <div class="wwd-dash__stat">
+                          <span class="wwd-dash__lbl">Engagements</span>
+                          <span class="wwd-dash__num">
+                            <span
+                              data-count="7.9"
+                              data-suffix="M+"
+                              data-decimals="1"
+                            >
+                              0
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="wwd-dash__chart">
+                        <span style="height:38%" />
+                        <span style="height:52%" />
+                        <span style="height:44%" />
+                        <span style="height:67%" />
+                        <span style="height:59%" />
+                        <span style="height:81%" />
+                        <span style="height:73%" />
+                        <span style="height:96%" />
+                      </div>
+                      <div class="wwd-dash__foot">
+                        <span class="wwd-dash__pill">Live</span>
+                        <span class="wwd-dash__note">Refreshed on the hour</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div class="wwd-svc__aside" data-reveal data-reveal-delay="1">
+              <ul class="wwd-svc__list">
+                {s.bullets.map((b) => (
+                  <li>
+                    <span class="wwd-svc__check" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path
+                          d="M2.5 7.5L6 11L11.5 3.5"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        {s.hasDashboard && (
+          <div class="container">
+            <ul class="wwd-svc__list wwd-svc__list--wide" data-reveal>
+              {s.bullets.map((b) => (
+                <li>
+                  <span class="wwd-svc__check" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path
+                        d="M2.5 7.5L6 11L11.5 3.5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
+    ))
+  }
+
+  <!-- ============ PLATFORMS BAND ============ -->
+  <section class="wwd-platforms">
+    <div class="container">
+      <p class="wwd-platforms__label" data-reveal>Published across</p>
+      <ul class="wwd-platforms__list" data-reveal data-reveal-delay="1">
+        {platforms.map((p) => <li>{p}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ SCOPE / BOUNDARY ============ -->
+  <section class="section section--ink wwd-scope">
+    <div class="container wwd-scope__inner">
+      <div class="wwd-scope__copy" data-reveal>
+        <span class="eyebrow eyebrow--dot">Where we hand off</span>
+        <h2 class="wwd-scope__title">
+          We fill the top of your funnel and tell you what's converting to interest.
+        </h2>
+        <p class="wwd-scope__body">
+          We grow the audience, earn the attention, and surface the intent signals that
+          show who is warming up. Where your funnel begins, we hand off. You close it.
+          Clear lines, no overpromising.
+        </p>
+      </div>
+      <ol class="wwd-scope__flow" data-reveal data-reveal-delay="1">
+        <li class="wwd-scope__step">
+          <span class="wwd-scope__stepn">Us</span>
+          <span class="wwd-scope__stepk">Reach</span>
+          <span class="wwd-scope__stepd">Original content, everywhere, daily.</span>
+        </li>
+        <li class="wwd-scope__step">
+          <span class="wwd-scope__stepn">Us</span>
+          <span class="wwd-scope__stepk">Interest</span>
+          <span class="wwd-scope__stepd">Engagement and intent signals surfaced.</span>
+        </li>
+        <li class="wwd-scope__step wwd-scope__step--handoff">
+          <span class="wwd-scope__stepn">You</span>
+          <span class="wwd-scope__stepk">The close</span>
+          <span class="wwd-scope__stepd">Your offer, your sale. We hand off here.</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ PRICING STRIP ============ -->
+  <section class="section wwd-pricing">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Starts at"
+        title="Try it before you commit"
+        lead="Every engagement opens with a free teardown, then a pilot month you can walk away from. Nothing is locked in on day one."
+        align="center"
+      />
+      <div class="wwd-price__grid">
+        {
+          pricing.map((p, i) => (
+            <div
+              class={`card wwd-price ${i === 2 ? "wwd-price--feature" : ""}`}
+              data-reveal
+              data-reveal-delay={String(i + 1)}
+            >
+              <span class="wwd-price__k">{p.k}</span>
+              <span class="wwd-price__v">{p.v}</span>
+              <p class="wwd-price__d muted">{p.d}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="wwd-price__foot" data-reveal>
+        <a href="/contact" class="btn btn--signal">
+          Book a call
+          <span class="btn__arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path
+                d="M3 11L11 3M11 3H5M11 3V9"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        </a>
+        <p class="wwd-price__fine muted">
+          The pilot month is fully credited toward your first engagement.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Layout>
+
+<style>
+  /* ---------- Hero ---------- */
+  .wwd-hero {
+    position: relative;
+    padding-top: clamp(7rem, 15vh, 11rem);
+    padding-bottom: var(--sp-6);
+    overflow: hidden;
+  }
+  .wwd-hero__mesh {
+    position: absolute;
+    inset: -25% -10% auto -10%;
+    height: 70%;
+    background:
+      radial-gradient(38% 55% at 24% 16%, rgba(75, 63, 228, 0.16), transparent 70%),
+      radial-gradient(32% 44% at 80% 10%, rgba(75, 63, 228, 0.08), transparent 70%);
+    filter: blur(6px);
+    animation: wwd-drift 24s var(--ease) infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes wwd-drift {
+    to {
+      transform: translate3d(0, 20px, 0) scale(1.05);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wwd-hero__mesh {
+      animation: none;
+    }
+  }
+  .wwd-hero__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .wwd-hero__title {
+    margin-top: var(--sp-5);
+    max-width: 18ch;
+  }
+  .wwd-hero__lead {
+    margin-top: var(--sp-5);
+    max-width: 62ch;
+    text-align: center;
+  }
+  .wwd-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    justify-content: center;
+    margin-top: var(--sp-8);
+  }
+
+  /* ---------- Index strip ---------- */
+  .wwd-index {
+    padding-block: var(--sp-8);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .wwd-index__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-3) var(--sp-6);
+  }
+  .wwd-index__item a {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-3);
+    padding: var(--sp-2) 0;
+    color: var(--ink-2);
+    transition: color var(--dur-micro) var(--ease);
+  }
+  .wwd-index__item a:hover {
+    color: var(--signal);
+  }
+  .wwd-index__n {
+    font-family: var(--font-accent);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    color: var(--signal);
+  }
+  .wwd-index__k {
+    font-weight: 600;
+    font-size: var(--fs-sm);
+  }
+  @media (min-width: 720px) {
+    .wwd-index__list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* ---------- Service section ---------- */
+  .wwd-svc {
+    scroll-margin-top: 6rem;
+  }
+  .wwd-svc__grid {
+    display: grid;
+    gap: var(--sp-8);
+    align-items: start;
+  }
+  .wwd-svc__head {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+  }
+  .wwd-svc__n {
+    font-family: var(--font-accent);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    color: var(--signal);
+    letter-spacing: -0.02em;
+  }
+  .wwd-svc__title {
+    margin-top: var(--sp-5);
+    max-width: 16ch;
+  }
+  .wwd-svc__body {
+    margin-top: var(--sp-5);
+    max-width: 50ch;
+  }
+  .wwd-svc__list {
+    list-style: none;
+    display: grid;
+    gap: var(--sp-4);
+  }
+  .wwd-svc__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-3);
+    color: var(--ink-2);
+    font-size: var(--fs-body);
+    line-height: 1.5;
+  }
+  .wwd-svc__check {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    margin-top: 1px;
+    border-radius: 50%;
+    background: var(--signal-tint);
+    color: var(--signal-ink);
+  }
+  .wwd-svc__list--wide {
+    margin-top: var(--sp-8);
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+  }
+  @media (min-width: 640px) {
+    .wwd-svc__list--wide {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-4) var(--sp-8);
+    }
+  }
+  @media (min-width: 900px) {
+    .wwd-svc__grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: var(--sp-12);
+      align-items: center;
+    }
+    .wwd-svc:nth-of-type(even) .wwd-svc__copy {
+      order: 2;
+    }
+  }
+
+  /* ---------- Dashboard mock ---------- */
+  .wwd-dash {
+    width: 100%;
+  }
+  .wwd-dash__core {
+    padding: var(--sp-2) !important;
+  }
+  .wwd-browser {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--canvas);
+  }
+  .wwd-browser__bar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px var(--sp-4);
+    background: var(--mist);
+    border-bottom: 1px solid var(--line);
+  }
+  .wwd-browser__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--line-2);
+  }
+  .wwd-browser__url {
+    margin-left: var(--sp-3);
+    font-family: var(--font-accent);
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .wwd-browser__body {
+    padding: var(--sp-6);
+    display: grid;
+    gap: var(--sp-6);
+  }
+  .wwd-dash__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-5);
+  }
+  .wwd-dash__stat {
+    display: grid;
+    gap: var(--sp-2);
+  }
+  .wwd-dash__lbl {
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .wwd-dash__num {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 4vw, 2.4rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .wwd-dash__chart {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--sp-3);
+    height: 96px;
+    padding-top: var(--sp-2);
+  }
+  .wwd-dash__chart span {
+    flex: 1;
+    border-radius: 5px 5px 2px 2px;
+    background: linear-gradient(
+      180deg,
+      var(--signal),
+      var(--signal-tint)
+    );
+    opacity: 0.9;
+  }
+  .wwd-dash__chart span:last-child {
+    background: var(--signal);
+    opacity: 1;
+  }
+  .wwd-dash__foot {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--line);
+  }
+  .wwd-dash__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: var(--r-pill);
+    background: var(--signal-tint);
+    color: var(--signal-ink);
+    font-family: var(--font-accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .wwd-dash__pill::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--signal);
+  }
+  .wwd-dash__note {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+
+  /* ---------- Platforms band ---------- */
+  .wwd-platforms {
+    padding-block: var(--sp-12);
+    border-top: 1px solid var(--line);
+  }
+  .wwd-platforms__label {
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+  }
+  .wwd-platforms__list {
+    list-style: none;
+    margin-top: var(--sp-6);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--sp-4) var(--sp-8);
+  }
+  .wwd-platforms__list li {
+    font-family: var(--font-accent);
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    font-weight: 500;
+    color: var(--ink-2);
+    letter-spacing: -0.01em;
+  }
+
+  /* ---------- Scope / boundary ---------- */
+  .wwd-scope__inner {
+    display: grid;
+    gap: var(--sp-10);
+  }
+  .wwd-scope__title {
+    margin-top: var(--sp-4);
+    max-width: 20ch;
+  }
+  .wwd-scope__body {
+    margin-top: var(--sp-5);
+    max-width: 50ch;
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .wwd-scope__flow {
+    list-style: none;
+    display: grid;
+    gap: var(--sp-4);
+  }
+  .wwd-scope__step {
+    display: grid;
+    gap: var(--sp-2);
+    padding: var(--sp-6);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--r-card);
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .wwd-scope__step--handoff {
+    border-color: rgba(75, 63, 228, 0.55);
+    background: rgba(75, 63, 228, 0.12);
+  }
+  .wwd-scope__stepn {
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    font-weight: 700;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--signal);
+  }
+  .wwd-scope__step--handoff .wwd-scope__stepn {
+    color: #fff;
+  }
+  .wwd-scope__stepk {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    color: #fff;
+  }
+  .wwd-scope__stepd {
+    font-size: var(--fs-sm);
+    color: rgba(255, 255, 255, 0.66);
+  }
+  @media (min-width: 900px) {
+    .wwd-scope__inner {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-12);
+      align-items: center;
+    }
+    .wwd-scope__flow {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---------- Pricing ---------- */
+  .wwd-price__grid {
+    margin-top: var(--sp-10);
+    display: grid;
+    gap: var(--sp-6);
+  }
+  .wwd-price {
+    display: grid;
+    gap: var(--sp-3);
+    align-content: start;
+  }
+  .wwd-price--feature {
+    border-color: var(--signal);
+    box-shadow: var(--shadow-card);
+  }
+  .wwd-price__k {
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .wwd-price--feature .wwd-price__k {
+    color: var(--signal-ink);
+  }
+  .wwd-price__v {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .wwd-price__d {
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+  }
+  .wwd-price__foot {
+    margin-top: var(--sp-8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-3);
+    text-align: center;
+  }
+  .wwd-price__fine {
+    font-size: var(--fs-sm);
+  }
+  @media (min-width: 760px) {
+    .wwd-price__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

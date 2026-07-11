@@ -1,0 +1,493 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import CTASection from "../components/CTASection.astro";
+
+const beliefs = [
+  {
+    title: "Specific beats generic",
+    body: "Content that names your market, your competitors, and the exact person you sell to travels. Content that could belong to anyone gets scrolled past.",
+  },
+  {
+    title: "The internet has enough slop",
+    body: "Machine-made, say-nothing content is everywhere now. People can feel the difference. We make the kind that a person clearly thought about and stands behind.",
+  },
+  {
+    title: "The first minutes decide everything",
+    body: "A post lives or dies in the first hour, on the hook and the early replies. We treat those minutes as the work, not an afterthought.",
+  },
+  {
+    title: "You should be selling, not posting",
+    body: "Being everywhere every day is a full-time job. Your job is serving the people we bring you. Ours is the rest of it.",
+  },
+];
+
+const people = [
+  {
+    name: "Jay Leaf-Clark",
+    initials: "JL",
+    role: "Founder",
+    // Photo to add: place a square image at public/about/jay.jpg (min 480x480).
+    photo: "/about/jay.jpg",
+    bio: [
+      "Jay founds Ilai and builds the software behind it. Around 20 years in IT infrastructure and automation taught him to make small systems do the work of big ones.",
+      "He builds the research and publishing engines that let a two-person studio run a full content operation across every platform, so people spend their time on judgment, not busywork.",
+    ],
+  },
+  {
+    name: "JJ Leaf-Clark",
+    initials: "JJ",
+    role: "Social, community, and voice",
+    // Photo to add: place a square image at public/about/jj.jpg (min 480x480).
+    photo: "/about/jj.jpg",
+    bio: [
+      "JJ leads social and community. He sets the voice for each brand we work with and makes sure every piece sounds like the person it belongs to.",
+      "He runs the first-response engagement in the minutes that decide whether a post spreads, and keeps the whole feed feeling like one consistent, human account.",
+    ],
+  },
+];
+
+const compare = [
+  {
+    them: "Guesses what might work and posts it",
+    us: "Researches your market and audience, then aims every piece",
+  },
+  {
+    them: "A different tone on every platform",
+    us: "One voice everywhere, built with you and held to",
+  },
+  {
+    them: "Content shipped on autopilot",
+    us: "A person approves every piece before it goes out",
+  },
+  {
+    them: "A monthly PDF report, weeks late",
+    us: "A live dashboard, refreshed on its own, that you watch it work on",
+  },
+  {
+    them: "Promises sales it cannot control",
+    us: "Reports the interest and intent it surfaces, and hands off at your funnel",
+  },
+];
+---
+
+<Layout
+  title="About — Ilai Collective"
+  description="Ilai Collective is a small, senior US team that grows the audience you sell to. Human-led and human-gated: people set the voice and approve every piece, while research and publishing software we built ourselves lets a small team move like a big one."
+  path="/about"
+>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero__mesh" aria-hidden="true"></div>
+    <div class="container hero__inner">
+      <span class="eyebrow eyebrow--pill" data-reveal>About</span>
+      <h1 class="hero__title display" data-reveal data-reveal-delay="1">
+        A small US team that makes you<br />
+        <span class="hero__accent">impossible to miss.</span>
+      </h1>
+      <p class="lead hero__lead" data-reveal data-reveal-delay="2">
+        Ilai is human-led and human-gated. People set the voice, write the angles,
+        and approve everything before it ships. The software we built just lets a
+        small, senior team move like a big one.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ WHAT WE BELIEVE ============ -->
+  <section class="section section--mist">
+    <div class="container">
+      <SectionHeader
+        eyebrow="What we believe"
+        title="A few things we hold to on every account"
+        lead="These aren't slogans. They decide what we make, what we refuse to make, and how we spend the hours."
+      />
+      <div class="grid grid-2 beliefs__grid">
+        {
+          beliefs.map((b, i) => (
+            <article
+              class="card card--hover belief"
+              data-reveal
+              data-reveal-delay={String((i % 2) + 1)}
+            >
+              <h3 class="belief__title">{b.title}</h3>
+              <p class="belief__body muted">{b.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE PEOPLE ============ -->
+  <section class="section" id="people">
+    <div class="container">
+      <SectionHeader
+        eyebrow="The people"
+        title="Two people run this, and both of them are senior"
+        lead="No account managers, no hand-offs to juniors. The people who build the systems and set the voice are the people on your work."
+      />
+      <div class="grid grid-2 people__grid">
+        {
+          people.map((p, i) => (
+            <article
+              class="card people__card"
+              data-reveal
+              data-reveal-delay={String((i % 2) + 1)}
+            >
+              <div class="people__head">
+                {/* Circular photo slot. Monogram shows until the image at `photo` exists. */}
+                <span class="people__avatar" aria-hidden="true">
+                  <span class="people__mono">{p.initials}</span>
+                  <img
+                    class="people__img"
+                    src={p.photo}
+                    alt=""
+                    loading="lazy"
+                    onerror="this.remove()"
+                  />
+                </span>
+                <div class="people__id">
+                  <h3 class="people__name">{p.name}</h3>
+                  <span class="people__role">{p.role}</span>
+                </div>
+              </div>
+              <div class="people__bio">
+                {p.bio.map((para) => (
+                  <p class="muted">{para}</p>
+                ))}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW WE'RE DIFFERENT ============ -->
+  <section class="section section--mist">
+    <div class="container">
+      <SectionHeader
+        eyebrow="How we're different"
+        title="What a normal agency does, and what we do instead"
+        lead="Most of the gap comes down to one thing: research and software let us do by hand what agencies fake with volume."
+      />
+      <div class="compare" data-reveal>
+        <div class="compare__headrow" aria-hidden="true">
+          <span class="compare__label compare__label--them">A normal agency</span>
+          <span class="compare__label compare__label--us">Ilai</span>
+        </div>
+        <ul class="compare__list">
+          {
+            compare.map((row, i) => (
+              <li
+                class="compare__row"
+                data-reveal
+                data-reveal-delay={String((i % 4) + 1)}
+              >
+                <div class="compare__cell compare__cell--them">
+                  <svg
+                    class="compare__icon compare__icon--them"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M4 4l8 8M12 4l-8 8"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                  <span>{row.them}</span>
+                </div>
+                <div class="compare__cell compare__cell--us">
+                  <svg
+                    class="compare__icon compare__icon--us"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3.5 8.5l3 3 6-7"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <span>{row.us}</span>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HUMAN-LED, HUMAN-GATED (manifesto band) ============ -->
+  <section class="section section--ink manifesto">
+    <div class="container">
+      <div class="manifesto__inner" data-reveal>
+        <span class="eyebrow eyebrow--pill manifesto__pill">Our standard</span>
+        <h2 class="manifesto__title">Human-led. Human-gated.</h2>
+        <p class="manifesto__lead">
+          Underneath the work sit research and publishing engines we built ourselves,
+          the kind that usually take a whole department. They do the heavy lifting so a
+          small team can cover every platform.
+        </p>
+        <p class="manifesto__body">
+          People stay in charge of the parts that matter. We direct the strategy, set the
+          voice, and sign off on every piece before it ships. That is how the quality holds
+          at scale, and why the work sounds like you and not like a machine guessing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Layout>
+
+<style>
+  /* ---------- Hero (mirrors index hero, sized down for a page title) ---------- */
+  .hero {
+    position: relative;
+    padding-top: clamp(8rem, 16vh, 12rem);
+    padding-bottom: var(--sp-10);
+    overflow: hidden;
+  }
+  .hero__mesh {
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 70%;
+    background:
+      radial-gradient(38% 55% at 22% 18%, rgba(75, 63, 228, 0.16), transparent 70%),
+      radial-gradient(30% 42% at 80% 10%, rgba(75, 63, 228, 0.08), transparent 70%);
+    filter: blur(6px);
+    animation: drift 22s var(--ease) infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes drift {
+    to {
+      transform: translate3d(0, 22px, 0) scale(1.05);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__mesh {
+      animation: none;
+    }
+  }
+  .hero__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .hero__title {
+    margin-top: var(--sp-5);
+    max-width: 18ch;
+    font-size: var(--fs-h1);
+    font-weight: 800;
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-display);
+  }
+  .hero__accent {
+    color: var(--signal);
+  }
+  .hero__lead {
+    margin-top: var(--sp-5);
+    max-width: 58ch;
+    text-align: center;
+  }
+
+  /* ---------- Beliefs ---------- */
+  .beliefs__grid {
+    margin-top: var(--sp-10);
+  }
+  .belief__title {
+    font-size: var(--fs-h3);
+  }
+  .belief__body {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-sm);
+  }
+
+  /* ---------- People ---------- */
+  .people__grid {
+    margin-top: var(--sp-10);
+  }
+  .people__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+  }
+  .people__head {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-5);
+  }
+  .people__avatar {
+    position: relative;
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--signal-tint);
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .people__mono {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+    color: var(--signal-ink);
+  }
+  /* Photo sits on top of the monogram. If the file is missing, onerror removes
+     it and the monogram shows through, so the card always looks intentional. */
+  .people__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .people__name {
+    font-size: var(--fs-h3);
+  }
+  .people__role {
+    display: inline-block;
+    margin-top: var(--sp-1);
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .people__bio {
+    display: grid;
+    gap: var(--sp-3);
+  }
+  .people__bio p {
+    font-size: var(--fs-sm);
+  }
+
+  /* ---------- Compare ---------- */
+  .compare {
+    margin-top: var(--sp-10);
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    background: var(--canvas);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+  }
+  .compare__headrow {
+    display: none;
+  }
+  .compare__label {
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    padding: var(--sp-4) var(--sp-6);
+  }
+  .compare__label--them {
+    color: var(--muted);
+  }
+  .compare__label--us {
+    color: var(--signal-ink);
+    background: var(--signal-tint);
+  }
+  .compare__list {
+    list-style: none;
+  }
+  .compare__row {
+    border-top: 1px solid var(--line);
+  }
+  .compare__row:first-child {
+    border-top: 0;
+  }
+  .compare__cell {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-3);
+    padding: var(--sp-5) var(--sp-6);
+    font-size: var(--fs-sm);
+  }
+  .compare__cell--them {
+    color: var(--muted);
+  }
+  .compare__cell--us {
+    color: var(--ink-2);
+    background: var(--mist);
+  }
+  .compare__icon {
+    flex: none;
+    margin-top: 2px;
+  }
+  .compare__icon--them {
+    color: var(--line-2);
+  }
+  .compare__icon--us {
+    color: var(--signal);
+  }
+  @media (min-width: 760px) {
+    .compare__headrow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+    .compare__row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .compare__cell--them {
+      border-right: 1px solid var(--line);
+    }
+    .compare__cell--us {
+      background: var(--signal-tint);
+      color: var(--signal-ink);
+    }
+    .compare__icon--us {
+      color: var(--signal);
+    }
+  }
+
+  /* ---------- Manifesto band ---------- */
+  .manifesto__inner {
+    max-width: 62ch;
+    margin-inline: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .manifesto__pill {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+  .manifesto__title {
+    margin-top: var(--sp-5);
+    font-size: var(--fs-h2);
+    color: #fff;
+  }
+  .manifesto__lead {
+    margin-top: var(--sp-5);
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.82);
+  }
+  .manifesto__body {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-body);
+    color: rgba(255, 255, 255, 0.66);
+  }
+</style>

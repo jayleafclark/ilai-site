@@ -1,0 +1,289 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CTASection from "../../components/CTASection.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+type Props = { post: CollectionEntry<"blog"> };
+const { post } = Astro.props;
+const { Content } = await post.render();
+const { data } = post;
+
+const fmtDate = (d: Date) =>
+  d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+const words = post.body.trim().split(/\s+/).length;
+const readMins = Math.max(1, Math.round(words / 220));
+
+const site = "https://ilaicollective.com";
+const path = `/blog/${post.slug}`;
+
+// Article JSON-LD — the GEO layer, so AI assistants can cite the piece.
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: data.title,
+  description: data.description,
+  datePublished: data.pubDate.toISOString(),
+  ...(data.updatedDate
+    ? { dateModified: data.updatedDate.toISOString() }
+    : { dateModified: data.pubDate.toISOString() }),
+  author: { "@type": "Organization", name: "Ilai Collective", url: site },
+  publisher: {
+    "@type": "Organization",
+    name: "Ilai Collective",
+    url: site,
+  },
+  mainEntityOfPage: { "@type": "WebPage", "@id": site + path },
+  ...(data.tags ? { keywords: data.tags.join(", ") } : {}),
+};
+---
+
+<Layout title={`${data.title} — Ilai Collective`} description={data.description} path={path}>
+  <!-- Article JSON-LD (GEO layer). ld+json is valid in body and read by crawlers/AI. -->
+  <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
+
+  <article class="post">
+    <div class="container post__inner">
+      <header class="post__head" data-reveal>
+        <div class="post__eyebrow">
+          <a href="/blog" class="post__back">Blog</a>
+          {data.tags?.[0] && <span class="post__chip">{data.tags[0]}</span>}
+        </div>
+        <h1 class="post__title">{data.title}</h1>
+        <p class="post__lead">{data.description}</p>
+        <div class="post__byline">
+          <span class="post__author">{data.author}</span>
+          <span class="post__dot" aria-hidden="true">·</span>
+          <time datetime={data.pubDate.toISOString()}>{fmtDate(data.pubDate)}</time>
+          <span class="post__dot" aria-hidden="true">·</span>
+          <span>{readMins} min read</span>
+        </div>
+      </header>
+
+      <div class="prose" data-reveal data-reveal-delay="1">
+        <Content />
+      </div>
+
+      <footer class="post__foot" data-reveal>
+        <a href="/blog" class="btn btn--ghost post__backbtn">
+          <span class="post__backarrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path
+                d="M11 3L3 11M3 11H9M3 11V5"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          Back to all posts
+        </a>
+      </footer>
+    </div>
+  </article>
+
+  <CTASection />
+</Layout>
+
+<style>
+  .post {
+    padding-top: clamp(8rem, 16vh, 11rem);
+    padding-bottom: var(--sp-10);
+  }
+  .post__inner {
+    max-width: var(--maxw-prose);
+  }
+
+  /* ---------- Head ---------- */
+  .post__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+  }
+  .post__back {
+    color: var(--muted);
+    font-weight: 500;
+    transition: color var(--dur-micro) var(--ease);
+  }
+  .post__back:hover {
+    color: var(--ink);
+  }
+  .post__chip {
+    color: var(--signal-ink);
+    background: var(--signal-tint);
+    padding: 5px 11px;
+    border-radius: var(--r-pill);
+    font-weight: 500;
+  }
+  .post__title {
+    margin-top: var(--sp-5);
+    font-size: var(--fs-h1);
+    max-width: 20ch;
+  }
+  .post__lead {
+    margin-top: var(--sp-5);
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .post__byline {
+    margin-top: var(--sp-6);
+    padding-top: var(--sp-5);
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2);
+    font-family: var(--font-accent);
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  .post__author {
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+  .post__dot {
+    color: var(--line-2);
+  }
+
+  /* ---------- Prose ---------- */
+  .prose {
+    margin-top: var(--sp-8);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--ink-2);
+  }
+  .prose :global(> * + *) {
+    margin-top: var(--sp-5);
+  }
+  .prose :global(h2) {
+    font-family: var(--font-sans);
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    line-height: var(--lh-snug);
+    letter-spacing: var(--tracking-tight);
+    color: var(--ink);
+    margin-top: var(--sp-10);
+  }
+  .prose :global(h3) {
+    font-family: var(--font-sans);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    line-height: var(--lh-snug);
+    letter-spacing: var(--tracking-tight);
+    color: var(--ink);
+    margin-top: var(--sp-8);
+  }
+  .prose :global(h2 + *),
+  .prose :global(h3 + *) {
+    margin-top: var(--sp-4);
+  }
+  .prose :global(p) {
+    text-wrap: pretty;
+  }
+  .prose :global(a) {
+    color: var(--signal);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--line-2);
+    transition: text-decoration-color var(--dur-micro) var(--ease);
+  }
+  .prose :global(a:hover) {
+    text-decoration-color: var(--signal);
+  }
+  .prose :global(strong) {
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-left: var(--sp-6);
+  }
+  .prose :global(li) {
+    margin-top: var(--sp-2);
+    padding-left: var(--sp-2);
+  }
+  .prose :global(li::marker) {
+    color: var(--signal);
+  }
+  .prose :global(blockquote) {
+    margin-inline: 0;
+    padding: var(--sp-2) var(--sp-6);
+    border-left: 2px solid var(--signal);
+    color: var(--ink);
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+  }
+  .prose :global(img) {
+    width: 100%;
+    border-radius: var(--r-media);
+    border: 1px solid var(--line);
+  }
+  .prose :global(hr) {
+    height: 1px;
+    background: var(--line);
+    border: 0;
+    margin-block: var(--sp-8);
+  }
+  .prose :global(code) {
+    font-family: "Space Grotesk", ui-monospace, monospace;
+    font-size: 0.9em;
+    background: var(--mist);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.1em 0.4em;
+  }
+  .prose :global(pre) {
+    background: var(--ink);
+    color: #fff;
+    border-radius: var(--r-media);
+    padding: var(--sp-5);
+    overflow-x: auto;
+  }
+  .prose :global(pre code) {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: inherit;
+  }
+
+  /* ---------- Foot ---------- */
+  .post__foot {
+    margin-top: var(--sp-10);
+    padding-top: var(--sp-6);
+    border-top: 1px solid var(--line);
+  }
+  .post__backbtn {
+    gap: var(--sp-3);
+  }
+  .post__backarrow {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--mist);
+    transition: transform var(--dur-base) var(--ease);
+  }
+  .post__backbtn:hover .post__backarrow {
+    transform: translateX(-3px);
+  }
+</style>

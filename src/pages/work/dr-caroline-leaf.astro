@@ -1,0 +1,999 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CTASection from "../../components/CTASection.astro";
+
+// ---- Headline numbers (12 months) ----
+const headline = [
+  { value: 205, suffix: "M+", label: "Impressions in 12 months" },
+  { value: 7.9, decimals: 1, suffix: "M+", label: "Engagements earned" },
+  { value: 90, suffix: "K+", label: "New followers gained" },
+  { value: 10.4, decimals: 1, suffix: "M+", label: "Video views" },
+];
+
+// ---- Year-over-year headline bars ----
+const yoyBars = [
+  {
+    label: "Reach",
+    pct: 204,
+    note: "Times content showed up on screens, year over year.",
+  },
+  {
+    label: "Engagement",
+    pct: 210,
+    note: "Likes, comments, shares, and saves, year over year.",
+  },
+];
+
+// ---- Per-platform YoY chips ----
+const yoyChips = [
+  { platform: "Facebook", metric: "reach", value: 359 },
+  { platform: "Facebook", metric: "engagement", value: 549 },
+  { platform: "Instagram", metric: "reach", value: 155 },
+  { platform: "Instagram", metric: "engagement", value: 155 },
+  { platform: "YouTube", metric: "views", value: 42 },
+  { platform: "TikTok", metric: "followers", value: 39 },
+];
+
+// ---- Platform standing cards ----
+const platforms = [
+  {
+    name: "Facebook",
+    glyph: "facebook",
+    stat: "523K",
+    statLabel: "followers",
+    lines: ["Up 28K this year", "76M impressions this year", "Reach +359% year over year"],
+  },
+  {
+    name: "Instagram",
+    glyph: "instagram",
+    stat: "932K",
+    statLabel: "followers",
+    lines: ["Up 46K this year", "129M impressions this year", "The biggest audience"],
+    feature: true,
+  },
+  {
+    name: "YouTube",
+    glyph: "youtube",
+    stat: "1.26M",
+    statLabel: "views",
+    lines: ["100K watch hours", "11K new subscribers", "4.1% click-through rate"],
+  },
+  {
+    name: "TikTok",
+    glyph: "tiktok",
+    stat: "+39%",
+    statLabel: "follower growth",
+    lines: ["The fastest-growing audience", "Of any platform we run", "Built from a standing start"],
+  },
+  {
+    name: "X, Threads, Bluesky, Substack",
+    glyph: "quartet",
+    stat: "4",
+    statLabel: "more platforms",
+    lines: ["Same voice, adapted per feed", "Written and published by people", "One idea, everywhere it fits"],
+  },
+];
+
+// ---- Why it worked ----
+const reasons = [
+  {
+    k: "Researched, not guessed",
+    d: "Every piece is grounded in her market, her audience of women 35 to 50, and what they actually respond to. Specific beats generic on every platform.",
+  },
+  {
+    k: "Human-led, human-gated",
+    d: "A real US team writes the angles and signs off on every piece before it ships. Software carries the load. The judgment stays with people.",
+  },
+  {
+    k: "Published everywhere, one voice",
+    d: "One idea, adapted for 8 platforms and posted under a single, consistent voice built with her, never handed to a machine to guess.",
+  },
+  {
+    k: "The first minutes decide",
+    d: "An engagement engine answers her community in her voice in the first minutes, the window that decides whether a post travels or stalls.",
+  },
+];
+---
+
+<Layout
+  title="Dr. Caroline Leaf — Ilai Collective case study"
+  description="In 12 months Ilai grew Dr. Caroline Leaf to 205M+ impressions, 7.9M+ engagements, and 90K+ new followers across 8 platforms with zero ad spend. Reach up 204%, engagement up 210%, in a year the average account went backwards."
+  path="/work/dr-caroline-leaf"
+>
+  <!-- ============ HERO ============ -->
+  <section class="ds-hero">
+    <div class="ds-hero__mesh" aria-hidden="true"></div>
+    <div class="container ds-hero__inner">
+      <div class="ds-hero__copy">
+        <span class="eyebrow eyebrow--pill ds-pill" data-reveal>Case study</span>
+        <h1 class="ds-hero__title display" data-reveal data-reveal-delay="1">
+          Dr. Caroline Leaf
+        </h1>
+        <p class="ds-hero__role" data-reveal data-reveal-delay="1">
+          Neuroscientist, mental-health author, and podcast host.
+        </p>
+        <p class="lead ds-hero__lead" data-reveal data-reveal-delay="2">
+          In 12 months her reach and engagement roughly tripled. In the same year most
+          accounts went backwards. Ilai has run her entire content operation across 8
+          platforms, with zero spent on ads.
+        </p>
+        <div class="ds-hero__meta" data-reveal data-reveal-delay="3">
+          <span class="ds-hero__metaitem">8 platforms</span>
+          <span class="ds-hero__dot" aria-hidden="true"></span>
+          <span class="ds-hero__metaitem">12 months</span>
+          <span class="ds-hero__dot" aria-hidden="true"></span>
+          <span class="ds-hero__metaitem">$0 on ads</span>
+        </div>
+      </div>
+
+      <!-- Portrait slot: client drops the headshot at /work/dr-caroline-leaf.jpg -->
+      <figure class="ds-portrait" data-reveal data-reveal-delay="2">
+        <img
+          src="/work/dr-caroline-leaf.jpg"
+          alt="Dr. Caroline Leaf"
+          class="ds-portrait__img"
+          loading="eager"
+          width="640"
+          height="800"
+        />
+        <div class="ds-portrait__fallback" aria-hidden="true">
+          <span class="ds-portrait__mono">CL</span>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ HEADLINE NUMBERS ============ -->
+  <section class="ds-band">
+    <div class="container">
+      <div class="ds-band__grid">
+        {
+          headline.map((s, i) => (
+            <div class="ds-stat" data-reveal data-reveal-delay={String((i % 4) + 1)}>
+              <div
+                class="ds-stat__num"
+                data-count={s.value}
+                data-decimals={s.decimals ?? 0}
+                data-prefix={s.prefix ?? ""}
+                data-suffix={s.suffix ?? ""}
+              >
+                {s.prefix ?? ""}0{s.suffix ?? ""}
+              </div>
+              <div class="ds-stat__label">{s.label}</div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="ds-band__source" data-reveal>
+        Totals for the last 12 months, across Facebook, Instagram, YouTube, TikTok, X,
+        Threads, Bluesky, and Substack. No paid promotion.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ THE CHALLENGE ============ -->
+  <section class="section section--mist">
+    <div class="container ds-challenge">
+      <div class="ds-challenge__head" data-reveal>
+        <span class="eyebrow eyebrow--dot ds-dot">The challenge</span>
+        <h2 class="ds-challenge__title">
+          A serious expert with a real message, and no time to be everywhere.
+        </h2>
+      </div>
+      <div class="ds-challenge__body" data-reveal data-reveal-delay="1">
+        <p class="lead">
+          Dr. Leaf reaches an audience that skews women 35 to 50 who come to her for careful,
+          researched work on the mind. That audience is spread across eight platforms, each
+          with its own format, rhythm, and voice. Showing up on all of them, every day, in her
+          voice, is a second full-time job.
+        </p>
+        <p class="ds-challenge__answer">
+          Generic agencies solve this with sameness: the same clip cut nine ways, captions that
+          could belong to anyone. Ilai took on the whole operation instead. We study her market,
+          write in a voice we built with her, publish across all eight platforms, and answer her
+          community in the minutes that matter, with people directing every call.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ YEAR-OVER-YEAR GROWTH ============ -->
+  <section class="section ds-yoy">
+    <div class="container">
+      <div class="ds-sechead" data-reveal>
+        <span class="eyebrow eyebrow--dot ds-dot">Year over year</span>
+        <h2 class="ds-sechead__title">She moved in the opposite direction from the industry.</h2>
+        <p class="lead ds-sechead__lead">
+          The cleanest like-for-like comparison, this year against last. Reach and engagement
+          both roughly tripled.
+        </p>
+      </div>
+
+      <div class="ds-bars" data-reveal data-reveal-delay="1">
+        {
+          yoyBars.map((b) => (
+            <div class="ds-bar">
+              <div class="ds-bar__head">
+                <span class="ds-bar__label">{b.label}</span>
+                <span class="ds-bar__pct">+{b.pct}%</span>
+              </div>
+              <div class="ds-bar__track" role="img" aria-label={`${b.label} up ${b.pct}% year over year`}>
+                <div class="ds-bar__base">
+                  <span class="ds-bar__basetag">Last year</span>
+                </div>
+                <div class="ds-bar__fill" style={`--grow:${b.pct}`}>
+                  <span class="ds-bar__filltag">This year</span>
+                </div>
+              </div>
+              <p class="ds-bar__note muted">{b.note}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="ds-chips" data-reveal data-reveal-delay="2">
+        <p class="ds-chips__title">Where the growth came from, by platform</p>
+        <div class="ds-chips__grid">
+          {
+            yoyChips.map((c) => (
+              <div class="ds-chip">
+                <span class="ds-chip__val">+{c.value}%</span>
+                <span class="ds-chip__meta">
+                  <strong>{c.platform}</strong> {c.metric}
+                </span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PLATFORM BY PLATFORM ============ -->
+  <section class="section section--mist">
+    <div class="container">
+      <div class="ds-sechead" data-reveal>
+        <span class="eyebrow eyebrow--dot ds-dot">Platform by platform</span>
+        <h2 class="ds-sechead__title">Where each audience stands now.</h2>
+        <p class="lead ds-sechead__lead">
+          Current standing across the eight platforms Ilai runs, all grown organically.
+        </p>
+      </div>
+
+      <div class="ds-platforms">
+        {
+          platforms.map((p, i) => (
+            <article
+              class={`ds-pcard${p.feature ? " ds-pcard--feature" : ""}`}
+              data-reveal
+              data-reveal-delay={String((i % 3) + 1)}
+            >
+              <div class="ds-pcard__top">
+                <span class="ds-pcard__glyph" aria-hidden="true">
+                  {p.glyph === "facebook" && (
+                    <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                      <path d="M14 8.5V7c0-.83.67-1.5 1.5-1.5H17M14 8.5H11.5M14 8.5V19M14 8.5H16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+                    </svg>
+                  )}
+                  {p.glyph === "instagram" && (
+                    <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                      <rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="1.5" />
+                      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.5" />
+                      <circle cx="16.5" cy="7.5" r="1" fill="currentColor" />
+                    </svg>
+                  )}
+                  {p.glyph === "youtube" && (
+                    <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                      <rect x="3" y="6" width="18" height="12" rx="3.5" stroke="currentColor" stroke-width="1.5" />
+                      <path d="M10.5 9.5l4 2.5-4 2.5v-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                    </svg>
+                  )}
+                  {p.glyph === "tiktok" && (
+                    <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                      <path d="M13 4v10.5a3.5 3.5 0 11-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M13 4c.5 2.5 2 4 4.5 4.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  )}
+                  {p.glyph === "quartet" && (
+                    <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                      <circle cx="8" cy="8" r="2.4" stroke="currentColor" stroke-width="1.5" />
+                      <circle cx="16" cy="8" r="2.4" stroke="currentColor" stroke-width="1.5" />
+                      <circle cx="8" cy="16" r="2.4" stroke="currentColor" stroke-width="1.5" />
+                      <circle cx="16" cy="16" r="2.4" stroke="currentColor" stroke-width="1.5" />
+                    </svg>
+                  )}
+                </span>
+                <h3 class="ds-pcard__name">{p.name}</h3>
+              </div>
+              <div class="ds-pcard__stat">
+                <span class="ds-pcard__num">{p.stat}</span>
+                <span class="ds-pcard__statlabel">{p.statLabel}</span>
+              </div>
+              <ul class="ds-pcard__lines">
+                {p.lines.map((l) => <li>{l}</li>)}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY IT WORKED ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="ds-sechead" data-reveal>
+        <span class="eyebrow eyebrow--dot ds-dot">Why it worked</span>
+        <h2 class="ds-sechead__title">Four things generic agencies skip.</h2>
+      </div>
+      <div class="ds-reasons">
+        {
+          reasons.map((r, i) => (
+            <div class="ds-reason" data-reveal data-reveal-delay={String((i % 2) + 1)}>
+              <span class="ds-reason__n">{String(i + 1).padStart(2, "0")}</span>
+              <div class="ds-reason__body">
+                <h3 class="ds-reason__k">{r.k}</h3>
+                <p class="ds-reason__d muted">{r.d}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INDUSTRY CONTEXT CALLOUT ============ -->
+  <section class="section ds-context-wrap">
+    <div class="container">
+      <div class="ds-context" data-reveal>
+        <span class="eyebrow eyebrow--pill ds-pill ds-context__pill">The context</span>
+        <p class="ds-context__quote">
+          Across the industry in 2025, the average account&rsquo;s reach fell about
+          <span class="ds-context__hl">12%</span> and engagement dropped close to
+          <span class="ds-context__hl">28%</span>. The typical Facebook page now reaches
+          only 1 to 2% of its own followers. Against that, Dr. Leaf&rsquo;s reach and
+          engagement roughly <span class="ds-context__hl">tripled</span>.
+        </p>
+        <p class="ds-context__foot">
+          She grew at a size where most accounts flatten out, in a year the whole field
+          shrank.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DASHBOARD SLOT ============ -->
+  <section class="section section--mist">
+    <div class="container">
+      <div class="ds-sechead ds-sechead--center" data-reveal>
+        <span class="eyebrow eyebrow--dot ds-dot">The proof</span>
+        <h2 class="ds-sechead__title">One dashboard, pulled straight from the platforms.</h2>
+      </div>
+      <figure class="ds-dash" data-reveal data-reveal-delay="1">
+        <div class="ds-dash__chrome" aria-hidden="true">
+          <span class="ds-dash__dots">
+            <i></i><i></i><i></i>
+          </span>
+          <span class="ds-dash__bar">dashboard.ilaicollective.com</span>
+        </div>
+        <div class="ds-dash__screen">
+          <!-- Dashboard slot: client drops the screenshot at /work/dashboard-year-review.png -->
+          <img
+            src="/work/dashboard-year-review.png"
+            alt="Dr. Caroline Leaf year-in-review dashboard"
+            class="ds-dash__img"
+            loading="lazy"
+            width="1280"
+            height="720"
+          />
+          <div class="ds-dash__fallback" aria-hidden="true">
+            <span class="ds-dash__mono">Year-in-review dashboard</span>
+          </div>
+        </div>
+        <figcaption class="ds-dash__cap muted">
+          Every figure on this page is pulled from the platforms and refreshed automatically.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <CTASection title="Want results like these?" />
+</Layout>
+
+<style>
+  /* ============================================================
+     Dr. Caroline Leaf case study
+     Co-brand: --drleaf raspberry as the section accent.
+     Ilai --signal stays reserved for the primary CTA (in CTASection).
+     ============================================================ */
+
+  /* ---------- Hero ---------- */
+  .ds-hero {
+    position: relative;
+    padding-top: clamp(7rem, 14vh, 11rem);
+    padding-bottom: var(--sp-10);
+    overflow: hidden;
+  }
+  .ds-hero__mesh {
+    position: absolute;
+    inset: -25% -10% auto -10%;
+    height: 75%;
+    background:
+      radial-gradient(38% 55% at 20% 16%, rgba(224, 48, 100, 0.14), transparent 70%),
+      radial-gradient(34% 46% at 84% 10%, rgba(224, 48, 100, 0.08), transparent 70%);
+    filter: blur(8px);
+    animation: dsDrift 24s var(--ease) infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes dsDrift {
+    to {
+      transform: translate3d(0, 20px, 0) scale(1.05);
+    }
+  }
+  .ds-hero__inner {
+    position: relative;
+    display: grid;
+    gap: var(--sp-8);
+    align-items: center;
+  }
+  .ds-pill {
+    background: var(--drleaf-tint);
+    color: var(--drleaf);
+  }
+  .ds-hero__title {
+    margin-top: var(--sp-5);
+  }
+  .ds-hero__role {
+    margin-top: var(--sp-4);
+    font-family: var(--font-accent);
+    font-size: var(--fs-body);
+    font-weight: 500;
+    color: var(--drleaf);
+  }
+  .ds-hero__lead {
+    margin-top: var(--sp-5);
+    max-width: 46ch;
+  }
+  .ds-hero__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+    margin-top: var(--sp-6);
+    flex-wrap: wrap;
+  }
+  .ds-hero__metaitem {
+    font-family: var(--font-accent);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--ink-2);
+  }
+  .ds-hero__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--line-2);
+  }
+
+  /* ---------- Portrait ---------- */
+  .ds-portrait {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--r-media);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: linear-gradient(155deg, var(--drleaf-tint), var(--mist) 65%, var(--sand));
+    box-shadow: var(--shadow-card);
+    max-width: 460px;
+    width: 100%;
+    justify-self: start;
+  }
+  .ds-portrait__img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .ds-portrait__fallback {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+  .ds-portrait__mono {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: clamp(3rem, 8vw, 5rem);
+    letter-spacing: 0.04em;
+    color: var(--drleaf);
+    opacity: 0.5;
+  }
+  /* Broken/missing image hides itself so the styled fallback shows through */
+  .ds-portrait__img:not([src]),
+  .ds-portrait__img[src=""] {
+    display: none;
+  }
+
+  @media (min-width: 880px) {
+    .ds-hero__inner {
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: var(--sp-12);
+    }
+    .ds-portrait {
+      justify-self: end;
+    }
+  }
+
+  /* ---------- Headline band ---------- */
+  .ds-band {
+    padding-block: var(--sp-12);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .ds-band__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-8) var(--sp-6);
+  }
+  .ds-stat {
+    border-left: 2px solid var(--drleaf);
+    padding-left: var(--sp-5);
+  }
+  .ds-stat__num {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 5.5vw, 4rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .ds-stat__label {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-sm);
+    color: var(--muted);
+    max-width: 20ch;
+  }
+  .ds-band__source {
+    margin-top: var(--sp-8);
+    padding-top: var(--sp-5);
+    border-top: 1px solid var(--line);
+    font-size: var(--fs-sm);
+    color: var(--muted);
+    max-width: 64ch;
+  }
+  @media (min-width: 820px) {
+    .ds-band__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* ---------- Section head (reused) ---------- */
+  .ds-dot::before {
+    background: var(--drleaf);
+  }
+  .ds-sechead {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+    max-width: 44ch;
+  }
+  .ds-sechead--center {
+    align-items: center;
+    text-align: center;
+    max-width: 52ch;
+    margin-inline: auto;
+  }
+  .ds-sechead__lead {
+    margin-top: var(--sp-1);
+  }
+
+  /* ---------- Challenge ---------- */
+  .ds-challenge {
+    display: grid;
+    gap: var(--sp-8);
+  }
+  .ds-challenge__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+  }
+  .ds-challenge__title {
+    max-width: 16ch;
+  }
+  .ds-challenge__answer {
+    margin-top: var(--sp-5);
+    font-size: var(--fs-body);
+    color: var(--ink-2);
+  }
+  @media (min-width: 900px) {
+    .ds-challenge {
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: var(--sp-12);
+      align-items: start;
+    }
+    .ds-challenge__title {
+      max-width: 14ch;
+    }
+  }
+
+  /* ---------- Year over year bars ---------- */
+  .ds-bars {
+    margin-top: var(--sp-10);
+    display: grid;
+    gap: var(--sp-8);
+  }
+  .ds-bar__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-4);
+  }
+  .ds-bar__label {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .ds-bar__pct {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: var(--fs-h3);
+    letter-spacing: -0.02em;
+    color: var(--drleaf);
+    font-variant-numeric: tabular-nums;
+  }
+  .ds-bar__track {
+    margin-top: var(--sp-4);
+    display: grid;
+    gap: var(--sp-3);
+  }
+  .ds-bar__base,
+  .ds-bar__fill {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    border-radius: var(--r-pill);
+    padding-inline: var(--sp-4);
+    color: #fff;
+    font-family: var(--font-accent);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .ds-bar__base {
+    /* last year normalised to 100 -> ~33% of this year's ~304 */
+    width: 33%;
+    background: var(--line-2);
+    color: var(--ink-2);
+  }
+  .ds-bar__basetag,
+  .ds-bar__filltag {
+    opacity: 0.9;
+  }
+  .ds-bar__fill {
+    width: 33%;
+    background: linear-gradient(90deg, var(--drleaf), #f0567f);
+    transition: width 1100ms var(--ease);
+  }
+  /* Grow to full when the bar block reveals. --grow is the +% (e.g. 204).
+     This year = 100 + grow, expressed as share of a ~305 scale. */
+  [data-reveal].is-visible .ds-bar__fill {
+    width: calc((100 + var(--grow)) / 3.05 * 1%);
+  }
+  .ds-bar__note {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-sm);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-bar__fill {
+      transition: none;
+    }
+  }
+  @media (min-width: 760px) {
+    .ds-bars {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-10);
+    }
+  }
+
+  /* ---------- YoY chips ---------- */
+  .ds-chips {
+    margin-top: var(--sp-12);
+    padding-top: var(--sp-8);
+    border-top: 1px solid var(--line);
+  }
+  .ds-chips__title {
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ds-chips__grid {
+    margin-top: var(--sp-5);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-4);
+  }
+  .ds-chip {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    padding: var(--sp-5);
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    background: var(--canvas);
+  }
+  .ds-chip__val {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    letter-spacing: -0.02em;
+    color: var(--drleaf);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .ds-chip__meta {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  .ds-chip__meta strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  @media (min-width: 640px) {
+    .ds-chips__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ---------- Platform cards ---------- */
+  .ds-platforms {
+    margin-top: var(--sp-10);
+    display: grid;
+    gap: var(--sp-5);
+    grid-template-columns: 1fr;
+  }
+  .ds-pcard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+    padding: var(--sp-6);
+    background: var(--canvas);
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    transition:
+      transform var(--dur-base) var(--ease),
+      box-shadow var(--dur-base) var(--ease);
+  }
+  .ds-pcard:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card);
+  }
+  .ds-pcard--feature {
+    background: linear-gradient(160deg, var(--drleaf-tint), var(--canvas) 70%);
+    border-color: rgba(224, 48, 100, 0.28);
+  }
+  .ds-pcard__top {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+  .ds-pcard__glyph {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--drleaf-tint);
+    color: var(--drleaf);
+    flex-shrink: 0;
+  }
+  .ds-pcard__name {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-snug);
+  }
+  .ds-pcard__stat {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-2);
+  }
+  .ds-pcard__num {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: clamp(2.25rem, 5vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .ds-pcard__statlabel {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  .ds-pcard__lines {
+    list-style: none;
+    display: grid;
+    gap: var(--sp-2);
+    margin-top: auto;
+  }
+  .ds-pcard__lines li {
+    position: relative;
+    padding-left: var(--sp-5);
+    font-size: var(--fs-sm);
+    color: var(--ink-2);
+  }
+  .ds-pcard__lines li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--drleaf);
+  }
+  @media (min-width: 680px) {
+    .ds-platforms {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1000px) {
+    .ds-platforms {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ---------- Why it worked ---------- */
+  .ds-reasons {
+    margin-top: var(--sp-10);
+    display: grid;
+    gap: var(--sp-6);
+  }
+  .ds-reason {
+    display: flex;
+    gap: var(--sp-5);
+    padding: var(--sp-6);
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    background: var(--canvas);
+  }
+  .ds-reason__n {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: var(--fs-body);
+    color: var(--drleaf);
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+  .ds-reason__k {
+    font-size: var(--fs-h3);
+  }
+  .ds-reason__d {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-sm);
+  }
+  @media (min-width: 760px) {
+    .ds-reasons {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-5);
+    }
+  }
+
+  /* ---------- Industry context callout ---------- */
+  .ds-context {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(2.25rem, 5vw, 4rem);
+    border-radius: 28px;
+    background: var(--ink);
+    color: #fff;
+    box-shadow: var(--shadow-float);
+  }
+  .ds-context::before {
+    content: "";
+    position: absolute;
+    inset: -40% -20% auto auto;
+    width: 60%;
+    height: 120%;
+    background: radial-gradient(50% 50% at 70% 30%, rgba(224, 48, 100, 0.4), transparent 70%);
+    pointer-events: none;
+  }
+  .ds-context > * {
+    position: relative;
+    z-index: 1;
+  }
+  .ds-context__pill {
+    background: rgba(224, 48, 100, 0.18);
+    color: #ff9bb6;
+  }
+  .ds-context__quote {
+    margin-top: var(--sp-5);
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: var(--tracking-tight);
+    color: #fff;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .ds-context__hl {
+    color: #ff8fac;
+  }
+  .ds-context__foot {
+    margin-top: var(--sp-6);
+    font-size: var(--fs-lead);
+    color: rgba(255, 255, 255, 0.72);
+    max-width: 46ch;
+  }
+
+  /* ---------- Dashboard slot ---------- */
+  .ds-dash {
+    margin-top: var(--sp-10);
+    max-width: 1040px;
+    margin-inline: auto;
+  }
+  .ds-dash__chrome {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+    padding: var(--sp-3) var(--sp-5);
+    background: var(--sand);
+    border: 1px solid var(--line);
+    border-bottom: 0;
+    border-radius: var(--r-media) var(--r-media) 0 0;
+  }
+  .ds-dash__dots {
+    display: inline-flex;
+    gap: 6px;
+  }
+  .ds-dash__dots i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--line-2);
+  }
+  .ds-dash__bar {
+    font-family: var(--font-accent);
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  .ds-dash__screen {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--line);
+    border-radius: 0 0 var(--r-media) var(--r-media);
+    overflow: hidden;
+    background: linear-gradient(160deg, var(--drleaf-tint), var(--mist) 60%, var(--sand));
+  }
+  .ds-dash__img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .ds-dash__fallback {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+  .ds-dash__mono {
+    font-family: var(--font-accent);
+    font-size: var(--fs-sm);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--drleaf);
+    opacity: 0.7;
+  }
+  .ds-dash__cap {
+    margin-top: var(--sp-5);
+    text-align: center;
+    font-size: var(--fs-sm);
+    max-width: 52ch;
+    margin-inline: auto;
+  }
+</style>

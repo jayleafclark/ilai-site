@@ -1,0 +1,105 @@
+---
+export interface Props {
+  title?: string;
+  lead?: string;
+}
+const {
+  title = "Let's grow the audience you'll sell to.",
+  lead = "Book a call and we'll bring a free teardown of your brand, your market, and your audience. You'll see exactly where the attention is before you decide anything.",
+} = Astro.props;
+---
+
+<section class="cta section">
+  <div class="container">
+    <div class="cta__box" data-reveal>
+      <div class="cta__glow" aria-hidden="true"></div>
+      <span class="eyebrow eyebrow--pill">Start here</span>
+      <h2 class="cta__title">{title}</h2>
+      <p class="cta__lead">{lead}</p>
+      <div class="cta__actions">
+        <a href="/contact" class="btn btn--signal">
+          Book a call
+          <span class="btn__arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path
+                d="M3 11L11 3M11 3H5M11 3V9"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        </a>
+        <a href="/work/dr-caroline-leaf" class="btn btn--ghost">See the proof</a>
+      </div>
+      <p class="cta__fine">
+        Engagements start at $5,500/mo. Pilot month, fully credited, is $1,950.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta__box {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--sp-4);
+    padding: clamp(2.5rem, 6vw, 5rem) var(--gutter);
+    border-radius: 28px;
+    background: var(--ink);
+    color: #fff;
+    box-shadow: var(--shadow-float);
+  }
+  .cta__glow {
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    width: 120%;
+    height: 140%;
+    transform: translateX(-50%);
+    background: radial-gradient(
+      50% 50% at 50% 30%,
+      rgba(75, 63, 228, 0.55) 0%,
+      rgba(75, 63, 228, 0) 70%
+    );
+    pointer-events: none;
+  }
+  .cta__box > *:not(.cta__glow) {
+    position: relative;
+    z-index: 1;
+  }
+  .cta__title {
+    color: #fff;
+    font-size: var(--fs-h2);
+    max-width: 20ch;
+  }
+  .cta__lead {
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 52ch;
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+  }
+  .cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    justify-content: center;
+    margin-top: var(--sp-3);
+  }
+  .cta__box .btn--ghost {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+  .cta__box .btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .cta__fine {
+    font-size: var(--fs-sm);
+    color: rgba(255, 255, 255, 0.55);
+    margin-top: var(--sp-2);
+  }
+</style>

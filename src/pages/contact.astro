@@ -1,0 +1,532 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const budgets = [
+  "Under $3k",
+  "$3k–$5k",
+  "$5.5k–$10k",
+  "$10k+",
+  "Not sure yet",
+];
+
+const steps = [
+  {
+    n: "01",
+    t: "We research you before we meet",
+    d: "We study your brand, your market, and the people you sell to, so we walk in already knowing your audience.",
+  },
+  {
+    n: "02",
+    t: "We show you what we found",
+    d: "On the call we walk you through the teardown and where your audience actually is, platform by platform.",
+  },
+  {
+    n: "03",
+    t: "If it's a fit, we build month one",
+    d: "We set your voice and content system, then start publishing. You approve everything before it ships.",
+  },
+];
+---
+
+<Layout
+  title="Book a call — Ilai Collective"
+  description="Book a call with Ilai Collective and get a free teardown of your brand, market, and audience. A real US team, human-led content built to grow the audience you'll sell to. Engagements start at $5,500/mo, pilot month $1,950 fully credited."
+  path="/contact"
+>
+  <section class="contact section">
+    <div class="container contact__grid">
+      <!-- ============ LEFT: THE FORM ============ -->
+      <div class="form-col" data-reveal>
+        <span class="eyebrow eyebrow--pill">Start here</span>
+        <h1 class="form-col__title">Book a call</h1>
+        <p class="lead form-col__lead">
+          We'll bring a free teardown of your brand, your market, and your
+          audience to the first call. No obligation, and the teardown is yours
+          to keep.
+        </p>
+
+        <!--
+          SETUP: replace REPLACE_WITH_FORM_ID below with your Formspree endpoint
+          (or a Basin / Web3Forms endpoint). This is a static site, so the form
+          posts to a third-party form backend. Nothing else needs changing.
+        -->
+        <form
+          class="lead-form"
+          action="https://formspree.io/f/REPLACE_WITH_FORM_ID"
+          method="POST"
+        >
+          <!-- Honeypot: real people leave this empty; bots fill it. -->
+          <div class="hp" aria-hidden="true">
+            <label for="company-website">Company website</label>
+            <input
+              type="text"
+              id="company-website"
+              name="_gotcha"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="field">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              autocomplete="name"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="platform">Website or main platform</label>
+            <input
+              type="url"
+              id="platform"
+              name="website_or_platform"
+              placeholder="https://"
+              inputmode="url"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="audience">What do you do, and who do you sell to?</label>
+            <textarea id="audience" name="what_you_do" rows="4" required
+            ></textarea>
+          </div>
+
+          <div class="field">
+            <label for="budget">Monthly budget</label>
+            <div class="select-wrap">
+              <select id="budget" name="monthly_budget" required>
+                <option value="" disabled selected>Choose a range</option>
+                {budgets.map((b) => <option value={b}>{b}</option>)}
+              </select>
+              <span class="select-caret" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M3.5 5.25L7 8.75L10.5 5.25"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="notes">
+              Anything else? <span class="field__opt">Optional</span>
+            </label>
+            <textarea id="notes" name="anything_else" rows="3"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn--signal lead-form__submit">
+            Request my free teardown
+            <span class="btn__arrow" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M3 11L11 3M11 3H5M11 3V9"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </span>
+          </button>
+
+          <p class="lead-form__fine">
+            No obligation. The teardown is free, and it's yours whether or not
+            we work together.
+          </p>
+          <p class="lead-form__mail">
+            Prefer email? <a href="mailto:hello@ilaicollective.com"
+              >hello@ilaicollective.com</a
+            >
+          </p>
+        </form>
+      </div>
+
+      <!-- ============ RIGHT: REASSURANCE ============ -->
+      <aside class="side-col" data-reveal data-reveal-delay="1">
+        <div class="side-card">
+          <span class="eyebrow eyebrow--dot">What happens next</span>
+          <ol class="steps">
+            {
+              steps.map((s) => (
+                <li class="step">
+                  <span class="step__n">{s.n}</span>
+                  <div class="step__body">
+                    <h3 class="step__t">{s.t}</h3>
+                    <p class="step__d muted">{s.d}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+
+          <div class="starts">
+            <span class="starts__label">Starts at</span>
+            <ul class="starts__list">
+              <li class="starts__row">
+                <span class="starts__k">Teardown</span>
+                <span class="starts__v starts__v--free">Free</span>
+              </li>
+              <li class="starts__row">
+                <span class="starts__k">Pilot month</span>
+                <span class="starts__v"
+                  >$1,950 <span class="starts__note">fully credited</span></span
+                >
+              </li>
+              <li class="starts__row">
+                <span class="starts__k">Engagements</span>
+                <span class="starts__v">from $5,500/mo</span>
+              </li>
+            </ul>
+          </div>
+
+          <p class="trust">
+            A real US team. Human-led, research-driven, software-aided. You
+            approve everything before it ships.
+          </p>
+
+          <!-- Optional: embed Calendly inline widget here -->
+          <div class="scheduler" aria-hidden="true">
+            <span class="scheduler__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <rect
+                  x="3.5"
+                  y="4.5"
+                  width="17"
+                  height="16"
+                  rx="3"
+                  stroke="currentColor"
+                  stroke-width="1.5"></rect>
+                <path
+                  d="M3.5 9H20.5M8 3v3M16 3v3"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"></path>
+              </svg>
+            </span>
+            <span class="scheduler__text"
+              >Scheduling link goes here once your call calendar is live.</span
+            >
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ REASSURANCE FOOTER BAND ============ -->
+  <section class="reassure section--mist">
+    <div class="container reassure__inner" data-reveal>
+      <p class="reassure__line">
+        Every claim on this site is a real client result. We report interest and
+        intent, and hand off at the funnel. No AI slop, no guessing.
+      </p>
+      <a href="/work/dr-caroline-leaf" class="reassure__link"
+        >See the proof for yourself →</a
+      >
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ---------- Layout ---------- */
+  .contact {
+    padding-top: clamp(7rem, 14vh, 10rem);
+  }
+  .contact__grid {
+    display: grid;
+    gap: var(--sp-8);
+    align-items: start;
+  }
+  @media (min-width: 920px) {
+    .contact__grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: var(--sp-12);
+    }
+  }
+
+  /* ---------- Left column head ---------- */
+  .form-col__title {
+    margin-top: var(--sp-5);
+    font-size: var(--fs-h1);
+  }
+  .form-col__lead {
+    margin-top: var(--sp-4);
+    max-width: 46ch;
+  }
+
+  /* ---------- Form ---------- */
+  .lead-form {
+    margin-top: var(--sp-8);
+    display: grid;
+    gap: var(--sp-5);
+  }
+  .field {
+    display: grid;
+    gap: var(--sp-2);
+  }
+  .field label {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .field__opt {
+    font-weight: 500;
+    color: var(--muted);
+    font-size: 0.8125rem;
+  }
+  .lead-form input,
+  .lead-form textarea,
+  .lead-form select {
+    width: 100%;
+    padding: 13px 15px;
+    background: var(--canvas);
+    border: 1px solid var(--line);
+    border-radius: var(--r-input);
+    font-size: var(--fs-body);
+    color: var(--ink);
+    transition:
+      border-color var(--dur-micro) var(--ease),
+      box-shadow var(--dur-micro) var(--ease),
+      background var(--dur-micro) var(--ease);
+  }
+  .lead-form input::placeholder,
+  .lead-form textarea::placeholder {
+    color: var(--muted);
+  }
+  .lead-form input:hover,
+  .lead-form textarea:hover,
+  .lead-form select:hover {
+    border-color: var(--line-2);
+  }
+  .lead-form input:focus,
+  .lead-form textarea:focus,
+  .lead-form select:focus {
+    outline: none;
+    border-color: var(--signal);
+    box-shadow: 0 0 0 3px var(--signal-tint);
+  }
+  .lead-form textarea {
+    resize: vertical;
+    min-height: 3.5rem;
+    line-height: 1.5;
+  }
+
+  /* Select with custom caret */
+  .select-wrap {
+    position: relative;
+  }
+  .select-wrap select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 42px;
+    cursor: pointer;
+  }
+  .select-caret {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    pointer-events: none;
+  }
+
+  /* Honeypot: visually hidden but reachable for bots */
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .lead-form__submit {
+    margin-top: var(--sp-2);
+    justify-self: start;
+  }
+  .lead-form__fine {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+    max-width: 44ch;
+  }
+  .lead-form__mail {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  .lead-form__mail a {
+    color: var(--signal);
+    font-weight: 600;
+  }
+  .lead-form__mail a:hover {
+    color: var(--signal-hover);
+  }
+
+  /* ---------- Right column ---------- */
+  .side-col {
+    position: sticky;
+    top: 6.5rem;
+  }
+  @media (max-width: 919px) {
+    .side-col {
+      position: static;
+    }
+  }
+  .side-card {
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    background: var(--mist);
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+  }
+
+  /* Steps */
+  .steps {
+    list-style: none;
+    margin-top: var(--sp-5);
+    display: grid;
+    gap: var(--sp-5);
+  }
+  .step {
+    display: flex;
+    gap: var(--sp-4);
+    align-items: flex-start;
+  }
+  .step__n {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: var(--r-pill);
+    background: var(--signal-tint);
+    color: var(--signal-ink);
+    font-family: var(--font-accent);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+  }
+  .step__t {
+    font-size: var(--fs-body);
+    font-weight: 700;
+  }
+  .step__d {
+    margin-top: var(--sp-1);
+    font-size: var(--fs-sm);
+  }
+
+  /* Starts-at strip */
+  .starts {
+    margin-top: var(--sp-6);
+    padding-top: var(--sp-6);
+    border-top: 1px solid var(--line);
+  }
+  .starts__label {
+    font-family: var(--font-accent);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .starts__list {
+    list-style: none;
+    margin-top: var(--sp-4);
+    display: grid;
+    gap: var(--sp-3);
+  }
+  .starts__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-4);
+  }
+  .starts__k {
+    font-size: var(--fs-sm);
+    color: var(--ink-2);
+  }
+  .starts__v {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: var(--fs-body);
+  }
+  .starts__v--free {
+    color: var(--signal);
+  }
+  .starts__note {
+    font-weight: 500;
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  /* Trust line */
+  .trust {
+    margin-top: var(--sp-6);
+    padding-top: var(--sp-6);
+    border-top: 1px solid var(--line);
+    font-size: var(--fs-sm);
+    color: var(--ink-2);
+  }
+
+  /* Scheduler placeholder */
+  .scheduler {
+    margin-top: var(--sp-5);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: var(--sp-4);
+    border: 1px dashed var(--line-2);
+    border-radius: var(--r-input);
+    background: var(--canvas);
+  }
+  .scheduler__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+  .scheduler__text {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+
+  /* ---------- Reassurance band ---------- */
+  .reassure {
+    padding-block: var(--sp-10);
+  }
+  .reassure__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-5);
+  }
+  .reassure__line {
+    font-size: var(--fs-body);
+    color: var(--ink-2);
+    max-width: 62ch;
+  }
+  .reassure__link {
+    flex: none;
+    font-weight: 600;
+    color: var(--signal);
+  }
+  .reassure__link:hover {
+    color: var(--signal-hover);
+  }
+</style>

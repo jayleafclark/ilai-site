@@ -1,0 +1,26 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.astro/
+
+# generated
+.DS_Store
+*.log
+npm-debug.log*
+
+# env
+.env
+.env.production
+.env.local
+
+# editor
+.vscode/
+.idea/
+
+# iCloud conflict copies
+*\ 2.*
+* 2.astro
+* 2.css
+* 2.md
