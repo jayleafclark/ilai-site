@@ -1753,4 +1753,64 @@ const indLen = 1400;
     max-width: 52ch;
     margin-inline: auto;
   }
+
+  /* ============================================================
+     MOBILE (<=560px) — phone-specific polish. Desktop untouched.
+     ============================================================ */
+  @media (max-width: 560px) {
+    /* Float chip: keep it inside the gutter so it never risks
+       clipping the section edge, and let it wrap its label. */
+    .ds-float {
+      left: 8px;
+      right: 8px;
+      bottom: 14px;
+      width: max-content;
+      max-width: calc(100% - 16px);
+      padding: 10px 14px;
+    }
+    .ds-float__num { font-size: 1.35rem; }
+    .ds-float__lab { font-size: 0.7rem; }
+
+    /* Headline band: a touch tighter so the big numbers breathe
+       without crowding on a narrow column. */
+    .ds-band__grid { gap: var(--sp-6) var(--sp-5); }
+    .ds-stat { padding-left: var(--sp-4); }
+
+    /* --- Growth graph: reposition the floating tags so they stop
+       colliding at the bottom and overflowing the plot on phones.
+       Make them flow under the chart instead of overlapping it. --- */
+    .ds-graph { padding: var(--sp-5); }
+    .ds-graph__plot svg { height: 190px; }
+    .ds-graph__endtag--her {
+      top: -6px;
+      right: 0;
+      font-size: 0.72rem;
+      padding: 3px 9px;
+    }
+    /* Drop the industry + start tags out of absolute overlap into a
+       clean caption row beneath the plot. */
+    .ds-graph__endtag--ind,
+    .ds-graph__starttag {
+      position: static;
+      display: inline-block;
+      margin-top: var(--sp-3);
+      opacity: 1;
+    }
+    .ds-graph__endtag--ind { margin-right: var(--sp-2); }
+
+    /* Dashboard mock: give the platform-row labels room so
+       "X · Threads" no longer clips, and balance the KPI grid. */
+    .dsb__rowP { width: 84px; font-size: 0.66rem; }
+    .dsb__kpi:nth-child(3) { grid-column: span 2; }
+    .dsb__kN { font-size: 1.25rem; }
+
+    /* Dark context panel: tighten the mini comparison rows. */
+    .ds-ctx-row { grid-template-columns: 5.6em 1fr 3.2em; gap: var(--sp-2); }
+    .ds-ctx-row__lab { font-size: 0.74rem; }
+  }
+
+  @media (max-width: 400px) {
+    /* Extra-narrow: shrink the label column further so bars keep width. */
+    .dsb__rowP { width: 76px; }
+  }
 </style>

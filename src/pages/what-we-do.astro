@@ -1502,4 +1502,62 @@ const pricing = [
     .wwd-price__grid { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
     .wwd-price--feature { transform: translateY(-8px); }
   }
+
+  /* ============ Mobile refinements (<= 640px) ============ */
+  @media (max-width: 640px) {
+    /* Hero: tighter top gap, calmer heading, roomier lead */
+    .wwd-hero { padding-top: clamp(5.5rem, 16vw, 7rem); }
+    .wwd-herocard { padding: 1.6rem 1.35rem; gap: var(--sp-6); }
+    .wwd-herocard__title { font-size: clamp(2rem, 8.5vw, 2.6rem); line-height: 1.08; }
+    .wwd-herocard__lead { margin-top: var(--sp-4); font-size: 1.02rem; }
+    .wwd-herocard__actions { gap: var(--sp-3); }
+    .wwd-herocard__actions .btn { flex: 1 1 auto; justify-content: center; }
+    /* Hero mock: give it breathing room; float sits below, not over, the mock */
+    .wwd-hmock { max-width: none; }
+    .wwd-herocard__visual { padding-bottom: 0; }
+    .wwd-herofloat {
+      position: static;
+      margin: var(--sp-4) 0 0;
+      align-self: flex-start;
+      width: max-content;
+    }
+
+    /* Stat panel: 2-up stays, tighten */
+    .wwd-statpanel { gap: var(--sp-5) var(--sp-4); padding: 1.5rem 1.25rem; }
+    .wwd-statp { gap: var(--sp-3); }
+    .wwd-statp__ico { width: 44px; height: 44px; border-radius: 13px; }
+    .wwd-statp__num { font-size: 1.65rem; }
+
+    /* Index strip: larger tap targets */
+    .wwd-index__list { gap: var(--sp-2) var(--sp-5); }
+    .wwd-index__item a { min-height: 44px; align-items: center; padding: var(--sp-2) 0; }
+
+    /* Service blocks: calmer headings, tighter rhythm */
+    .section.wwd-svc { padding-block: clamp(2.5rem, 9vw, 3.5rem); }
+    .wwd-svc__grid { gap: var(--sp-6); }
+    .wwd-svc__title { font-size: clamp(1.7rem, 7vw, 2.1rem); max-width: none; }
+    .wwd-svc__body { margin-top: var(--sp-4); }
+    .wwd-svc__ico { width: 42px; height: 42px; }
+
+    /* Viz mocks: trimmer height, drop the overlapping corner number */
+    .wwd-viz { min-height: 240px; padding: 1.4rem; }
+    .wwd-viz__tag { display: none; }
+    .wwd-vreel { gap: var(--sp-3); }
+    .wwd-vreel__phone { width: 108px; height: 190px; }
+
+    /* Funnel: tighter heading + card padding */
+    .wwd-scope__inner { gap: var(--sp-8); }
+    .wwd-scope__title { font-size: clamp(1.8rem, 7.4vw, 2.2rem); max-width: none; }
+    .wwd-scope__body { margin-top: var(--sp-4); font-size: 1.02rem; }
+    .wwd-funnel { gap: var(--sp-3); }
+    .wwd-fstep { padding: var(--sp-5); }
+
+    /* Pricing: calmer intro + value sizing */
+    .wwd-price__h { font-size: clamp(1.8rem, 7.4vw, 2.2rem); }
+    .wwd-price__grid { margin-top: var(--sp-8); gap: var(--sp-5); }
+    .wwd-price { padding: var(--sp-6); }
+    .wwd-price--feature { padding-top: var(--sp-8); }
+    .wwd-price__v { font-size: clamp(1.9rem, 8vw, 2.4rem); }
+    .wwd-price__foot .btn { width: 100%; justify-content: center; }
+  }
 </style>

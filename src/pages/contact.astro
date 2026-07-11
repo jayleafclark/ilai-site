@@ -773,9 +773,11 @@ const pricing = [
     margin-top: var(--sp-3);
     display: flex;
     justify-content: space-between;
-    gap: var(--sp-3);
+    gap: var(--sp-2);
   }
   .starts__tick {
+    flex: 1 1 0;
+    min-width: 0;
     font-size: 0.75rem;
     line-height: 1.35;
     color: var(--muted);
@@ -792,6 +794,8 @@ const pricing = [
     font-family: var(--font-accent);
     font-weight: 700;
     letter-spacing: -0.01em;
+    /* allow the longest price ("from $5,500/mo") to wrap instead of overflowing */
+    overflow-wrap: anywhere;
   }
   @media (prefers-reduced-motion: reduce) {
     .starts__seg {
@@ -921,6 +925,60 @@ const pricing = [
     .reassure__inner {
       grid-template-columns: 1.35fr 0.65fr;
       gap: var(--sp-10);
+    }
+  }
+
+  /* ---------- Mobile polish (<= 560px) ---------- */
+  @media (max-width: 560px) {
+    /* Pull the hero closer to the nav so the fold shows the waitlist card sooner. */
+    .contact {
+      padding-top: clamp(5.5rem, 22vw, 7rem);
+    }
+    .contact__grid {
+      gap: var(--sp-6);
+    }
+
+    /* Tighten the oversized waitlist heading on narrow screens. */
+    .form-col__title {
+      font-size: clamp(1.9rem, 9vw, 2.6rem);
+      line-height: 1.08;
+    }
+    /* The line break is tuned for desktop width; let it flow on mobile. */
+    .form-col__title br {
+      display: none;
+    }
+
+    .formcard {
+      padding: var(--sp-5);
+    }
+    /* Stack icon over text so the heading has full width and never crowds. */
+    .formcard__head {
+      align-items: flex-start;
+    }
+
+    /* Pricing scale: give each label an equal share and let the price wrap
+       so "from $5,500/mo" no longer overflows/collides at ~375px. */
+    .starts {
+      padding: var(--sp-5);
+    }
+    .starts__ticks {
+      gap: 6px;
+    }
+    .starts__tick {
+      font-size: 0.68rem;
+    }
+    .starts__tick b {
+      font-size: 0.72rem;
+    }
+  }
+
+  /* Extra-narrow safety net (<= 380px): shrink the price label a touch more. */
+  @media (max-width: 380px) {
+    .starts__tick {
+      font-size: 0.65rem;
+    }
+    .starts__tick b {
+      font-size: 0.68rem;
     }
   }
 </style>

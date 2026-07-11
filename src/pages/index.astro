@@ -2298,4 +2298,167 @@ const comments = [
       grid-template-columns: repeat(3, 1fr);
     }
   }
+
+  /* =====================================================================
+     MOBILE POLISH (<= 640px) — phone-first tuning, desktop untouched.
+     Fixes: hero nav/eyebrow collision, oversized display type, cramped
+     growth rows, excessive section gaps, and tap targets under 44px.
+     ===================================================================== */
+  @media (max-width: 640px) {
+    /* --- Hero: keep the eyebrow clear of the carousel nav --- */
+    .hero {
+      padding-bottom: var(--sp-6);
+    }
+    .hslide {
+      /* let the slide grow to its content instead of a fixed tall min */
+      min-height: 0;
+    }
+    .hslide__inner {
+      padding: var(--sp-6) var(--sp-5) var(--sp-8);
+    }
+    /* Move the dots/arrows to the BOTTOM of the slide so they never sit on
+       top of the eyebrow, and give them room to breathe. */
+    .herocar__nav {
+      position: static;
+      justify-content: space-between;
+      padding: 0 var(--sp-5) var(--sp-5);
+      margin-top: calc(var(--sp-6) * -1);
+      gap: var(--sp-4);
+    }
+    .herocar__arrow {
+      width: 44px;
+      height: 44px;
+    }
+    /* Slightly tighter hero display so it doesn't dominate the whole screen */
+    .hslide__title {
+      margin-top: var(--sp-3);
+      font-size: clamp(2rem, 8.5vw, 2.55rem);
+      line-height: 1.08;
+    }
+    /* Keep the intentional <br> in hero titles (removing it would glue the two
+       clauses together with no space). The break points are readable on mobile. */
+    .hslide__lead {
+      margin-top: var(--sp-4);
+      font-size: 1.02rem;
+    }
+    .hslide__actions {
+      margin-top: var(--sp-5);
+      gap: var(--sp-3);
+    }
+    .hslide__actions .btn {
+      flex: 1 1 auto;
+      justify-content: center;
+    }
+    /* Feature cards: a touch tighter, pulled up less aggressively */
+    .herofeatures {
+      margin-top: -2.25rem;
+      gap: var(--sp-3);
+    }
+    .feat {
+      padding: var(--sp-4);
+      align-items: center;
+    }
+
+    /* --- Section rhythm: the clamp maxes at 8rem which is too airy on a
+       phone. Cap top/bottom padding so cards don't float in dead space. --- */
+    .section {
+      padding-top: var(--sp-10);
+      padding-bottom: var(--sp-10);
+    }
+    .stats-sec {
+      padding-bottom: var(--sp-10);
+    }
+    .welcome__grid,
+    .hiw__top {
+      gap: var(--sp-6);
+    }
+
+    /* --- "What a month looks like" growth rows: the 5.5em label column
+       forces 2-line wraps. Stack label above the bar for a clean read. --- */
+    .growth {
+      margin: var(--sp-5) 0;
+      gap: var(--sp-5);
+    }
+    .growth__row {
+      grid-template-columns: 1fr auto;
+      column-gap: var(--sp-3);
+      row-gap: 6px;
+    }
+    .growth__p {
+      grid-column: 1 / -1;
+      font-size: 0.95rem;
+    }
+    .growth__v {
+      font-size: 0.95rem;
+    }
+
+    /* --- Stats panel: two columns is fine but tighten and align icons top --- */
+    .statspanel {
+      gap: var(--sp-5);
+      padding: var(--sp-6);
+    }
+    .statp {
+      align-items: flex-start;
+      gap: var(--sp-3);
+    }
+    .statp__ico {
+      width: 44px;
+      height: 44px;
+    }
+
+    /* --- Services: trim the tall media blocks so 6 stacked cards aren't an
+       endless scroll, and tighten the header gap. --- */
+    .services__head {
+      margin-bottom: var(--sp-6);
+      gap: var(--sp-4);
+    }
+    .svc__media {
+      min-height: 132px;
+      padding: var(--sp-4);
+    }
+    .svc__body {
+      padding: var(--sp-5);
+    }
+
+    /* --- How it works: header gap + step spacing --- */
+    .hiw__top {
+      margin-bottom: var(--sp-6);
+    }
+    .hiw__steps {
+      gap: var(--sp-4);
+    }
+    .hiw__step {
+      padding-top: var(--sp-4);
+    }
+    .hiw__k {
+      font-size: 1.2rem;
+    }
+
+    /* --- Offer + pull + blog: rein in the stacked-card gaps --- */
+    .offer__grid,
+    .blog__grid {
+      gap: var(--sp-5);
+    }
+    .pull {
+      gap: var(--sp-6);
+    }
+    .blog__head {
+      margin-bottom: var(--sp-6);
+      gap: var(--sp-4);
+    }
+    .blog__head .btn {
+      align-self: flex-start;
+    }
+    .startcard__cta {
+      align-self: stretch;
+      justify-content: center;
+    }
+  }
+
+  /* Very small phones (<= 380px): shave the hero display once more */
+  @media (max-width: 380px) {
+    .hslide__title {
+      font-size: 1.9rem;
+    }
+  }
 </style>

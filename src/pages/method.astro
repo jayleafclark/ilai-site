@@ -1291,4 +1291,91 @@ const why = [
   @media (min-width: 820px) {
     .why__grid { grid-template-columns: repeat(3, 1fr); }
   }
+
+  /* ==================================================================
+     MOBILE (<= 560px) — phone-first refinements, not a shrink.
+     Desktop rules above are untouched; these only apply on small screens.
+  ================================================================== */
+  @media (max-width: 560px) {
+    /* ---- Hero ---- */
+    .mhero {
+      padding-top: clamp(5rem, 15vh, 6.5rem);
+      padding-bottom: var(--sp-6);
+    }
+    .herocard { padding: 1.5rem 1.25rem 1.75rem; }
+    .herocard__title {
+      font-size: clamp(2rem, 8.5vw, 2.4rem);
+      line-height: 1.08;
+    }
+    .herocard__lead {
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+    /* Full-width, easy-to-tap CTAs stacked */
+    .herocard__actions {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--sp-3);
+    }
+    .herocard__actions .btn {
+      width: 100%;
+      justify-content: center;
+      min-height: 48px;
+    }
+
+    /* ---- Flow timeline: readable stacked pills ---- */
+    .flowviz { margin-top: var(--sp-6); gap: 10px; }
+    .flowviz__pill {
+      gap: var(--sp-3);
+      padding: 13px 16px;
+      min-height: 52px;
+      border-radius: 16px;
+    }
+    /* Fixed-width number so the step names line up in a column */
+    .flowviz__num { flex: 0 0 auto; width: 1.6em; }
+    .flowviz__k { font-size: 1rem; }
+    /* Description drops under the name instead of cramming on one line */
+    .flowviz__d {
+      flex-basis: 100%;
+      margin-left: 0;
+      padding-left: calc(1.6em + var(--sp-3));
+      margin-top: -2px;
+      font-size: 0.8rem;
+      line-height: 1.3;
+    }
+    .flowviz__pill { flex-wrap: wrap; }
+
+    /* ---- Quick-stats: keep 2-up but tighten ---- */
+    .herostats { gap: var(--sp-3); margin-top: var(--sp-5); padding: 0; }
+    .herostat { padding: var(--sp-4); }
+    .herostat__num { font-size: 1.75rem; }
+    .herostat__lab { font-size: 0.8rem; }
+
+    /* ---- Step rows ---- */
+    .step__row { gap: var(--sp-6); }
+    .step__head { gap: var(--sp-2); }
+    .step__n { font-size: 2.4rem; }
+    .step__rule { max-width: 44px; }
+    .step__name { margin-top: var(--sp-3); font-size: 1.9rem; }
+    .step__body { max-width: none; }
+    .step__cols { margin-top: var(--sp-5); gap: var(--sp-4); }
+    .step__list { gap: var(--sp-3); }
+    .step__outcome { padding: var(--sp-4); }
+
+    /* Visual card: trim the tall min-height so cards don't float in space */
+    .stepcard__core {
+      min-height: 0;
+      padding: var(--sp-5);
+    }
+
+    /* ---- 04 Distribute: 6-col grid is too tight at 390px -> 4-col ---- */
+    .viz .dis__tiles { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .dis__out { font-size: 1.4rem; }
+
+    /* ---- Why cards ---- */
+    .why__head { margin-bottom: var(--sp-8); }
+    .why__h { font-size: 1.9rem; }
+    .why__grid { gap: var(--sp-5); }
+    .whycard { padding: 1.5rem 1.35rem; }
+  }
 </style>

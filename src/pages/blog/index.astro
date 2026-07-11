@@ -215,4 +215,35 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   .postcard:hover .postcard__arrow {
     transform: translate(3px, -3px);
   }
+
+  /* ============================================================
+     MOBILE (<=560px) — clean single column, comfy spacing.
+     Desktop grid/layout untouched.
+     ============================================================ */
+  @media (max-width: 560px) {
+    .bloghero {
+      padding-top: clamp(6.5rem, 22vw, 9rem);
+    }
+    .bloghero__title {
+      /* Rein the fluid display size in a touch on phones so the
+         3-line headline sits calmer above the lead. */
+      font-size: clamp(2.5rem, 12vw, 3.25rem);
+    }
+    .bloghero__lead {
+      margin-top: var(--sp-4);
+    }
+    .bloglist {
+      padding-top: var(--sp-8);
+    }
+    /* Generous gap between full-width stacked cards. */
+    .bloglist__grid {
+      gap: var(--sp-6);
+    }
+    /* Tap target: the whole card is the link, but keep the arrow
+       comfortably large. */
+    .postcard__arrow {
+      width: 34px;
+      height: 34px;
+    }
+  }
 </style>

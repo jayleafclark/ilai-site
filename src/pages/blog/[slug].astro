@@ -309,4 +309,44 @@ const articleLd = {
   .post__backbtn:hover .post__backarrow {
     transform: translateX(-3px);
   }
+
+  /* ============================================================
+     MOBILE (<=560px) — readable article on a phone. Desktop
+     measure/sizing untouched.
+     ============================================================ */
+  @media (max-width: 560px) {
+    .post {
+      padding-top: clamp(6.5rem, 22vw, 9rem);
+    }
+    .post__title {
+      font-size: clamp(2rem, 9vw, 2.6rem);
+      max-width: 100%;
+    }
+    .post__lead {
+      margin-top: var(--sp-4);
+    }
+    /* Tame the huge desktop gaps above headings so the article
+       reads as one continuous flow on a narrow screen. */
+    .prose :global(h2) {
+      font-size: 1.65rem;
+      margin-top: var(--sp-8);
+    }
+    .prose :global(h3) {
+      font-size: 1.3rem;
+      margin-top: var(--sp-6);
+    }
+    /* Pull block images to the full content width for impact. */
+    .post__cover {
+      margin-top: var(--sp-6);
+    }
+    .prose :global(blockquote) {
+      padding-inline: var(--sp-4);
+      font-size: var(--fs-body);
+    }
+    /* Keep the back button a comfortable tap target. */
+    .post__backbtn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
 </style>

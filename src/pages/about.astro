@@ -841,4 +841,87 @@ const stats = [
     height: 8px;
     border-radius: 50%;
   }
+
+  /* ---------- Mobile polish (<= 560px) ---------- */
+  @media (max-width: 560px) {
+    /* Hero: trim the top gap and rein in the display heading so it doesn't
+       dominate the fold. The desktop <br> is tuned for a wider measure. */
+    .hero {
+      padding-top: clamp(6rem, 24vw, 9rem);
+    }
+    .hero__title {
+      font-size: clamp(2rem, 9.5vw, 2.9rem);
+      line-height: 1.08;
+    }
+    .hero__title br {
+      display: none;
+    }
+
+    /* Dark-band beliefs: smaller heading, tighter card padding + spacing. */
+    .beliefs__head {
+      margin-bottom: var(--sp-8);
+    }
+    .beliefs__h {
+      font-size: clamp(1.6rem, 7.5vw, 2.1rem);
+    }
+    .belief {
+      padding: var(--sp-6) var(--sp-5);
+    }
+    .belief__title {
+      margin-top: var(--sp-4);
+      font-size: 1.15rem;
+    }
+
+    /* Team + compare + manifesto headings scale down to fit one/two lines. */
+    .team__hh,
+    .cmp__hh {
+      font-size: clamp(1.6rem, 7.5vw, 2.1rem);
+    }
+    .manifesto__title {
+      font-size: clamp(2.1rem, 10vw, 3rem);
+    }
+
+    /* "Two strengths, one team" viz: tighter inner padding on small screens. */
+    .tcv {
+      padding: var(--sp-6) var(--sp-5);
+    }
+    .tcv__node {
+      padding: var(--sp-3);
+    }
+
+    /* Stats: 2-up grid crowds the 4th cell ("Years building organizations")
+       against the edge. Shrink the icon + gap so the number/label breathe. */
+    .statspanel {
+      gap: var(--sp-5) var(--sp-4);
+      padding: var(--sp-6) var(--sp-5);
+    }
+    .statp {
+      gap: var(--sp-3);
+    }
+    .statp__ico {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+    }
+    .statp__num {
+      font-size: clamp(1.6rem, 8vw, 2rem);
+    }
+
+    /* Compare rows: a touch more breathing room per cell. */
+    .cmp__cell {
+      padding: var(--sp-4) var(--sp-5);
+    }
+
+    /* Manifesto wink callout: keep the padding comfortable, not cramped. */
+    .manifesto__wink {
+      padding: var(--sp-4);
+    }
+  }
+
+  /* Extra-narrow (<= 400px): let stats sit one per row so nothing clips. */
+  @media (max-width: 400px) {
+    .statspanel {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

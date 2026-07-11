@@ -36,7 +36,7 @@ const links = [
 
   <div class="nav__mobile" data-mobile>
     {links.map((l) => <a href={l.href}>{l.label}</a>)}
-    <a href="/contact" class="btn btn--signal">Book a call</a>
+    <a href="/contact" class="btn btn--pink nav__mobilecta">Book a call</a>
   </div>
 </header>
 
@@ -121,8 +121,8 @@ const links = [
     margin-left: auto;
     display: grid;
     gap: 5px;
-    width: 42px;
-    height: 42px;
+    width: 46px;
+    height: 46px;
     place-content: center;
     border-radius: 50%;
     background: transparent;
@@ -161,14 +161,24 @@ const links = [
     box-shadow: var(--shadow-float);
   }
   .nav__mobile a:not(.btn) {
-    padding: var(--sp-2) 0;
-    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: var(--sp-3) 0;
+    font-size: 1.12rem;
     font-weight: 500;
+    color: var(--ink);
     border-bottom: 1px solid var(--line);
   }
+  /* drop the divider on the last plain link (the one directly before the CTA) */
+  .nav__mobile a:not(.btn):has(+ .btn) {
+    border-bottom: 0;
+  }
   .nav__mobile .btn {
-    margin-top: var(--sp-2);
+    margin-top: var(--sp-3);
+    padding-block: 15px;
     justify-content: center;
+    font-size: 1.02rem;
   }
 
   .nav__mobile.is-open {
@@ -192,10 +202,22 @@ const links = [
 <script>
   const burger = document.querySelector<HTMLButtonElement>("[data-burger]");
   const mobile = document.querySelector<HTMLElement>("[data-mobile]");
+  const setMenu = (open: boolean) => {
+    burger?.setAttribute("aria-expanded", String(open));
+    burger?.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    mobile?.classList.toggle("is-open", open);
+    // lock page scroll while the panel is open so it can't drift underneath
+    document.body.style.overflow = open ? "hidden" : "";
+  };
   burger?.addEventListener("click", () => {
-    const open = burger.getAttribute("aria-expanded") === "true";
-    burger.setAttribute("aria-expanded", String(!open));
-    if (mobile) mobile.classList.toggle("is-open", !open);
+    setMenu(burger.getAttribute("aria-expanded") !== "true");
+  });
+  // close on link tap and on Escape
+  mobile?.querySelectorAll("a").forEach((a) =>
+    a.addEventListener("click", () => setMenu(false)),
+  );
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setMenu(false);
   });
 
   // Subtle lift on scroll
