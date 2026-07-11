@@ -58,6 +58,14 @@ const services = [
   { tag: "Publishing & engagement", d: "Posted everywhere on schedule, with first-response community engagement in the minutes that decide reach.", tone: "blue", viz: "grid" },
 ];
 
+const hiw = [
+  { k: "Decode", d: "Your audience, competitors, and what you sell." },
+  { k: "Define", d: "Your voice, your look, your content system." },
+  { k: "Direct", d: "We write the scripts, you film, you approve." },
+  { k: "Distribute", d: "Publish everywhere, engage in your voice." },
+  { k: "Measure", d: "A live dashboard where you watch it work." },
+];
+
 const posts = [
   { slug: "one-recording-content-system", tag: "Systems", title: "Be everywhere without living online", date: "Apr 14, 2026" },
   { slug: "why-organic-reach-fell-2025", tag: "Strategy", title: "Why organic reach fell in 2025", date: "May 20, 2026" },
@@ -68,7 +76,7 @@ const posts = [
 <Layout>
   <!-- ============ HERO ============ -->
   <section class="hero">
-    <div class="container">
+    <div class="container hero__wrap">
       <div class="herocar" data-carousel data-reveal>
         <div class="herocar__vp">
           <div class="herocar__track" data-track>
@@ -207,8 +215,8 @@ const posts = [
       <div class="herofeatures">
         {features.map((f, i) => (
           <article class="feat" data-reveal data-reveal-delay={String(i + 1)}>
-            <span class="feat__ico" aria-hidden="true" style={`color:${f.c};background:${f.bg}`}>
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" set:html={f.icon} />
+            <span class="feat__ico" aria-hidden="true" style={`--ic:${f.c}`}>
+              <svg width="21" height="21" viewBox="0 0 20 20" fill="none" set:html={f.icon} />
             </span>
             <div>
               <p class="feat__t">{f.t}</p>
@@ -277,7 +285,7 @@ const posts = [
       <div class="statspanel" data-reveal>
         {stats.map((s) => (
           <div class="statp">
-            <span class="statp__ico" aria-hidden="true" style={`color:${s.c};background:${s.bg}`}>
+            <span class="statp__ico" aria-hidden="true" style={`--ic:${s.c}`}>
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" set:html={s.icon} />
             </span>
             <div>
@@ -340,6 +348,34 @@ const posts = [
             </div>
           </article>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section howitworks section--mist">
+    <div class="container">
+      <div class="hiw__head" data-reveal>
+        <span class="eyebrow eyebrow--star">How it works</span>
+        <h2 class="hiw__h">Five steps, <span class="hl">one system.</span></h2>
+        <p class="lead">
+          The Signal Method turns one recording into a month of content, aimed at the
+          people you actually sell to.
+        </p>
+      </div>
+      <ol class="hiw__steps">
+        {hiw.map((s, i) => (
+          <li class="hiw__step" data-reveal data-reveal-delay={String((i % 5) + 1)}>
+            <span class="hiw__n">{`0${i + 1}`}</span>
+            <h3 class="hiw__k">{s.k}</h3>
+            <p class="hiw__d">{s.d}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="hiw__foot" data-reveal>
+        <a href="/method" class="btn btn--signal">
+          See the full method<span class="btn__arrow" aria-hidden="true" set:html={arrow} />
+        </a>
       </div>
     </div>
   </section>
@@ -499,8 +535,17 @@ const posts = [
 <style>
   /* ---------- Hero ---------- */
   .hero {
-    padding-top: clamp(5.25rem, 9vh, 6.75rem);
-    padding-bottom: clamp(1.75rem, 3vw, 2.5rem);
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding-top: clamp(5rem, 8vh, 6.5rem);
+    padding-bottom: clamp(1.25rem, 2.5vw, 2rem);
+  }
+  .hero__wrap {
+    max-width: calc(var(--maxw) + var(--gutter) * 2);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
   /* ---- Carousel ---- */
   .herocar {
@@ -899,12 +944,16 @@ const posts = [
     flex: none;
     display: grid;
     place-items: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: var(--blue-tint);
-    color: var(--blue);
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    color: #fff;
+    background: linear-gradient(140deg, var(--ic), color-mix(in srgb, var(--ic) 55%, #ffffff));
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.5),
+      0 10px 20px -8px var(--ic);
   }
+  .feat__ico svg { stroke-width: 1.7; }
   .feat__t {
     font-weight: 700;
     font-size: var(--fs-body);
@@ -922,7 +971,8 @@ const posts = [
     }
   }
   .hero__logos {
-    margin-top: clamp(1.75rem, 3vw, 2.75rem);
+    margin-top: auto;
+    padding-top: clamp(1.5rem, 3vw, 2.75rem);
   }
 
   /* ---------- Welcome + client card ---------- */
@@ -1046,12 +1096,14 @@ const posts = [
     flex: none;
     display: grid;
     place-items: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    background: var(--paper);
-    color: var(--blue);
-    box-shadow: var(--shadow-card);
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    color: #fff;
+    background: linear-gradient(140deg, var(--ic), color-mix(in srgb, var(--ic) 55%, #ffffff));
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.5),
+      0 10px 20px -8px var(--ic);
   }
   .statp__num {
     font-family: var(--font-accent);
@@ -1218,6 +1270,55 @@ const posts = [
     }
     .services__grid {
       grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ---------- How it works ---------- */
+  .hiw__head {
+    max-width: 46ch;
+    margin-bottom: var(--sp-10);
+  }
+  .hiw__h {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h2);
+    font-weight: 600;
+    letter-spacing: var(--tracking-tight);
+  }
+  .hiw__head .lead {
+    margin-top: var(--sp-4);
+  }
+  .hiw__steps {
+    list-style: none;
+    display: grid;
+    gap: var(--sp-5);
+    counter-reset: step;
+  }
+  .hiw__step {
+    padding-top: var(--sp-5);
+    border-top: 2px solid var(--line-2);
+  }
+  .hiw__n {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: var(--fs-sm);
+    color: var(--coral);
+  }
+  .hiw__k {
+    margin-top: var(--sp-3);
+    font-size: 1.3rem;
+  }
+  .hiw__d {
+    margin-top: var(--sp-2);
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  .hiw__foot {
+    margin-top: var(--sp-8);
+  }
+  @media (min-width: 720px) {
+    .hiw__steps {
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--sp-4);
     }
   }
 

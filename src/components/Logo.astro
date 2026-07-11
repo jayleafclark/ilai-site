@@ -1,19 +1,22 @@
 ---
-// Ilai wordmark + three-leaf sprout mark.
+// Ilai wordmark + three-leaf sprout mark (matches the supplied logo).
 export interface Props {
   variant?: "ink" | "light";
 }
 const { variant = "ink" } = Astro.props;
 const wordColor = variant === "light" ? "#ffffff" : "var(--ink)";
 const markColor = variant === "light" ? "#ffffff" : "var(--coral)";
+// One slender leaf, pointed at both ends, base at local origin (0,0), tip up.
+const leaf =
+  "M0 -11.5 C 1.9 -7.5 1.9 -3.2 0 0 C -1.9 -3.2 -1.9 -7.5 0 -11.5 Z";
 ---
 
 <a href="/" class="logo" aria-label="Ilai Collective home">
-  <svg class="logo__mark" width="26" height="24" viewBox="0 0 24 24" aria-hidden="true">
+  <svg class="logo__mark" width="30" height="28" viewBox="0 0 24 24" aria-hidden="true">
     <g fill={markColor}>
-      <path d="M12 16.5C10.4 12.8 10.4 7.6 12 3.5C13.6 7.6 13.6 12.8 12 16.5Z" />
-      <path d="M12 16.8C14 12.9 17.7 9.4 21.4 8.2C21 12.4 17.6 16 12 16.8Z" />
-      <path d="M12 16.8C10 12.9 6.3 9.4 2.6 8.2C3 12.4 6.4 16 12 16.8Z" />
+      <path d={leaf} transform="translate(12 20) rotate(-56) scale(1.05)" />
+      <path d={leaf} transform="translate(12 20) scale(0.78)" />
+      <path d={leaf} transform="translate(12 20) rotate(56) scale(1.05)" />
     </g>
   </svg>
   <span class="logo__word" style={`color:${wordColor}`}>ilai</span>
