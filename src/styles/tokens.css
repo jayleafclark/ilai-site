@@ -104,7 +104,9 @@
   --sp-12: 96px;
   --sp-16: 128px;
 
-  --section-y: clamp(3.5rem, 5.5vw, 6rem);
+  --section-y: clamp(5rem, 8vw, 8rem);
+  --head-gap: var(--sp-10); /* section header -> content */
+  --grid-gap: var(--sp-6); /* between cards in a grid */
   --maxw: 1200px;
   --maxw-wide: 1320px;
   --maxw-prose: 68ch;
