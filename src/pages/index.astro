@@ -21,7 +21,7 @@ const features = [
   {
     t: "Everywhere, one voice",
     s: "One recording, published across up to 13 platforms.",
-    c: "var(--green)", bg: "var(--green-tint)",
+    c: "var(--charcoal)", bg: "var(--green-tint)",
     icon: `<circle cx="10" cy="10" r="2.2" fill="currentColor"/><path d="M5.5 5.5a6.5 6.5 0 000 9M14.5 5.5a6.5 6.5 0 010 9M3 3a10 10 0 000 14M17 3a10 10 0 010 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>`,
   },
 ];
@@ -43,22 +43,22 @@ const stats = [
     icon: `<path d="M3.5 11L19 4l-6 15-2.5-6-7-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>`,
   },
   {
-    value: 13, suffix: "+", label: "Platforms, one voice", c: "var(--green)", bg: "var(--green-tint)",
+    value: 13, suffix: "+", label: "Platforms, one voice", c: "pearl", bg: "var(--green-tint)",
     icon: `<rect x="3" y="3" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="12.5" y="3" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="12.5" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="12.5" y="12.5" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/>`,
   },
   {
-    value: 8, suffix: "", label: "Engagement-engine platforms", c: "var(--plum)", bg: "var(--plum-tint)",
+    value: 8, suffix: "", label: "Engagement-engine platforms", c: "var(--charcoal)", bg: "var(--plum-tint)",
     icon: `<path d="M4 5.5h16v9H10l-4 3.5v-3.5H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>`,
   },
 ];
 
 const services = [
-  { tag: "Research & strategy", d: "We learn your audience, your competitors, and which formats are earning engagement in your niche right now, then aim every piece before we make it.", tone: "blue", viz: "grid" },
-  { tag: "Podcasts, video & scripts", d: "We write the scripts and shot lists, you record once, and we edit the full episode with dynamic motion graphics and sound design.", tone: "slate", viz: "wave" },
-  { tag: "Short-form & reels", d: "Every episode cut into vertical clips with hooks and captions, fanned out across each platform in your voice.", tone: "terra", viz: "reel" },
-  { tag: "Writing at scale", d: "Quote cards, carousels, long-form articles, and newsletters, all written in the voice we document with you.", tone: "slate", viz: "grid" },
-  { tag: "Brand & on-brand templates", d: "Templates matched to your exact typography and color, so 350 posts a month still look unmistakably yours.", tone: "terra", viz: "reel" },
-  { tag: "Publishing & engagement", d: "A bespoke posting schedule built for your stage, plus first-response community engagement in the minutes that decide reach.", tone: "blue", viz: "grid" },
+  { tag: "Research & strategy", d: "We learn your audience, your competitors, and which formats are earning engagement in your niche right now, then aim every piece before we make it.", tone: "forest", viz: "chart" },
+  { tag: "Podcasts, video & scripts", d: "We write the scripts and shot lists, you record once, and we edit the full episode with dynamic motion graphics and sound design.", tone: "charcoal", viz: "wave" },
+  { tag: "Short-form & reels", d: "Every episode cut into vertical clips with hooks and captions, fanned out across each platform in your voice.", tone: "pink", viz: "reel" },
+  { tag: "Writing at scale", d: "Quote cards, carousels, long-form articles, and newsletters, all written in the voice we document with you.", tone: "charcoal", viz: "doc" },
+  { tag: "Brand & on-brand templates", d: "Templates matched to your exact typography and color, so 350 posts a month still look unmistakably yours.", tone: "forest", viz: "swatch" },
+  { tag: "Publishing & engagement", d: "A bespoke posting schedule built for your stage, plus first-response community engagement in the minutes that decide reach.", tone: "pink", viz: "grid" },
 ];
 
 const hiw = [
@@ -320,7 +320,7 @@ const comments = [
       <div class="statspanel" data-reveal>
         {stats.map((s) => (
           <div class="statp">
-            <span class="statp__ico" aria-hidden="true" style={`--ic:${s.c}`}>
+            <span class={`statp__ico${s.c === "pearl" ? " ico--pearl" : ""}`} aria-hidden="true" style={s.c === "pearl" ? "" : `--ic:${s.c}`}>
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" set:html={s.icon} />
             </span>
             <div>
@@ -374,6 +374,25 @@ const comments = [
               {s.viz === "grid" && (
                 <div class="viz-grid">
                   {Array.from({ length: 6 }).map((_, k) => <span class={k === 2 ? "on" : ""}></span>)}
+                </div>
+              )}
+              {s.viz === "chart" && (
+                <div class="viz-chart">
+                  {[42, 66, 54, 88, 72].map((h) => <span style={`--h:${h}%`}></span>)}
+                </div>
+              )}
+              {s.viz === "doc" && (
+                <div class="viz-doc">
+                  <span class="viz-doc__q">&ldquo;</span>
+                  <span></span><span></span><span class="viz-doc__s"></span>
+                </div>
+              )}
+              {s.viz === "swatch" && (
+                <div class="viz-swatch">
+                  <span class="viz-swatch__aa">Aa</span>
+                  <span class="viz-swatch__row">
+                    <i></i><i></i><i></i><i></i>
+                  </span>
                 </div>
               )}
             </div>
@@ -616,18 +635,18 @@ const comments = [
     overflow: hidden;
     color: #fff;
     background:
-      radial-gradient(80% 120% at 85% 12%, rgba(227, 178, 76, 0.42), transparent 60%),
+      radial-gradient(80% 120% at 85% 12%, rgba(230, 169, 196, 0.42), transparent 60%),
       radial-gradient(70% 90% at 8% 92%, rgba(13, 40, 29, 0.9), transparent 65%),
       linear-gradient(135deg, var(--charcoal-2), var(--charcoal) 55%, var(--charcoal-3));
   }
   .hslide--2 {
     background:
-      radial-gradient(75% 110% at 88% 15%, rgba(227, 178, 76, 0.34), transparent 60%),
+      radial-gradient(75% 110% at 88% 15%, rgba(230, 169, 196, 0.34), transparent 60%),
       linear-gradient(135deg, var(--charcoal), var(--charcoal-2));
   }
   .hslide--3 {
     background:
-      radial-gradient(85% 120% at 80% 20%, rgba(227, 178, 76, 0.5), transparent 62%),
+      radial-gradient(85% 120% at 80% 20%, rgba(230, 169, 196, 0.5), transparent 62%),
       linear-gradient(135deg, var(--charcoal-2), var(--charcoal-3));
   }
   .hslide__inner {
@@ -1393,9 +1412,9 @@ const comments = [
     padding: var(--sp-5);
     overflow: hidden;
   }
-  .svc--slate .svc__media { background: linear-gradient(150deg, var(--slate), var(--slate-2)); }
-  .svc--terra .svc__media { background: linear-gradient(150deg, var(--coral), var(--coral-soft)); }
-  .svc--blue .svc__media { background: linear-gradient(150deg, var(--brand), #e0cfa0); }
+  .svc--forest .svc__media { background: linear-gradient(150deg, var(--coral), var(--coral-hover)); }
+  .svc--charcoal .svc__media { background: linear-gradient(150deg, var(--slate), var(--slate-2)); }
+  .svc--pink .svc__media { background: linear-gradient(150deg, var(--pink-ink), var(--pink)); }
   .svc__num {
     position: absolute;
     top: var(--sp-4);
@@ -1472,8 +1491,45 @@ const comments = [
     animation: gridpulse 2s var(--ease) infinite;
   }
   @keyframes gridpulse { 50% { opacity: 0.5; } }
+  /* Research chart */
+  .viz-chart { display: flex; align-items: flex-end; gap: 6px; height: 78px; }
+  .viz-chart span {
+    width: 13px; height: var(--h); border-radius: 4px 4px 2px 2px;
+    background: rgba(255, 255, 255, 0.88); transform-origin: bottom;
+    animation: vizchart 1.7s var(--ease) infinite alternate;
+  }
+  .viz-chart span:nth-child(2n) { animation-delay: 0.3s; opacity: 0.72; }
+  .viz-chart span:nth-child(3n) { animation-delay: 0.5s; }
+  @keyframes vizchart { to { transform: scaleY(0.62); } }
+  /* Writing / quote doc */
+  .viz-doc {
+    position: relative; width: 128px; display: flex; flex-direction: column; gap: 9px;
+    padding: 30px 16px 16px; border-radius: 12px;
+    background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.28);
+  }
+  .viz-doc__q {
+    position: absolute; top: 2px; left: 12px; font-family: var(--font-display);
+    font-size: 2.6rem; line-height: 1; color: rgba(255, 255, 255, 0.85);
+  }
+  .viz-doc span { height: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.55); }
+  .viz-doc__s { width: 58%; }
+  /* Brand swatches */
+  .viz-swatch { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .viz-swatch__aa {
+    font-family: var(--font-display); font-weight: 600; font-size: 2.6rem; line-height: 1;
+    letter-spacing: -0.03em; color: #fff;
+  }
+  .viz-swatch__row { display: flex; gap: 8px; }
+  .viz-swatch__row i {
+    width: 24px; height: 24px; border-radius: 8px;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  }
+  .viz-swatch__row i:nth-child(1) { background: var(--pink); }
+  .viz-swatch__row i:nth-child(2) { background: #fff; }
+  .viz-swatch__row i:nth-child(3) { background: var(--coral-soft); }
+  .viz-swatch__row i:nth-child(4) { background: var(--charcoal); }
   @media (prefers-reduced-motion: reduce) {
-    .viz-wave span, .viz-grid span.on { animation: none; }
+    .viz-wave span, .viz-grid span.on, .viz-chart span { animation: none; }
   }
   .svc__body {
     background: var(--paper);

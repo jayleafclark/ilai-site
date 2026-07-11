@@ -35,20 +35,31 @@
   --coral-ink: #0f3d2a;
   --coral-soft: #57977a;
 
-  /* --- Accents (complementary to forest) --- */
-  --brand: #c9a25c; /* subdued gold / ochre */
-  --brand-deep: #b0894a;
-  --brand-night: #6e5322;
-  --brand-tint: #f0e7d3;
-  --green: #4fa47e; /* fresh mint/emerald */
-  --green-tint: #dcefe6;
-  --gold: #c9a25c;
-  --gold-tint: #f0e7d3;
-  --plum: #c07a58; /* terracotta */
-  --plum-tint: #f3e2d7;
-  --pink: #e6a9c4; /* powder pink — soft, cute accent */
+  /* --- Accent scheme: pink · forest · charcoal · pearl (no gold/orange/mint) --- */
+  --pink: #e6a9c4; /* powder pink — soft accent */
   --pink-tint: #f8ebf1;
-  --pink-ink: #b06388; /* deeper dusty rose for pink text/badges (contrast) */
+  --pink-ink: #b06388; /* deeper dusty rose — pink icon chips + pink text (contrast) */
+
+  /* --brand / --gold now resolve to the deep pink so any legacy gold reads pink */
+  --brand: #b06388;
+  --brand-deep: #94486e;
+  --brand-night: #5e2f47;
+  --brand-tint: #f8ebf1;
+  --gold: #b06388;
+  --gold-tint: #f8ebf1;
+
+  /* --green now resolves to the exact forest green (was mint) */
+  --green: #1c6b4a;
+  --green-tint: #dcece4;
+
+  /* --plum now resolves to a neutral charcoal-slate (was terracotta) */
+  --plum: #35393a;
+  --plum-tint: #e6e9e7;
+
+  /* pearl — a soft white/3D chip surface for the 4th accent */
+  --pearl: #ffffff;
+  --pearl-2: #e8ede5;
+  --pearl-ink: #123527; /* forest glyph on a pearl chip */
 
   --drleaf: #ce5a7a;
   --drleaf-tint: #f8e7ec;
