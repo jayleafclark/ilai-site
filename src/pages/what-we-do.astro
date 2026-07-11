@@ -548,7 +548,7 @@ const pricing = [
     border-radius: var(--r-card-lg);
     color: #fff;
     background:
-      radial-gradient(80% 120% at 85% 10%, rgba(230, 169, 196, 0.42), transparent 58%),
+      radial-gradient(80% 120% at 85% 10%, rgba(201, 162, 92, 0.42), transparent 58%),
       radial-gradient(70% 90% at 6% 94%, rgba(13, 40, 29, 0.9), transparent 62%),
       linear-gradient(135deg, var(--charcoal-2), var(--charcoal) 55%, var(--charcoal-3));
     box-shadow: var(--shadow-float);
@@ -559,7 +559,7 @@ const pricing = [
     right: -10%;
     width: 60%;
     height: 120%;
-    background: radial-gradient(50% 50% at 50% 40%, rgba(230, 169, 196, 0.28), transparent 70%);
+    background: radial-gradient(50% 50% at 50% 40%, rgba(201, 162, 92, 0.28), transparent 70%);
     pointer-events: none;
   }
   .wwd-herocard__inner {
@@ -871,7 +871,7 @@ const pricing = [
   }
   .wwd-viz--dark {
     background:
-      radial-gradient(80% 110% at 82% 12%, rgba(230, 169, 196, 0.28), transparent 60%),
+      radial-gradient(80% 110% at 82% 12%, rgba(201, 162, 92, 0.28), transparent 60%),
       linear-gradient(150deg, var(--charcoal), var(--charcoal-2));
   }
   .wwd-viz--dark .wwd-viz__tag { color: rgba(255, 255, 255, 0.55); }
@@ -981,6 +981,16 @@ const pricing = [
   }
   .wwd-vsched__cell {
     aspect-ratio: 1; border-radius: 7px;
+    animation: wwd-schedcell 3.4s var(--ease) infinite;
+  }
+  .wwd-vsched__grid .wwd-vsched__cell:nth-child(5n) { animation-delay: -0.4s; }
+  .wwd-vsched__grid .wwd-vsched__cell:nth-child(5n + 1) { animation-delay: -1.1s; }
+  .wwd-vsched__grid .wwd-vsched__cell:nth-child(5n + 2) { animation-delay: -1.8s; }
+  .wwd-vsched__grid .wwd-vsched__cell:nth-child(5n + 3) { animation-delay: -2.5s; }
+  .wwd-vsched__grid .wwd-vsched__cell:nth-child(5n + 4) { animation-delay: -3.1s; }
+  @keyframes wwd-schedcell {
+    0%, 100% { transform: scale(0.92); opacity: 0.85; }
+    16% { transform: scale(1); opacity: 1; }
   }
   .wwd-vsched__cell--a { background: color-mix(in srgb, var(--green) 62%, white); }
   .wwd-vsched__cell--b { background: color-mix(in srgb, var(--brand) 66%, white); }
@@ -1021,7 +1031,14 @@ const pricing = [
   .wwd-vbrand__swatches span {
     aspect-ratio: 1; border-radius: 10px;
     box-shadow: inset 0 1px 1px rgba(255,255,255,0.4);
+    animation: wwd-swpop 2.8s var(--ease) infinite;
   }
+  .wwd-vbrand__swatches span:nth-child(1) { animation-delay: 0s; }
+  .wwd-vbrand__swatches span:nth-child(2) { animation-delay: 0.15s; }
+  .wwd-vbrand__swatches span:nth-child(3) { animation-delay: 0.3s; }
+  .wwd-vbrand__swatches span:nth-child(4) { animation-delay: 0.45s; }
+  .wwd-vbrand__swatches span:nth-child(5) { animation-delay: 0.6s; }
+  @keyframes wwd-swpop { 0%, 70%, 100% { transform: translateY(0) scale(1); } 22% { transform: translateY(-5px) scale(1.1); } }
   .wwd-vbrand__type {
     display: flex; align-items: center; gap: 16px;
     padding: 16px; border-radius: 14px;
@@ -1154,14 +1171,17 @@ const pricing = [
     transform: scaleY(0.15); transform-origin: bottom;
     transition: transform 0.7s var(--ease);
   }
-  .is-visible .wwd-vdash__chart span { transform: none; }
-  .wwd-vdash__chart span:nth-child(2) { transition-delay: 0.05s; }
-  .wwd-vdash__chart span:nth-child(3) { transition-delay: 0.1s; }
-  .wwd-vdash__chart span:nth-child(4) { transition-delay: 0.15s; }
-  .wwd-vdash__chart span:nth-child(5) { transition-delay: 0.2s; }
-  .wwd-vdash__chart span:nth-child(6) { transition-delay: 0.25s; }
-  .wwd-vdash__chart span:nth-child(7) { transition-delay: 0.3s; }
-  .wwd-vdash__chart span:nth-child(8) { transition-delay: 0.35s; background: linear-gradient(180deg, var(--charcoal-3), var(--coral)); }
+  /* once revealed, the chart keeps ticking like live data */
+  .is-visible .wwd-vdash__chart span { animation: wwd-dashlive 2.6s var(--ease) infinite alternate; }
+  @keyframes wwd-dashlive { from { transform: scaleY(0.5); } to { transform: scaleY(1); } }
+  .wwd-vdash__chart span:nth-child(1) { animation-delay: -2.2s; }
+  .wwd-vdash__chart span:nth-child(2) { animation-delay: -1.9s; }
+  .wwd-vdash__chart span:nth-child(3) { animation-delay: -1.6s; }
+  .wwd-vdash__chart span:nth-child(4) { animation-delay: -1.3s; }
+  .wwd-vdash__chart span:nth-child(5) { animation-delay: -1s; }
+  .wwd-vdash__chart span:nth-child(6) { animation-delay: -0.7s; }
+  .wwd-vdash__chart span:nth-child(7) { animation-delay: -0.4s; }
+  .wwd-vdash__chart span:nth-child(8) { animation-delay: -0.1s; background: linear-gradient(180deg, var(--charcoal-3), var(--coral)); }
   .wwd-vdash__foot {
     display: flex; align-items: center; gap: 10px;
     padding-top: 12px; border-top: 1px solid var(--line);
@@ -1179,8 +1199,10 @@ const pricing = [
   .wwd-vdash__refresh { font-size: 0.74rem; color: var(--muted); }
 
   @media (prefers-reduced-motion: reduce) {
-    .wwd-vwave span, .wwd-vreel__prog i, .wwd-valert { animation: none; }
-    .wwd-bar i, .is-visible .wwd-vdash__chart span { transition: none; }
+    .wwd-vwave span, .wwd-vreel__prog i, .wwd-valert,
+    .wwd-vsched__cell, .wwd-vbrand__swatches span,
+    .is-visible .wwd-vdash__chart span { animation: none; }
+    .wwd-bar i { transition: none; }
   }
 
   /* ============ Platform strip ============ */
@@ -1206,8 +1228,8 @@ const pricing = [
     background: rgba(255, 255, 255, 0.04);
   }
   .wwd-fstep--close {
-    border-color: rgba(230, 169, 196, 0.55);
-    background: rgba(230, 169, 196, 0.12);
+    border-color: rgba(201, 162, 92, 0.55);
+    background: rgba(201, 162, 92, 0.12);
   }
   .wwd-fstep__row { display: flex; align-items: center; gap: var(--sp-3); }
   .wwd-fstep__who {

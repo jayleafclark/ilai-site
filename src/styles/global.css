@@ -201,8 +201,9 @@ p {
 .hl-mint {
   color: var(--green);
 }
+/* Bright pink highlight (reads on dark hero cards) */
 .hl-gold {
-  color: var(--brand-deep);
+  color: var(--pink);
 }
 
 /* Pearl icon chip — the 4th accent: a soft white 3D surface with a forest
@@ -277,13 +278,13 @@ p {
 .btn:hover .btn__arrow {
   transform: translate(3px, -3px);
 }
-/* Primary CTA = forest green (brighter than the accent so it reads on dark). */
+/* Primary CTA = the exact brand forest green. */
 .btn--signal {
-  --btn-bg: #1d7d52;
+  --btn-bg: var(--coral);
   --btn-fg: #fff;
 }
 .btn--signal:hover {
-  --btn-bg: #1a6e48;
+  --btn-bg: var(--coral-hover);
 }
 /* Powder-pink button — the top-right nav CTA (matches the logo centre leaf) */
 .btn--pink {

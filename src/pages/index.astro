@@ -2,8 +2,12 @@
 import Layout from "../layouts/Layout.astro";
 import CTASection from "../components/CTASection.astro";
 import PlatformStrip from "../components/PlatformStrip.astro";
+import { getCollection } from "astro:content";
 
 const arrow = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const fmtDate = (d) => d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 
 const features = [
   {
@@ -69,11 +73,17 @@ const hiw = [
   { k: "Measure", d: "A live dashboard where you watch it work." },
 ];
 
-const posts = [
-  { slug: "one-recording-content-system", tag: "Systems", title: "Be everywhere without living online", date: "Apr 14, 2026" },
-  { slug: "why-organic-reach-fell-2025", tag: "Strategy", title: "Why organic reach fell in 2025", date: "May 20, 2026" },
-  { slug: "ai-slop-vs-researched-content", tag: "Craft", title: "AI slop vs researched content", date: "Jun 18, 2026" },
-];
+// Latest 3 real blog posts, with their real covers
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 3)
+  .map((p) => ({
+    slug: p.slug,
+    tag: p.data.tags?.[0] ?? "Journal",
+    title: p.data.title,
+    date: fmtDate(p.data.pubDate),
+    cover: p.data.cover,
+  }));
 
 // Hero slide 1 — content calendar (dots per day, colored by platform)
 const dotPalette = ["var(--coral)", "var(--brand)", "var(--green)", "var(--plum)", "var(--pink)"];
@@ -409,13 +419,33 @@ const comments = [
   <!-- ============ HOW IT WORKS ============ -->
   <section class="section howitworks section--mist">
     <div class="container">
-      <div class="hiw__head" data-reveal>
-        <span class="eyebrow eyebrow--star">How it works</span>
-        <h2 class="hiw__h">Five steps, <span class="hl">one system.</span></h2>
-        <p class="lead">
-          The Signal Method turns one recording into a month of content, aimed at the
-          people you actually sell to.
-        </p>
+      <div class="hiw__top">
+        <div class="hiw__head" data-reveal>
+          <span class="eyebrow eyebrow--star">How it works</span>
+          <h2 class="hiw__h">Five steps, <span class="hl">one system.</span></h2>
+          <p class="lead">
+            The Signal Method turns one recording into a month of content, aimed at the
+            people you actually sell to.
+          </p>
+        </div>
+        <div class="hiw__viz" data-reveal data-reveal-delay="1" aria-hidden="true">
+          <div class="hiwviz">
+            <div class="hiwviz__src">
+              <span class="hiwviz__pulse"></span>
+              <span>One recording</span>
+            </div>
+            <div class="hiwviz__flow" aria-hidden="true"></div>
+            <div class="hiwviz__grid">
+              {Array.from({ length: 15 }).map((_, k) => (
+                <span class="hiwviz__cell" style={`--d:${(k % 5) * 0.28 + Math.floor(k / 5) * 0.14}s`}></span>
+              ))}
+            </div>
+            <div class="hiwviz__foot">
+              <span class="hiwviz__dot"></span>
+              <span>350+ posts a month, every platform</span>
+            </div>
+          </div>
+        </div>
       </div>
       <ol class="hiw__steps">
         {hiw.map((s, i) => (
@@ -510,6 +540,7 @@ const comments = [
         {posts.map((p, i) => (
           <a href={`/blog/${p.slug}`} class="postcard" data-reveal data-reveal-delay={String(i + 1)}>
             <div class={`postcard__thumb postcard__thumb--${i}`} aria-hidden="true">
+              {p.cover && <img class="postcard__cover" src={`${base}${p.cover}`} alt="" loading="lazy" width="1200" height="630" />}
               <span class="postcard__tag">{p.tag}</span>
             </div>
             <div class="postcard__body">
@@ -635,18 +666,18 @@ const comments = [
     overflow: hidden;
     color: #fff;
     background:
-      radial-gradient(80% 120% at 85% 12%, rgba(230, 169, 196, 0.42), transparent 60%),
+      radial-gradient(80% 120% at 85% 12%, rgba(201, 162, 92, 0.42), transparent 60%),
       radial-gradient(70% 90% at 8% 92%, rgba(13, 40, 29, 0.9), transparent 65%),
       linear-gradient(135deg, var(--charcoal-2), var(--charcoal) 55%, var(--charcoal-3));
   }
   .hslide--2 {
     background:
-      radial-gradient(75% 110% at 88% 15%, rgba(230, 169, 196, 0.34), transparent 60%),
+      radial-gradient(75% 110% at 88% 15%, rgba(201, 162, 92, 0.34), transparent 60%),
       linear-gradient(135deg, var(--charcoal), var(--charcoal-2));
   }
   .hslide--3 {
     background:
-      radial-gradient(85% 120% at 80% 20%, rgba(230, 169, 196, 0.5), transparent 62%),
+      radial-gradient(85% 120% at 80% 20%, rgba(201, 162, 92, 0.5), transparent 62%),
       linear-gradient(135deg, var(--charcoal-2), var(--charcoal-3));
   }
   .hslide__inner {
@@ -1457,6 +1488,7 @@ const comments = [
     padding: 12px;
   }
   .viz-reel__play {
+    position: relative;
     display: grid;
     place-items: center;
     width: 38px;
@@ -1464,16 +1496,34 @@ const comments = [
     border-radius: 50%;
     background: #fff;
     color: var(--coral);
+    animation: vizReelPlay 2.4s var(--ease) infinite;
   }
+  .viz-reel__play::after {
+    content: "";
+    position: absolute; inset: 0; border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    animation: vizReelRipple 2.4s var(--ease-out) infinite;
+  }
+  @keyframes vizReelPlay { 0%, 62%, 100% { transform: scale(1); } 72% { transform: scale(0.86); } 82% { transform: scale(1.06); } }
+  @keyframes vizReelRipple { 0%, 62% { opacity: 0; transform: scale(1); } 72% { opacity: 0.9; } 100% { opacity: 0; transform: scale(1.9); } }
   .viz-reel__bar,
   .viz-reel__cap {
     width: 100%;
     height: 6px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.28);
+    overflow: hidden;
   }
-  .viz-reel__cap { width: 66%; }
-  /* Publish grid */
+  /* progress fill sweeps the track */
+  .viz-reel__bar::before {
+    content: "";
+    display: block; height: 100%; width: 100%; border-radius: 999px;
+    background: #fff; transform-origin: left; transform: scaleX(0.1);
+    animation: vizReelFill 3.4s linear infinite;
+  }
+  @keyframes vizReelFill { 0% { transform: scaleX(0.05); } 96% { transform: scaleX(1); } 100% { transform: scaleX(0.05); } }
+  .viz-reel__cap { width: 66%; background: rgba(255, 255, 255, 0.5); }
+  /* Publish grid — cells publish across the grid in a rolling sequence */
   .viz-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1483,25 +1533,35 @@ const comments = [
   .viz-grid span {
     aspect-ratio: 1;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.22);
-    border: 1px solid rgba(255, 255, 255, 0.32);
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    animation: vizGridCell 3s var(--ease) infinite;
   }
-  .viz-grid span.on {
-    background: #fff;
-    animation: gridpulse 2s var(--ease) infinite;
+  .viz-grid span:nth-child(1) { animation-delay: 0s; }
+  .viz-grid span:nth-child(2) { animation-delay: 0.25s; }
+  .viz-grid span:nth-child(3) { animation-delay: 0.5s; }
+  .viz-grid span:nth-child(4) { animation-delay: 0.75s; }
+  .viz-grid span:nth-child(5) { animation-delay: 1s; }
+  .viz-grid span:nth-child(6) { animation-delay: 1.25s; }
+  @keyframes vizGridCell {
+    0%, 70%, 100% { background: rgba(255, 255, 255, 0.18); transform: scale(0.94); }
+    12% { background: #fff; transform: scale(1); }
+    40% { background: rgba(230, 169, 196, 0.6); }
   }
-  @keyframes gridpulse { 50% { opacity: 0.5; } }
-  /* Research chart */
+  /* Research chart — live rolling data */
   .viz-chart { display: flex; align-items: flex-end; gap: 6px; height: 78px; }
   .viz-chart span {
     width: 13px; height: var(--h); border-radius: 4px 4px 2px 2px;
     background: rgba(255, 255, 255, 0.88); transform-origin: bottom;
-    animation: vizchart 1.7s var(--ease) infinite alternate;
+    animation: vizchart 1.9s var(--ease) infinite alternate;
   }
-  .viz-chart span:nth-child(2n) { animation-delay: 0.3s; opacity: 0.72; }
-  .viz-chart span:nth-child(3n) { animation-delay: 0.5s; }
-  @keyframes vizchart { to { transform: scaleY(0.62); } }
-  /* Writing / quote doc */
+  .viz-chart span:nth-child(1) { animation-delay: -1.5s; }
+  .viz-chart span:nth-child(2) { animation-delay: -1.1s; }
+  .viz-chart span:nth-child(3) { animation-delay: -0.7s; }
+  .viz-chart span:nth-child(4) { animation-delay: -0.3s; }
+  .viz-chart span:nth-child(5) { animation-delay: 0s; }
+  @keyframes vizchart { from { transform: scaleY(0.4); } to { transform: scaleY(1); } }
+  /* Writing / quote doc — a line types itself out */
   .viz-doc {
     position: relative; width: 128px; display: flex; flex-direction: column; gap: 9px;
     padding: 30px 16px 16px; border-radius: 12px;
@@ -1512,8 +1572,14 @@ const comments = [
     font-size: 2.6rem; line-height: 1; color: rgba(255, 255, 255, 0.85);
   }
   .viz-doc span { height: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.55); }
-  .viz-doc__s { width: 58%; }
-  /* Brand swatches */
+  .viz-doc span:nth-child(2) { width: 100%; }
+  .viz-doc span:nth-child(3) { width: 84%; }
+  .viz-doc__s {
+    width: 58%; transform-origin: left;
+    animation: vizType 3.6s steps(24) infinite;
+  }
+  @keyframes vizType { 0% { transform: scaleX(0); } 55% { transform: scaleX(1); } 92% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+  /* Brand swatches — pop in sequence */
   .viz-swatch { display: flex; flex-direction: column; align-items: center; gap: 14px; }
   .viz-swatch__aa {
     font-family: var(--font-display); font-weight: 600; font-size: 2.6rem; line-height: 1;
@@ -1523,13 +1589,16 @@ const comments = [
   .viz-swatch__row i {
     width: 24px; height: 24px; border-radius: 8px;
     box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    animation: vizSwatch 2.8s var(--ease) infinite;
   }
-  .viz-swatch__row i:nth-child(1) { background: var(--pink); }
-  .viz-swatch__row i:nth-child(2) { background: #fff; }
-  .viz-swatch__row i:nth-child(3) { background: var(--coral-soft); }
-  .viz-swatch__row i:nth-child(4) { background: var(--charcoal); }
+  .viz-swatch__row i:nth-child(1) { background: var(--pink); animation-delay: 0s; }
+  .viz-swatch__row i:nth-child(2) { background: #fff; animation-delay: 0.2s; }
+  .viz-swatch__row i:nth-child(3) { background: var(--coral-soft); animation-delay: 0.4s; }
+  .viz-swatch__row i:nth-child(4) { background: var(--charcoal); animation-delay: 0.6s; }
+  @keyframes vizSwatch { 0%, 70%, 100% { transform: translateY(0) scale(1); } 20% { transform: translateY(-5px) scale(1.12); } }
   @media (prefers-reduced-motion: reduce) {
-    .viz-wave span, .viz-grid span.on, .viz-chart span { animation: none; }
+    .viz-wave span, .viz-grid span, .viz-chart span, .viz-reel__play,
+    .viz-reel__play::after, .viz-reel__bar::before, .viz-doc__s, .viz-swatch__row i { animation: none; }
   }
   .svc__body {
     background: var(--paper);
@@ -1558,15 +1627,113 @@ const comments = [
   }
 
   /* ---------- How it works ---------- */
+  .hiw__top {
+    display: grid;
+    gap: var(--sp-8);
+    align-items: center;
+    margin-bottom: var(--sp-10);
+  }
   .hiw__head {
     max-width: 46ch;
-    margin-bottom: var(--sp-10);
   }
   .hiw__h {
     margin-top: var(--sp-4);
     font-size: var(--fs-h2);
     font-weight: 600;
     letter-spacing: var(--tracking-tight);
+  }
+  /* Right-side animated graphic: one recording fans into many posts */
+  .hiw__viz { justify-self: stretch; }
+  .hiwviz {
+    position: relative;
+    padding: var(--sp-6);
+    border-radius: var(--r-card-lg);
+    background: linear-gradient(150deg, var(--charcoal), var(--charcoal-2));
+    box-shadow: var(--shadow-float);
+    overflow: hidden;
+  }
+  .hiwviz::after {
+    content: "";
+    position: absolute;
+    top: -30%; right: -10%;
+    width: 60%; height: 120%;
+    background: radial-gradient(50% 50% at 50% 40%, rgba(201, 162, 92, 0.26), transparent 70%);
+    pointer-events: none;
+  }
+  .hiwviz__src {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 15px;
+    border-radius: var(--r-pill);
+    background: var(--coral);
+    color: #fff;
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 0.82rem;
+  }
+  .hiwviz__pulse {
+    position: relative;
+    width: 9px; height: 9px; border-radius: 50%; background: #fff;
+  }
+  .hiwviz__pulse::after {
+    content: "";
+    position: absolute; inset: -5px; border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    animation: hiwPulse 2.2s var(--ease-out) infinite;
+  }
+  @keyframes hiwPulse {
+    0% { opacity: 0.9; transform: scale(0.7); }
+    100% { opacity: 0; transform: scale(2); }
+  }
+  .hiwviz__flow {
+    position: relative; z-index: 1;
+    height: 22px; margin: 6px 0 var(--sp-4) 12px;
+    border-left: 2px dashed rgba(255, 255, 255, 0.22);
+    width: 2px;
+  }
+  .hiwviz__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  .hiwviz__cell {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    animation: hiwCell 3.6s var(--ease) infinite;
+    animation-delay: var(--d);
+  }
+  @keyframes hiwCell {
+    0%, 100% { background: rgba(255, 255, 255, 0.1); transform: scale(0.9); }
+    18% { background: var(--coral); transform: scale(1); }
+    45% { background: rgba(230, 169, 196, 0.55); }
+    70% { background: rgba(255, 255, 255, 0.14); }
+  }
+  .hiwviz__foot {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; gap: 9px;
+    margin-top: var(--sp-5); padding-top: var(--sp-4);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.8rem; color: rgba(255, 255, 255, 0.7);
+  }
+  .hiwviz__dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--coral);
+    box-shadow: 0 0 0 4px rgba(28, 107, 74, 0.3);
+  }
+  @media (min-width: 900px) {
+    .hiw__top {
+      grid-template-columns: 1fr 0.9fr;
+      gap: var(--sp-12);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hiwviz__pulse::after, .hiwviz__cell { animation: none; }
   }
   .hiw__head .lead {
     margin-top: var(--sp-4);
@@ -1795,17 +1962,30 @@ const comments = [
   }
   .postcard__thumb {
     position: relative;
-    height: 150px;
+    aspect-ratio: 1200 / 630;
     padding: var(--sp-4);
+    overflow: hidden;
   }
   .postcard__thumb--0 { background: linear-gradient(150deg, var(--charcoal), var(--charcoal-3)); }
   .postcard__thumb--1 { background: linear-gradient(150deg, var(--coral), var(--coral-soft)); }
-  .postcard__thumb--2 { background: linear-gradient(150deg, var(--green), #9ac9b0); }
+  .postcard__thumb--2 { background: linear-gradient(150deg, var(--slate), var(--slate-2)); }
+  .postcard__cover {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--dur-slow) var(--ease);
+  }
+  .postcard:hover .postcard__cover { transform: scale(1.04); }
   .postcard__tag {
+    position: relative;
+    z-index: 1;
     display: inline-block;
     padding: 5px 12px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.16);
+    background: rgba(18, 53, 39, 0.5);
+    backdrop-filter: blur(4px);
     color: #fff;
     font-family: var(--font-accent);
     font-size: 0.7rem;
