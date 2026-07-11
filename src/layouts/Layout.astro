@@ -37,8 +37,28 @@ const jsonLd = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/favicon.png`} />
-    <link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/favicon.png`} />
+    <!-- Neutralize any service worker + caches left by a previous site on this
+         domain (e.g. the old Lovable app), so returning visitors always get the
+         current site. The new site registers no service worker, so this is a
+         one-way cleanup, safe to run on every load. -->
+    <script is:inline>
+      (function () {
+        try {
+          if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function (regs) {
+              regs.forEach(function (r) { r.unregister(); });
+            }).catch(function () {});
+          }
+          if (window.caches && caches.keys) {
+            caches.keys().then(function (keys) {
+              keys.forEach(function (k) { caches.delete(k); });
+            }).catch(function () {});
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/favicon.png?v=3`} />
+    <link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/favicon.png?v=3`} />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
