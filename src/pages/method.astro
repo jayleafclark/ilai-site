@@ -764,7 +764,9 @@ const why = [
     display: grid;
     gap: var(--sp-5);
   }
-  @media (min-width: 560px) {
+  /* Only split the get/do lists once the visual sits beside the text (>=900),
+     so the 560-899 band doesn't stretch two columns across the full width. */
+  @media (min-width: 900px) {
     .step__cols { grid-template-columns: 1fr 1fr; gap: var(--sp-6); }
   }
   .step__coltag {
@@ -892,7 +894,7 @@ const why = [
   }
   .stepcard--ink .stepcard__url { color: rgba(255, 255, 255, 0.55); }
   .stepcard__core {
-    padding: var(--sp-8);
+    padding: clamp(1.25rem, 4vw, var(--sp-8));
     min-height: 340px;
     display: flex;
     align-items: center;

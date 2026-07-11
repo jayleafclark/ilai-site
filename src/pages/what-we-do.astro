@@ -32,13 +32,13 @@ const services = [
     n: "01",
     eyebrow: "Podcast production & scripts",
     title: "We write it, you record, we finish it.",
-    body: "Before the camera rolls we write the episode scripts and shot lists so you always know what to say. Then you sit for one recording and we go to work: a clean long-form edit with filler and false starts cut, studio-grade sound design, dynamic motion graphics, burned-in captions, show notes, chapters, and six to twelve vertical clips hand-cut to carry the show across every feed all month. It is a lot of expert work. That is the point of hiring a studio.",
+    body: "Before the camera rolls we write the episode scripts and shot lists so you always know what to say. Then you sit for one recording and we go to work: a clean long-form edit with filler and false starts cut, studio-grade sound design, dynamic motion graphics, burned-in captions, show notes, chapters, and as many as 50 vertical clips hand-cut from that single recording to carry the show across every feed all month. It is a lot of expert work. That is the point of hiring a studio.",
     bullets: [
       "Episode scripts and shot lists written before you film",
       "Full episode edit: filler removed, studio sound design, motion graphics, captions",
       "Long-form YouTube cut plus a standalone audio version",
       "Show notes, SEO title and description, chapter and ad-break timestamps",
-      "Six to twelve vertical reels and clips cut from every episode",
+      "Up to 50 vertical reels and clips cut from a single recording",
     ],
     c: "var(--coral)", tone: "dark", viz: "wave",
     icon: `<path d="M10 2.5a3 3 0 013 3v5a3 3 0 11-6 0v-5a3 3 0 013-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4.5 9.5v.6a5.5 5.5 0 0011 0v-.6M10 15.6V18M7 18h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
@@ -49,7 +49,7 @@ const services = [
     title: "Scroll-stopping clips, in your voice",
     body: "Every episode is mined for its sharpest moments and cut into vertical clips built to travel. Each one gets a hook, captions, and a rhythm tuned to the platform it lands on, so the same idea earns attention on TikTok, Reels, and Shorts alike.",
     bullets: [
-      "Six to twelve reels cut from every recording",
+      "Up to 50 clips cut from one long-form recording",
       "Hook, captions, and pacing tuned per platform",
       "Cut in your voice, never generic filler",
       "Fanned out across every short-form feed",
@@ -289,7 +289,7 @@ const pricing = [
   <!-- ============ SERVICES (one detailed block each) ============ -->
   {services.map((s, i) => (
     <section
-      class={`section wwd-svc ${i % 2 === 1 ? "section--mist" : ""}`}
+      class={`section wwd-svc ${i % 2 === 1 ? "section--mist wwd-svc--alt" : ""}`}
       id={`service-${s.n}`}
     >
       <div class="container wwd-svc__grid">
@@ -858,7 +858,7 @@ const pricing = [
       grid-template-columns: 1.05fr 0.95fr;
       gap: var(--sp-12);
     }
-    .wwd-svc:nth-of-type(even) .wwd-svc__copy { order: 2; }
+    .wwd-svc--alt .wwd-svc__copy { order: 2; }
   }
 
   /* ---- Viz shell (colored / slate / white / dark variety) ---- */

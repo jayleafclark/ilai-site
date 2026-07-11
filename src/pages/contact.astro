@@ -178,7 +178,10 @@ const pricing = [
                 <li class="starts__row">
                   <span class="starts__k">{p.k}</span>
                   {p.free ? (
-                    <span class="starts__v starts__v--free">Free</span>
+                    <span class="starts__v">
+                      <span class="starts__v--free">Free</span>
+                      {p.note && <span class="starts__note"> {p.note}</span>}
+                    </span>
                   ) : (
                     <span class="starts__v">
                       <span
@@ -192,7 +195,6 @@ const pricing = [
                       {p.note && <span class="starts__note"> {p.note}</span>}
                     </span>
                   )}
-                  {p.free && p.note && <span class="starts__note-abs">{p.note}</span>}
                 </li>
               ))
             }
@@ -726,13 +728,6 @@ const pricing = [
     font-size: 0.8125rem;
     color: var(--muted);
     letter-spacing: 0;
-  }
-  .starts__note-abs {
-    position: absolute;
-    right: 0;
-    top: 1.5rem;
-    font-size: 0.8125rem;
-    color: var(--muted);
   }
   .starts__bar {
     display: flex;

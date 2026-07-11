@@ -480,7 +480,7 @@ const stats = [
   .team__ps { margin-top: var(--sp-2); font-size: var(--fs-sm); color: var(--muted); line-height: 1.55; }
 
   /* Distinctive "two strengths, one team" graphic */
-  .team__viz { position: sticky; top: 6rem; }
+  .team__viz { align-self: start; }
   .tcv {
     position: relative;
     padding: clamp(1.75rem, 3vw, 2.5rem);
@@ -542,7 +542,8 @@ const stats = [
   .tcv__outk { display: block; font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; color: #fff; }
   .tcv__outd { display: block; margin-top: 4px; font-size: var(--fs-sm); color: rgba(255, 255, 255, 0.6); }
   @media (min-width: 900px) {
-    .team__grid { grid-template-columns: 1.1fr 0.9fr; gap: var(--sp-12); }
+    .team__grid { grid-template-columns: 1.1fr 0.9fr; gap: var(--sp-10); }
+    .team__viz { position: sticky; top: 6rem; }
   }
 
   /* ---------- Stat row ---------- */

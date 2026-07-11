@@ -510,7 +510,7 @@ const comments = [
         <span class="eyebrow eyebrow--star eyebrow--ondark">What a month looks like</span>
         <h3 class="offercard__h">120+ pieces. 350+ posts. One voice.</h3>
         <ul class="checks">
-          <li>Around 4 podcast episodes, cut into ~20 reels and clips</li>
+          <li>Around 4 podcast episodes, cut into dozens of reels and clips</li>
           <li>~60 short-form posts and ~12 long-form essays</li>
           <li>Published across up to 13 platforms, on schedule</li>
           <li>First-response community engagement, in your voice</li>
@@ -1032,7 +1032,14 @@ const comments = [
     .cmts__track { animation: none !important; }
   }
   @media (min-width: 940px) and (max-width: 1100px) {
+    /* Tablet-landscape band: constrain the copy and shrink the mocks so the
+       absolutely-positioned visual never lands on top of the hero text. */
+    .hslide__inner { max-width: 54%; }
     .hmock { width: 300px; }
+    .cal { width: clamp(280px, 30vw, 340px); }
+    .editor { width: clamp(300px, 33vw, 380px); }
+    .cmts { width: clamp(280px, 30vw, 340px); }
+    .news { width: clamp(280px, 31vw, 360px); }
   }
 
   /* ---- Hero visual: web app window (slide 2) ---- */
