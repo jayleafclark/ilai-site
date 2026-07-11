@@ -6,7 +6,8 @@ export interface Props {
 }
 const { variant = "ink" } = Astro.props;
 const wordColor = variant === "light" ? "#ffffff" : "var(--ink)";
-const src = `${import.meta.env.BASE_URL}${variant === "light" ? "logo-mark-light.png" : "logo-mark.png"}`;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const src = `${base}/${variant === "light" ? "logo-mark-light.png" : "logo-mark.png"}`;
 ---
 
 <a href="/" class="logo" aria-label="Ilai Collective home">

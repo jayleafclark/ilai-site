@@ -273,6 +273,17 @@ p {
 .btn--signal:hover {
   --btn-bg: #1a6e48;
 }
+/* Powder-pink button — the top-right nav CTA (matches the logo centre leaf) */
+.btn--pink {
+  --btn-bg: var(--pink);
+  --btn-fg: var(--ink);
+}
+.btn--pink:hover {
+  --btn-bg: color-mix(in srgb, var(--pink) 82%, var(--pink-ink));
+}
+.btn--pink .btn__arrow {
+  background: rgba(29, 42, 35, 0.14);
+}
 /* Charcoal (anchor) button */
 .btn--charcoal {
   --btn-bg: var(--charcoal);

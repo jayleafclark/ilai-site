@@ -173,7 +173,7 @@ const indLen = 1400;
         <figure class="ds-portrait">
           <span class="ds-portrait__ring" aria-hidden="true"></span>
           <img
-            src={`${import.meta.env.BASE_URL}work/dr-caroline-leaf.jpg`}
+            src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/work/dr-caroline-leaf.jpg`}
             alt="Dr. Caroline Leaf"
             class="ds-portrait__img"
             loading="eager"
@@ -556,7 +556,7 @@ const indLen = 1400;
         </div>
         <div class="ds-dash__screen">
           <img
-            src={`${import.meta.env.BASE_URL}work/dashboard-year-review.png`}
+            src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/work/dashboard-year-review.png`}
             alt="Dr. Caroline Leaf year-in-review dashboard"
             class="ds-dash__img"
             loading="lazy"
@@ -590,7 +590,7 @@ const indLen = 1400;
   .ds-hero {
     position: relative;
     padding-top: clamp(7rem, 14vh, 11rem);
-    padding-bottom: var(--sp-10);
+    padding-bottom: var(--sp-6);
     overflow: hidden;
   }
   .ds-hero__mesh {
@@ -791,7 +791,7 @@ const indLen = 1400;
 
   /* ---------- Headline band ---------- */
   .ds-band {
-    padding-block: var(--sp-12);
+    padding-block: var(--sp-8) var(--sp-12);
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
   }

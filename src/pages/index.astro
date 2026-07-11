@@ -88,7 +88,7 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
           <div class="herocar__track" data-track>
 
             <!-- Slide 1: volume + everywhere -->
-            <article class="hslide">
+            <article class="hslide is-active">
               <div class="hslide__inner">
                 <span class="eyebrow eyebrow--star eyebrow--ondark">One studio, every platform</span>
                 <h1 class="hslide__title">350+ posts a month.<br />On every platform.</h1>
@@ -512,6 +512,7 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
     const render = () => {
       track.style.transform = `translateX(-${i * 100}%)`;
       dots.forEach((d, k) => d.classList.toggle("is-active", k === i));
+      slides.forEach((s, k) => s.classList.toggle("is-active", k === i));
     };
     const go = (n: number) => {
       i = (n + slides.length) % slides.length;
@@ -838,7 +839,38 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
       top: 50%;
       transform: translateY(-50%);
       z-index: 1;
+      opacity: 0;
     }
+    /* Graceful entrance whenever a slide becomes active */
+    .hslide.is-active .hslide__visual {
+      animation: heroVisIn 820ms var(--ease-out) both;
+    }
+    .hslide.is-active .herofloat {
+      animation:
+        hfloat 6s var(--ease) infinite alternate,
+        heroFloatIn 900ms var(--ease-out) both;
+    }
+    .hslide.is-active .herofloat {
+      animation-delay: 0s, 260ms;
+    }
+  }
+  @keyframes heroVisIn {
+    from {
+      opacity: 0;
+      transform: translateY(-50%) translateX(34px) scale(0.94) rotate(1.2deg);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0) scale(1) rotate(0);
+    }
+  }
+  @keyframes heroFloatIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hslide__visual { opacity: 1 !important; animation: none !important; }
+    .hslide.is-active .herofloat { animation: none !important; }
   }
   @media (min-width: 940px) and (max-width: 1100px) {
     .hmock { width: 300px; }
@@ -929,7 +961,7 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
   .alert span { font-size: 0.72rem; color: var(--muted); }
 
   /* ---- Slide 1: content calendar ---- */
-  .cal { width: 360px; }
+  .cal { width: clamp(360px, 31vw, 460px); }
   .cal__body { padding: var(--sp-4) var(--sp-5) var(--sp-5); }
   .cal__week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-bottom: 6px; }
   .cal__dow { text-align: center; font-size: 0.58rem; color: var(--muted); font-family: var(--font-accent); }
@@ -943,7 +975,7 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
   .cal__dots i { width: 5px; height: 5px; border-radius: 50%; display: block; }
 
   /* ---- Slide 2: podcast editor + clipping ---- */
-  .editor { width: 380px; }
+  .editor { width: clamp(380px, 33vw, 480px); }
   .editor__body { padding: var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-3); }
   .editor__preview {
     position: relative; height: 118px; border-radius: 12px;
@@ -965,7 +997,7 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
   .editor__clip--c { background: var(--plum); }
 
   /* ---- Slide 3: thoughtful comment replies ---- */
-  .cmts { width: 360px; }
+  .cmts { width: clamp(360px, 31vw, 450px); }
   .cmts__body { padding: var(--sp-4); display: flex; flex-direction: column; gap: 10px; }
   .cmt { position: relative; display: flex; gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--mist); border: 1px solid var(--line); }
   .cmt--reply { background: var(--pink-tint); border-color: transparent; margin-left: 20px; }
