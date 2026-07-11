@@ -180,12 +180,26 @@ const year = new Date().getFullYear();
     .footer__col:last-child {
       grid-column: 1 / -1;
     }
+    /* Tap targets: every footer link (and the email) must clear 44px.
+       Center the label vertically and tighten the list gap so the extra
+       height doesn't over-space the columns. */
+    .footer__col ul {
+      gap: var(--sp-2);
+    }
     .footer__col a {
-      min-height: 32px;
+      display: flex;
+      align-items: center;
+      min-height: 44px;
     }
     .footer__cta {
       width: 100%;
       justify-content: center;
+    }
+    /* Copyright / made-by line links (if any) also get a 44px target. */
+    .footer__bottom a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
     }
     .footer__bottom {
       gap: var(--sp-2);

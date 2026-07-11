@@ -75,7 +75,7 @@ const articleLd = {
 
       {data.cover && (
         <figure class="post__cover" data-reveal>
-          <img src={`${base}${data.cover}?v=2`} alt="" width="1200" height="630" />
+          <img src={`${base}${data.cover}?v=3`} alt="" width="1200" height="630" />
         </figure>
       )}
 
@@ -325,6 +325,12 @@ const articleLd = {
     .post__lead {
       margin-top: var(--sp-4);
     }
+    /* Tighten the top chrome so readers reach the body faster: pull the
+       byline rule up and trim the gap before the cover. */
+    .post__byline {
+      margin-top: var(--sp-4);
+      padding-top: var(--sp-4);
+    }
     /* Tame the huge desktop gaps above headings so the article
        reads as one continuous flow on a narrow screen. */
     .prose :global(h2) {
@@ -335,8 +341,15 @@ const articleLd = {
       font-size: 1.3rem;
       margin-top: var(--sp-6);
     }
-    /* Pull block images to the full content width for impact. */
+    /* Cover is now text-free art (no longer repeats the H1). Keep it as a
+       compact banner strip — not a near-full-screen block — so the article
+       body starts sooner. */
     .post__cover {
+      margin-top: var(--sp-5);
+      aspect-ratio: 16 / 8;
+    }
+    /* The first prose block follows the cover; trim its top gap. */
+    .prose {
       margin-top: var(--sp-6);
     }
     .prose :global(blockquote) {

@@ -937,6 +937,11 @@ const pricing = [
     .contact__grid {
       gap: var(--sp-6);
     }
+    /* The page is functionally one mailto button. Tighten the gap between the
+       few blocks that survive so it reads as ~2 screens, not 5. */
+    .side-col {
+      gap: var(--sp-5);
+    }
 
     /* Tighten the oversized waitlist heading on narrow screens. */
     .form-col__title {
@@ -956,29 +961,28 @@ const pricing = [
       align-items: flex-start;
     }
 
-    /* Pricing scale: give each label an equal share and let the price wrap
-       so "from $5,500/mo" no longer overflows/collides at ~375px. */
+    /* Cut the decorative "your free teardown" browser-chrome mock on mobile.
+       Its checklist and "Cost: Free" line duplicate the stepper + pricing card,
+       and the browser frame is pure decoration on a phone. */
+    .preview {
+      display: none;
+    }
+
+    /* Keep ONE pricing statement: the 3-row card. Hide the tick-scale bar —
+       it restates the same three prices as decorative labels. */
     .starts {
       padding: var(--sp-5);
     }
-    .starts__ticks {
-      gap: 6px;
+    .starts__scale {
+      display: none;
     }
-    .starts__tick {
-      font-size: 0.68rem;
-    }
-    .starts__tick b {
-      font-size: 0.72rem;
-    }
-  }
 
-  /* Extra-narrow safety net (<= 380px): shrink the price label a touch more. */
-  @media (max-width: 380px) {
-    .starts__tick {
-      font-size: 0.65rem;
-    }
-    .starts__tick b {
-      font-size: 0.68rem;
+    /* Merge the two reassurance bands into one on mobile: the footer
+       "Why it's worth the call" + 100% card reads best, so drop the duplicate
+       trust card. Also cut the empty scheduler placeholder. */
+    .trustcard,
+    .scheduler {
+      display: none;
     }
   }
 </style>

@@ -271,8 +271,12 @@ const pricing = [
     </div>
   </section>
 
+  <!-- Scroll anchor for "See every service" — lives with the services so it
+       still works on mobile where the index strip below is hidden. -->
+  <span id="services" class="wwd-anchor" aria-hidden="true"></span>
+
   <!-- ============ SERVICE INDEX STRIP ============ -->
-  <section class="wwd-index" id="services">
+  <section class="wwd-index">
     <div class="container">
       <ol class="wwd-index__list" data-reveal>
         {services.map((s) => (
@@ -294,31 +298,38 @@ const pricing = [
       id={`service-${s.n}`}
     >
       <div class="container wwd-svc__grid">
-        <div class="wwd-svc__copy" data-reveal>
-          <div class="wwd-svc__head">
-            <span class="wwd-svc__ico" aria-hidden="true" style={`--ic:${s.c}`}>
-              <svg width="21" height="21" viewBox="0 0 20 20" fill="none" set:html={s.icon} />
-            </span>
-            <div class="wwd-svc__headtx">
-              <span class="wwd-svc__n">{s.n}</span>
-              <span class="eyebrow eyebrow--dot">{s.eyebrow}</span>
+        <details class="wwd-svc__copy wwd-acc" data-reveal open>
+          <summary class="wwd-acc__summary" data-n={s.n}>
+            <div class="wwd-svc__head">
+              <span class="wwd-svc__ico" aria-hidden="true" style={`--ic:${s.c}`}>
+                <svg width="21" height="21" viewBox="0 0 20 20" fill="none" set:html={s.icon} />
+              </span>
+              <div class="wwd-svc__headtx">
+                <span class="wwd-svc__n">{s.n}</span>
+                <span class="eyebrow eyebrow--dot">{s.eyebrow}</span>
+              </div>
             </div>
+            <h2 class="wwd-svc__title">{s.title}</h2>
+            <span class="wwd-acc__chev" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+          <div class="wwd-acc__body">
+            <p class="lead wwd-svc__body">{s.body}</p>
+            <ul class="wwd-svc__list">
+              {s.bullets.map((b) => (
+                <li>
+                  <span class="wwd-svc__check" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path d="M2.5 7.5L6 11L11.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-          <h2 class="wwd-svc__title">{s.title}</h2>
-          <p class="lead wwd-svc__body">{s.body}</p>
-          <ul class="wwd-svc__list">
-            {s.bullets.map((b) => (
-              <li>
-                <span class="wwd-svc__check" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M2.5 7.5L6 11L11.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </span>
-                <span>{b}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        </details>
 
         <div class="wwd-svc__aside" data-reveal data-reveal-delay="1">
           <div class={`wwd-viz wwd-viz--${s.tone}`}>
@@ -795,6 +806,9 @@ const pricing = [
     .wwd-statpanel { grid-template-columns: repeat(4, 1fr); }
   }
 
+  /* Invisible scroll target for the "See every service" jump. */
+  .wwd-anchor { display: block; height: 0; scroll-margin-top: 5rem; }
+
   /* ============ Index strip ============ */
   .wwd-index {
     padding-block: var(--sp-8);
@@ -896,6 +910,61 @@ const pricing = [
     background: var(--coral-tint);
     color: var(--coral-ink);
   }
+
+  /* ---- Mobile accordion (<=760px). Each service is a <details>; the summary is
+     the tappable row (number + title), the body reveals paragraph + checklist.
+     Desktop (>=760px) neutralises all of this below so the layout is unchanged. */
+  .wwd-acc { display: block; }
+  .wwd-acc__summary {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    min-height: 56px;
+    padding: var(--sp-4) 0;
+    list-style: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .wwd-acc__summary::-webkit-details-marker { display: none; }
+  .wwd-acc__summary:focus-visible {
+    outline: 2px solid var(--coral);
+    outline-offset: 4px;
+    border-radius: 8px;
+  }
+  /* On mobile the head (icon) is hidden to keep rows compact; the number leads. */
+  .wwd-acc .wwd-svc__head { display: none; }
+  .wwd-acc__summary .wwd-svc__title {
+    flex: 1;
+    margin-top: 0;
+    max-width: none;
+    font-size: clamp(1.15rem, 4.6vw, 1.4rem);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  /* Number chip in front of the title on mobile */
+  .wwd-acc__summary::before {
+    content: attr(data-n);
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: var(--fs-sm);
+    color: var(--coral);
+    flex: none;
+    align-self: flex-start;
+    margin-top: 3px;
+  }
+  .wwd-acc__chev {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    color: var(--muted);
+    transition: transform var(--dur-base, 0.25s) var(--ease);
+  }
+  .wwd-acc[open] .wwd-acc__chev { transform: rotate(180deg); }
+  .wwd-acc__body { padding-bottom: var(--sp-2); }
+  .wwd-acc__body .wwd-svc__body { margin-top: 0; }
+
   /* Go two-column at tablet (760) so the viz sits beside the copy instead of
      leaving big side-voids in the full-width shell; widen the gap on desktop. */
   @media (min-width: 760px) {
@@ -905,6 +974,28 @@ const pricing = [
       align-items: center;
     }
     .wwd-svc--alt .wwd-svc__copy { order: 2; }
+
+    /* --- Desktop bypass: dissolve the accordion so the original stacked copy
+       layout (head, title, body, checklist) renders exactly as before, always
+       expanded and non-interactive. --- */
+    .wwd-acc { display: block; }              /* stays the grid column */
+    .wwd-acc__summary,
+    .wwd-acc__body { display: contents; }     /* children flow as before */
+    .wwd-acc .wwd-svc__head { display: flex; }
+    .wwd-acc__summary { cursor: default; min-height: 0; padding: 0; }
+    .wwd-acc__summary::before { content: none; }
+    .wwd-acc__chev { display: none; }
+    /* Restore the original title styling (font size/line-height come from the
+       global h2 rule — revert the mobile overrides so desktop is untouched). */
+    .wwd-acc__summary .wwd-svc__title {
+      margin-top: var(--sp-5);
+      max-width: 18ch;
+      font-size: revert;
+      line-height: revert;
+      text-wrap: revert;
+      flex: revert;
+    }
+    .wwd-acc__body .wwd-svc__body { margin-top: var(--sp-4); }
   }
   @media (min-width: 1000px) {
     .wwd-svc__grid { gap: var(--sp-12); }
@@ -1509,6 +1600,29 @@ const pricing = [
     .wwd-price--feature { transform: translateY(-8px); }
   }
 
+  /* ============ Mobile accordion layout (<= 760px) ============ */
+  @media (max-width: 760px) {
+    /* Hide the viz mocks entirely on mobile — they were the main length tax. */
+    .wwd-svc__aside { display: none; }
+
+    /* Hide the 01-10 index strip: the accordion titles now list every service. */
+    .wwd-index { display: none; }
+
+    /* Collapse the per-service section chrome into a tight stacked list so all
+       ten summary rows sit close together, divided by a hairline. */
+    .section.wwd-svc {
+      padding-block: 0;
+      background: none;
+    }
+    .section.wwd-svc.wwd-svc--alt { background: none; }
+    .wwd-svc__grid { display: block; gap: 0; }
+    .wwd-acc {
+      border-top: 1px solid var(--line);
+    }
+    /* The last service closes the list with a bottom rule. */
+    .wwd-svc:last-of-type .wwd-acc { border-bottom: 1px solid var(--line); }
+  }
+
   /* ============ Mobile refinements (<= 640px) ============ */
   @media (max-width: 640px) {
     /* Hero: tighter top gap, calmer heading, roomier lead */
@@ -1567,3 +1681,67 @@ const pricing = [
     .wwd-price__foot .btn { width: 100%; justify-content: center; }
   }
 </style>
+
+<script>
+  // Mobile accordion controller for the ten service blocks.
+  // - Desktop (>=760px): every <details> is forced open and stays open, so the
+  //   CSS `display:contents` bypass renders the original side-by-side layout.
+  // - Mobile (<=760px): blocks start collapsed; opening one closes the others
+  //   (single-open, nice-to-have) and hash links (#service-03) open + scroll.
+  (() => {
+    const accs = Array.from(
+      document.querySelectorAll<HTMLDetailsElement>(".wwd-svc .wwd-acc"),
+    );
+    if (!accs.length) return;
+    const desktop = window.matchMedia("(min-width: 760px)");
+
+    const syncToViewport = () => {
+      if (desktop.matches) {
+        // Force-open on desktop; the layout is driven entirely by CSS.
+        accs.forEach((d) => {
+          d.open = true;
+        });
+      } else {
+        // Collapse on entering mobile so the list is short by default.
+        accs.forEach((d) => {
+          d.open = false;
+        });
+      }
+    };
+
+    // Single-open behaviour on mobile only.
+    accs.forEach((d) => {
+      d.addEventListener("toggle", () => {
+        if (desktop.matches || !d.open) return;
+        accs.forEach((o) => {
+          if (o !== d) o.open = false;
+        });
+      });
+    });
+
+    // Open the targeted service when arriving via #service-NN (any viewport).
+    const openFromHash = () => {
+      const id = location.hash.replace("#", "");
+      if (!id) return;
+      const section = document.getElementById(id);
+      const d = section && section.querySelector<HTMLDetailsElement>(".wwd-acc");
+      if (d && !desktop.matches) {
+        d.open = true;
+        d.querySelector<HTMLElement>(".wwd-acc__summary")?.scrollIntoView({
+          block: "start",
+          behavior: "smooth",
+        });
+      }
+    };
+
+    syncToViewport();
+    if (desktop.addEventListener) {
+      desktop.addEventListener("change", syncToViewport);
+    } else {
+      // Safari <14 fallback
+      desktop.addListener(syncToViewport);
+    }
+    window.addEventListener("hashchange", openFromHash);
+    openFromHash();
+  })();
+</script>

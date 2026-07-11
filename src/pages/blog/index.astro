@@ -59,7 +59,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
             >
               {post.data.cover && (
                 <span class="postcard__cover">
-                  <img src={`${base}${post.data.cover}?v=2`} alt="" loading="lazy" width="1200" height="630" />
+                  <img src={`${base}${post.data.cover}?v=3`} alt="" loading="lazy" width="1200" height="630" />
                 </span>
               )}
               {post.data.tags?.[0] && (
@@ -242,9 +242,41 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     .bloglist {
       padding-top: var(--sp-8);
     }
-    /* Generous gap between full-width stacked cards. */
+    /* Comfortable gap between full-width stacked cards without wasting a
+       whole screen between each. */
     .bloglist__grid {
-      gap: var(--sp-6);
+      gap: var(--sp-5);
+    }
+
+    /* --- Compact, scannable cards ---
+       Tighten the card padding and internal rhythm so each card reads at a
+       glance and the index isn't ~1.3 screens per post. Covers are becoming
+       clean, text-free art, so one title + category + description is all the
+       card carries. */
+    .postcard {
+      padding: var(--sp-5);
+    }
+    /* Reasonable cover height — a banded strip, not a full 16:9-ish block.
+       Full-bleed to the (now smaller) card padding. */
+    .postcard__cover {
+      margin: calc(-1 * var(--sp-5)) calc(-1 * var(--sp-5)) var(--sp-4);
+      aspect-ratio: 16 / 8;
+    }
+    .postcard__title {
+      margin-top: var(--sp-3);
+      font-size: 1.35rem;
+      line-height: 1.2;
+    }
+    .postcard__desc {
+      margin-top: var(--sp-2);
+      /* Keep the description to a scannable preview instead of a full block. */
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .postcard__meta {
+      padding-top: var(--sp-4);
     }
     /* Tap target: the whole card is the link, but keep the arrow
        comfortably large. */

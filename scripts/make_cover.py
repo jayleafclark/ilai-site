@@ -100,53 +100,34 @@ def _wrap(draw, text, font, max_w):
 
 
 def make_cover(slug, title, category, out_path):
+    # Clean, TEXT-FREE branded art: gradient + glows + leaf texture + centered
+    # 3-petal mark. The blog card supplies the title/category, so nothing is
+    # baked into the image (no title, category, wordmark, or URL). Theme is
+    # picked deterministically from the slug for on-brand variety.
     h = int(hashlib.sha256(slug.encode()).hexdigest(), 16)
     (bg_top, bg_bot, title_c, eb_c, bar_c, muted_c,
      motif_c, logo_variant, glow_c) = THEMES[h % len(THEMES)]
 
     img = _vgrad(W, H, bg_top, bg_bot).convert("RGBA")
-    img.alpha_composite(_radial_glow(W, H, int(W * 0.86), int(H * 0.12), 520, glow_c, 46))
+    img.alpha_composite(_radial_glow(W, H, int(W * 0.80), int(H * 0.16), 580, glow_c, 54))
+    img.alpha_composite(_radial_glow(W, H, int(W * 0.14), int(H * 0.90), 460, glow_c, 30))
 
-    motif = motif_c + (30,)
-    l1, p1 = _leaf(320, 460, motif, -32, W * 0.86, H * 0.82)
+    # Soft leaf motif for texture in opposite corners.
+    motif = motif_c + (26,)
+    l1, p1 = _leaf(380, 540, motif, -30, W * 0.90, H * 0.86)
     img.alpha_composite(l1, p1)
-    l2, p2 = _leaf(300, 440, motif, 34, W * 0.965, H * 0.86)
+    l2, p2 = _leaf(300, 440, motif, 34, W * 0.06, H * 0.10)
     img.alpha_composite(l2, p2)
 
-    draw = ImageDraw.Draw(img)
-    pad = 76
-
-    eb_font = _font(24, "SemiBold")
-    draw.text((pad, 78), " ".join((category or "Journal").upper()), font=eb_font, fill=eb_c)
-    draw.rounded_rectangle([pad, 124, pad + 64, 130], radius=3, fill=bar_c)
-
-    title_font = _font(70, "SemiBold")
-    lines = _wrap(draw, title, title_font, W - pad * 2 - 40)
-    if len(lines) > 4:
-        title_font = _font(58, "SemiBold")
-        lines = _wrap(draw, title, title_font, W - pad * 2 - 40)
-    line_h = int(title_font.size * 1.14)
-    ty = int((H - line_h * len(lines)) / 2) + 18
-    for ln in lines:
-        draw.text((pad, ty), ln, font=title_font, fill=title_c)
-        ty += line_h
-
-    fy = H - 92
+    # Centered 3-petal mark as the focal element (the only graphic; no text).
     logo_path = os.path.join(PUB, "logo-mark-light.png" if logo_variant == "light" else "logo-mark.png")
-    word_x = pad
     try:
         mark = Image.open(logo_path).convert("RGBA")
-        mh = 40
+        mh = 208
         mark = mark.resize((int(mark.width * mh / mark.height), mh), Image.LANCZOS)
-        img.alpha_composite(mark, (pad, fy))
-        word_x = pad + mark.width + 14
+        img.alpha_composite(mark, (int((W - mark.width) / 2), int((H - mark.height) / 2) - 6))
     except Exception:
         pass
-    draw.text((word_x, fy - 2), "ilai", font=_font(38, "SemiBold"), fill=title_c)
-
-    dom_font = _font(24, "Medium")
-    dom = "ilaicollective.com"
-    draw.text((W - pad - draw.textlength(dom, font=dom_font), fy + 8), dom, font=dom_font, fill=muted_c)
 
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     img.convert("RGB").save(out_path, "PNG")

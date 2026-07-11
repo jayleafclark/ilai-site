@@ -57,12 +57,24 @@ const stats = [
 ];
 
 const services = [
-  { tag: "Research & strategy", d: "We learn your audience, your competitors, and which formats are earning engagement in your niche right now, then aim every piece before we make it.", tone: "forest", viz: "chart" },
-  { tag: "Podcasts, video & scripts", d: "We write the scripts and shot lists, you record once, and we edit the full episode with dynamic motion graphics and sound design.", tone: "charcoal", viz: "wave" },
-  { tag: "Short-form & reels", d: "Every episode cut into vertical clips with hooks and captions, fanned out across each platform in your voice.", tone: "pink", viz: "reel" },
-  { tag: "Writing at scale", d: "Quote cards, carousels, long-form articles, and newsletters, all written in the voice we document with you.", tone: "charcoal", viz: "doc" },
-  { tag: "Brand & on-brand templates", d: "Templates matched to your exact typography and color, so 350 posts a month still look unmistakably yours.", tone: "forest", viz: "swatch" },
-  { tag: "Publishing & engagement", d: "A bespoke posting schedule built for your stage, plus first-response community engagement in the minutes that decide reach.", tone: "pink", viz: "grid" },
+  { tag: "Research & strategy", d: "We learn your audience, your competitors, and which formats are earning engagement in your niche right now, then aim every piece before we make it.", tone: "forest", viz: "chart",
+    m: "Aimed at the people you sell to.",
+    icon: `<circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>` },
+  { tag: "Podcasts, video & scripts", d: "We write the scripts and shot lists, you record once, and we edit the full episode with dynamic motion graphics and sound design.", tone: "charcoal", viz: "wave",
+    m: "We script it, you record once.",
+    icon: `<rect x="4" y="7" width="12" height="8.5" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M16 10l3-2v6l-3-2" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>` },
+  { tag: "Short-form & reels", d: "Every episode cut into vertical clips with hooks and captions, fanned out across each platform in your voice.", tone: "pink", viz: "reel",
+    m: "Vertical clips, hooked and captioned.",
+    icon: `<rect x="6.5" y="3" width="9" height="16" rx="2.4" stroke="currentColor" stroke-width="1.6"/><path d="M9.7 11l3-1.8v3.6l-3-1.8z" fill="currentColor"/>` },
+  { tag: "Writing at scale", d: "Quote cards, carousels, long-form articles, and newsletters, all written in the voice we document with you.", tone: "charcoal", viz: "doc",
+    m: "Carousels, essays, newsletters, your voice.",
+    icon: `<path d="M5 3.5h6.5L16 8v9.5a1 1 0 01-1 1H5a1 1 0 01-1-1v-13a1 1 0 011-1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M11 3.5V8h4.5M7 11.5h6M7 14.5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>` },
+  { tag: "Brand & on-brand templates", d: "Templates matched to your exact typography and color, so 350 posts a month still look unmistakably yours.", tone: "forest", viz: "swatch",
+    m: "Every post unmistakably yours.",
+    icon: `<circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.6"/><circle cx="7" cy="8" r="1.3" fill="currentColor"/><circle cx="12.5" cy="7.2" r="1.3" fill="currentColor"/><circle cx="13.6" cy="12" r="1.3" fill="currentColor"/>` },
+  { tag: "Publishing & engagement", d: "A bespoke posting schedule built for your stage, plus first-response community engagement in the minutes that decide reach.", tone: "pink", viz: "grid",
+    m: "Published on schedule, replies in minutes.",
+    icon: `<path d="M4 5.5h12v8H8l-3 2.5v-2.5H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>` },
 ];
 
 const hiw = [
@@ -406,6 +418,9 @@ const comments = [
       <div class="services__grid">
         {services.map((s, i) => (
           <article class={`svc svc--${s.tone}`} data-reveal data-reveal-delay={String(i + 1)}>
+            <span class="svc__ico" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 20 20" fill="none" set:html={s.icon} />
+            </span>
             <div class="svc__media" aria-hidden="true">
               <span class="svc__num">{`0${i + 1}`}</span>
               {s.viz === "wave" && (
@@ -449,6 +464,7 @@ const comments = [
             <div class="svc__body">
               <h3>{s.tag}</h3>
               <p>{s.d}</p>
+              <p class="svc__line">{s.m}</p>
             </div>
           </article>
         ))}
@@ -580,7 +596,7 @@ const comments = [
         {posts.map((p, i) => (
           <a href={`/blog/${p.slug}`} class="postcard" data-reveal data-reveal-delay={String(i + 1)}>
             <div class={`postcard__thumb postcard__thumb--${i}`} aria-hidden="true">
-              {p.cover && <img class="postcard__cover" src={`${base}${p.cover}?v=2`} alt="" loading="lazy" width="1200" height="630" />}
+              {p.cover && <img class="postcard__cover" src={`${base}${p.cover}?v=3`} alt="" loading="lazy" width="1200" height="630" />}
             </div>
             <div class="postcard__body">
               <h3>{p.title}</h3>
@@ -597,8 +613,11 @@ const comments = [
 
 <script>
   // Hero carousel: auto-advance, dots, arrows, pointer swipe.
+  // On mobile (<=640px) the hero is a single static slide — skip the carousel
+  // entirely so it never advances to a display:none slide (blank hero).
   const car = document.querySelector<HTMLElement>("[data-carousel]");
-  if (car) {
+  const isMobile = window.matchMedia("(max-width: 640px)").matches;
+  if (car && !isMobile) {
     const track = car.querySelector<HTMLElement>("[data-track]")!;
     const slides = Array.from(track.children);
     const dots = Array.from(car.querySelectorAll<HTMLButtonElement>("[data-dots] button"));
@@ -1538,6 +1557,9 @@ const comments = [
     display: flex;
     flex-direction: column;
   }
+  /* Leading icon + one-line copy: mobile-list affordances, hidden on desktop */
+  .svc__ico { display: none; }
+  .svc__line { display: none; }
   .svc__media {
     position: relative;
     min-height: 172px;
@@ -2299,56 +2321,68 @@ const comments = [
   }
 
   /* =====================================================================
-     MOBILE POLISH (<= 640px) — phone-first tuning, desktop untouched.
-     Fixes: hero nav/eyebrow collision, oversized display type, cramped
-     growth rows, excessive section gaps, and tap targets under 44px.
+     MOBILE OVERHAUL (<= 640px) — phone-first rebuild, desktop untouched.
+     Goal: ~7 scannable screens (was 13.6), one focal graphic per viewport.
+       1. Single static hero (slide 1 only, no carousel/nav).
+       2. Six service cards -> compact icon+title+one-line list rows.
+       3. Kill number redundancy: hide the client card + hiw viz; keep the
+          stats panel and the 5-step text list.
+       4. Reduce blog to 2 cards; tighten section padding.
      ===================================================================== */
   @media (max-width: 640px) {
-    /* --- Hero: keep the eyebrow clear of the carousel nav --- */
+    /* ---------- 1. SINGLE STATIC HERO ---------- */
     .hero {
+      min-height: 0;
+      padding-top: clamp(5.5rem, 16vw, 6.5rem);
       padding-bottom: var(--sp-6);
     }
+    /* Kill the carousel: only slide 1 shows, no track transform, no swipe UI */
+    .herocar__vp {
+      overflow: visible;
+      touch-action: auto;
+      cursor: default;
+    }
+    .herocar__track {
+      display: block;
+      transform: none !important;
+      transition: none !important;
+    }
     .hslide {
-      /* let the slide grow to its content instead of a fixed tall min */
+      display: none;
+    }
+    .hslide.is-active {
+      display: flex;
       min-height: 0;
+      border-radius: var(--r-card-lg);
+    }
+    /* Remove the entire carousel nav (dots + arrows) — no collision, no clutter */
+    .herocar__nav {
+      display: none;
     }
     .hslide__inner {
-      padding: var(--sp-6) var(--sp-5) var(--sp-8);
+      padding: var(--sp-7) var(--sp-5) var(--sp-7);
     }
-    /* Move the dots/arrows to the BOTTOM of the slide so they never sit on
-       top of the eyebrow, and give them room to breathe. */
-    .herocar__nav {
-      position: static;
-      justify-content: space-between;
-      padding: 0 var(--sp-5) var(--sp-5);
-      margin-top: calc(var(--sp-6) * -1);
-      gap: var(--sp-4);
-    }
-    .herocar__arrow {
-      width: 44px;
-      height: 44px;
-    }
-    /* Slightly tighter hero display so it doesn't dominate the whole screen */
     .hslide__title {
       margin-top: var(--sp-3);
       font-size: clamp(2rem, 8.5vw, 2.55rem);
       line-height: 1.08;
     }
-    /* Keep the intentional <br> in hero titles (removing it would glue the two
-       clauses together with no space). The break points are readable on mobile. */
     .hslide__lead {
       margin-top: var(--sp-4);
       font-size: 1.02rem;
     }
+    /* Two hero CTAs: stacked, full-width, comfortable 48px tap targets */
     .hslide__actions {
-      margin-top: var(--sp-5);
+      margin-top: var(--sp-6);
+      flex-direction: column;
       gap: var(--sp-3);
     }
     .hslide__actions .btn {
-      flex: 1 1 auto;
+      width: 100%;
       justify-content: center;
+      min-height: 48px;
     }
-    /* Feature cards: a touch tighter, pulled up less aggressively */
+    /* Feature cards: tighter, pulled up less aggressively */
     .herofeatures {
       margin-top: -2.25rem;
       gap: var(--sp-3);
@@ -2358,11 +2392,10 @@ const comments = [
       align-items: center;
     }
 
-    /* --- Section rhythm: the clamp maxes at 8rem which is too airy on a
-       phone. Cap top/bottom padding so cards don't float in dead space. --- */
+    /* ---------- Section rhythm: 40-48px, not desktop's 96-128 ---------- */
     .section {
-      padding-top: var(--sp-10);
-      padding-bottom: var(--sp-10);
+      padding-top: var(--sp-9);
+      padding-bottom: var(--sp-9);
     }
     .stats-sec {
       padding-block: var(--sp-8);
@@ -2372,26 +2405,16 @@ const comments = [
       gap: var(--sp-6);
     }
 
-    /* --- "What a month looks like" growth rows: the 5.5em label column
-       forces 2-line wraps. Stack label above the bar for a clean read. --- */
-    .growth {
-      margin: var(--sp-5) 0;
-      gap: var(--sp-5);
+    /* ---------- 3a. KILL REDUNDANT "What a month looks like" client card.
+       Numbers already live in the hero + stats panel + offer card. ---------- */
+    .welcome .clientcard {
+      display: none;
     }
-    .growth__row {
-      grid-template-columns: 1fr auto;
-      column-gap: var(--sp-3);
-      row-gap: 6px;
-    }
-    .growth__p {
-      grid-column: 1 / -1;
-      font-size: 0.95rem;
-    }
-    .growth__v {
-      font-size: 0.95rem;
+    .welcome__copy .btn {
+      margin-top: var(--sp-5);
     }
 
-    /* --- Stats panel: two columns is fine but tighten and align icons top --- */
+    /* ---------- Stats panel (KEPT — the single canonical numbers block) ---------- */
     .statspanel {
       gap: var(--sp-5);
       padding: var(--sp-6);
@@ -2405,21 +2428,69 @@ const comments = [
       height: 44px;
     }
 
-    /* --- Services: trim the tall media blocks so 6 stacked cards aren't an
-       endless scroll, and tighten the header gap. --- */
+    /* ---------- 2. SERVICE CARDS -> COMPACT LIST ROWS ----------
+       Hide the big graphic media; show a 44px leading icon + title + one line.
+       Six tight rows instead of six full-height cards. */
     .services__head {
       margin-bottom: var(--sp-6);
       gap: var(--sp-4);
     }
-    .svc__media {
-      min-height: 132px;
-      padding: var(--sp-4);
+    .services__grid {
+      gap: var(--sp-3);
     }
+    .svc {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--sp-4);
+      padding: var(--sp-4);
+      border: 1px solid var(--line);
+      border-radius: var(--r-card);
+      box-shadow: var(--shadow-card);
+      background: var(--paper);
+    }
+    .svc__media {
+      display: none;
+    }
+    .svc__ico {
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      color: #fff;
+    }
+    .svc--forest .svc__ico { background: linear-gradient(150deg, var(--coral), var(--coral-hover)); }
+    .svc--charcoal .svc__ico { background: linear-gradient(150deg, var(--slate), var(--slate-2)); }
+    .svc--pink .svc__ico { background: linear-gradient(150deg, var(--pink-ink), var(--pink)); }
+    .svc__ico svg { stroke-width: 1.7; }
     .svc__body {
-      padding: var(--sp-5);
+      padding: 0;
+      background: none;
+      border: 0;
+      border-radius: 0;
+    }
+    .svc__body h3 {
+      font-size: 1.05rem;
+      line-height: 1.2;
+    }
+    /* Desktop paragraph off; the tight one-liner on */
+    .svc__body > p:not(.svc__line) {
+      display: none;
+    }
+    .svc__line {
+      display: block;
+      margin-top: 3px;
+      font-size: var(--fs-sm);
+      color: var(--muted);
+      line-height: 1.3;
     }
 
-    /* --- How it works: header gap + step spacing --- */
+    /* ---------- How it works: keep the 5-step text list, drop the viz ---------- */
+    /* 3b. Hide the "one recording" hiw visual card (duplicate of hero story) */
+    .hiw__viz {
+      display: none;
+    }
     .hiw__top {
       margin-bottom: var(--sp-6);
     }
@@ -2433,13 +2504,25 @@ const comments = [
       font-size: 1.2rem;
     }
 
-    /* --- Offer + pull + blog: rein in the stacked-card gaps --- */
-    .offer__grid,
-    .blog__grid {
+    /* ---------- Offer + pull: rein in stacked-card gaps ---------- */
+    .offer__grid {
       gap: var(--sp-5);
     }
     .pull {
       gap: var(--sp-6);
+    }
+    .startcard__cta {
+      align-self: stretch;
+      justify-content: center;
+      min-height: 48px;
+    }
+
+    /* ---------- 3c. BLOG -> 2 cards, tighter header ---------- */
+    .blog__grid {
+      gap: var(--sp-5);
+    }
+    .blog__grid .postcard:nth-child(3) {
+      display: none;
     }
     .blog__head {
       margin-bottom: var(--sp-6);
@@ -2447,10 +2530,6 @@ const comments = [
     }
     .blog__head .btn {
       align-self: flex-start;
-    }
-    .startcard__cta {
-      align-self: stretch;
-      justify-content: center;
     }
   }
 

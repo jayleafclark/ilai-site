@@ -185,6 +185,25 @@ const links = [
     display: flex;
   }
 
+  /* --- Mobile (phones): give the pill a solid, opaque backdrop so page
+     text can never bleed through or sit legibly under the fixed header.
+     The translucent blur look is kept for desktop only. --- */
+  @media (max-width: 899px) {
+    .nav__pill {
+      /* Near-solid powder-white; opacity high enough that scrolled body
+         text behind it reads as a clean surface, not a see-through panel. */
+      background: #f7f9f4;
+      backdrop-filter: saturate(160%) blur(20px);
+      -webkit-backdrop-filter: saturate(160%) blur(20px);
+      box-shadow: var(--shadow-float);
+    }
+    /* Match the open panel to the pill so the whole header reads as one
+       opaque surface when the menu is down. */
+    .nav__mobile {
+      background: #f7f9f4;
+    }
+  }
+
   @media (min-width: 900px) {
     .nav__links,
     .nav__cta {

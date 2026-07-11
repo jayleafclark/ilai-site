@@ -857,19 +857,67 @@ const stats = [
       display: none;
     }
 
-    /* Dark-band beliefs: smaller heading, tighter card padding + spacing. */
+    /* Dark-band beliefs -> tight stacked list on mobile.
+       Drop the big card chrome (bg/blur/border/shadow), stack the icon inline
+       beside a one-line claim, and separate rows with a hairline instead. The
+       full glass cards belong to the wider desktop grid. */
     .beliefs__head {
-      margin-bottom: var(--sp-8);
+      margin-bottom: var(--sp-6);
     }
     .beliefs__h {
       font-size: clamp(1.6rem, 7.5vw, 2.1rem);
     }
+    .beliefs__grid {
+      gap: 0;
+    }
     .belief {
-      padding: var(--sp-6) var(--sp-5);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: var(--sp-3);
+      align-items: center;
+      padding: var(--sp-4) 0;
+      border-radius: 0;
+      background: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: none;
+    }
+    .beliefs__grid .belief:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .belief:hover {
+      transform: none;
+      background: none;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    /* Shrink the icon tile so the claim leads; span both text rows so it
+       sits centred against the claim + support line. */
+    .belief__ico {
+      grid-row: 1 / span 2;
+      align-self: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+    }
+    .belief__ico svg {
+      width: 17px;
+      height: 17px;
     }
     .belief__title {
-      margin-top: var(--sp-4);
-      font-size: 1.15rem;
+      grid-column: 2;
+      margin-top: 0;
+      font-size: 1.02rem;
+      line-height: 1.25;
+    }
+    /* One line of support, tucked under the claim in the text column. */
+    .belief__body {
+      grid-column: 2;
+      margin-top: 3px;
+      font-size: 0.9rem;
+      line-height: 1.45;
     }
 
     /* Team + compare + manifesto headings scale down to fit one/two lines. */
@@ -881,12 +929,14 @@ const stats = [
       font-size: clamp(2.1rem, 10vw, 3rem);
     }
 
-    /* "Two strengths, one team" viz: tighter inner padding on small screens. */
-    .tcv {
-      padding: var(--sp-6) var(--sp-5);
+    /* Hide the "Technical x Creative -> one team" viz on mobile: it just
+       restates the "technical and creative" credential already in the list.
+       The stat row below still carries the numbers. */
+    .team__viz {
+      display: none;
     }
-    .tcv__node {
-      padding: var(--sp-3);
+    .team__grid {
+      gap: 0;
     }
 
     /* Stats: 2-up grid crowds the 4th cell ("Years building organizations")
@@ -907,14 +957,63 @@ const stats = [
       font-size: clamp(1.6rem, 8vw, 2rem);
     }
 
-    /* Compare rows: a touch more breathing room per cell. */
+    /* Compare: the two columns aren't labeled on mobile, so a "them" line and
+       an "us" line read as unrelated. Wrap each pair as one bordered unit and
+       label each half ("Most agencies" / "Ilai") so the contrast is legible. */
+    /* Drop the outer card frame so we don't double-border the padded pairs. */
+    .cmp {
+      border: 0;
+      background: none;
+      box-shadow: none;
+      overflow: visible;
+    }
+    .cmp__list {
+      display: grid;
+      gap: var(--sp-4);
+      padding: 0;
+    }
+    .cmp__row {
+      border: 1px solid var(--line);
+      border-radius: var(--r-card);
+      overflow: hidden;
+    }
     .cmp__cell {
-      padding: var(--sp-4) var(--sp-5);
+      padding: var(--sp-3) var(--sp-4);
+      font-size: 0.92rem;
+      line-height: 1.4;
+    }
+    .cmp__cell--them {
+      border-bottom: 1px solid var(--line);
+    }
+    /* Per-pair labels via pseudo-element (mobile only, no markup change). */
+    .cmp__cell::before {
+      flex: none;
+      align-self: center;
+      min-width: 5.7em;
+      margin-right: 2px;
+      font-family: var(--font-accent);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .cmp__cell--them::before {
+      content: "Most agencies";
+      color: var(--muted);
+    }
+    .cmp__cell--us::before {
+      content: "Ilai";
+      color: var(--coral);
     }
 
     /* Manifesto wink callout: keep the padding comfortable, not cramped. */
     .manifesto__wink {
       padding: var(--sp-4);
+    }
+    /* Cut the manifesto pill-chips on mobile: they restate the hero line and
+       the body above. The headline + P.S. wink carry the point. */
+    .manifesto__pills {
+      display: none;
     }
   }
 

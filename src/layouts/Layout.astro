@@ -93,6 +93,17 @@ const jsonLd = {
     />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Mobile-only: ensure anchored headings clear the fixed pill header
+         (pill ~46px + top padding), so a jumped-to heading never lands
+         beneath the opaque header. Desktop keeps the global 6rem. -->
+    <style is:global>
+      @media (max-width: 899px) {
+        html {
+          scroll-padding-top: 92px;
+        }
+      }
+    </style>
   </head>
   <body>
     <a href="#main" class="sr-only">Skip to content</a>

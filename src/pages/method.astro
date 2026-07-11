@@ -1345,11 +1345,15 @@ const why = [
     }
     .flowviz__pill { flex-wrap: wrap; }
 
-    /* ---- Quick-stats: keep 2-up but tighten ---- */
-    .herostats { gap: var(--sp-3); margin-top: var(--sp-5); padding: 0; }
-    .herostat { padding: var(--sp-4); }
-    .herostat__num { font-size: 1.75rem; }
-    .herostat__lab { font-size: 0.8rem; }
+    /* ---- Quick-stats: the hero + step promises already carry every one of
+       these numbers (5 steps, 120+ pieces, 13+ platforms, human-gated), so
+       the stat block is pure duplication on mobile. Hide it entirely. ---- */
+    .herostats { display: none; }
+
+    /* ---- Tighten section padding: with the viz cards gone the steps are
+       compact copy blocks, so the airy desktop section rhythm is too loose. ---- */
+    .step.section { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
+    .why-sec.section { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
 
     /* ---- Step rows ---- */
     .step__row { gap: var(--sp-6); }
@@ -1358,15 +1362,20 @@ const why = [
     .step__rule { max-width: 44px; }
     .step__name { margin-top: var(--sp-3); font-size: 1.9rem; }
     .step__body { max-width: none; }
-    .step__cols { margin-top: var(--sp-5); gap: var(--sp-4); }
+    .step__cols { margin-top: var(--sp-4); gap: var(--sp-4); }
     .step__list { gap: var(--sp-3); }
     .step__outcome { padding: var(--sp-4); }
 
-    /* Visual card: trim the tall min-height so cards don't float in space */
-    .stepcard__core {
-      min-height: 0;
-      padding: var(--sp-5);
-    }
+    /* ---- The per-step viz mocks are the main length tax on mobile: each
+       browser-chrome card runs ~1.3 screens. Hide them on mobile; the step
+       copy carries the meaning. (Desktop keeps them beside the text.) ---- */
+    .step__visual { display: none; }
+
+    /* ---- Condense the two-list format. Each step shows "What you get"
+       (checklist) + "What you do" (dotted list) + an outcome — three list
+       formats stacked. On mobile keep the concrete checklist and the bold
+       outcome; drop the redundant "What you do" column. ---- */
+    .step__col + .step__col { display: none; }
 
     /* ---- 04 Distribute: 6-col grid is too tight at 390px -> 4-col ---- */
     .viz .dis__tiles { grid-template-columns: repeat(4, 1fr); gap: 8px; }
