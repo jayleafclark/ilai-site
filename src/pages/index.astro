@@ -2,296 +2,318 @@
 import Layout from "../layouts/Layout.astro";
 import CTASection from "../components/CTASection.astro";
 
-const platforms = [
-  "YouTube",
-  "Instagram",
-  "TikTok",
-  "Substack",
-  "Facebook",
-  "Threads",
-  "X",
-  "Bluesky",
-  "LinkedIn",
-];
+const arrow = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-const approach = [
+const features = [
   {
-    title: "Decode your market",
-    body: "We study your audience, your competitors, and what actually performs in your niche, then aim every piece at the people you sell to.",
+    t: "Researched, not guessed",
+    s: "Every piece aimed at the people you sell to.",
+    icon: `<circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="2" fill="currentColor"/>`,
   },
   {
-    title: "Make original content",
-    body: "Podcasts, reels, essays, and posts written in a voice we build with you. Researched and specific, never generic and never machine-guessed.",
+    t: "Human-led, human-gated",
+    s: "People set the voice and sign off on everything.",
+    icon: `<path d="M10 2l6 2.5v5c0 4-2.7 6.3-6 7.5-3.3-1.2-6-3.5-6-7.5v-5L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.2 10l2 2 3.6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
   {
-    title: "Distribute everywhere",
-    body: "One recording becomes a month of content, published across up to 13 platforms under one voice, with a live engagement engine.",
+    t: "Everywhere, one voice",
+    s: "One recording, published across up to 13 platforms.",
+    icon: `<circle cx="10" cy="10" r="2.2" fill="currentColor"/><path d="M5.5 5.5a6.5 6.5 0 000 9M14.5 5.5a6.5 6.5 0 010 9M3 3a10 10 0 000 14M17 3a10 10 0 010 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>`,
   },
 ];
 
-const bars = [
-  { p: "Instagram", v: "935K", pct: 100 },
-  { p: "Facebook", v: "524K", pct: 62 },
-  { p: "YouTube", v: "262K", pct: 34 },
-  { p: "Threads", v: "203K", pct: 26 },
-  { p: "TikTok", v: "20K", pct: 12 },
+const growth = [
+  { p: "Facebook", v: "+359%", pct: 100 },
+  { p: "Instagram", v: "+155%", pct: 62 },
+  { p: "YouTube", v: "+42%", pct: 30 },
+  { p: "TikTok", v: "+39%", pct: 26 },
 ];
 
 const stats = [
-  { value: 205, suffix: "M+", label: "Impressions in 12 months" },
-  { value: 7.9, decimals: 1, suffix: "M+", label: "Engagements earned" },
-  { value: 90, suffix: "K+", label: "New followers" },
-  { value: 228, suffix: "", label: "Posts every month" },
+  {
+    value: 205, suffix: "M+", label: "Impressions in 12 months",
+    icon: `<path d="M3 17V9M8.5 17V4M14 17v-6M19.5 17V7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
+  },
+  {
+    value: 90, suffix: "K+", label: "New followers",
+    icon: `<circle cx="8" cy="7" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M3 18a5 5 0 0110 0M15 5a3 3 0 010 6M19 18a4.5 4.5 0 00-3-4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
+  },
+  {
+    value: 8, suffix: "", label: "Platforms managed",
+    icon: `<rect x="3" y="3" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="12.5" y="3" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="12.5" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="12.5" y="12.5" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/>`,
+  },
+  {
+    value: 0, prefix: "$", label: "Spent on ads",
+    icon: `<circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 7v8M8.5 9.2c0-1.2 1.1-1.9 2.5-1.9s2.5.6 2.5 1.8-1.1 1.6-2.5 1.9-2.5.7-2.5 1.9 1.1 1.8 2.5 1.8 2.5-.7 2.5-1.9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>`,
+  },
 ];
 
-const expertise = [
-  { n: "01", k: "Podcast production", d: "Full episode edits, clips, reels, long-form video, show notes, and SEO." },
-  { n: "02", k: "Multi-platform publishing", d: "One idea, adapted and posted across up to 13 platforms under one voice." },
-  { n: "03", k: "Audience research", d: "Your market, your competitors, and the people you actually sell to." },
-  { n: "04", k: "Engagement engine", d: "First-response community engagement in the minutes that decide reach." },
+const services = [
+  { tag: "Podcasts & video", d: "Full episode edits, clips, long-form YouTube, show notes, and SEO. Record once, get a month of content.", tone: "navy" },
+  { tag: "Short-form & reels", d: "Scroll-stopping clips cut from every episode and fanned out across each platform, in your voice.", tone: "blue" },
+  { tag: "Publishing & engagement", d: "Posted everywhere on schedule, with first-response community engagement in the minutes that decide reach.", tone: "navy2" },
 ];
 
-const ArrowChip = `<svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const posts = [
+  { slug: "one-recording-content-system", tag: "Systems", title: "Be everywhere without living online", date: "Apr 14, 2026" },
+  { slug: "why-organic-reach-fell-2025", tag: "Strategy", title: "Why organic reach fell in 2025", date: "May 20, 2026" },
+  { slug: "ai-slop-vs-researched-content", tag: "Craft", title: "AI slop vs researched content", date: "Jun 18, 2026" },
+];
 ---
 
 <Layout>
   <!-- ============ HERO ============ -->
   <section class="hero">
-    <div class="container hero__inner">
-      <span class="eyebrow eyebrow--star" data-reveal>Welcome to Ilai Collective</span>
-      <h1 class="hero__title" data-reveal data-reveal-delay="1">
-        We grow the audience
-        <span class="hero__chip" aria-hidden="true" set:html={ArrowChip} />
-        <span class="hero__grey">you'll sell to.</span>
-      </h1>
-      <p class="hero__lead" data-reveal data-reveal-delay="2">
-        A human-led content studio for experts and personal brands. We learn your brand,
-        your market, and your audience, then make original content that grows it. You film
-        once. We make you impossible to ignore.
-      </p>
-
-      <!-- HERO CARD ROW -->
-      <div class="herocards" data-reveal data-reveal-delay="3">
-        <!-- Left: dark pitch card -->
-        <article class="herocards__pitch card--dark">
-          <span class="eyebrow eyebrow--star eyebrow--ondark">About the studio</span>
-          <h2 class="herocards__h">
-            Human-led.<br /><span class="herocards__hmuted">Human-gated.</span>
-          </h2>
-          <p class="herocards__p">
-            A real US team sets your voice, writes your angles, and signs off on every piece.
-            Sophisticated in-house software does the heavy lifting. People make every call.
+    <div class="container">
+      <div class="herocard" data-reveal>
+        <div class="herocard__bg" aria-hidden="true"></div>
+        <!-- Optional: drop a team/brand photo at /home/hero.jpg -->
+        <img class="herocard__photo" src="/home/hero.jpg" alt="" onerror="this.remove()" />
+        <div class="herocard__inner">
+          <span class="eyebrow eyebrow--star eyebrow--ondark">Welcome to Ilai Collective</span>
+          <h1 class="herocard__title">
+            We make experts<br />impossible to ignore.
+          </h1>
+          <p class="herocard__lead">
+            A human-led content studio for experts and personal brands. We learn your brand,
+            your market, and your audience, then grow it. You film once. We do the rest.
           </p>
-          <div class="herocards__actions">
-            <a href="/contact" class="btn btn--signal">
+          <div class="herocard__actions">
+            <a href="/contact" class="btn btn--light">
               Book a call
-              <span class="btn__arrow" aria-hidden="true" set:html={ArrowChip} />
+              <span class="btn__arrow" aria-hidden="true" set:html={arrow} />
             </a>
-            <a href="/what-we-do" class="btn btn--ghost btn--ghost-dark">What we do</a>
+            <a href="/work/dr-caroline-leaf" class="btn btn--ghost btn--ghost-dark">See the proof</a>
           </div>
-          <div class="herocards__mini">
-            <div class="herocards__miniicon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 14l4-5 3 3 4-6 3 4" stroke="var(--amber)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div>
-              <p class="herocards__minititle">One reel reached 543K</p>
-              <p class="herocards__minisub">61K likes, 3.4K comments. No ad spend.</p>
-            </div>
-          </div>
-        </article>
+        </div>
 
-        <!-- Right: dashboard visual + floating metric cards -->
-        <div class="herocards__visual">
-          <div class="chrome herostage__mock">
+        <!-- Right visual: live-dashboard mock + floating metric -->
+        <div class="herocard__visual" aria-hidden="true">
+          <div class="chrome hmock">
             <div class="chrome__bar">
               <span class="chrome__dot"></span><span class="chrome__dot"></span><span class="chrome__dot"></span>
               <span class="chrome__url">drleaf.ilaicollective.com</span>
-              <span class="herostage__live">Live</span>
             </div>
             <div class="chrome__body">
               <div class="hmock__tiles">
-                <div class="hmock__tile">
-                  <span class="hmock__tl">Impressions, 30d</span>
-                  <span class="hmock__tv">27.1M</span>
-                  <span class="hmock__tu">+18% MoM</span>
-                </div>
-                <div class="hmock__tile">
-                  <span class="hmock__tl">Engagements, 30d</span>
-                  <span class="hmock__tv">1.1M</span>
-                  <span class="hmock__tu">+22% MoM</span>
-                </div>
+                <div class="hmock__tile"><span class="hmock__tl">Impressions, 30d</span><span class="hmock__tv">27.1M</span></div>
+                <div class="hmock__tile"><span class="hmock__tl">Engagements, 30d</span><span class="hmock__tv">1.1M</span></div>
               </div>
-              <div class="hmock__chart" aria-hidden="true">
-                {[38, 52, 46, 68, 60, 82, 74, 96].map((h) => (
-                  <span style={`--h:${h}%`}></span>
-                ))}
+              <div class="hmock__chart">
+                {[38, 52, 46, 68, 60, 82, 74, 96].map((h) => <span style={`--h:${h}%`}></span>)}
               </div>
             </div>
           </div>
-          <div class="herofloat herofloat--a">
+          <div class="herofloat">
             <span class="herofloat__num">+204<span class="herofloat__u">%</span></span>
             <span class="herofloat__lab">Reach, year over year</span>
-            <span class="herofloat__note">↑ Compounding, not paid</span>
-          </div>
-          <div class="herofloat herofloat--b">
-            <span class="herofloat__num">205M+</span>
-            <span class="herofloat__lab">Impressions this year</span>
-            <span class="herofloat__note">↑ Across 8 platforms</span>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Logo strip -->
-    <div class="container">
-      <p class="logostrip__label">We create, publish, and grow audiences across</p>
-      <ul class="logostrip">
-        {platforms.map((p) => <li class="logostrip__item">{p}</li>)}
-      </ul>
-    </div>
-  </section>
-
-  <!-- ============ APPROACH ============ -->
-  <section class="section approach">
-    <div class="container">
-      <div class="approach__head" data-reveal>
-        <span class="eyebrow eyebrow--star">Our approach</span>
-        <h2 class="twotone">
-          Human-led.<br /><span class="twotone__muted">Built on research.</span>
-        </h2>
-        <p class="lead center">
-          We don't just make content. We build a system, backed by real research, so every
-          post is aimed at the people you sell to.
-        </p>
-      </div>
-      <div class="approach__grid">
-        {approach.map((a, i) => (
-          <article class="card card--hover appcard" data-reveal data-reveal-delay={String(i + 1)}>
-            <span class="appcard__n">{`0${i + 1}`}</span>
-            <h3>{a.title}</h3>
-            <p class="muted">{a.body}</p>
+      <!-- Floating feature cards -->
+      <div class="herofeatures">
+        {features.map((f, i) => (
+          <article class="feat" data-reveal data-reveal-delay={String(i + 1)}>
+            <span class="feat__ico" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" set:html={f.icon} />
+            </span>
+            <div>
+              <p class="feat__t">{f.t}</p>
+              <p class="feat__s">{f.s}</p>
+            </div>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ============ BENTO ============ -->
-  <section class="section bento-sec">
-    <div class="container">
-      <div class="bento">
-        <article class="card card--dark bento__a" data-reveal>
-          <span class="eyebrow eyebrow--star eyebrow--ondark">One voice</span>
-          <h3>Everywhere, on brand, on schedule</h3>
-          <p class="herocards__p">
-            One recording, adapted for each platform and posted for you. No copy-paste, no
-            off-brand slip-ups.
-          </p>
-          <div class="toggle" aria-hidden="true">
-            <span class="toggle__knob"></span>
-            <span class="toggle__label">Autopilot posting: never on</span>
-          </div>
-        </article>
-
-        <article class="card card--blue bento__b" data-reveal data-reveal-delay="1">
-          <span class="eyebrow eyebrow--star eyebrow--ondark">The math</span>
-          <p class="bento__big">1 <span class="bento__arrow">→</span> 30+</p>
-          <p class="herocards__p">One 60-minute recording becomes 30-plus pieces of content across the month.</p>
-        </article>
-
-        <article class="card bento__c" data-reveal data-reveal-delay="2">
-          <div class="bento__chead">
-            <span class="bento__cnum" data-count="2" data-decimals="0" data-suffix="M">2M</span>
-            <span class="eyebrow">Total following, 8 platforms</span>
-          </div>
-          <ul class="dotbars">
-            {bars.map((b) => (
-              <li class="dotbar">
-                <span class="dotbar__p">{b.p}</span>
-                <span class="dotbar__track"><span class="dotbar__fill" style={`--w:${b.pct}%`}></span></span>
-                <span class="dotbar__v">{b.v}</span>
-              </li>
-            ))}
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ STATS ============ -->
-  <section class="stats">
-    <div class="container">
-      <div class="stats__grid" data-reveal>
-        {stats.map((s) => (
-          <div class="stats__item">
-            <div class="stats__num" data-count={s.value} data-decimals={s.decimals ?? 0} data-suffix={s.suffix ?? ""}>
-              {s.value.toLocaleString("en-US", { minimumFractionDigits: s.decimals ?? 0, maximumFractionDigits: s.decimals ?? 0 }) + (s.suffix ?? "")}
-            </div>
-            <div class="stats__lab">{s.label}</div>
-          </div>
-        ))}
-      </div>
-      <p class="stats__src">
-        12-month results for Dr. Caroline Leaf, managed by Ilai. <a href="/work/dr-caroline-leaf">See the full case study →</a>
-      </p>
-    </div>
-  </section>
-
-  <!-- ============ EXPERTISE (numbered, dark) ============ -->
-  <section class="section expertise section--ink">
-    <div class="container">
-      <div class="expertise__head" data-reveal>
-        <span class="eyebrow eyebrow--star eyebrow--ondark">What we do</span>
-        <h2 class="twotone">
-          One studio for your<br /><span class="twotone__muted">entire content operation.</span>
-        </h2>
-      </div>
-      <div class="expertise__grid">
-        {expertise.map((e, i) => (
-          <div class="exp" data-reveal data-reveal-delay={String(i + 1)}>
-            <span class="exp__n">{e.n}</span>
-            <h3 class="exp__k">{e.k}</h3>
-            <p class="exp__d">{e.d}</p>
-          </div>
-        ))}
-      </div>
-      <div class="expertise__foot" data-reveal>
-        <a href="/what-we-do" class="btn btn--signal">
-          Explore every service
-          <span class="btn__arrow" aria-hidden="true" set:html={ArrowChip} />
+  <!-- ============ WELCOME + CLIENT CARD ============ -->
+  <section class="section welcome">
+    <div class="container welcome__grid">
+      <div class="welcome__copy" data-reveal>
+        <span class="eyebrow eyebrow--star">Why Ilai</span>
+        <h2 class="welcome__h">Content that's built,<br />not guessed.</h2>
+        <p class="welcome__p">
+          Most experts know content matters and have no time to be everywhere. Generic
+          agencies hand back posts that sound like everyone else.
+        </p>
+        <p class="welcome__p">
+          Ilai runs the whole operation: research, scripts, publishing, and community, in a
+          voice we build with you and never hand to a machine to guess. You stay focused on
+          serving and selling to the people we bring you.
+        </p>
+        <a href="/method" class="btn btn--blue">
+          See how it works
+          <span class="btn__arrow" aria-hidden="true" set:html={arrow} />
         </a>
       </div>
+
+      <article class="clientcard card--dark" data-reveal data-reveal-delay="1">
+        <div class="clientcard__top">
+          <div class="clientcard__ava" aria-hidden="true">CL</div>
+          <div>
+            <p class="clientcard__name">One client, one year</p>
+            <p class="clientcard__role">Dr. Caroline Leaf · year-over-year growth</p>
+          </div>
+        </div>
+        <ul class="growth">
+          {growth.map((g) => (
+            <li class="growth__row">
+              <span class="growth__p">{g.p}</span>
+              <span class="growth__track"><span class="growth__fill" style={`--w:${g.pct}%`}></span></span>
+              <span class="growth__v">{g.v}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="clientcard__note">
+          Reach and engagement roughly tripled in a year the average account went backwards.
+          Zero spent on ads.
+        </p>
+      </article>
     </div>
   </section>
 
-  <!-- ============ CASE STUDY TEASER ============ -->
-  <section class="section casestudy">
+  <!-- ============ STATS PANEL ============ -->
+  <section class="stats-sec">
     <div class="container">
-      <article class="casestudy__box" data-reveal>
-        <div class="casestudy__copy">
-          <span class="eyebrow eyebrow--pill casestudy__pill">Case study</span>
-          <h2 class="casestudy__title">Dr. Caroline Leaf</h2>
-          <p class="lead">
-            A neuroscientist and author with a serious message and no time to be everywhere.
-            In 12 months her reach and engagement roughly tripled, in a year most accounts
-            went backwards.
+      <div class="statspanel" data-reveal>
+        {stats.map((s) => (
+          <div class="statp">
+            <span class="statp__ico" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" set:html={s.icon} />
+            </span>
+            <div>
+              <div class="statp__num" data-count={s.value} data-decimals="0" data-prefix={s.prefix ?? ""} data-suffix={s.suffix ?? ""}>
+                {(s.prefix ?? "") + s.value.toLocaleString("en-US") + (s.suffix ?? "")}
+              </div>
+              <div class="statp__lab">{s.label}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="section services">
+    <div class="container">
+      <div class="services__head" data-reveal>
+        <div>
+          <span class="eyebrow eyebrow--star">What we do</span>
+          <h2 class="services__h">One studio for every channel.</h2>
+        </div>
+        <div class="services__intro">
+          <p class="muted">
+            Everything it takes to build and hold an audience, run by a real US team and
+            supported by serious in-house software.
           </p>
-          <ul class="casestudy__list">
-            <li><strong>+204%</strong> reach, year over year</li>
-            <li><strong>+210%</strong> engagement, year over year</li>
-            <li><strong>8 platforms</strong> managed, zero on ads</li>
-          </ul>
-          <a href="/work/dr-caroline-leaf" class="btn btn--dark">
-            Read the full story
-            <span class="btn__arrow" aria-hidden="true" set:html={ArrowChip} />
+          <a href="/what-we-do" class="btn btn--ghost">
+            Explore every service
+            <span class="btn__arrow" aria-hidden="true" set:html={arrow} />
           </a>
         </div>
-        <div class="casestudy__panel" aria-hidden="true">
-          <span class="casestudy__mlabel">Impressions, this year</span>
-          <span class="casestudy__mval">205M+</span>
-          <span class="casestudy__mnote">Industry average fell about 12%. She tripled.</span>
-        </div>
+      </div>
+      <div class="services__grid">
+        {services.map((s, i) => (
+          <article class={`svc svc--${s.tone}`} data-reveal data-reveal-delay={String(i + 1)}>
+            <div class="svc__media" aria-hidden="true">
+              <span class="svc__num">{`0${i + 1}`}</span>
+            </div>
+            <div class="svc__body">
+              <h3>{s.tag}</h3>
+              <p>{s.d}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OFFER ============ -->
+  <section class="section offer">
+    <div class="container offer__grid">
+      <article class="offercard card--navy" data-reveal>
+        <span class="eyebrow eyebrow--star eyebrow--ondark">What a month looks like</span>
+        <h3 class="offercard__h">120+ pieces. 350+ posts. One voice.</h3>
+        <ul class="checks">
+          <li>Around 4 podcast episodes, cut into ~20 reels and clips</li>
+          <li>~60 short-form posts and ~12 long-form essays</li>
+          <li>Published across up to 13 platforms, on schedule</li>
+          <li>First-response community engagement, in your voice</li>
+          <li>A live dashboard where every number is pulled automatically</li>
+        </ul>
       </article>
+
+      <aside class="startcard" data-reveal data-reveal-delay="1">
+        <span class="eyebrow eyebrow--star">Start here</span>
+        <h3 class="startcard__h">A free teardown, then your first month.</h3>
+        <p class="muted">
+          We research your brand, market, and audience and show you where the attention is,
+          before you decide anything.
+        </p>
+        <div class="startcard__price">
+          <span class="startcard__amt">$1,950</span>
+          <span class="startcard__per">pilot month, fully credited</span>
+        </div>
+        <p class="startcard__sub">Ongoing engagements start at $5,500/mo.</p>
+        <a href="/contact" class="btn btn--signal startcard__cta">
+          Book a call
+          <span class="btn__arrow" aria-hidden="true" set:html={arrow} />
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIAL / PULL ============ -->
+  <section class="section pull-sec">
+    <div class="container">
+      <figure class="pull" data-reveal>
+        <div class="pull__quote">
+          <span class="pull__mark" aria-hidden="true">&ldquo;</span>
+          <blockquote>
+            In a year the average account's organic reach fell about 12 percent. Dr. Leaf's
+            reach and engagement roughly tripled, at a size where most accounts flatten out.
+          </blockquote>
+          <figcaption>
+            <span class="pull__who">The Dr. Caroline Leaf case study</span>
+            <a href="/work/dr-caroline-leaf" class="pull__link">Read the numbers →</a>
+          </figcaption>
+        </div>
+        <div class="pull__stat" aria-hidden="true">
+          <span class="pull__num">3×</span>
+          <span class="pull__lab">reach and engagement, in a shrinking year</span>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ BLOG ============ -->
+  <section class="section blog-sec">
+    <div class="container">
+      <div class="blog__head" data-reveal>
+        <div>
+          <span class="eyebrow eyebrow--star">From the studio</span>
+          <h2 class="blog__h">Notes on building an audience.</h2>
+        </div>
+        <a href="/blog" class="btn btn--ghost">
+          See all posts
+          <span class="btn__arrow" aria-hidden="true" set:html={arrow} />
+        </a>
+      </div>
+      <div class="blog__grid">
+        {posts.map((p, i) => (
+          <a href={`/blog/${p.slug}`} class="postcard" data-reveal data-reveal-delay={String(i + 1)}>
+            <div class={`postcard__thumb postcard__thumb--${i}`} aria-hidden="true">
+              <span class="postcard__tag">{p.tag}</span>
+            </div>
+            <div class="postcard__body">
+              <h3>{p.title}</h3>
+              <span class="postcard__date">{p.date}</span>
+            </div>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -301,159 +323,61 @@ const ArrowChip = `<svg width="18" height="18" viewBox="0 0 14 14" fill="none"><
 <style>
   /* ---------- Hero ---------- */
   .hero {
-    padding-top: clamp(7.5rem, 15vh, 11rem);
-    padding-bottom: var(--sp-12);
+    padding-top: clamp(6.5rem, 12vh, 9rem);
+    padding-bottom: clamp(3.5rem, 6vw, 6rem);
   }
-  .hero__inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .hero__title {
-    margin-top: var(--sp-5);
-    font-size: var(--fs-display);
-    font-weight: 800;
-    line-height: var(--lh-tight);
-    letter-spacing: var(--tracking-display);
-    max-width: 15ch;
-  }
-  .hero__grey {
-    color: var(--muted);
-  }
-  .hero__chip {
-    display: inline-grid;
-    place-items: center;
-    width: clamp(2.6rem, 4vw, 3.6rem);
-    height: clamp(2.6rem, 4vw, 3.6rem);
-    vertical-align: middle;
-    margin: 0 0.2em;
-    border-radius: 16px;
-    background: var(--amber);
-    color: var(--amber-ink);
-    transform: rotate(-4deg);
-    box-shadow: var(--shadow-card);
-  }
-  .hero__lead {
-    margin-top: var(--sp-5);
-    font-size: var(--fs-lead);
-    line-height: 1.55;
-    color: var(--ink-2);
-    max-width: 58ch;
-  }
-
-  /* Hero card row */
-  .herocards {
-    width: 100%;
-    margin-top: var(--sp-10);
-    display: grid;
-    gap: var(--sp-5);
-    text-align: left;
-  }
-  .herocards__pitch {
-    padding: clamp(1.75rem, 3vw, 2.75rem);
-    border-radius: var(--r-card-lg);
-    display: flex;
-    flex-direction: column;
-  }
-  .herocards__h {
-    margin-top: var(--sp-4);
-    font-size: clamp(1.9rem, 3vw, 2.6rem);
-    font-weight: 800;
-    letter-spacing: var(--tracking-tight);
-    line-height: 1.05;
-    color: #fff;
-  }
-  .herocards__hmuted {
-    color: rgba(255, 255, 255, 0.4);
-  }
-  .herocards__p {
-    margin-top: var(--sp-4);
-    color: var(--on-dark);
-    font-size: var(--fs-sm);
-    line-height: 1.6;
-    max-width: 42ch;
-  }
-  .herocards__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-3);
-    margin-top: var(--sp-6);
-  }
-  .btn--ghost-dark {
-    --btn-fg: #fff;
-    border-color: rgba(255, 255, 255, 0.24);
-  }
-  .btn--ghost-dark:hover {
-    background: rgba(255, 255, 255, 0.08);
-  }
-  .herocards__mini {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-3);
-    margin-top: auto;
-    padding-top: var(--sp-6);
-  }
-  .herocards__miniicon {
-    flex: none;
-    display: grid;
-    place-items: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid var(--on-dark-soft);
-  }
-  .herocards__minititle {
-    color: #fff;
-    font-weight: 600;
-    font-size: var(--fs-sm);
-  }
-  .herocards__minisub {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.8rem;
-  }
-
-  .herocards__visual {
+  .herocard {
     position: relative;
+    overflow: hidden;
     border-radius: var(--r-card-lg);
-    background:
-      radial-gradient(120% 90% at 80% 10%, rgba(47, 107, 255, 0.14), transparent 60%),
-      radial-gradient(120% 90% at 10% 90%, rgba(245, 179, 51, 0.18), transparent 60%),
-      var(--sand);
-    border: 1px solid var(--line);
-    padding: clamp(1.25rem, 3vw, 2.5rem);
-    display: grid;
-    place-items: center;
-    min-height: 340px;
-  }
-  .herostage__mock {
-    width: 100%;
-    max-width: 420px;
-  }
-  .herostage__live {
-    margin-left: auto;
-    display: inline-flex;
+    min-height: clamp(420px, 56vw, 600px);
+    display: flex;
     align-items: center;
-    gap: 6px;
-    font-family: var(--font-accent);
-    font-size: 0.64rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--blue);
+    box-shadow: var(--shadow-float);
+    isolation: isolate;
   }
-  .herostage__live::before {
-    content: "";
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--blue);
-    animation: pulse 2.4s var(--ease) infinite;
+  .herocard__bg,
+  .herocard__photo {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
   }
-  @keyframes pulse {
-    70%, 100% { box-shadow: 0 0 0 7px rgba(47, 107, 255, 0); }
-    0% { box-shadow: 0 0 0 0 rgba(47, 107, 255, 0.5); }
+  .herocard__bg {
+    background:
+      radial-gradient(80% 120% at 85% 15%, rgba(47, 107, 240, 0.55), transparent 60%),
+      radial-gradient(70% 90% at 10% 90%, rgba(22, 55, 95, 0.9), transparent 65%),
+      linear-gradient(135deg, var(--navy-2), var(--navy) 55%, var(--navy-3));
+  }
+  .herocard__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    mix-blend-mode: luminosity;
+  }
+  .herocard__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 640px;
+    padding: clamp(1.75rem, 3.5vw, 2.75rem);
+    padding-bottom: clamp(4.5rem, 8vw, 6rem);
+    color: #fff;
+  }
+  .herocard__title {
+    margin-top: var(--sp-4);
+    font-size: clamp(2.2rem, 3vw, 3.1rem);
+    font-weight: 800;
+    line-height: 1.06;
+    letter-spacing: var(--tracking-display);
+    color: #fff;
+  }
+  /* Right-side visual */
+  .herocard__visual {
+    display: none;
+  }
+  .hmock {
+    width: 340px;
   }
   .hmock__tiles {
     display: grid;
@@ -464,36 +388,35 @@ const ArrowChip = `<svg width="18" height="18" viewBox="0 0 14 14" fill="none"><
     display: flex;
     flex-direction: column;
     gap: 3px;
-    padding: var(--sp-4);
+    padding: var(--sp-3) var(--sp-4);
     background: var(--mist);
     border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: 12px;
   }
-  .hmock__tl { font-size: 0.72rem; color: var(--muted); }
-  .hmock__tv { font-family: var(--font-accent); font-weight: 700; font-size: 1.4rem; letter-spacing: -0.02em; }
-  .hmock__tu { font-size: 0.72rem; font-weight: 600; color: var(--blue); }
+  .hmock__tl { font-size: 0.7rem; color: var(--muted); }
+  .hmock__tv { font-family: var(--font-accent); font-weight: 700; font-size: 1.3rem; letter-spacing: -0.02em; color: var(--navy); }
   .hmock__chart {
     display: flex;
     align-items: flex-end;
-    gap: 7px;
-    height: 84px;
+    gap: 6px;
+    height: 78px;
     margin-top: var(--sp-3);
-    padding: var(--sp-4);
+    padding: var(--sp-3);
     background: var(--mist);
     border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: 12px;
   }
   .hmock__chart span {
     flex: 1;
     height: var(--h);
-    border-radius: 5px 5px 3px 3px;
-    background: linear-gradient(180deg, var(--blue), #7aa0ff);
-    opacity: 0.9;
+    border-radius: 4px 4px 2px 2px;
+    background: linear-gradient(180deg, var(--blue), #7aa4ff);
   }
-  .hmock__chart span:last-child { background: linear-gradient(180deg, var(--amber), #ffd27a); opacity: 1; }
-
+  .hmock__chart span:last-child { background: linear-gradient(180deg, #16375f, var(--blue)); }
   .herofloat {
     position: absolute;
+    left: -34px;
+    bottom: 34px;
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -502,233 +425,534 @@ const ArrowChip = `<svg width="18" height="18" viewBox="0 0 14 14" fill="none"><
     border: 1px solid var(--line);
     border-radius: 16px;
     box-shadow: var(--shadow-float);
+    animation: hfloat 6s var(--ease) infinite alternate;
   }
-  .herofloat--a { top: 8%; right: -12px; animation: float 6s var(--ease) infinite alternate; }
-  .herofloat--b { bottom: 8%; left: -12px; animation: float 6s var(--ease) 1.2s infinite alternate; }
-  .herofloat__num { font-family: var(--font-accent); font-weight: 700; font-size: 1.5rem; letter-spacing: -0.03em; }
-  .herofloat__u { color: var(--amber); }
-  .herofloat__lab { font-size: 0.76rem; color: var(--muted); }
-  .herofloat__note { font-size: 0.72rem; font-weight: 600; color: var(--blue); margin-top: 2px; }
-  @keyframes float { to { transform: translateY(-9px); } }
-  @media (prefers-reduced-motion: reduce) {
-    .herofloat, .herostage__live::before { animation: none; }
-  }
-
+  .herofloat__num { font-family: var(--font-accent); font-weight: 700; font-size: 1.6rem; letter-spacing: -0.03em; color: var(--navy); }
+  .herofloat__u { color: var(--blue); }
+  .herofloat__lab { font-size: 0.74rem; color: var(--muted); }
+  @keyframes hfloat { to { transform: translateY(-9px); } }
+  @media (prefers-reduced-motion: reduce) { .herofloat { animation: none; } }
   @media (min-width: 940px) {
-    .herocards {
-      grid-template-columns: 1fr 1.05fr;
-      gap: var(--sp-6);
-      margin-top: var(--sp-12);
+    .herocard__visual {
+      display: block;
+      position: absolute;
+      right: clamp(2rem, 5vw, 4.5rem);
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
     }
   }
-  @media (max-width: 560px) {
-    .herofloat--a { right: 0; top: 2%; }
-    .herofloat--b { left: 0; bottom: 2%; }
-    .herofloat__num { font-size: 1.2rem; }
+  @media (min-width: 940px) and (max-width: 1100px) {
+    .hmock { width: 300px; }
   }
-
-  /* ---------- Logo strip ---------- */
-  .logostrip__label {
-    margin-top: var(--sp-12);
-    text-align: center;
-    font-family: var(--font-accent);
-    font-size: var(--fs-eyebrow);
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: var(--muted);
+  .herocard__lead {
+    margin-top: var(--sp-5);
+    color: rgba(255, 255, 255, 0.82);
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+    max-width: 46ch;
   }
-  .logostrip {
-    list-style: none;
+  .herocard__actions {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: var(--sp-4) var(--sp-8);
-    margin-top: var(--sp-5);
-    padding-top: var(--sp-5);
-    border-top: 1px solid var(--line);
+    gap: var(--sp-3);
+    margin-top: var(--sp-6);
   }
-  .logostrip__item {
-    font-family: var(--font-accent);
-    font-weight: 500;
-    font-size: 1.05rem;
-    color: var(--ink);
-    opacity: 0.42;
-    transition: opacity var(--dur-base) var(--ease);
+  .btn--ghost-dark {
+    --btn-fg: #fff;
+    border-color: rgba(255, 255, 255, 0.28);
   }
-  .logostrip__item:hover { opacity: 0.9; }
+  .btn--ghost-dark:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
 
-  /* ---------- Approach ---------- */
-  .approach__head {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  /* Floating feature cards */
+  .herofeatures {
+    position: relative;
+    z-index: 2;
+    margin-top: -3.5rem;
+    display: grid;
     gap: var(--sp-4);
+    padding: 0 clamp(0.5rem, 3vw, 2.5rem);
   }
-  .twotone {
+  .feat {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-3);
+    padding: var(--sp-5);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
+    box-shadow: var(--shadow-card);
+  }
+  .feat__ico {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--blue-tint);
+    color: var(--blue);
+  }
+  .feat__t {
+    font-weight: 700;
+    font-size: var(--fs-body);
+    letter-spacing: -0.01em;
+  }
+  .feat__s {
+    margin-top: 3px;
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  @media (min-width: 800px) {
+    .herofeatures {
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: -4.5rem;
+    }
+  }
+
+  /* ---------- Welcome + client card ---------- */
+  .welcome__grid {
+    display: grid;
+    gap: var(--sp-8);
+    align-items: center;
+  }
+  .welcome__h {
+    margin-top: var(--sp-4);
     font-size: var(--fs-h2);
     font-weight: 800;
     letter-spacing: var(--tracking-tight);
     line-height: 1.05;
   }
-  .twotone__muted { color: var(--muted); }
-  .approach__grid {
-    margin-top: var(--sp-10);
-    display: grid;
-    gap: var(--sp-5);
+  .welcome__p {
+    margin-top: var(--sp-4);
+    color: var(--ink-2);
+    max-width: 48ch;
   }
-  .appcard { display: flex; flex-direction: column; gap: var(--sp-3); }
-  .appcard__n {
+  .welcome__copy .btn {
+    margin-top: var(--sp-6);
+  }
+  .clientcard {
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border-radius: var(--r-card-lg);
+  }
+  .clientcard__top {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+  .clientcard__ava {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--drleaf);
+    color: #fff;
+    font-family: var(--font-accent);
+    font-weight: 700;
+  }
+  .clientcard__name {
+    color: #fff;
+    font-weight: 700;
+  }
+  .clientcard__role {
+    font-size: var(--fs-sm);
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .growth {
+    list-style: none;
+    margin: var(--sp-6) 0;
+    display: grid;
+    gap: var(--sp-4);
+  }
+  .growth__row {
+    display: grid;
+    grid-template-columns: 5.5em 1fr auto;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+  .growth__p {
+    font-size: var(--fs-sm);
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .growth__track {
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+  }
+  .growth__fill {
+    display: block;
+    height: 100%;
+    width: var(--w);
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--blue), #7aa4ff);
+  }
+  .growth__v {
     font-family: var(--font-accent);
     font-weight: 700;
     font-size: var(--fs-sm);
-    color: var(--amber-ink);
-    background: var(--amber-tint);
-    width: 40px; height: 40px;
-    display: grid; place-items: center;
-    border-radius: 12px;
+    color: #fff;
   }
-  .appcard p { font-size: var(--fs-sm); }
-  @media (min-width: 820px) {
-    .approach__grid { grid-template-columns: repeat(3, 1fr); }
+  .clientcard__note {
+    font-size: var(--fs-sm);
+    color: rgba(255, 255, 255, 0.62);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--on-dark-soft);
+  }
+  @media (min-width: 900px) {
+    .welcome__grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: var(--sp-12);
+    }
   }
 
-  /* ---------- Bento ---------- */
-  .bento {
+  /* ---------- Stats panel ---------- */
+  .stats-sec {
+    padding-bottom: var(--section-y);
+  }
+  .statspanel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-6);
+    padding: clamp(1.75rem, 4vw, 3rem);
+    background: var(--mist);
+    border-radius: var(--r-card-lg);
+  }
+  .statp {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+  }
+  .statp__ico {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--paper);
+    color: var(--blue);
+    box-shadow: var(--shadow-card);
+  }
+  .statp__num {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--navy);
+  }
+  .statp__lab {
+    margin-top: 4px;
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  @media (min-width: 860px) {
+    .statspanel {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* ---------- Services ---------- */
+  .services__head {
+    display: grid;
+    gap: var(--sp-5);
+    margin-bottom: var(--sp-10);
+  }
+  .services__h {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h2);
+    font-weight: 800;
+    letter-spacing: var(--tracking-tight);
+  }
+  .services__intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-5);
+  }
+  .services__intro p {
+    font-size: var(--fs-lead);
+  }
+  .services__grid {
     display: grid;
     gap: var(--sp-5);
   }
-  .bento .card { display: flex; flex-direction: column; }
-  .bento__big {
+  .svc {
+    border-radius: var(--r-card-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+  }
+  .svc__media {
+    position: relative;
+    min-height: 150px;
+    display: flex;
+    align-items: flex-end;
+    padding: var(--sp-5);
+  }
+  .svc--navy .svc__media { background: linear-gradient(150deg, var(--navy), var(--navy-3)); }
+  .svc--blue .svc__media { background: linear-gradient(150deg, var(--blue), #5b8bff); }
+  .svc--navy2 .svc__media { background: linear-gradient(150deg, var(--navy-2), var(--navy)); }
+  .svc__num {
     font-family: var(--font-accent);
     font-weight: 700;
-    font-size: clamp(3rem, 6vw, 4.5rem);
-    letter-spacing: -0.04em;
-    line-height: 1;
-    margin: var(--sp-4) 0;
-    color: #fff;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: -0.03em;
   }
-  .bento__arrow { opacity: 0.6; }
-  .bento .eyebrow { margin-bottom: var(--sp-3); }
-  .bento h3 { font-size: var(--fs-h3); }
-  .toggle {
-    display: flex; align-items: center; gap: 10px;
-    margin-top: auto; padding-top: var(--sp-5);
-  }
-  .toggle__knob {
-    position: relative; width: 40px; height: 23px; border-radius: 999px;
-    background: rgba(255,255,255,0.16); flex: none;
-  }
-  .toggle__knob::after {
-    content: ""; position: absolute; top: 3px; left: 3px;
-    width: 17px; height: 17px; border-radius: 50%; background: #fff;
-  }
-  .toggle__label { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
-  .bento__chead { display: flex; flex-direction: column; gap: 4px; margin-bottom: var(--sp-5); }
-  .bento__cnum {
-    font-family: var(--font-accent); font-weight: 700;
-    font-size: clamp(2.4rem, 5vw, 3.2rem); letter-spacing: -0.03em; line-height: 1;
-  }
-  .dotbars { list-style: none; display: grid; gap: var(--sp-3); }
-  .dotbar { display: grid; grid-template-columns: 5.5em 1fr auto; align-items: center; gap: var(--sp-3); }
-  .dotbar__p { font-size: 0.82rem; color: var(--ink-2); }
-  .dotbar__track { height: 8px; border-radius: 999px; background: var(--sand); overflow: hidden; }
-  .dotbar__fill {
-    display: block; height: 100%; width: var(--w);
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--blue), #6f95ff);
-  }
-  .dotbar__v { font-family: var(--font-accent); font-size: 0.82rem; font-weight: 600; }
-  @media (min-width: 860px) {
-    .bento { grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr; }
-    .bento__c { grid-row: span 2; grid-column: 2; }
-    .bento__a { grid-column: 1; }
-    .bento__b { grid-column: 1; }
-  }
-  @media (min-width: 1080px) {
-    .bento { grid-template-columns: 1.1fr 0.9fr 1.1fr; }
-    .bento__a { grid-column: 1; grid-row: 1; }
-    .bento__b { grid-column: 2; grid-row: 1; }
-    .bento__c { grid-column: 3; grid-row: 1; }
-  }
-
-  /* ---------- Stats ---------- */
-  .stats { padding-block: var(--sp-12); }
-  .stats__grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-8) var(--sp-6);
-  }
-  .stats__num {
-    font-family: var(--font-accent); font-weight: 700;
-    font-size: clamp(2.6rem, 5vw, 3.8rem); letter-spacing: -0.03em; line-height: 1;
-    font-variant-numeric: tabular-nums;
-  }
-  .stats__lab { margin-top: var(--sp-3); font-size: var(--fs-sm); color: var(--muted); }
-  .stats__src {
-    margin-top: var(--sp-8); padding-top: var(--sp-5);
-    border-top: 1px solid var(--line); font-size: var(--fs-sm); color: var(--muted);
-  }
-  .stats__src a { color: var(--blue); font-weight: 600; }
-  @media (min-width: 820px) { .stats__grid { grid-template-columns: repeat(4, 1fr); } }
-
-  /* ---------- Expertise ---------- */
-  .expertise__head { max-width: 44ch; }
-  .expertise .twotone { color: #fff; }
-  .expertise .twotone__muted { color: rgba(255,255,255,0.42); }
-  .expertise__grid {
-    margin-top: var(--sp-10);
-    display: grid; gap: var(--sp-8) var(--sp-6);
-  }
-  .exp {
-    padding-top: var(--sp-5);
-    border-top: 1px solid rgba(255,255,255,0.16);
-  }
-  .exp__n {
-    font-family: var(--font-accent); font-weight: 700; font-size: var(--fs-sm);
-    color: var(--amber);
-  }
-  .exp__k { margin-top: var(--sp-3); color: #fff; font-size: 1.25rem; }
-  .exp__d { margin-top: var(--sp-2); color: rgba(255,255,255,0.6); font-size: var(--fs-sm); }
-  .expertise__foot { margin-top: var(--sp-10); }
-  @media (min-width: 720px) { .expertise__grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 1020px) { .expertise__grid { grid-template-columns: repeat(4, 1fr); } }
-
-  /* ---------- Case study ---------- */
-  .casestudy__box {
-    display: grid; gap: var(--sp-8);
-    padding: clamp(1.75rem, 4vw, 3rem);
-    border-radius: var(--r-card-lg);
+  .svc__body {
     background: var(--paper);
     border: 1px solid var(--line);
-    box-shadow: var(--shadow-card);
+    border-top: 0;
+    border-radius: 0 0 var(--r-card-lg) var(--r-card-lg);
+    padding: var(--sp-6);
+    flex: 1;
   }
-  .casestudy__pill { background: var(--drleaf-tint); color: var(--drleaf); }
-  .casestudy__title { margin-top: var(--sp-4); font-size: var(--fs-h1); }
-  .casestudy__list { list-style: none; margin-top: var(--sp-5); display: grid; gap: var(--sp-3); }
-  .casestudy__list li { padding-left: var(--sp-5); position: relative; color: var(--ink-2); }
-  .casestudy__list li::before {
-    content: ""; position: absolute; left: 0; top: 0.6em;
-    width: 8px; height: 8px; border-radius: 50%; background: var(--drleaf);
+  .svc__body h3 {
+    font-size: var(--fs-h3);
   }
-  .casestudy__list strong { color: var(--ink); }
-  .casestudy__box .btn { margin-top: var(--sp-6); }
-  .casestudy__panel {
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-align: center; gap: var(--sp-2);
+  .svc__body p {
+    margin-top: var(--sp-3);
+    color: var(--muted);
+    font-size: var(--fs-sm);
+  }
+  @media (min-width: 720px) {
+    .services__head {
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+    }
+    .services__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ---------- Offer ---------- */
+  .offer__grid {
+    display: grid;
+    gap: var(--sp-6);
+  }
+  .offercard {
+    padding: clamp(1.75rem, 4vw, 3rem);
+    border-radius: var(--r-card-lg);
+  }
+  .offercard__h {
+    margin-top: var(--sp-4);
+    font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+    color: #fff;
+    letter-spacing: var(--tracking-tight);
+  }
+  .checks {
+    list-style: none;
+    margin-top: var(--sp-6);
+    display: grid;
+    gap: var(--sp-4);
+  }
+  .checks li {
+    position: relative;
+    padding-left: 2rem;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: var(--fs-sm);
+  }
+  .checks li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--blue);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M6 10.2l2.5 2.5L14 7' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+  .startcard {
+    padding: clamp(1.75rem, 4vw, 3rem);
+    border-radius: var(--r-card-lg);
+    background: var(--mist);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+  }
+  .startcard__h {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h3);
+  }
+  .startcard .muted {
+    margin-top: var(--sp-3);
+    font-size: var(--fs-sm);
+  }
+  .startcard__price {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-3);
+    margin-top: var(--sp-6);
+  }
+  .startcard__amt {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: clamp(2.4rem, 5vw, 3.2rem);
+    letter-spacing: -0.03em;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .startcard__per {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  .startcard__sub {
+    margin-top: var(--sp-2);
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  .startcard__cta {
+    margin-top: var(--sp-6);
+    align-self: flex-start;
+  }
+  @media (min-width: 900px) {
+    .offer__grid {
+      grid-template-columns: 1.2fr 0.8fr;
+    }
+  }
+
+  /* ---------- Pull / testimonial ---------- */
+  .pull {
+    display: grid;
+    gap: var(--sp-8);
+    padding: clamp(2rem, 5vw, 4rem);
+    border-radius: var(--r-card-lg);
+    background: var(--blue-tint);
+    align-items: center;
+  }
+  .pull__mark {
+    font-family: var(--font-accent);
+    font-size: 4rem;
+    line-height: 0.5;
+    color: var(--blue);
+  }
+  .pull blockquote {
+    margin-top: var(--sp-4);
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+  }
+  .pull figcaption {
+    margin-top: var(--sp-5);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2) var(--sp-4);
+    align-items: center;
+  }
+  .pull__who {
+    font-weight: 600;
+    font-size: var(--fs-sm);
+  }
+  .pull__link {
+    color: var(--blue);
+    font-weight: 600;
+    font-size: var(--fs-sm);
+  }
+  .pull__stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
     padding: var(--sp-8);
     border-radius: var(--r-card);
-    background: linear-gradient(160deg, var(--drleaf-tint), var(--mist));
+    background: var(--navy);
+    text-align: center;
   }
-  .casestudy__mlabel {
-    font-family: var(--font-accent); font-size: var(--fs-eyebrow);
-    letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--drleaf);
+  .pull__num {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: #fff;
   }
-  .casestudy__mval {
-    font-family: var(--font-accent); font-size: clamp(3rem, 8vw, 5rem);
-    font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--ink);
+  .pull__lab {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: var(--fs-sm);
+    max-width: 22ch;
+    margin-inline: auto;
   }
-  .casestudy__mnote { font-size: var(--fs-sm); color: var(--muted); max-width: 24ch; }
-  @media (min-width: 900px) {
-    .casestudy__box { grid-template-columns: 1.15fr 1fr; align-items: center; gap: var(--sp-10); }
+  @media (min-width: 860px) {
+    .pull {
+      grid-template-columns: 1.5fr 1fr;
+      gap: var(--sp-10);
+    }
+  }
+
+  /* ---------- Blog ---------- */
+  .blog__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: end;
+    gap: var(--sp-5);
+    margin-bottom: var(--sp-8);
+  }
+  .blog__h {
+    margin-top: var(--sp-4);
+    font-size: var(--fs-h2);
+    font-weight: 800;
+    letter-spacing: var(--tracking-tight);
+  }
+  .blog__grid {
+    display: grid;
+    gap: var(--sp-5);
+  }
+  .postcard {
+    border-radius: var(--r-card);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    box-shadow: var(--shadow-card);
+    transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
+  }
+  .postcard:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-float);
+  }
+  .postcard__thumb {
+    position: relative;
+    height: 150px;
+    padding: var(--sp-4);
+  }
+  .postcard__thumb--0 { background: linear-gradient(150deg, var(--navy), var(--navy-3)); }
+  .postcard__thumb--1 { background: linear-gradient(150deg, var(--blue), #6f96ff); }
+  .postcard__thumb--2 { background: linear-gradient(150deg, var(--navy-2), var(--blue)); }
+  .postcard__tag {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    font-family: var(--font-accent);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .postcard__body {
+    padding: var(--sp-5);
+  }
+  .postcard__body h3 {
+    font-size: 1.2rem;
+  }
+  .postcard__date {
+    display: block;
+    margin-top: var(--sp-3);
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  @media (min-width: 780px) {
+    .blog__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 </style>

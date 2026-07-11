@@ -1,70 +1,68 @@
 /* ============================================================
-   Ilai Collective — Design Tokens  (v2: warm cream + amber + dynamic cards)
+   Ilai Collective — Design Tokens  (v3: navy + blue + white, École format)
    Single source of truth. See BrandGuidelines.md / Design.md.
    ============================================================ */
 
 :root {
   /* --- Color --- */
-  /* Warm cream base, near-black ink, amber primary, blue secondary. Cards
-     use dynamic colors: charcoal, white, amber, blue. */
-  --ink: #1a1815; /* text, dark cards, dark buttons */
-  --ink-2: #4a463d; /* strong secondary text */
-  --muted: #7b7568; /* muted warm grey text */
-  --canvas: #f7f2e8; /* page background (warm cream) */
+  --ink: #16202e; /* near-navy text */
+  --ink-2: #3a4757; /* strong secondary text */
+  --muted: #697585; /* muted slate text */
+  --canvas: #ffffff; /* page background */
   --paper: #ffffff; /* white cards */
-  --sand: #efe7d5; /* deeper cream panel */
-  --line: #e7dece; /* hairline on cream */
-  --line-2: #d8ceba; /* stronger hairline */
-  --on-dark: rgba(255, 255, 255, 0.72); /* body text on charcoal cards */
-  --on-dark-soft: rgba(255, 255, 255, 0.14); /* hairlines on charcoal */
+  --mist: #f2f6fc; /* cool light panel */
+  --sand: #e7eef8; /* deeper cool panel */
+  --line: #e2e9f2; /* cool hairline */
+  --line-2: #d0dae8; /* stronger hairline */
+  --on-dark: rgba(255, 255, 255, 0.74); /* body text on navy cards */
+  --on-dark-soft: rgba(255, 255, 255, 0.16); /* hairlines on navy */
 
-  /* Amber — primary accent (CTAs, highlights, the hero chip) */
-  --amber: #f5b333;
-  --amber-hover: #e7a41d;
-  --amber-tint: #fbe8c2;
-  --amber-ink: #6f4e0c; /* text on amber */
+  /* Navy — dark cards, dark buttons, hero */
+  --navy: #0f2947;
+  --navy-2: #0a1f38; /* deeper navy */
+  --navy-3: #16375f; /* lighter navy */
 
-  /* Blue — secondary/dynamic accent (cards, links, data) */
-  --blue: #2f6bff;
-  --blue-hover: #1f57e6;
-  --blue-tint: #e7efff;
-  --blue-deep: #0f2c53; /* navy card */
+  /* Blue — primary accent (CTAs, links, data, highlights) */
+  --blue: #2f6bf0;
+  --blue-hover: #1f56d6;
+  --blue-tint: #e9f0fe;
+  --blue-ink: #16448f;
 
   /* Dr. Leaf co-brand raspberry — case-study section only */
   --drleaf: #e03064;
   --drleaf-tint: #fdeaf1;
 
-  /* Section alt background (light cream) */
-  --mist: #f0e8d9;
-
-  /* Back-compat aliases — subpages pending the v2 redesign still read these.
-     Map the old single "signal" accent onto the new amber primary. */
-  --signal: #cf8f13; /* amber, darkened for contrast on cream/white */
-  --signal-hover: var(--amber-hover);
-  --signal-tint: var(--amber-tint);
-  --signal-ink: var(--amber-ink);
+  /* Back-compat aliases — subpages read the old "signal"/amber names. */
+  --signal: #2f6bf0; /* -> blue */
+  --signal-hover: var(--blue-hover);
+  --signal-tint: var(--blue-tint);
+  --signal-ink: var(--blue-ink);
+  --amber: var(--blue);
+  --amber-hover: var(--blue-hover);
+  --amber-tint: var(--blue-tint);
+  --amber-ink: var(--blue-ink);
   --pop-red: #f5402c;
-  --pop-yellow: var(--amber);
+  --pop-yellow: var(--blue);
   --pop-blue: var(--blue);
 
   /* --- Typography --- */
   --font-sans: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-accent: "Space Grotesk", "Figtree", monospace;
 
-  --fs-display: clamp(2.85rem, 6.2vw + 1rem, 5.75rem);
-  --fs-h1: clamp(2.35rem, 3.6vw + 1rem, 4rem);
-  --fs-h2: clamp(1.9rem, 2.4vw + 1rem, 3rem);
+  --fs-display: clamp(2.75rem, 5.6vw + 1rem, 5.25rem);
+  --fs-h1: clamp(2.25rem, 3.4vw + 1rem, 3.85rem);
+  --fs-h2: clamp(1.9rem, 2.3vw + 1rem, 2.9rem);
   --fs-h3: clamp(1.25rem, 1vw + 1rem, 1.6rem);
   --fs-lead: clamp(1.05rem, 0.5vw + 1rem, 1.3rem);
   --fs-body: 1.0625rem;
   --fs-sm: 0.9375rem;
   --fs-eyebrow: 0.72rem;
 
-  --tracking-display: -0.035em;
+  --tracking-display: -0.03em;
   --tracking-tight: -0.02em;
   --tracking-eyebrow: 0.16em;
 
-  --lh-tight: 1.04;
+  --lh-tight: 1.05;
   --lh-snug: 1.16;
   --lh-body: 1.6;
 
@@ -88,21 +86,21 @@
 
   /* --- Radius --- */
   --r-pill: 999px;
-  --r-card: 24px;
+  --r-card: 22px;
   --r-card-lg: 30px;
-  --r-card-inner: 18px;
+  --r-card-inner: 16px;
   --r-input: 14px;
-  --r-media: 20px;
+  --r-media: 18px;
 
   /* --- Elevation --- */
   --shadow-card:
-    rgba(26, 24, 21, 0.03) 0 0 0 1px,
-    rgba(26, 24, 21, 0.05) 0 2px 8px,
-    rgba(26, 24, 21, 0.06) 0 14px 30px -14px;
+    rgba(15, 41, 71, 0.04) 0 0 0 1px,
+    rgba(15, 41, 71, 0.05) 0 2px 8px,
+    rgba(15, 41, 71, 0.07) 0 14px 30px -14px;
   --shadow-float:
-    rgba(26, 24, 21, 0.04) 0 0 0 1px,
-    rgba(26, 24, 21, 0.07) 0 8px 20px,
-    rgba(26, 24, 21, 0.12) 0 24px 48px -20px;
+    rgba(15, 41, 71, 0.05) 0 0 0 1px,
+    rgba(15, 41, 71, 0.08) 0 8px 20px,
+    rgba(15, 41, 71, 0.14) 0 24px 48px -20px;
   --inset-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.6);
 
   /* --- Motion --- */
