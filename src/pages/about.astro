@@ -184,19 +184,23 @@ const stats = [
       <div class="team__viz" data-reveal data-reveal-delay="1" aria-hidden="true">
         <div class="tcv">
           <div class="tcv__cap">Two strengths, one team</div>
-          <div class="tcv__row">
-            <span class="tcv__ic">
-              <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M6.5 4.5L2.5 8.5l4 4M13.5 4.5l4 4-4 4M11.5 3l-3 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            <div class="tcv__meta"><b>Technical</b><span class="tcv__bar"><i style="--w:94%"></i></span></div>
+          <div class="tcv__nodes">
+            <div class="tcv__node tcv__node--tech">
+              <span class="tcv__ic">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M6.5 4.5L2.5 8.5l4 4M13.5 4.5l4 4-4 4M11.5 3l-3 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <b>Technical</b>
+            </div>
+            <div class="tcv__merge" aria-hidden="true">
+              <span></span><span></span>
+            </div>
+            <div class="tcv__node tcv__node--cre">
+              <span class="tcv__ic tcv__ic--pink">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2.5l2.2 4.7 5.1.7-3.7 3.6.9 5.1L10 14.2 5.5 16.6l.9-5.1L2.7 7.9l5.1-.7L10 2.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              </span>
+              <b>Creative</b>
+            </div>
           </div>
-          <div class="tcv__row">
-            <span class="tcv__ic tcv__ic--pink">
-              <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2.5l2.2 4.7 5.1.7-3.7 3.6.9 5.1L10 14.2 5.5 16.6l.9-5.1L2.7 7.9l5.1-.7L10 2.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-            </span>
-            <div class="tcv__meta"><b>Creative</b><span class="tcv__bar"><i class="tcv__bar--pink" style="--w:90%"></i></span></div>
-          </div>
-          <div class="tcv__merge"><span></span><span></span></div>
           <div class="tcv__out">
             <span class="tcv__outk">One senior team</span>
             <span class="tcv__outd">Both, under one roof, on every account</span>
@@ -284,6 +288,11 @@ const stats = [
           People stay in charge of everything that carries a name. We direct the strategy,
           set the voice, and sign off on every piece before it ships. That is how the quality
           holds at scale, and why the work sounds like you instead of like software filling space.
+        </p>
+        <p class="manifesto__wink">
+          P.S. A person wrote every word on this site, and it passed our own no-slop filter:
+          no canned openers, no em dashes doing the emotional heavy lifting, no manufactured
+          this-versus-that contrasts, and zero AI slop.
         </p>
         <div class="manifesto__pills">
           <span class="mpill"><span class="mpill__dot" style="background:var(--green)"></span>People set the voice</span>
@@ -502,10 +511,30 @@ const stats = [
     letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5);
     margin-bottom: var(--sp-5);
   }
-  .tcv__row {
+  /* Two nodes converge toward the merge point on reveal */
+  .tcv__nodes {
     position: relative; z-index: 1;
-    display: flex; align-items: center; gap: var(--sp-4);
-    margin-bottom: var(--sp-4);
+    display: flex; align-items: center; justify-content: center;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-5);
+  }
+  .tcv__node {
+    flex: 1;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    padding: var(--sp-4) var(--sp-3);
+    border-radius: var(--r-card);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    opacity: 0;
+    transition:
+      transform 0.9s var(--ease),
+      opacity 0.7s var(--ease);
+  }
+  .tcv__node--tech { transform: translate3d(-24px, 0, 0); }
+  .tcv__node--cre { transform: translate3d(24px, 0, 0); }
+  .is-visible .tcv__node {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
   .tcv__ic {
     flex: none; display: grid; place-items: center;
@@ -514,33 +543,68 @@ const stats = [
     box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4);
   }
   .tcv__ic--pink { background: var(--pink-ink); }
-  .tcv__meta { flex: 1; }
-  .tcv__meta b { display: block; color: #fff; font-family: var(--font-accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; }
-  .tcv__bar { display: block; height: 8px; border-radius: 999px; background: rgba(255, 255, 255, 0.12); overflow: hidden; }
-  .tcv__bar i {
-    display: block; height: 100%; width: 0; border-radius: 999px; background: var(--coral-soft);
-    transition: width 1.1s var(--ease);
+  .tcv__node b {
+    color: #fff; font-family: var(--font-accent); font-weight: 600;
+    font-size: 0.9rem; letter-spacing: 0.01em;
   }
-  .tcv__bar i.tcv__bar--pink { background: var(--pink); }
-  .is-visible .tcv__bar i { width: var(--w); }
+  /* Chevrons that pulse inward, reinforcing the converge */
   .tcv__merge {
-    position: relative; z-index: 1;
-    display: flex; justify-content: center; gap: 6px; margin: var(--sp-4) 0;
+    flex: none;
+    display: flex; align-items: center; justify-content: center; gap: 3px;
+    opacity: 0;
+    transition: opacity 0.6s var(--ease) 0.5s;
   }
+  .is-visible .tcv__merge { opacity: 1; }
   .tcv__merge span {
-    width: 2px; height: 22px; border-radius: 2px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.4), transparent);
+    width: 2px; height: 16px; border-radius: 2px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), transparent);
   }
-  .tcv__merge span:first-child { transform: rotate(20deg); }
-  .tcv__merge span:last-child { transform: rotate(-20deg); }
+  .tcv__merge span:first-child { transform: rotate(22deg); }
+  .tcv__merge span:last-child { transform: rotate(-22deg); }
+  .is-visible .tcv__merge span:first-child { animation: tcvNudgeR 2.4s var(--ease) 1s infinite; }
+  .is-visible .tcv__merge span:last-child { animation: tcvNudgeL 2.4s var(--ease) 1s infinite; }
+  @keyframes tcvNudgeR {
+    0%, 100% { transform: rotate(22deg) translateX(0); }
+    50% { transform: rotate(22deg) translateX(2px); }
+  }
+  @keyframes tcvNudgeL {
+    0%, 100% { transform: rotate(-22deg) translateX(0); }
+    50% { transform: rotate(-22deg) translateX(-2px); }
+  }
+  /* Result chip resolves in after the two nodes meet */
   .tcv__out {
     position: relative; z-index: 1;
     padding: var(--sp-5); border-radius: var(--r-card);
     background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.14);
     text-align: center;
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(0.97);
+    transition:
+      transform 0.7s var(--ease) 0.55s,
+      opacity 0.6s var(--ease) 0.55s;
+  }
+  .is-visible .tcv__out {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
   }
   .tcv__outk { display: block; font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; color: #fff; }
   .tcv__outd { display: block; margin-top: 4px; font-size: var(--fs-sm); color: rgba(255, 255, 255, 0.6); }
+  @media (prefers-reduced-motion: reduce) {
+    .tcv__node,
+    .tcv__out {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .tcv__merge {
+      opacity: 1;
+      transition: none;
+    }
+    .is-visible .tcv__merge span:first-child,
+    .is-visible .tcv__merge span:last-child {
+      animation: none;
+    }
+  }
   @media (min-width: 900px) {
     .team__grid { grid-template-columns: 1.1fr 0.9fr; gap: var(--sp-10); }
     .team__viz { position: sticky; top: 6rem; }
@@ -742,11 +806,23 @@ const stats = [
     font-size: var(--fs-body);
     color: rgba(255, 255, 255, 0.62);
   }
+  .manifesto__wink {
+    margin: var(--sp-6) auto 0;
+    max-width: 60ch;
+    font-size: var(--fs-sm);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.66);
+    background: rgba(230, 169, 196, 0.08);
+    border: 1px solid rgba(230, 169, 196, 0.24);
+    border-radius: var(--r-card-inner);
+    padding: var(--sp-4) var(--sp-5);
+  }
   .manifesto__pills {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: var(--sp-3);
+    margin-top: var(--sp-6);
     margin-top: var(--sp-8);
   }
   .mpill {

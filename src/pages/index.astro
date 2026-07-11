@@ -411,6 +411,7 @@ const comments = [
               {s.viz === "wave" && (
                 <div class="viz-wave">
                   {[10, 22, 40, 28, 54, 34, 62, 44, 30, 50, 24, 38, 16].map((h) => <span style={`--h:${h}px`}></span>)}
+                  <span class="viz-wave__head"></span>
                 </div>
               )}
               {s.viz === "reel" && (
@@ -1557,23 +1558,70 @@ const comments = [
     color: rgba(255, 255, 255, 0.7);
     letter-spacing: -0.03em;
   }
-  /* Podcast waveform */
+  /* Podcast waveform — STATIC bars (a real waveform doesn't bounce); a
+     playhead scrubs L->R and lights each bar coral as it passes, then loops.
+     Mirrors the hero .editor__wave + playhead pattern. */
   .viz-wave {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 4px;
     height: 70px;
   }
   .viz-wave span {
+    position: relative;
     width: 4px;
     height: var(--h);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.85);
-    animation: wave 1.4s var(--ease) infinite alternate;
+    background: rgba(255, 255, 255, 0.32);
   }
-  .viz-wave span:nth-child(2n) { animation-delay: 0.2s; opacity: 0.7; }
-  .viz-wave span:nth-child(3n) { animation-delay: 0.4s; opacity: 0.85; }
-  @keyframes wave { to { transform: scaleY(0.55); } }
+  /* each bar flashes to coral as the playhead reaches it, then holds a lit
+     tint until the sweep restarts — 13 bars over a 3.9s loop (~0.3s/bar) */
+  .viz-wave span::after {
+    content: "";
+    position: absolute; inset: 0; border-radius: 999px;
+    background: var(--coral);
+    opacity: 0;
+    animation: vizWaveLit 3.9s linear infinite;
+  }
+  .viz-wave span:nth-child(1)::after { animation-delay: 0s; }
+  .viz-wave span:nth-child(2)::after { animation-delay: 0.3s; }
+  .viz-wave span:nth-child(3)::after { animation-delay: 0.6s; }
+  .viz-wave span:nth-child(4)::after { animation-delay: 0.9s; }
+  .viz-wave span:nth-child(5)::after { animation-delay: 1.2s; }
+  .viz-wave span:nth-child(6)::after { animation-delay: 1.5s; }
+  .viz-wave span:nth-child(7)::after { animation-delay: 1.8s; }
+  .viz-wave span:nth-child(8)::after { animation-delay: 2.1s; }
+  .viz-wave span:nth-child(9)::after { animation-delay: 2.4s; }
+  .viz-wave span:nth-child(10)::after { animation-delay: 2.7s; }
+  .viz-wave span:nth-child(11)::after { animation-delay: 3s; }
+  .viz-wave span:nth-child(12)::after { animation-delay: 3.3s; }
+  .viz-wave span:nth-child(13)::after { animation-delay: 3.6s; }
+  @keyframes vizWaveLit {
+    0% { opacity: 0; }
+    2% { opacity: 1; }
+    /* hold the lit state behind the playhead, then reset at loop end */
+    92% { opacity: 0.85; }
+    97%, 100% { opacity: 0; }
+  }
+  /* the playhead: thin vertical line + dot travelling L->R, matching hero */
+  .viz-wave__head {
+    position: absolute; top: 0; bottom: 0; left: 0; width: 2px;
+    background: #fff; border-radius: 2px;
+    box-shadow: 0 0 8px 1px rgba(255, 255, 255, 0.6);
+    animation: vizWaveHead 3.9s linear infinite;
+  }
+  .viz-wave__head::before {
+    content: ""; position: absolute; top: -3px; left: 50%; transform: translateX(-50%);
+    width: 7px; height: 7px; border-radius: 50%; background: #fff;
+    box-shadow: 0 0 8px 1px rgba(255, 255, 255, 0.6);
+  }
+  @keyframes vizWaveHead {
+    0% { left: 0; opacity: 0; }
+    3% { opacity: 1; }
+    94% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+  }
   /* Reel card */
   .viz-reel {
     width: 96px;
@@ -1624,7 +1672,9 @@ const comments = [
   }
   @keyframes vizReelFill { 0% { transform: scaleX(0.05); } 96% { transform: scaleX(1); } 100% { transform: scaleX(0.05); } }
   .viz-reel__cap { width: 66%; background: rgba(255, 255, 255, 0.5); }
-  /* Publish grid — cells publish across the grid in a rolling sequence */
+  /* Publish grid — each cell "publishes" in sequence: a check-dot appears and
+     STAYS filled (posts going live across platforms), then the board gently
+     resets at the end of the loop. */
   .viz-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1632,22 +1682,49 @@ const comments = [
     width: 116px;
   }
   .viz-grid span {
+    position: relative;
     aspect-ratio: 1;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.18);
     border: 1px solid rgba(255, 255, 255, 0.28);
-    animation: vizGridCell 3s var(--ease) infinite;
+    animation: vizGridCell 4.2s var(--ease) infinite;
   }
-  .viz-grid span:nth-child(1) { animation-delay: 0s; }
-  .viz-grid span:nth-child(2) { animation-delay: 0.25s; }
-  .viz-grid span:nth-child(3) { animation-delay: 0.5s; }
-  .viz-grid span:nth-child(4) { animation-delay: 0.75s; }
-  .viz-grid span:nth-child(5) { animation-delay: 1s; }
-  .viz-grid span:nth-child(6) { animation-delay: 1.25s; }
+  /* the persisting "published" check-dot inside each cell */
+  .viz-grid span::after {
+    content: "";
+    position: absolute; top: 50%; left: 50%;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #fff;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    animation: vizGridDot 4.2s var(--ease) infinite;
+  }
+  .viz-grid span:nth-child(1),
+  .viz-grid span:nth-child(1)::after { animation-delay: 0s; }
+  .viz-grid span:nth-child(2),
+  .viz-grid span:nth-child(2)::after { animation-delay: 0.35s; }
+  .viz-grid span:nth-child(3),
+  .viz-grid span:nth-child(3)::after { animation-delay: 0.7s; }
+  .viz-grid span:nth-child(4),
+  .viz-grid span:nth-child(4)::after { animation-delay: 1.05s; }
+  .viz-grid span:nth-child(5),
+  .viz-grid span:nth-child(5)::after { animation-delay: 1.4s; }
+  .viz-grid span:nth-child(6),
+  .viz-grid span:nth-child(6)::after { animation-delay: 1.75s; }
+  /* cell fills to a soft pink tint on publish and HOLDS, then resets */
   @keyframes vizGridCell {
-    0%, 70%, 100% { background: rgba(255, 255, 255, 0.18); transform: scale(0.94); }
-    12% { background: #fff; transform: scale(1); }
-    40% { background: rgba(230, 169, 196, 0.6); }
+    0% { background: rgba(255, 255, 255, 0.18); }
+    6% { background: rgba(230, 169, 196, 0.55); }
+    90% { background: rgba(230, 169, 196, 0.55); }
+    97%, 100% { background: rgba(255, 255, 255, 0.18); }
+  }
+  /* the dot pops in on publish and stays until the loop resets */
+  @keyframes vizGridDot {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    5% { transform: translate(-50%, -50%) scale(1.25); opacity: 1; }
+    9% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    90% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    97%, 100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
   }
   /* Research chart — live rolling data */
   .viz-chart { display: flex; align-items: flex-end; gap: 6px; height: 78px; }
@@ -1680,26 +1757,53 @@ const comments = [
     animation: vizType 3.6s steps(24) infinite;
   }
   @keyframes vizType { 0% { transform: scaleX(0); } 55% { transform: scaleX(1); } 92% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
-  /* Brand swatches — pop in sequence */
+  /* Brand swatches — the "Aa" glyph adopts each palette colour in turn as its
+     swatch activates (the swatch "paints" the letter): one brand, applied
+     consistently. The letter cycles pink -> white -> coral -> charcoal. */
   .viz-swatch { display: flex; flex-direction: column; align-items: center; gap: 14px; }
   .viz-swatch__aa {
     font-family: var(--font-display); font-weight: 600; font-size: 2.6rem; line-height: 1;
-    letter-spacing: -0.03em; color: #fff;
+    letter-spacing: -0.03em; color: var(--pink);
+    animation: vizSwatchPaint 4.4s var(--ease) infinite;
   }
+  /* the active swatch lifts + rings to show it's the colour being applied */
   .viz-swatch__row { display: flex; gap: 8px; }
   .viz-swatch__row i {
     width: 24px; height: 24px; border-radius: 8px;
     box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4);
-    animation: vizSwatch 2.8s var(--ease) infinite;
+    animation: vizSwatchActive 4.4s var(--ease) infinite;
   }
   .viz-swatch__row i:nth-child(1) { background: var(--pink); animation-delay: 0s; }
-  .viz-swatch__row i:nth-child(2) { background: #fff; animation-delay: 0.2s; }
-  .viz-swatch__row i:nth-child(3) { background: var(--coral-soft); animation-delay: 0.4s; }
-  .viz-swatch__row i:nth-child(4) { background: var(--charcoal); animation-delay: 0.6s; }
-  @keyframes vizSwatch { 0%, 70%, 100% { transform: translateY(0) scale(1); } 20% { transform: translateY(-5px) scale(1.12); } }
+  .viz-swatch__row i:nth-child(2) { background: #fff; animation-delay: 1.1s; }
+  .viz-swatch__row i:nth-child(3) { background: var(--coral-soft); animation-delay: 2.2s; }
+  .viz-swatch__row i:nth-child(4) { background: var(--charcoal); animation-delay: 3.3s; }
+  /* glyph holds each colour across its quarter of the loop */
+  @keyframes vizSwatchPaint {
+    0%, 22% { color: var(--pink); }
+    25%, 47% { color: #fff; }
+    50%, 72% { color: var(--coral-soft); }
+    75%, 97% { color: var(--charcoal); }
+    100% { color: var(--pink); }
+  }
+  /* each swatch pops only during its own quarter (~1.1s of 4.4s) */
+  @keyframes vizSwatchActive {
+    0% { transform: translateY(0) scale(1); box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4); }
+    6% { transform: translateY(-5px) scale(1.14); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); }
+    22% { transform: translateY(-5px) scale(1.14); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); }
+    28%, 100% { transform: translateY(0) scale(1); box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4); }
+  }
   @media (prefers-reduced-motion: reduce) {
-    .viz-wave span, .viz-grid span, .viz-chart span, .viz-reel__play,
-    .viz-reel__play::after, .viz-reel__bar::before, .viz-doc__s, .viz-swatch__row i { animation: none; }
+    .viz-wave span, .viz-wave span::after, .viz-wave__head,
+    .viz-grid span, .viz-grid span::after, .viz-chart span, .viz-reel__play,
+    .viz-reel__play::after, .viz-reel__bar::before, .viz-doc__s,
+    .viz-swatch__aa, .viz-swatch__row i { animation: none; }
+    /* resting states so the frozen frame still reads correctly */
+    .viz-wave__head { opacity: 0; }
+    .viz-wave span::after { opacity: 0; }
+    .viz-grid span { background: rgba(230, 169, 196, 0.55); }
+    .viz-grid span::after { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    .viz-swatch__aa { color: #fff; }
+    .viz-swatch__row i { transform: none; }
   }
   .svc__body {
     background: var(--paper);

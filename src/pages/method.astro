@@ -262,9 +262,9 @@ const why = [
                         <div class="dcd__scanwrap">
                           <span class="dcd__scanlab">Competitor scan</span>
                           <ul class="dcd__list">
-                            <li><span class="dcd__ldot" style="background:var(--coral)"></span>Owns the how-to angle</li>
-                            <li><span class="dcd__ldot" style="background:var(--brand)"></span>Weak on proof and stories</li>
-                            <li><span class="dcd__ldot" style="background:var(--green)"></span>Gap: your point of view</li>
+                            <li style="--i:0"><span class="dcd__ldot" style="background:var(--coral)"></span>Owns the how-to angle</li>
+                            <li style="--i:1"><span class="dcd__ldot" style="background:var(--brand)"></span>Weak on proof and stories</li>
+                            <li style="--i:2"><span class="dcd__ldot" style="background:var(--green)"></span>Gap: your point of view</li>
                           </ul>
                           <span class="dcd__scan"></span>
                         </div>
@@ -340,12 +340,20 @@ const why = [
                         </div>
                         <div class="dis__tiles">
                           {["a","b","c","a","c","b","b","a","c","a","b","c"].map((t, k) => (
-                            <span class={`dis__tile dis__tile--${t}`} style={`--d:${k * 55}ms`}></span>
+                            <span class={`dis__tile dis__tile--${t} ${t === "b" ? "dis__tile--post" : "dis__tile--play"}`} style={`--d:${450 + k * 60}ms`}>
+                              {t === "b" ? (
+                                <span class="dis__glyph dis__glyph--post" aria-hidden="true"></span>
+                              ) : (
+                                <span class="dis__glyph dis__glyph--play" aria-hidden="true">
+                                  <svg width="10" height="12" viewBox="0 0 10 12" fill="none"><path d="M1 1.4v9.2a.6.6 0 0 0 .92.5l7.3-4.6a.6.6 0 0 0 0-1L1.92.9A.6.6 0 0 0 1 1.4Z" fill="currentColor"/></svg>
+                                </span>
+                              )}
+                            </span>
                           ))}
                         </div>
                         <div class="dis__plats">
                           {["Reels","Shorts","TikTok","X","LinkedIn","Threads"].map((p, k) => (
-                            <span class="dis__plat" style={`--d:${k * 80}ms`}>{p}</span>
+                            <span class="dis__plat" style={`--d:${900 + k * 80}ms`}>{p}</span>
                           ))}
                         </div>
                       </div>
@@ -979,15 +987,60 @@ const why = [
     letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--muted);
   }
   .dcd__list { list-style: none; margin-top: 10px; display: grid; gap: 8px; }
-  .dcd__list li { display: flex; align-items: center; gap: var(--sp-3); font-size: 0.8rem; color: var(--ink-2); }
-  .dcd__ldot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
-  .dcd__scan {
-    position: absolute; left: 0; right: 0; top: 0; height: 34px;
-    background: linear-gradient(180deg, rgba(28, 107, 74, 0.14), transparent);
-    border-bottom: 1.5px solid rgba(28, 107, 74, 0.4);
-    animation: dcdscan 3.4s var(--ease) infinite alternate;
+  .dcd__list li {
+    display: flex; align-items: center; gap: var(--sp-3);
+    font-size: 0.8rem; color: var(--ink-2);
+    /* start undiscovered; the sweep reveals each finding in turn */
+    opacity: 0.28; transform: translateX(-4px);
   }
-  @keyframes dcdscan { to { transform: translateY(72px); } }
+  .dcd__ldot {
+    width: 8px; height: 8px; border-radius: 50%; flex: none;
+    transform: scale(0.6); opacity: 0.4;
+  }
+  /* One shared loop; each item fires as the scan line crosses its row.
+     4.2s cycle: ~0.5s per row of sweep travel + a hold at the end. */
+  .step__visual.is-visible .dcd__list li {
+    animation: dcdreveal 4.2s var(--ease) infinite;
+    animation-delay: calc(var(--i) * 0.52s);
+  }
+  .step__visual.is-visible .dcd__list li .dcd__ldot {
+    animation: dcddot 4.2s var(--ease) infinite;
+    animation-delay: calc(var(--i) * 0.52s);
+  }
+  @keyframes dcdreveal {
+    0% { opacity: 0.28; transform: translateX(-4px); }
+    /* found the moment the line passes, then settle and hold */
+    8% { opacity: 1; transform: translateX(2px); }
+    16%, 82% { opacity: 1; transform: translateX(0); }
+    /* fade back before the sweep restarts */
+    96%, 100% { opacity: 0.28; transform: translateX(-4px); }
+  }
+  @keyframes dcddot {
+    0% { transform: scale(0.6); opacity: 0.4; }
+    8% { transform: scale(1.25); opacity: 1; }
+    16%, 82% { transform: scale(1); opacity: 1; }
+    96%, 100% { transform: scale(0.6); opacity: 0.4; }
+  }
+  .dcd__scan {
+    position: absolute; left: 0; right: 0; top: 0; height: 28px;
+    background: linear-gradient(180deg, rgba(28, 107, 74, 0.16), transparent);
+    border-bottom: 1.5px solid rgba(28, 107, 74, 0.45);
+    opacity: 0; transform: translateY(0);
+  }
+  .step__visual.is-visible .dcd__scan {
+    animation: dcdscan 4.2s var(--ease) infinite;
+  }
+  /* Sweep down across the three rows in the first ~85% of the cycle
+     (matching the reveal delays), then reset invisibly and repeat. */
+  @keyframes dcdscan {
+    0% { transform: translateY(2px); opacity: 0; }
+    4% { opacity: 1; }
+    12% { transform: translateY(16px); }
+    50% { transform: translateY(52px); }
+    82% { transform: translateY(84px); opacity: 1; }
+    90% { transform: translateY(90px); opacity: 0; }
+    100% { transform: translateY(90px); opacity: 0; }
+  }
 
   /* ---- 02 Define ---- */
   .viz--define { display: grid; gap: var(--sp-4); }
@@ -1073,14 +1126,40 @@ const why = [
   .dis__out { font-family: var(--font-accent); font-weight: 700; font-size: 1.6rem; letter-spacing: -0.03em; color: var(--ac, var(--plum)); }
   .dis__tiles { display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; }
   .dis__tile {
+    position: relative;
     aspect-ratio: 1; border-radius: 8px;
-    opacity: 0; transform: scale(0.6);
-    transition: opacity 0.4s var(--ease) var(--d), transform 0.4s var(--ease) var(--d);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    /* start collapsed toward the source node (top-left of the block) */
+    transform: translate(-14px, -18px) scale(0.35);
+    transform-origin: top left;
   }
-  .step__visual.is-visible .dis__tile { opacity: 1; transform: none; }
+  /* each piece emanates from the single recording, one after another */
+  .step__visual.is-visible .dis__tile {
+    animation: disemanate 0.55s var(--ease-out, var(--ease)) both;
+    animation-delay: var(--d);
+  }
+  @keyframes disemanate {
+    0% { opacity: 0; transform: translate(-14px, -18px) scale(0.35); }
+    60% { opacity: 1; transform: translate(1px, 2px) scale(1.06); }
+    100% { opacity: 1; transform: translate(0, 0) scale(1); }
+  }
   .dis__tile--a { background: color-mix(in srgb, var(--plum) 65%, white); }
   .dis__tile--b { background: color-mix(in srgb, var(--brand) 62%, white); }
   .dis__tile--c { background: color-mix(in srgb, var(--green) 58%, white); }
+  /* content glyphs: play triangle = a video piece, bars = a written post */
+  .dis__glyph { display: flex; align-items: center; justify-content: center; }
+  .dis__glyph--play { color: rgba(255, 255, 255, 0.92); }
+  .dis__glyph--play svg { display: block; }
+  .dis__glyph--post {
+    width: 54%; height: 54%;
+    border-radius: 2px;
+    background:
+      linear-gradient(currentColor, currentColor) left 0 top 22% / 100% 2px no-repeat,
+      linear-gradient(currentColor, currentColor) left 0 top 50% / 100% 2px no-repeat,
+      linear-gradient(currentColor, currentColor) left 0 top 78% / 70% 2px no-repeat;
+    color: rgba(255, 255, 255, 0.9);
+  }
   .dis__plats { display: flex; flex-wrap: wrap; gap: 6px; }
   .dis__plat {
     padding: 6px 12px; border-radius: 999px;
@@ -1142,6 +1221,14 @@ const why = [
 
   @media (prefers-reduced-motion: reduce) {
     .herocard__glow, .dcd__scan, .mea__pulse { animation: none; }
+    /* Show all findings statically (no sweep to reveal them). */
+    .step__visual.is-visible .dcd__list li,
+    .step__visual.is-visible .dcd__list li .dcd__ldot { animation: none; }
+    .dcd__list li { opacity: 1; transform: none; }
+    .dcd__ldot { opacity: 1; transform: none; }
+    .dcd__scan { opacity: 0; }
+    /* Content pieces appear in place, no fan-out. */
+    .dis__tile { animation: none; opacity: 1; transform: none; }
     /* Stop the traveling signal; leave step 01 highlighted via .is-active. */
     .flowviz__node .flowviz__pill,
     .flowviz__node::before { animation: none; }
