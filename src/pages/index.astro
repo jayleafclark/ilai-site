@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CTASection from "../components/CTASection.astro";
+import PlatformStrip from "../components/PlatformStrip.astro";
 
 const arrow = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
@@ -65,48 +66,113 @@ const posts = [
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="container">
-      <div class="herocard" data-reveal>
-        <div class="herocard__bg" aria-hidden="true"></div>
-        <!-- Optional: drop a team/brand photo at /home/hero.jpg -->
-        <img class="herocard__photo" src="/home/hero.jpg" alt="" onerror="this.remove()" />
-        <div class="herocard__inner">
-          <span class="eyebrow eyebrow--star eyebrow--ondark">Welcome to Ilai Collective</span>
-          <h1 class="herocard__title">
-            We make experts<br />impossible to ignore.
-          </h1>
-          <p class="herocard__lead">
-            A human-led content studio for experts and personal brands. We learn your brand,
-            your market, and your audience, then grow it. You film once. We do the rest.
-          </p>
-          <div class="herocard__actions">
-            <a href="/contact" class="btn btn--light">
-              Book a call
-              <span class="btn__arrow" aria-hidden="true" set:html={arrow} />
-            </a>
-            <a href="/work/dr-caroline-leaf" class="btn btn--ghost btn--ghost-dark">See the proof</a>
+      <div class="herocar" data-carousel data-reveal>
+        <div class="herocar__vp">
+          <div class="herocar__track" data-track>
+
+            <!-- Slide 1: pitch -->
+            <article class="hslide">
+              <div class="hslide__inner">
+                <span class="eyebrow eyebrow--star eyebrow--ondark">Welcome to Ilai Collective</span>
+                <h1 class="hslide__title">We make experts<br />impossible to ignore.</h1>
+                <p class="hslide__lead">
+                  A human-led content studio for experts and personal brands. We learn your
+                  brand, your market, and your audience, then grow it. You film once, we do the rest.
+                </p>
+                <div class="hslide__actions">
+                  <a href="/contact" class="btn btn--signal">Book a call<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
+                  <a href="/work/dr-caroline-leaf" class="btn btn--ghost btn--ghost-dark">See the proof</a>
+                </div>
+              </div>
+              <div class="hslide__visual" aria-hidden="true">
+                <div class="chrome hmock">
+                  <div class="chrome__bar">
+                    <span class="chrome__dot"></span><span class="chrome__dot"></span><span class="chrome__dot"></span>
+                    <span class="chrome__url">drleaf.ilaicollective.com</span>
+                  </div>
+                  <div class="chrome__body">
+                    <div class="hmock__tiles">
+                      <div class="hmock__tile"><span class="hmock__tl">Impressions, 30d</span><span class="hmock__tv">27.1M</span></div>
+                      <div class="hmock__tile"><span class="hmock__tl">Engagements, 30d</span><span class="hmock__tv">1.1M</span></div>
+                    </div>
+                    <div class="hmock__chart">
+                      {[38, 52, 46, 68, 60, 82, 74, 96].map((h) => <span style={`--h:${h}%`}></span>)}
+                    </div>
+                  </div>
+                </div>
+                <div class="herofloat">
+                  <span class="herofloat__num">+204<span class="herofloat__u">%</span></span>
+                  <span class="herofloat__lab">Reach, year over year</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Slide 2: repurpose -->
+            <article class="hslide hslide--2">
+              <div class="hslide__inner">
+                <span class="eyebrow eyebrow--star eyebrow--ondark">One recording, everywhere</span>
+                <h1 class="hslide__title">Film once.<br />Post for a month.</h1>
+                <p class="hslide__lead">
+                  One 60-minute recording becomes 30-plus pieces of content, adapted for every
+                  platform and published for you, in a voice we build with you.
+                </p>
+                <div class="hslide__actions">
+                  <a href="/method" class="btn btn--signal">See how it works<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
+                  <a href="/what-we-do" class="btn btn--ghost btn--ghost-dark">What we do</a>
+                </div>
+              </div>
+              <div class="hslide__visual" aria-hidden="true">
+                <div class="fanout">
+                  <div class="fanout__src">1 recording</div>
+                  <div class="fanout__cards">
+                    {["Reel", "Short", "Carousel", "Essay", "Clip", "Thread"].map((c) => <span>{c}</span>)}
+                  </div>
+                </div>
+                <div class="herofloat">
+                  <span class="herofloat__num">30<span class="herofloat__u">+</span></span>
+                  <span class="herofloat__lab">pieces per recording</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Slide 3: proof -->
+            <article class="hslide hslide--3">
+              <div class="hslide__inner">
+                <span class="eyebrow eyebrow--star eyebrow--ondark">Proven to spread</span>
+                <h1 class="hslide__title">Proof,<br />not promises.</h1>
+                <p class="hslide__lead">
+                  In 12 months one client reached 205M+ impressions and gained 90,000+
+                  followers, with reach up 204% year over year and nothing spent on ads.
+                </p>
+                <div class="hslide__actions">
+                  <a href="/work/dr-caroline-leaf" class="btn btn--signal">Read the case study<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
+                  <a href="/contact" class="btn btn--ghost btn--ghost-dark">Book a call</a>
+                </div>
+              </div>
+              <div class="hslide__visual" aria-hidden="true">
+                <div class="prooftiles">
+                  <div class="prooftile"><span class="prooftile__n">205M+</span><span class="prooftile__l">Impressions in 12 months</span></div>
+                  <div class="prooftile prooftile--coral"><span class="prooftile__n">3×</span><span class="prooftile__l">Reach & engagement, year over year</span></div>
+                </div>
+              </div>
+            </article>
+
           </div>
         </div>
 
-        <!-- Right visual: live-dashboard mock + floating metric -->
-        <div class="herocard__visual" aria-hidden="true">
-          <div class="chrome hmock">
-            <div class="chrome__bar">
-              <span class="chrome__dot"></span><span class="chrome__dot"></span><span class="chrome__dot"></span>
-              <span class="chrome__url">drleaf.ilaicollective.com</span>
-            </div>
-            <div class="chrome__body">
-              <div class="hmock__tiles">
-                <div class="hmock__tile"><span class="hmock__tl">Impressions, 30d</span><span class="hmock__tv">27.1M</span></div>
-                <div class="hmock__tile"><span class="hmock__tl">Engagements, 30d</span><span class="hmock__tv">1.1M</span></div>
-              </div>
-              <div class="hmock__chart">
-                {[38, 52, 46, 68, 60, 82, 74, 96].map((h) => <span style={`--h:${h}%`}></span>)}
-              </div>
-            </div>
+        <div class="herocar__nav">
+          <div class="herocar__dots" data-dots>
+            <button class="herocar__dot is-active" type="button" aria-label="Slide 1"></button>
+            <button class="herocar__dot" type="button" aria-label="Slide 2"></button>
+            <button class="herocar__dot" type="button" aria-label="Slide 3"></button>
           </div>
-          <div class="herofloat">
-            <span class="herofloat__num">+204<span class="herofloat__u">%</span></span>
-            <span class="herofloat__lab">Reach, year over year</span>
+          <div class="herocar__arrows">
+            <button class="herocar__arrow" type="button" data-prev aria-label="Previous slide">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="herocar__arrow" type="button" data-next aria-label="Next slide">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
           </div>
         </div>
       </div>
@@ -124,6 +190,10 @@ const posts = [
             </div>
           </article>
         ))}
+      </div>
+
+      <div class="hero__logos" data-reveal>
+        <PlatformStrip />
       </div>
     </div>
   </section>
@@ -320,51 +390,124 @@ const posts = [
   <CTASection />
 </Layout>
 
+<script>
+  // Hero carousel: auto-advance, dots, arrows, pointer swipe.
+  const car = document.querySelector<HTMLElement>("[data-carousel]");
+  if (car) {
+    const track = car.querySelector<HTMLElement>("[data-track]")!;
+    const slides = Array.from(track.children);
+    const dots = Array.from(car.querySelectorAll<HTMLButtonElement>("[data-dots] button"));
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let i = 0;
+    let timer: ReturnType<typeof setInterval> | undefined;
+
+    const render = () => {
+      track.style.transform = `translateX(-${i * 100}%)`;
+      dots.forEach((d, k) => d.classList.toggle("is-active", k === i));
+    };
+    const go = (n: number) => {
+      i = (n + slides.length) % slides.length;
+      render();
+    };
+    const auto = () => {
+      if (!reduce) timer = setInterval(() => go(i + 1), 5500);
+    };
+    const restart = () => {
+      if (timer) clearInterval(timer);
+      auto();
+    };
+
+    car.querySelector("[data-next]")?.addEventListener("click", () => { go(i + 1); restart(); });
+    car.querySelector("[data-prev]")?.addEventListener("click", () => { go(i - 1); restart(); });
+    dots.forEach((d, k) => d.addEventListener("click", () => { go(k); restart(); }));
+    car.addEventListener("mouseenter", () => timer && clearInterval(timer));
+    car.addEventListener("mouseleave", auto);
+
+    // Pointer swipe
+    let x0: number | null = null;
+    let dx = 0;
+    const vp = car.querySelector<HTMLElement>(".herocar__vp")!;
+    vp.addEventListener("pointerdown", (e) => {
+      x0 = e.clientX; dx = 0;
+      track.style.transition = "none";
+      if (timer) clearInterval(timer);
+    });
+    window.addEventListener("pointermove", (e) => {
+      if (x0 === null) return;
+      dx = e.clientX - x0;
+      track.style.transform = `translateX(calc(-${i * 100}% + ${dx}px))`;
+    });
+    window.addEventListener("pointerup", () => {
+      if (x0 === null) return;
+      track.style.transition = "";
+      if (Math.abs(dx) > 55) go(dx < 0 ? i + 1 : i - 1);
+      else render();
+      x0 = null;
+      restart();
+    });
+
+    render();
+    auto();
+  }
+</script>
+
 <style>
   /* ---------- Hero ---------- */
   .hero {
     padding-top: clamp(6.5rem, 12vh, 9rem);
     padding-bottom: clamp(3.5rem, 6vw, 6rem);
   }
-  .herocard {
+  /* ---- Carousel ---- */
+  .herocar {
     position: relative;
+  }
+  .herocar__vp {
     overflow: hidden;
     border-radius: var(--r-card-lg);
-    min-height: clamp(420px, 56vw, 600px);
+    box-shadow: var(--shadow-float);
+    touch-action: pan-y;
+    cursor: grab;
+  }
+  .herocar__vp:active {
+    cursor: grabbing;
+  }
+  .herocar__track {
+    display: flex;
+    transition: transform var(--dur-slow) var(--ease);
+    will-change: transform;
+  }
+  .hslide {
+    position: relative;
+    min-width: 100%;
+    min-height: clamp(430px, 52vw, 560px);
     display: flex;
     align-items: center;
-    box-shadow: var(--shadow-float);
-    isolation: isolate;
-  }
-  .herocard__bg,
-  .herocard__photo {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-  }
-  .herocard__bg {
+    overflow: hidden;
+    color: #fff;
     background:
-      radial-gradient(80% 120% at 85% 15%, rgba(47, 107, 240, 0.55), transparent 60%),
-      radial-gradient(70% 90% at 10% 90%, rgba(22, 55, 95, 0.9), transparent 65%),
-      linear-gradient(135deg, var(--navy-2), var(--navy) 55%, var(--navy-3));
+      radial-gradient(80% 120% at 85% 12%, rgba(242, 104, 60, 0.42), transparent 60%),
+      radial-gradient(70% 90% at 8% 92%, rgba(47, 40, 33, 0.9), transparent 65%),
+      linear-gradient(135deg, var(--charcoal-2), var(--charcoal) 55%, var(--charcoal-3));
   }
-  .herocard__photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.5;
-    mix-blend-mode: luminosity;
+  .hslide--2 {
+    background:
+      radial-gradient(75% 110% at 88% 15%, rgba(242, 104, 60, 0.34), transparent 60%),
+      linear-gradient(135deg, var(--charcoal), var(--charcoal-2));
   }
-  .herocard__inner {
+  .hslide--3 {
+    background:
+      radial-gradient(85% 120% at 80% 20%, rgba(242, 104, 60, 0.5), transparent 62%),
+      linear-gradient(135deg, var(--charcoal-2), var(--charcoal-3));
+  }
+  .hslide__inner {
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 640px;
+    max-width: 620px;
     padding: clamp(1.75rem, 3.5vw, 2.75rem);
-    padding-bottom: clamp(4.5rem, 8vw, 6rem);
-    color: #fff;
+    padding-bottom: clamp(4.5rem, 8vw, 5.5rem);
   }
-  .herocard__title {
+  .hslide__title {
     margin-top: var(--sp-4);
     font-size: clamp(2.2rem, 3vw, 3.1rem);
     font-weight: 800;
@@ -372,9 +515,140 @@ const posts = [
     letter-spacing: var(--tracking-display);
     color: #fff;
   }
-  /* Right-side visual */
-  .herocard__visual {
+  .hslide__lead {
+    margin-top: var(--sp-5);
+    color: rgba(255, 255, 255, 0.82);
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+    max-width: 44ch;
+  }
+  .hslide__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    margin-top: var(--sp-6);
+  }
+  .hslide__visual {
     display: none;
+  }
+
+  /* Carousel nav */
+  .herocar__nav {
+    position: absolute;
+    top: clamp(1.5rem, 3vw, 2.25rem);
+    right: clamp(1.5rem, 3vw, 2.25rem);
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+  }
+  .herocar__dots {
+    display: flex;
+    gap: 7px;
+  }
+  .herocar__dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border-radius: 999px;
+    border: 0;
+    background: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition:
+      width var(--dur-base) var(--ease),
+      background var(--dur-base) var(--ease);
+  }
+  .herocar__dot.is-active {
+    width: 22px;
+    background: var(--coral);
+  }
+  .herocar__arrows {
+    display: flex;
+    gap: 8px;
+  }
+  .herocar__arrow {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    cursor: pointer;
+    transition: background var(--dur-micro) var(--ease);
+  }
+  .herocar__arrow:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  /* Slide 2 fanout */
+  .fanout {
+    display: grid;
+    gap: var(--sp-4);
+    width: 320px;
+  }
+  .fanout__src {
+    justify-self: start;
+    padding: 12px 20px;
+    border-radius: 14px;
+    background: var(--coral);
+    color: #fff;
+    font-family: var(--font-accent);
+    font-weight: 700;
+  }
+  .fanout__cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .fanout__cards span {
+    padding: 9px 15px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .hslide--2 .herofloat {
+    left: auto;
+    right: -22px;
+    bottom: -18px;
+  }
+
+  /* Slide 3 proof tiles */
+  .prooftiles {
+    display: grid;
+    gap: var(--sp-4);
+    width: 320px;
+  }
+  .prooftile {
+    padding: var(--sp-6);
+    border-radius: var(--r-card);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+  .prooftile--coral {
+    background: var(--coral);
+    border-color: transparent;
+  }
+  .prooftile__n {
+    display: block;
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 2.6rem;
+    letter-spacing: -0.03em;
+    color: #fff;
+    line-height: 1;
+  }
+  .prooftile__l {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .prooftile--coral .prooftile__l {
+    color: rgba(255, 255, 255, 0.88);
   }
   .hmock {
     width: 340px;
@@ -410,9 +684,9 @@ const posts = [
     flex: 1;
     height: var(--h);
     border-radius: 4px 4px 2px 2px;
-    background: linear-gradient(180deg, var(--blue), #7aa4ff);
+    background: linear-gradient(180deg, var(--coral), var(--coral-soft));
   }
-  .hmock__chart span:last-child { background: linear-gradient(180deg, #16375f, var(--blue)); }
+  .hmock__chart span:last-child { background: linear-gradient(180deg, var(--charcoal-3), var(--coral)); }
   .herofloat {
     position: absolute;
     left: -34px;
@@ -433,7 +707,7 @@ const posts = [
   @keyframes hfloat { to { transform: translateY(-9px); } }
   @media (prefers-reduced-motion: reduce) { .herofloat { animation: none; } }
   @media (min-width: 940px) {
-    .herocard__visual {
+    .hslide__visual {
       display: block;
       position: absolute;
       right: clamp(2rem, 5vw, 4.5rem);
@@ -589,7 +863,7 @@ const posts = [
     height: 100%;
     width: var(--w);
     border-radius: 999px;
-    background: linear-gradient(90deg, var(--blue), #7aa4ff);
+    background: linear-gradient(90deg, var(--coral), var(--coral-soft));
   }
   .growth__v {
     font-family: var(--font-accent);
@@ -697,7 +971,7 @@ const posts = [
     padding: var(--sp-5);
   }
   .svc--navy .svc__media { background: linear-gradient(150deg, var(--navy), var(--navy-3)); }
-  .svc--blue .svc__media { background: linear-gradient(150deg, var(--blue), #5b8bff); }
+  .svc--blue .svc__media { background: linear-gradient(150deg, var(--coral), var(--coral-soft)); }
   .svc--navy2 .svc__media { background: linear-gradient(150deg, var(--navy-2), var(--navy)); }
   .svc__num {
     font-family: var(--font-accent);
@@ -925,7 +1199,7 @@ const posts = [
     padding: var(--sp-4);
   }
   .postcard__thumb--0 { background: linear-gradient(150deg, var(--navy), var(--navy-3)); }
-  .postcard__thumb--1 { background: linear-gradient(150deg, var(--blue), #6f96ff); }
+  .postcard__thumb--1 { background: linear-gradient(150deg, var(--coral), var(--coral-soft)); }
   .postcard__thumb--2 { background: linear-gradient(150deg, var(--navy-2), var(--blue)); }
   .postcard__tag {
     display: inline-block;

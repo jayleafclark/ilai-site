@@ -1,49 +1,58 @@
 /* ============================================================
-   Ilai Collective — Design Tokens  (v3: navy + blue + white, École format)
+   Ilai Collective — Design Tokens  (v4: Coral + Charcoal + cream)
+   Two majors: coral (dominant) + charcoal (anchor). Neutrals: warm cream/white/grey.
    Single source of truth. See BrandGuidelines.md / Design.md.
    ============================================================ */
 
 :root {
-  /* --- Color --- */
-  --ink: #16202e; /* near-navy text */
-  --ink-2: #3a4757; /* strong secondary text */
-  --muted: #697585; /* muted slate text */
-  --canvas: #ffffff; /* page background */
+  /* --- Neutrals --- */
+  --ink: #241d17; /* warm charcoal text */
+  --ink-2: #4c4238; /* strong secondary text */
+  --muted: #8a7d6e; /* muted warm grey text */
+  --canvas: #fbf6ef; /* warm off-white page bg */
   --paper: #ffffff; /* white cards */
-  --mist: #f2f6fc; /* cool light panel */
-  --sand: #e7eef8; /* deeper cool panel */
-  --line: #e2e9f2; /* cool hairline */
-  --line-2: #d0dae8; /* stronger hairline */
-  --on-dark: rgba(255, 255, 255, 0.74); /* body text on navy cards */
-  --on-dark-soft: rgba(255, 255, 255, 0.16); /* hairlines on navy */
+  --mist: #f4ecdf; /* cream panel */
+  --sand: #ecdfcd; /* deeper cream panel */
+  --line: #ece1d1; /* warm hairline */
+  --line-2: #dccdb6; /* stronger hairline */
+  --on-dark: rgba(255, 255, 255, 0.74); /* body text on charcoal cards */
+  --on-dark-soft: rgba(255, 255, 255, 0.16); /* hairlines on charcoal */
 
-  /* Navy — dark cards, dark buttons, hero */
-  --navy: #0f2947;
-  --navy-2: #0a1f38; /* deeper navy */
-  --navy-3: #16375f; /* lighter navy */
+  /* --- Major 1: Charcoal (anchor) --- */
+  --charcoal: #201a15;
+  --charcoal-2: #161210;
+  --charcoal-3: #2f2820;
 
-  /* Blue — primary accent (CTAs, links, data, highlights) */
-  --blue: #2f6bf0;
-  --blue-hover: #1f56d6;
-  --blue-tint: #e9f0fe;
-  --blue-ink: #16448f;
+  /* --- Major 2: Coral (dominant accent) --- */
+  --coral: #f2683c;
+  --coral-hover: #e2551f;
+  --coral-tint: #fce8dd;
+  --coral-ink: #8a3413;
+  --coral-soft: #f8916d; /* lighter coral for gradients */
 
   /* Dr. Leaf co-brand raspberry — case-study section only */
   --drleaf: #e03064;
   --drleaf-tint: #fdeaf1;
 
-  /* Back-compat aliases — subpages read the old "signal"/amber names. */
-  --signal: #2f6bf0; /* -> blue */
-  --signal-hover: var(--blue-hover);
-  --signal-tint: var(--blue-tint);
-  --signal-ink: var(--blue-ink);
-  --amber: var(--blue);
-  --amber-hover: var(--blue-hover);
-  --amber-tint: var(--blue-tint);
-  --amber-ink: var(--blue-ink);
-  --pop-red: #f5402c;
-  --pop-yellow: var(--blue);
-  --pop-blue: var(--blue);
+  /* --- Back-compat aliases (map old v2/v3 names onto v4) --- */
+  --navy: var(--charcoal);
+  --navy-2: var(--charcoal-2);
+  --navy-3: var(--charcoal-3);
+  --blue: var(--coral);
+  --blue-hover: var(--coral-hover);
+  --blue-tint: var(--coral-tint);
+  --blue-ink: var(--coral-ink);
+  --signal: var(--coral);
+  --signal-hover: var(--coral-hover);
+  --signal-tint: var(--coral-tint);
+  --signal-ink: var(--coral-ink);
+  --amber: var(--coral);
+  --amber-hover: var(--coral-hover);
+  --amber-tint: var(--coral-tint);
+  --amber-ink: var(--coral-ink);
+  --pop-red: var(--coral);
+  --pop-yellow: var(--coral);
+  --pop-blue: var(--coral);
 
   /* --- Typography --- */
   --font-sans: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -94,13 +103,13 @@
 
   /* --- Elevation --- */
   --shadow-card:
-    rgba(15, 41, 71, 0.04) 0 0 0 1px,
-    rgba(15, 41, 71, 0.05) 0 2px 8px,
-    rgba(15, 41, 71, 0.07) 0 14px 30px -14px;
+    rgba(32, 26, 21, 0.04) 0 0 0 1px,
+    rgba(32, 26, 21, 0.05) 0 2px 8px,
+    rgba(32, 26, 21, 0.07) 0 14px 30px -14px;
   --shadow-float:
-    rgba(15, 41, 71, 0.05) 0 0 0 1px,
-    rgba(15, 41, 71, 0.08) 0 8px 20px,
-    rgba(15, 41, 71, 0.14) 0 24px 48px -20px;
+    rgba(32, 26, 21, 0.05) 0 0 0 1px,
+    rgba(32, 26, 21, 0.08) 0 8px 20px,
+    rgba(32, 26, 21, 0.14) 0 24px 48px -20px;
   --inset-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.6);
 
   /* --- Motion --- */

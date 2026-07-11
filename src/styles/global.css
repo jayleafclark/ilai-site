@@ -233,13 +233,21 @@ p {
 .btn:hover .btn__arrow {
   transform: translate(3px, -3px);
 }
-/* Primary CTA = navy. */
+/* Primary CTA = coral. */
 .btn--signal {
-  --btn-bg: var(--navy);
+  --btn-bg: var(--coral);
   --btn-fg: #fff;
 }
 .btn--signal:hover {
-  --btn-bg: var(--navy-3);
+  --btn-bg: var(--coral-hover);
+}
+/* Charcoal (anchor) button */
+.btn--charcoal {
+  --btn-bg: var(--charcoal);
+  --btn-fg: #fff;
+}
+.btn--charcoal:hover {
+  --btn-bg: var(--charcoal-3);
 }
 /* Blue variant */
 .btn--blue {
