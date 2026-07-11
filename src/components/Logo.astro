@@ -1,5 +1,5 @@
 ---
-// Ilai wordmark + rising "signal" bars mark. Third bar in the accent color.
+// Ilai wordmark (text only for now; logo mark TBD).
 export interface Props {
   variant?: "ink" | "light";
 }
@@ -8,19 +8,6 @@ const wordColor = variant === "light" ? "#ffffff" : "var(--ink)";
 ---
 
 <a href="/" class="logo" aria-label="Ilai Collective home">
-  <svg
-    class="logo__mark"
-    width="26"
-    height="22"
-    viewBox="0 0 26 22"
-    fill="none"
-    aria-hidden="true"
-  >
-    <rect x="0" y="13" width="5" height="9" rx="2" fill="var(--blue)" />
-    <rect x="7" y="8" width="5" height="14" rx="2" fill="currentColor" opacity="0.4" />
-    <rect x="14" y="3" width="5" height="19" rx="2" fill="var(--amber)" />
-    <rect x="21" y="9" width="5" height="13" rx="2" fill="var(--blue)" opacity="0.55" />
-  </svg>
   <span class="logo__word" style={`color:${wordColor}`}>ilai</span>
 </a>
 
@@ -28,18 +15,11 @@ const wordColor = variant === "light" ? "#ffffff" : "var(--ink)";
   .logo {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
     color: var(--ink);
-  }
-  .logo__mark {
-    transition: transform var(--dur-base) var(--ease);
-  }
-  .logo:hover .logo__mark {
-    transform: translateY(-2px);
   }
   .logo__word {
     font-weight: 800;
-    font-size: 1.35rem;
-    letter-spacing: -0.04em;
+    font-size: 1.4rem;
+    letter-spacing: -0.045em;
   }
 </style>

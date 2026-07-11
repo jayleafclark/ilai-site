@@ -5,34 +5,40 @@
    ============================================================ */
 
 :root {
-  /* --- Neutrals --- */
-  --ink: #241d17; /* warm charcoal text */
-  --ink-2: #4c4238; /* strong secondary text */
-  --muted: #8a7d6e; /* muted warm grey text */
-  --canvas: #fbf6ef; /* warm off-white page bg */
+  /* --- Neutrals (Karani warm cream + brown ink) --- */
+  --ink: #3b3229; /* warm brown ink */
+  --ink-2: #7c7264; /* strong secondary text */
+  --muted: #9a9184; /* muted warm grey text */
+  --canvas: #fbf7ef; /* warm cream page bg */
   --paper: #ffffff; /* white cards */
-  --mist: #f4ecdf; /* cream panel */
-  --sand: #ecdfcd; /* deeper cream panel */
-  --line: #ece1d1; /* warm hairline */
-  --line-2: #dccdb6; /* stronger hairline */
-  --on-dark: rgba(255, 255, 255, 0.74); /* body text on charcoal cards */
-  --on-dark-soft: rgba(255, 255, 255, 0.16); /* hairlines on charcoal */
+  --mist: #f4ecde; /* cream panel */
+  --sand: #ecdfc9; /* deeper cream panel */
+  --line: rgba(59, 50, 41, 0.09); /* warm hairline */
+  --line-2: rgba(59, 50, 41, 0.16); /* stronger hairline */
+  --on-dark: rgba(255, 255, 255, 0.72); /* body text on dark cards */
+  --on-dark-soft: rgba(255, 255, 255, 0.14); /* hairlines on dark */
 
-  /* --- Major 1: Charcoal (anchor) --- */
-  --charcoal: #201a15;
-  --charcoal-2: #161210;
-  --charcoal-3: #2f2820;
+  /* --- Major 1: Night (dark anchor) --- */
+  --charcoal: #132630;
+  --charcoal-2: #0e1e26;
+  --charcoal-3: #1b333f;
 
-  /* --- Major 2: Coral (dominant accent) --- */
-  --coral: #f2683c;
-  --coral-hover: #e2551f;
-  --coral-tint: #fce8dd;
-  --coral-ink: #8a3413;
-  --coral-soft: #f8916d; /* lighter coral for gradients */
+  /* --- Major 2: Terracotta (dominant accent) --- */
+  --coral: #ce8168;
+  --coral-hover: #bd6d52;
+  --coral-tint: #fbeee7;
+  --coral-ink: #8a4a34;
+  --coral-soft: #e0a48f; /* lighter terracotta for gradients */
+
+  /* --- Accompanying: dusty blue --- */
+  --brand: #6f93ac;
+  --brand-deep: #557790;
+  --brand-night: #2c4757;
+  --brand-tint: #e9eff3;
 
   /* Dr. Leaf co-brand raspberry — case-study section only */
-  --drleaf: #e03064;
-  --drleaf-tint: #fdeaf1;
+  --drleaf: #ce5a7a;
+  --drleaf-tint: #f8e7ec;
 
   /* --- Back-compat aliases (map old v2/v3 names onto v4) --- */
   --navy: var(--charcoal);
@@ -54,9 +60,10 @@
   --pop-yellow: var(--coral);
   --pop-blue: var(--coral);
 
-  /* --- Typography --- */
-  --font-sans: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-accent: "Space Grotesk", "Figtree", monospace;
+  /* --- Typography (Karani: Jost display + Hanken Grotesk body) --- */
+  --font-sans: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Jost", "Hanken Grotesk", system-ui, sans-serif;
+  --font-accent: "Jost", "Hanken Grotesk", system-ui, sans-serif;
 
   --fs-display: clamp(2.75rem, 5.6vw + 1rem, 5.25rem);
   --fs-h1: clamp(2.25rem, 3.4vw + 1rem, 3.85rem);
@@ -87,7 +94,7 @@
   --sp-12: 96px;
   --sp-16: 128px;
 
-  --section-y: clamp(4.5rem, 8vw, 8rem);
+  --section-y: clamp(3.5rem, 5.5vw, 6rem);
   --maxw: 1200px;
   --maxw-wide: 1320px;
   --maxw-prose: 68ch;
@@ -101,15 +108,15 @@
   --r-input: 14px;
   --r-media: 18px;
 
-  /* --- Elevation --- */
+  /* --- Elevation (Karani soft warm shadows) --- */
   --shadow-card:
-    rgba(32, 26, 21, 0.04) 0 0 0 1px,
-    rgba(32, 26, 21, 0.05) 0 2px 8px,
-    rgba(32, 26, 21, 0.07) 0 14px 30px -14px;
+    rgba(59, 50, 41, 0.05) 0 0 0 1px,
+    rgba(59, 50, 41, 0.1) 0 2px 10px -4px,
+    rgba(59, 50, 41, 0.08) 0 18px 40px -22px;
   --shadow-float:
-    rgba(32, 26, 21, 0.05) 0 0 0 1px,
-    rgba(32, 26, 21, 0.08) 0 8px 20px,
-    rgba(32, 26, 21, 0.14) 0 24px 48px -20px;
+    rgba(59, 50, 41, 0.05) 0 0 0 1px,
+    rgba(46, 66, 80, 0.18) 0 12px 30px -12px,
+    rgba(46, 66, 80, 0.24) 0 30px 60px -30px;
   --inset-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.6);
 
   /* --- Motion --- */
