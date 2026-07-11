@@ -251,6 +251,17 @@ p {
 .btn--charcoal:hover {
   --btn-bg: var(--charcoal-3);
 }
+/* Gold button — for CTAs on dark forest surfaces */
+.btn--gold {
+  --btn-bg: var(--gold);
+  --btn-fg: var(--ink);
+}
+.btn--gold:hover {
+  --btn-bg: var(--brand-deep);
+}
+.btn--gold .btn__arrow {
+  background: rgba(29, 42, 35, 0.14);
+}
 /* Blue variant */
 .btn--blue {
   --btn-bg: var(--blue);

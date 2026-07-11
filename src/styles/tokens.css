@@ -5,44 +5,43 @@
    ============================================================ */
 
 :root {
-  /* --- Neutrals (Karani warm cream + brown ink) --- */
-  --ink: #3b3229; /* warm brown ink */
-  --ink-2: #7c7264; /* strong secondary text */
-  --muted: #9a9184; /* muted warm grey text */
-  --canvas: #fbf7ef; /* warm cream page bg */
-  --paper: #ffffff; /* white cards */
-  --mist: #f4ecde; /* cream panel */
-  --sand: #ecdfc9; /* deeper cream panel */
-  --line: rgba(59, 50, 41, 0.09); /* warm hairline */
-  --line-2: rgba(59, 50, 41, 0.16); /* stronger hairline */
-  --on-dark: rgba(255, 255, 255, 0.72); /* body text on dark cards */
-  --on-dark-soft: rgba(255, 255, 255, 0.14); /* hairlines on dark */
+  /* --- Neutrals (forest green brand: cool greyish-white) --- */
+  --ink: #1d2a23; /* dark forest-charcoal text */
+  --ink-2: #49554d;
+  --muted: #79847b;
+  --canvas: #f1f3ee; /* light greyish-white, cool (low yellow) */
+  --paper: #ffffff;
+  --mist: #e8ede5; /* light green-grey panel */
+  --sand: #dce3d7;
+  --line: rgba(29, 42, 35, 0.1);
+  --line-2: rgba(29, 42, 35, 0.16);
+  --on-dark: rgba(255, 255, 255, 0.74);
+  --on-dark-soft: rgba(255, 255, 255, 0.15);
 
-  /* --- Major 1: Night (dark anchor) --- */
-  --charcoal: #132630;
-  --charcoal-2: #0e1e26;
-  --charcoal-3: #1b333f;
+  /* --- Major 1: deep forest (dark anchor) --- */
+  --charcoal: #123527;
+  --charcoal-2: #0d281d;
+  --charcoal-3: #1d4836;
 
-  /* --- Major 2: Terracotta (dominant accent) --- */
-  --coral: #ce8168;
-  --coral-hover: #bd6d52;
-  --coral-tint: #fbeee7;
-  --coral-ink: #8a4a34;
-  --coral-soft: #e0a48f; /* lighter terracotta for gradients */
+  /* --- Major 2: forest green (dominant / CTAs) --- */
+  --coral: #1c6b4a;
+  --coral-hover: #17593d;
+  --coral-tint: #dcece4;
+  --coral-ink: #0f3d2a;
+  --coral-soft: #57977a;
 
-  /* --- Accompanying / playful accents --- */
-  --brand: #6f93ac; /* dusty blue */
-  --brand-deep: #557790;
-  --brand-night: #2c4757;
-  --brand-tint: #e9eff3;
-  --green: #6fae8b; /* sage */
-  --green-tint: #e6f1ea;
-  --gold: #e0a552; /* warm gold */
-  --gold-tint: #f8ecd6;
-  --plum: #9d7bab; /* soft plum */
-  --plum-tint: #efe8f3;
+  /* --- Accents (complementary to forest) --- */
+  --brand: #e3b24c; /* warm gold */
+  --brand-deep: #cf9a2f;
+  --brand-night: #7a5e18;
+  --brand-tint: #f8edcf;
+  --green: #4fa47e; /* fresh mint/emerald */
+  --green-tint: #dcefe6;
+  --gold: #e3b24c;
+  --gold-tint: #f8edcf;
+  --plum: #d07b54; /* terracotta */
+  --plum-tint: #f6e2d5;
 
-  /* Dr. Leaf co-brand raspberry — case-study section only */
   --drleaf: #ce5a7a;
   --drleaf-tint: #f8e7ec;
 

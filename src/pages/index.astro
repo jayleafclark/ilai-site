@@ -26,29 +26,29 @@ const features = [
   },
 ];
 
-const growth = [
-  { p: "Facebook", v: "+359%", pct: 100, c: "var(--brand)" },
-  { p: "Instagram", v: "+155%", pct: 62, c: "var(--coral-soft)" },
-  { p: "YouTube", v: "+42%", pct: 30, c: "var(--gold)" },
-  { p: "TikTok", v: "+39%", pct: 26, c: "var(--green)" },
+const output = [
+  { p: "Short-form posts", v: "~60", pct: 100, c: "var(--coral)" },
+  { p: "Reels & clips", v: "~20", pct: 52, c: "var(--plum)" },
+  { p: "Long-form essays", v: "~12", pct: 34, c: "var(--gold)" },
+  { p: "Podcast episodes", v: "~4", pct: 16, c: "var(--green)" },
 ];
 
 const stats = [
   {
-    value: 205, suffix: "M+", label: "Impressions in 12 months", c: "var(--coral)", bg: "var(--coral-tint)",
-    icon: `<path d="M3 17V9M8.5 17V4M14 17v-6M19.5 17V7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
+    value: 120, suffix: "+", label: "Original pieces a month", c: "var(--coral)", bg: "var(--coral-tint)",
+    icon: `<path d="M4 15.5L14 5.5l3.5 3.5L7.5 19H4v-3.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12.5 7l3.5 3.5" stroke="currentColor" stroke-width="1.6"/>`,
   },
   {
-    value: 90, suffix: "K+", label: "New followers", c: "var(--brand)", bg: "var(--brand-tint)",
-    icon: `<circle cx="8" cy="7" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M3 18a5 5 0 0110 0M15 5a3 3 0 010 6M19 18a4.5 4.5 0 00-3-4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
+    value: 350, suffix: "+", label: "Posts published a month", c: "var(--brand)", bg: "var(--brand-tint)",
+    icon: `<path d="M3.5 11L19 4l-6 15-2.5-6-7-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>`,
   },
   {
-    value: 8, suffix: "", label: "Platforms managed", c: "var(--green)", bg: "var(--green-tint)",
+    value: 13, suffix: "+", label: "Platforms, one voice", c: "var(--green)", bg: "var(--green-tint)",
     icon: `<rect x="3" y="3" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="12.5" y="3" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="12.5" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="12.5" y="12.5" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/>`,
   },
   {
-    value: 0, prefix: "$", label: "Spent on ads", c: "var(--gold)", bg: "var(--gold-tint)",
-    icon: `<circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M11 7v8M8.5 9.2c0-1.2 1.1-1.9 2.5-1.9s2.5.6 2.5 1.8-1.1 1.6-2.5 1.9-2.5.7-2.5 1.9 1.1 1.8 2.5 1.8 2.5-.7 2.5-1.9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>`,
+    value: 8, suffix: "", label: "Engagement-engine platforms", c: "var(--plum)", bg: "var(--plum-tint)",
+    icon: `<path d="M4 5.5h16v9H10l-4 3.5v-3.5H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>`,
   },
 ];
 
@@ -83,7 +83,7 @@ const posts = [
                   brand, your market, and your audience, then grow it. You film once, we do the rest.
                 </p>
                 <div class="hslide__actions">
-                  <a href="/contact" class="btn btn--signal">Book a call<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
+                  <a href="/contact" class="btn btn--gold">Book a call<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
                   <a href="/work/dr-caroline-leaf" class="btn btn--ghost btn--ghost-dark">See the proof</a>
                 </div>
               </div>
@@ -91,12 +91,12 @@ const posts = [
                 <div class="chrome hmock">
                   <div class="chrome__bar">
                     <span class="chrome__dot"></span><span class="chrome__dot"></span><span class="chrome__dot"></span>
-                    <span class="chrome__url">drleaf.ilaicollective.com</span>
+                    <span class="chrome__url">your dashboard, live</span>
                   </div>
                   <div class="chrome__body">
                     <div class="hmock__tiles">
-                      <div class="hmock__tile"><span class="hmock__tl">Impressions, 30d</span><span class="hmock__tv">27.1M</span></div>
-                      <div class="hmock__tile"><span class="hmock__tl">Engagements, 30d</span><span class="hmock__tv">1.1M</span></div>
+                      <div class="hmock__tile"><span class="hmock__tl">Posts published</span><span class="hmock__tv">342</span></div>
+                      <div class="hmock__tile"><span class="hmock__tl">Platforms</span><span class="hmock__tv">13</span></div>
                     </div>
                     <div class="hmock__chart">
                       {[38, 52, 46, 68, 60, 82, 74, 96].map((h) => <span style={`--h:${h}%`}></span>)}
@@ -104,8 +104,8 @@ const posts = [
                   </div>
                 </div>
                 <div class="herofloat">
-                  <span class="herofloat__num">+204<span class="herofloat__u">%</span></span>
-                  <span class="herofloat__lab">Reach, year over year</span>
+                  <span class="herofloat__num">124</span>
+                  <span class="herofloat__lab">Original pieces / month</span>
                 </div>
               </div>
             </article>
@@ -120,7 +120,7 @@ const posts = [
                   platform and published for you, in a voice we build with you.
                 </p>
                 <div class="hslide__actions">
-                  <a href="/method" class="btn btn--signal">See how it works<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
+                  <a href="/method" class="btn btn--gold">See how it works<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
                   <a href="/what-we-do" class="btn btn--ghost btn--ghost-dark">What we do</a>
                 </div>
               </div>
@@ -141,21 +141,21 @@ const posts = [
             <!-- Slide 3: proof -->
             <article class="hslide hslide--3">
               <div class="hslide__inner">
-                <span class="eyebrow eyebrow--star eyebrow--ondark">Proven to spread</span>
-                <h1 class="hslide__title">Proof,<br />not promises.</h1>
+                <span class="eyebrow eyebrow--star eyebrow--ondark">What you get</span>
+                <h1 class="hslide__title">A month of content,<br />from one sitting.</h1>
                 <p class="hslide__lead">
-                  In 12 months one client reached 205M+ impressions and gained 90,000+
-                  followers, with reach up 204% year over year and nothing spent on ads.
+                  Around 120 original pieces, adapted into 350-plus posts across up to 13
+                  platforms, all in a voice we build with you and sign off on together.
                 </p>
                 <div class="hslide__actions">
-                  <a href="/work/dr-caroline-leaf" class="btn btn--signal">Read the case study<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
+                  <a href="/what-we-do" class="btn btn--gold">See what we do<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
                   <a href="/contact" class="btn btn--ghost btn--ghost-dark">Book a call</a>
                 </div>
               </div>
               <div class="hslide__visual" aria-hidden="true">
                 <div class="prooftiles">
-                  <div class="prooftile"><span class="prooftile__n">205M+</span><span class="prooftile__l">Impressions in 12 months</span></div>
-                  <div class="prooftile prooftile--coral"><span class="prooftile__n">3×</span><span class="prooftile__l">Reach & engagement, year over year</span></div>
+                  <div class="prooftile"><span class="prooftile__n">120+</span><span class="prooftile__l">Original pieces a month</span></div>
+                  <div class="prooftile prooftile--coral"><span class="prooftile__n">350+</span><span class="prooftile__l">Posts across your platforms</span></div>
                 </div>
               </div>
             </article>
@@ -224,14 +224,16 @@ const posts = [
 
       <article class="clientcard card--dark" data-reveal data-reveal-delay="1">
         <div class="clientcard__top">
-          <div class="clientcard__ava" aria-hidden="true">CL</div>
+          <div class="clientcard__ava" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7l8-4 8 4-8 4-8-4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 12l8 4 8-4M4 17l8 4 8-4" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </div>
           <div>
-            <p class="clientcard__name">One client, one year</p>
-            <p class="clientcard__role">Dr. Caroline Leaf · year-over-year growth</p>
+            <p class="clientcard__name">What a month looks like</p>
+            <p class="clientcard__role">Made for you, never AI slop</p>
           </div>
         </div>
         <ul class="growth">
-          {growth.map((g) => (
+          {output.map((g) => (
             <li class="growth__row">
               <span class="growth__p">{g.p}</span>
               <span class="growth__track"><span class="growth__fill" style={`--w:${g.pct}%;background:${g.c}`}></span></span>
@@ -240,8 +242,7 @@ const posts = [
           ))}
         </ul>
         <p class="clientcard__note">
-          Reach and engagement roughly tripled in a year the average account went backwards.
-          Zero spent on ads.
+          120+ original pieces, published as 350+ posts across your platforms, in one voice.
         </p>
       </article>
     </div>
@@ -362,17 +363,18 @@ const posts = [
         <div class="pull__quote">
           <span class="pull__mark" aria-hidden="true">&ldquo;</span>
           <blockquote>
-            In a year the average account's organic reach fell about 12 percent. Dr. Leaf's
-            reach and engagement roughly tripled, at a size where most accounts flatten out.
+            Across 2025, the average account's organic reach fell about 12 percent. Generic,
+            machine-made content is why. Researched, human-led content is how you move the
+            other way.
           </blockquote>
           <figcaption>
-            <span class="pull__who">The Dr. Caroline Leaf case study</span>
-            <a href="/work/dr-caroline-leaf" class="pull__link">Read the numbers →</a>
+            <span class="pull__who">Why the work matters</span>
+            <a href="/work/dr-caroline-leaf" class="pull__link">See our work →</a>
           </figcaption>
         </div>
         <div class="pull__stat" aria-hidden="true">
-          <span class="pull__num">3×</span>
-          <span class="pull__lab">reach and engagement, in a shrinking year</span>
+          <span class="pull__num">100%</span>
+          <span class="pull__lab">human-led, human-gated. No AI slop.</span>
         </div>
       </figure>
     </div>
@@ -505,18 +507,18 @@ const posts = [
     overflow: hidden;
     color: #fff;
     background:
-      radial-gradient(80% 120% at 85% 12%, rgba(242, 104, 60, 0.42), transparent 60%),
-      radial-gradient(70% 90% at 8% 92%, rgba(47, 40, 33, 0.9), transparent 65%),
+      radial-gradient(80% 120% at 85% 12%, rgba(227, 178, 76, 0.42), transparent 60%),
+      radial-gradient(70% 90% at 8% 92%, rgba(13, 40, 29, 0.9), transparent 65%),
       linear-gradient(135deg, var(--charcoal-2), var(--charcoal) 55%, var(--charcoal-3));
   }
   .hslide--2 {
     background:
-      radial-gradient(75% 110% at 88% 15%, rgba(242, 104, 60, 0.34), transparent 60%),
+      radial-gradient(75% 110% at 88% 15%, rgba(227, 178, 76, 0.34), transparent 60%),
       linear-gradient(135deg, var(--charcoal), var(--charcoal-2));
   }
   .hslide--3 {
     background:
-      radial-gradient(85% 120% at 80% 20%, rgba(242, 104, 60, 0.5), transparent 62%),
+      radial-gradient(85% 120% at 80% 20%, rgba(227, 178, 76, 0.5), transparent 62%),
       linear-gradient(135deg, var(--charcoal-2), var(--charcoal-3));
   }
   .hslide__inner {
@@ -846,10 +848,8 @@ const posts = [
     width: 48px;
     height: 48px;
     border-radius: 14px;
-    background: var(--drleaf);
-    color: #fff;
-    font-family: var(--font-accent);
-    font-weight: 700;
+    background: var(--gold);
+    color: var(--charcoal);
   }
   .clientcard__name {
     color: #fff;
