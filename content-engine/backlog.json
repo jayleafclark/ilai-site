@@ -1,0 +1,502 @@
+[
+  {
+    "slug": "how-to-build-a-content-strategy-expert",
+    "title": "How to Build a Content Marketing Strategy as a Subject-Matter Expert",
+    "keyword": "content marketing strategy",
+    "sv": 4400,
+    "intent": "informational",
+    "category": "Content Strategy",
+    "angle": "The research-first framework: audience, niche study, pillars from real expertise, formats, measurement.",
+    "status": "published"
+  },
+  {
+    "slug": "content-pillars-examples",
+    "title": "Content Pillars: Real Examples for Coaches, Authors and Founders",
+    "keyword": "content pillars examples",
+    "sv": 320,
+    "intent": "informational",
+    "category": "Content Strategy",
+    "angle": "Show 3-4 pillar sets built from a real expert's expertise, not generic templates.",
+    "status": "pending"
+  },
+  {
+    "slug": "how-to-run-a-content-audit",
+    "title": "What a Content Audit Is and How to Run One",
+    "keyword": "content audit",
+    "sv": 390,
+    "intent": "informational",
+    "category": "Content Strategy",
+    "angle": "Human-led audit checklist; teaser for a done-for-you audit.",
+    "status": "pending"
+  },
+  {
+    "slug": "evergreen-content-for-experts",
+    "title": "Evergreen Content: How Experts Compound Reach Over Time",
+    "keyword": "evergreen content",
+    "sv": 1600,
+    "intent": "informational",
+    "category": "Content Strategy",
+    "angle": "Argue for durable, researched content over disposable filler.",
+    "status": "pending"
+  },
+  {
+    "slug": "content-marketing-examples-2026",
+    "title": "Content Marketing Examples Worth Copying in 2026",
+    "keyword": "content marketing examples",
+    "sv": 720,
+    "intent": "informational",
+    "category": "Content Strategy",
+    "angle": "Curated teardown; establishes taste and expertise.",
+    "status": "pending"
+  },
+  {
+    "slug": "how-to-make-a-reel-that-gets-watched",
+    "title": "How to Make a Reel That Actually Gets Watched",
+    "keyword": "how to make a reel",
+    "sv": 2400,
+    "intent": "informational",
+    "category": "Short-form Video",
+    "angle": "Retention-first editing; hook, structure, pacing, captions.",
+    "status": "published"
+  },
+  {
+    "slug": "turn-one-podcast-into-30-pieces",
+    "title": "How to Turn One Podcast Into 30 Pieces of Content",
+    "keyword": "repurpose a podcast",
+    "sv": 210,
+    "intent": "informational",
+    "category": "Repurposing",
+    "angle": "The repurposing engine, flagship differentiator.",
+    "status": "published"
+  },
+  {
+    "slug": "short-form-video-ideas-for-experts",
+    "title": "Short-Form Video Ideas for Experts Who Hate Being on Camera",
+    "keyword": "short form video ideas",
+    "sv": 210,
+    "intent": "informational",
+    "category": "Short-form Video",
+    "angle": "Talking-head plus motion-graphics alternatives.",
+    "status": "pending"
+  },
+  {
+    "slug": "how-to-add-captions-to-video",
+    "title": "How to Add Captions to Video (and Why They Double Watch Time)",
+    "keyword": "how to add captions to video",
+    "sv": 1300,
+    "intent": "informational",
+    "category": "Short-form Video",
+    "angle": "Practical plus a subtle craft flex.",
+    "status": "pending"
+  },
+  {
+    "slug": "how-to-write-a-hook-that-stops-the-scroll",
+    "title": "How to Write a Hook That Stops the Scroll",
+    "keyword": "how to write a hook",
+    "sv": 5400,
+    "intent": "informational",
+    "category": "Copywriting",
+    "angle": "High-volume anchor; scripting expertise.",
+    "status": "published"
+  },
+  {
+    "slug": "video-editing-for-beginners",
+    "title": "Video Editing for Beginners: A Creator's First 10 Edits",
+    "keyword": "video editing for beginners",
+    "sv": 1600,
+    "intent": "informational",
+    "category": "Short-form Video",
+    "angle": "Top-funnel magnet; soft CTA to done-for-you editing.",
+    "status": "pending"
+  },
+  {
+    "slug": "how-to-start-a-podcast-expert-guide",
+    "title": "How to Start a Podcast: A 2026 Guide for Experts",
+    "keyword": "how to start a podcast",
+    "sv": 22200,
+    "intent": "informational",
+    "category": "Podcasting",
+    "angle": "Comprehensive guide; concept, gear, editing, publishing, repurposing.",
+    "status": "published"
+  },
+  {
+    "slug": "how-to-edit-a-podcast",
+    "title": "How to Edit a Podcast So It Sounds Professional",
+    "keyword": "how to edit a podcast",
+    "sv": 320,
+    "intent": "informational",
+    "category": "Podcasting",
+    "angle": "Craft piece; ladders to the service.",
+    "status": "pending"
+  },
+  {
+    "slug": "podcast-editing-service-guide",
+    "title": "Podcast Editing Service: What to Look For (and What It Costs)",
+    "keyword": "podcast editing service",
+    "sv": 390,
+    "intent": "commercial",
+    "category": "Podcasting",
+    "angle": "Bottom-funnel; transparent pricing angle.",
+    "status": "pending"
+  },
+  {
+    "slug": "best-time-to-post-on-instagram",
+    "title": "The Best Time to Post on Instagram (What the Data Actually Says)",
+    "keyword": "best time to post on instagram",
+    "sv": 90500,
+    "intent": "informational",
+    "category": "Instagram",
+    "angle": "Data-grounded; find your own best time from your audience.",
+    "status": "published"
+  },
+  {
+    "slug": "how-the-instagram-algorithm-works",
+    "title": "How the Instagram Algorithm Works in 2026",
+    "keyword": "instagram algorithm",
+    "sv": 3600,
+    "intent": "informational",
+    "category": "Instagram",
+    "angle": "Evergreen explainer; internal-link hub.",
+    "status": "pending"
+  },
+  {
+    "slug": "how-to-grow-on-linkedin-as-a-founder",
+    "title": "How to Grow on LinkedIn as a Founder or Expert",
+    "keyword": "how to grow on linkedin",
+    "sv": 70,
+    "intent": "informational",
+    "category": "LinkedIn",
+    "angle": "ICP-aligned; feeds the LinkedIn service.",
+    "status": "pending"
+  },
+  {
+    "slug": "linkedin-post-ideas-for-thought-leaders",
+    "title": "LinkedIn Post Ideas for Thought Leaders",
+    "keyword": "linkedin post ideas",
+    "sv": 590,
+    "intent": "informational",
+    "category": "LinkedIn",
+    "angle": "Idea bank; strategic depth.",
+    "status": "pending"
+  },
+  {
+    "slug": "how-to-grow-a-youtube-channel-with-seo",
+    "title": "How to Grow a YouTube Channel with SEO",
+    "keyword": "youtube seo",
+    "sv": 2900,
+    "intent": "informational",
+    "category": "YouTube",
+    "angle": "Ranks for search-intent creators.",
+    "status": "pending"
+  },
+  {
+    "slug": "tiktok-for-business-playbook",
+    "title": "TikTok for Business: A Practical Playbook for Experts",
+    "keyword": "tiktok for business",
+    "sv": 8100,
+    "intent": "informational",
+    "category": "TikTok",
+    "angle": "High-volume; brandable framework.",
+    "status": "pending"
+  },
+  {
+    "slug": "how-to-get-more-engagement-on-instagram",
+    "title": "How to Get More Engagement on Instagram (Without Gimmicks)",
+    "keyword": "how to get more engagement on instagram",
+    "sv": 390,
+    "intent": "informational",
+    "category": "Instagram",
+    "angle": "Anti-hack, quality-first.",
+    "status": "pending"
+  },
+  {
+    "slug": "instagram-post-ideas-for-personal-brands",
+    "title": "Instagram Post Ideas for Personal Brands",
+    "keyword": "instagram post ideas",
+    "sv": 1300,
+    "intent": "informational",
+    "category": "Instagram",
+    "angle": "Idea bank magnet.",
+    "status": "pending"
+  },
+  {
+    "slug": "how-often-should-you-post-on-social-media",
+    "title": "How Often Should You Post on Social Media?",
+    "keyword": "how often should i post on social media",
+    "sv": 110,
+    "intent": "informational",
+    "category": "Content Systems",
+    "angle": "Bridges to scheduling and consistency.",
+    "status": "pending"
+  },
+  {
+    "slug": "what-is-thought-leadership",
+    "title": "What Is Thought Leadership (and How to Build It)",
+    "keyword": "what is thought leadership",
+    "sv": 1900,
+    "intent": "informational",
+    "category": "Thought Leadership",
+    "angle": "Definition first, then a real build.",
+    "status": "published"
+  },
+  {
+    "slug": "how-to-build-a-personal-brand",
+    "title": "How to Build a Personal Brand as an Expert",
+    "keyword": "how to build a personal brand",
+    "sv": 590,
+    "intent": "informational",
+    "category": "Personal Brand",
+    "angle": "Foundational; links to services.",
+    "status": "pending"
+  },
+  {
+    "slug": "thought-leadership-content-formats",
+    "title": "Thought Leadership Content: Formats That Build Authority",
+    "keyword": "thought leadership content",
+    "sv": 210,
+    "intent": "informational",
+    "category": "Thought Leadership",
+    "angle": "Ties formats to Ilai's craft menu.",
+    "status": "pending"
+  },
+  {
+    "slug": "personal-branding-tips-for-founders",
+    "title": "Personal Branding Tips for Founders and Consultants",
+    "keyword": "personal branding tips",
+    "sv": 260,
+    "intent": "informational",
+    "category": "Personal Brand",
+    "angle": "Audience-specific.",
+    "status": "pending"
+  },
+  {
+    "slug": "newsletter-examples-that-work",
+    "title": "Newsletter Examples That Prove Long-Form Still Wins",
+    "keyword": "newsletter examples",
+    "sv": 3600,
+    "intent": "informational",
+    "category": "Newsletters",
+    "angle": "Format types with what makes each work.",
+    "status": "published"
+  },
+  {
+    "slug": "how-to-write-a-newsletter",
+    "title": "How to Write a Newsletter People Actually Open",
+    "keyword": "how to write a newsletter",
+    "sv": 480,
+    "intent": "informational",
+    "category": "Newsletters",
+    "angle": "Craft plus soft CTA to the newsletter service.",
+    "status": "pending"
+  },
+  {
+    "slug": "how-to-grow-a-newsletter-from-zero",
+    "title": "How to Grow a Newsletter from Zero",
+    "keyword": "how to grow a newsletter",
+    "sv": 90,
+    "intent": "informational",
+    "category": "Newsletters",
+    "angle": "Ladder and lead-magnet angle.",
+    "status": "pending"
+  },
+  {
+    "slug": "seo-content-writing-for-experts",
+    "title": "SEO Content Writing: How Experts Rank Without Sounding Robotic",
+    "keyword": "seo content writing",
+    "sv": 1300,
+    "intent": "informational",
+    "category": "SEO",
+    "angle": "Human-led thesis front and center.",
+    "status": "pending"
+  },
+  {
+    "slug": "how-to-write-a-blog-post-that-ranks",
+    "title": "How to Write a Blog Post That Ranks and Reads Well",
+    "keyword": "how to write a blog post",
+    "sv": 720,
+    "intent": "informational",
+    "category": "SEO",
+    "angle": "Meta craft piece; demonstrates ability.",
+    "status": "pending"
+  },
+  {
+    "slug": "long-form-vs-short-form-content",
+    "title": "Long-Form Content: When It Beats Short-Form",
+    "keyword": "long form content",
+    "sv": 720,
+    "intent": "informational",
+    "category": "Content Strategy",
+    "angle": "Positions full-funnel capability.",
+    "status": "pending"
+  },
+  {
+    "slug": "what-a-content-agency-does",
+    "title": "What a Content Creation Agency Does (and When to Hire One)",
+    "keyword": "content creation agency",
+    "sv": 8100,
+    "intent": "commercial",
+    "category": "Hiring an Agency",
+    "angle": "Define the human-led model; when to hire.",
+    "status": "published"
+  },
+  {
+    "slug": "content-agency-vs-freelancer",
+    "title": "Content Agency vs Freelancer vs In-House: How to Choose",
+    "keyword": "content agency vs freelancer",
+    "sv": 90,
+    "intent": "commercial",
+    "category": "Hiring an Agency",
+    "angle": "Decision guide; ranks easily, converts.",
+    "status": "pending"
+  },
+  {
+    "slug": "how-much-does-a-content-agency-cost",
+    "title": "How Much Does a Content Agency Cost?",
+    "keyword": "content marketing pricing",
+    "sv": 90,
+    "intent": "commercial",
+    "category": "Hiring an Agency",
+    "angle": "Transparent pricing equals trust.",
+    "status": "pending"
+  },
+  {
+    "slug": "done-for-you-content-explained",
+    "title": "Done-for-You Content: What It Includes and Who It's For",
+    "keyword": "done for you content",
+    "sv": 90,
+    "intent": "commercial",
+    "category": "Hiring an Agency",
+    "angle": "Owns Ilai's exact positioning term.",
+    "status": "pending"
+  },
+  {
+    "slug": "social-media-management-services",
+    "title": "Social Media Management Services: What's Actually Included",
+    "keyword": "social media management services",
+    "sv": 2400,
+    "intent": "commercial",
+    "category": "Hiring an Agency",
+    "angle": "High-volume commercial page.",
+    "status": "pending"
+  },
+  {
+    "slug": "content-strategy-agency-what-you-get",
+    "title": "Content Strategy Agency: What You Get Beyond Posting",
+    "keyword": "content strategy agency",
+    "sv": 210,
+    "intent": "commercial",
+    "category": "Hiring an Agency",
+    "angle": "Strategy-first differentiation.",
+    "status": "pending"
+  },
+  {
+    "slug": "how-to-build-a-social-media-content-calendar",
+    "title": "How to Build a Social Media Content Calendar",
+    "keyword": "social media content calendar",
+    "sv": 2400,
+    "intent": "informational",
+    "category": "Content Systems",
+    "angle": "Pillars to slots; cadence by stage.",
+    "status": "published"
+  },
+  {
+    "slug": "content-batching-for-experts",
+    "title": "Content Batching: How Experts Create a Month in a Day",
+    "keyword": "content batching",
+    "sv": 90,
+    "intent": "informational",
+    "category": "Content Systems",
+    "angle": "Systems and consistency angle.",
+    "status": "pending"
+  },
+  {
+    "slug": "social-media-engagement-strategy",
+    "title": "A Social Media Engagement Strategy That Builds Community",
+    "keyword": "social media engagement strategy",
+    "sv": 260,
+    "intent": "informational",
+    "category": "Engagement",
+    "angle": "First-30-min replies; a differentiator.",
+    "status": "published"
+  },
+  {
+    "slug": "community-management-on-social-media",
+    "title": "Community Management on Social Media: The Human Layer",
+    "keyword": "community management social media",
+    "sv": 390,
+    "intent": "informational",
+    "category": "Engagement",
+    "angle": "Engagement at any stage.",
+    "status": "pending"
+  },
+  {
+    "slug": "content-distribution-strategy",
+    "title": "Content Distribution Strategy: Getting Seen on Every Channel",
+    "keyword": "content distribution strategy",
+    "sv": 140,
+    "intent": "informational",
+    "category": "Content Systems",
+    "angle": "Full-funnel systems thinking.",
+    "status": "pending"
+  },
+  {
+    "slug": "social-media-for-authors",
+    "title": "Social Media for Authors: Building a Platform Before Launch",
+    "keyword": "social media for authors",
+    "sv": 140,
+    "intent": "commercial",
+    "category": "By Audience",
+    "angle": "Hyper-targeted; easy rank.",
+    "status": "pending"
+  },
+  {
+    "slug": "content-marketing-for-coaches",
+    "title": "Content Marketing for Coaches: A Client-Attracting System",
+    "keyword": "content marketing for coaches",
+    "sv": 90,
+    "intent": "commercial",
+    "category": "By Audience",
+    "angle": "ICP page.",
+    "status": "pending"
+  },
+  {
+    "slug": "content-marketing-for-consultants",
+    "title": "Content Marketing for Consultants and B2B Experts",
+    "keyword": "content marketing for consultants",
+    "sv": 70,
+    "intent": "commercial",
+    "category": "By Audience",
+    "angle": "Links to B2B pillar.",
+    "status": "pending"
+  },
+  {
+    "slug": "motion-graphics-for-social-media",
+    "title": "Motion Graphics for Social Media: When Movement Beats Static",
+    "keyword": "motion graphics for social media",
+    "sv": 90,
+    "intent": "informational",
+    "category": "Design",
+    "angle": "A real Ilai edge; near-zero competition.",
+    "status": "published"
+  },
+  {
+    "slug": "how-to-design-an-instagram-carousel",
+    "title": "How to Design an Instagram Carousel That Gets Saved",
+    "keyword": "instagram carousel",
+    "sv": 1900,
+    "intent": "informational",
+    "category": "Design",
+    "angle": "High-volume design piece; craft showcase.",
+    "status": "pending"
+  },
+  {
+    "slug": "how-to-make-quote-cards-on-brand",
+    "title": "How to Make Quote Cards That Stay On-Brand",
+    "keyword": "how to make quote cards",
+    "sv": 90,
+    "intent": "informational",
+    "category": "Design",
+    "angle": "On-brand-templates flex.",
+    "status": "pending"
+  }
+]

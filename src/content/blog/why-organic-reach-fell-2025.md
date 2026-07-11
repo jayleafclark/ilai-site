@@ -5,6 +5,7 @@ pubDate: 2026-05-20
 author: "Ilai Collective"
 tags: ["organic reach", "engagement strategy", "social media", "distribution"]
 draft: false
+cover: "/blog/covers/why-organic-reach-fell-2025.png"
 ---
 
 In 2025 the average account got quieter. Across the major platforms, organic reach fell roughly 12% year over year, and engagement fell closer to 28%. The same effort returned less. If your numbers slid last year, you were not doing anything wrong. The ground moved.

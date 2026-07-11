@@ -1,0 +1,56 @@
+name: Publish blog post
+
+on:
+  schedule:
+    # 14:00 UTC Mon/Wed/Fri (~9-10am ET). Ramp to weekdays once indexed:
+    # - cron: "0 14 * * 1,2,3,4,5"
+    - cron: "0 14 * * 1,3,5"
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Force a specific backlog slug (optional)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-blog
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install pillow
+
+      - name: Generate the next post
+        id: gen
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ILAI_MODEL: claude-sonnet-5
+          ILAI_SLUG: ${{ github.event.inputs.slug }}
+        run: |
+          set +e
+          python scripts/generate_post.py
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          # 0 = published, 3 = backlog empty (both are clean); anything else fails
+          if [ "$code" -eq 0 ] || [ "$code" -eq 3 ]; then exit 0; fi
+          exit $code
+
+      - name: Commit and push
+        if: steps.gen.outputs.exit_code == '0'
+        run: |
+          git config user.name "Ilai Collective"
+          git config user.email "hello@ilaicollective.com"
+          git add src/content/blog public/blog/covers content-engine/backlog.json content-engine/log.json
+          git commit -m "New blog post (content engine)"
+          git push

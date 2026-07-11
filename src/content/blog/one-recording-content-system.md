@@ -5,6 +5,7 @@ pubDate: 2026-04-14
 author: "Ilai Collective"
 tags: ["content system", "repurposing", "founders", "podcast"]
 draft: false
+cover: "/blog/covers/one-recording-content-system.png"
 ---
 
 Most experts believe that being everywhere means being online all day. It does not. The people who seem to be on every platform are almost never typing in real time. They record once, then a system does the rest.

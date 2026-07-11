@@ -5,6 +5,7 @@ pubDate: 2026-06-18
 author: "Ilai Collective"
 tags: ["AI content", "content quality", "content that converts", "human-led"]
 draft: false
+cover: "/blog/covers/ai-slop-vs-researched-content.png"
 ---
 
 Feeds are full of content that says nothing. It is grammatical, on-topic, and completely forgettable. People have a name for it now: slop. The question worth answering is not whether slop is annoying. It is whether it works. It does not, and understanding why tells you exactly what to build instead.

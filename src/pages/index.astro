@@ -53,9 +53,12 @@ const stats = [
 ];
 
 const services = [
-  { tag: "Podcasts & video", d: "Full episode edits, clips, long-form YouTube, show notes, and SEO. You record once; we do the rest.", tone: "slate", viz: "wave" },
-  { tag: "Short-form & reels", d: "Scroll-stopping clips cut from every episode and fanned out across each platform, in your voice.", tone: "terra", viz: "reel" },
-  { tag: "Publishing & engagement", d: "Posted everywhere on schedule, with first-response community engagement in the minutes that decide reach.", tone: "blue", viz: "grid" },
+  { tag: "Research & strategy", d: "We learn your audience, your competitors, and which formats are earning engagement in your niche right now, then aim every piece before we make it.", tone: "blue", viz: "grid" },
+  { tag: "Podcasts, video & scripts", d: "We write the scripts and shot lists, you record once, and we edit the full episode with dynamic motion graphics and sound design.", tone: "slate", viz: "wave" },
+  { tag: "Short-form & reels", d: "Every episode cut into vertical clips with hooks and captions, fanned out across each platform in your voice.", tone: "terra", viz: "reel" },
+  { tag: "Writing at scale", d: "Quote cards, carousels, long-form articles, and newsletters, all written in the voice we document with you.", tone: "slate", viz: "grid" },
+  { tag: "Brand & on-brand templates", d: "Templates matched to your exact typography and color, so 350 posts a month still look unmistakably yours.", tone: "terra", viz: "reel" },
+  { tag: "Publishing & engagement", d: "A bespoke posting schedule built for your stage, plus first-response community engagement in the minutes that decide reach.", tone: "blue", viz: "grid" },
 ];
 
 const hiw = [
@@ -77,6 +80,15 @@ const dotPalette = ["var(--coral)", "var(--brand)", "var(--green)", "var(--plum)
 const calDays = [1, 0, 2, 1, 3, 0, 1, 2, 0, 1, 3, 1, 0, 2, 1, 2, 0, 3, 1, 0, 2, 1, 0, 2, 1, 3, 1, 0];
 // Hero slide 2 — editor waveform bar heights
 const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50, 64, 42, 86, 56, 30, 68, 46];
+// Hero slide 3 — engagement feed (auto-scrolls through the thread)
+const comments = [
+  { who: "@jenna_m", txt: "Does this actually help with anxiety?" },
+  { reply: true, who: "Replied in your voice", txt: "Great question. Here's what the research shows, and where to start.", badge: "2 min" },
+  { who: "@marktrains", txt: "How do I work with you?", lead: true },
+  { who: "@sophie.k", txt: "Saving this to try this week." },
+  { reply: true, who: "Replied in your voice", txt: "Love that. Start with the first step and tell me how it goes.", badge: "1 min" },
+  { who: "@dan_wole", txt: "Is there something for total beginners?" },
+];
 ---
 
 <Layout>
@@ -143,7 +155,7 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
                   30-plus clips for every feed. You show up and talk. We do the rest.
                 </p>
                 <div class="hslide__actions">
-                  <a href="/method" class="btn btn--gold">See how it works<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
+                  <a href="/method" class="btn btn--pink">See how it works<span class="btn__arrow" aria-hidden="true" set:html={arrow} /></a>
                   <a href="/what-we-do" class="btn btn--ghost btn--ghost-dark">What we do</a>
                 </div>
               </div>
@@ -199,19 +211,15 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
                     <span class="chrome__url">Engagement · in your voice</span>
                   </div>
                   <div class="cmts__body">
-                    <div class="cmt">
-                      <span class="cmt__ava"></span>
-                      <div class="cmt__txt"><b>@jenna_m</b><span>Does this actually help with anxiety?</span></div>
-                    </div>
-                    <div class="cmt cmt--reply">
-                      <span class="cmt__ava cmt__ava--ilai"></span>
-                      <div class="cmt__txt"><b>Replied in your voice</b><span>Great question. Here's what the research shows, and where to start.</span></div>
-                      <span class="cmt__badge">2 min</span>
-                    </div>
-                    <div class="cmt">
-                      <span class="cmt__ava"></span>
-                      <div class="cmt__txt"><b>@marktrains</b><span>How do I work with you?</span></div>
-                      <span class="cmt__badge cmt__badge--lead">Lead flagged</span>
+                    <div class="cmts__track">
+                      {[...comments, ...comments].map((c) => (
+                        <div class={`cmt${c.reply ? " cmt--reply" : ""}`}>
+                          <span class={`cmt__ava${c.reply ? " cmt__ava--ilai" : ""}`}></span>
+                          <div class="cmt__txt"><b>{c.who}</b><span>{c.txt}</span></div>
+                          {c.badge && <span class="cmt__badge">{c.badge}</span>}
+                          {c.lead && <span class="cmt__badge cmt__badge--lead">Lead flagged</span>}
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -337,8 +345,8 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
         </div>
         <div class="services__intro">
           <p class="muted">
-            Everything it takes to build and hold an audience, run by a real US team and
-            supported by serious in-house software.
+            Everything it takes to build and hold an audience, run by a real US team, with
+            sophisticated software and engines that help us move fast.
           </p>
           <a href="/what-we-do" class="btn btn--ghost">
             Explore every service
@@ -876,7 +884,8 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
     .editor__wave span,
     .editor__sel,
     .cal__dots i,
-    .cal__day { animation: none !important; }
+    .cal__day,
+    .cmts__track { animation: none !important; }
   }
   @media (min-width: 940px) and (max-width: 1100px) {
     .hmock { width: 300px; }
@@ -978,32 +987,45 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
   }
   .cal__num { font-size: 0.5rem; color: var(--muted); line-height: 1; }
   .cal__dots { display: flex; flex-wrap: wrap; gap: 2px; }
+  /* Dots cycle in and out in a rolling wave, like posts being scheduled
+     and refreshed across the month. */
   .cal__dots i {
     width: 5px; height: 5px; border-radius: 50%; display: block;
-    transform-origin: center; animation: dotPop 4s ease-in-out infinite;
+    transform-origin: center; animation: dotCycle 4.5s ease-in-out infinite;
   }
-  .cal__day:nth-child(3n) .cal__dots i { animation-delay: -0.6s; }
-  .cal__day:nth-child(3n + 1) .cal__dots i { animation-delay: -1.4s; }
-  .cal__day:nth-child(4n) .cal__dots i { animation-delay: -2.2s; }
-  .cal__day:nth-child(5n) .cal__dots i { animation-delay: -3.1s; }
-  .cal__dots i:nth-child(2) { animation-delay: -0.9s; }
-  .cal__dots i:nth-child(3) { animation-delay: -1.8s; }
-  @keyframes dotPop {
-    0%, 70%, 100% { transform: scale(1); opacity: 1; }
-    82% { transform: scale(1.55); opacity: 0.85; }
+  .cal__day:nth-child(7n) .cal__dots i { animation-delay: -0.5s; }
+  .cal__day:nth-child(7n + 1) .cal__dots i { animation-delay: -1.1s; }
+  .cal__day:nth-child(7n + 2) .cal__dots i { animation-delay: -1.7s; }
+  .cal__day:nth-child(7n + 3) .cal__dots i { animation-delay: -2.3s; }
+  .cal__day:nth-child(7n + 4) .cal__dots i { animation-delay: -2.9s; }
+  .cal__day:nth-child(7n + 5) .cal__dots i { animation-delay: -3.5s; }
+  .cal__day:nth-child(7n + 6) .cal__dots i { animation-delay: -4.1s; }
+  .cal__dots i:nth-child(2) { animation-delay: -0.7s; }
+  .cal__dots i:nth-child(3) { animation-delay: -1.5s; }
+  @keyframes dotCycle {
+    0% { transform: scale(0); opacity: 0; }
+    14% { transform: scale(1.35); opacity: 1; }
+    24% { transform: scale(1); opacity: 1; }
+    72% { transform: scale(1); opacity: 1; }
+    86% { transform: scale(0.5); opacity: 0.3; }
+    100% { transform: scale(0); opacity: 0; }
   }
-  /* a soft highlight travels across the calendar like a scheduling cursor */
+  /* a soft highlight sweeps diagonally across the month, cell by cell */
   .cal__grid { position: relative; }
   .cal__day {
     position: relative;
-    animation: calCell 6s ease-in-out infinite;
+    animation: calCell 4.5s ease-in-out infinite;
   }
-  .cal__day:nth-child(7n) { animation-delay: -0.8s; }
-  .cal__day:nth-child(7n + 3) { animation-delay: -2.4s; }
-  .cal__day:nth-child(7n + 5) { animation-delay: -4s; }
+  .cal__day:nth-child(7n) { animation-delay: -0.3s; }
+  .cal__day:nth-child(7n + 1) { animation-delay: -0.9s; }
+  .cal__day:nth-child(7n + 2) { animation-delay: -1.5s; }
+  .cal__day:nth-child(7n + 3) { animation-delay: -2.1s; }
+  .cal__day:nth-child(7n + 4) { animation-delay: -2.7s; }
+  .cal__day:nth-child(7n + 5) { animation-delay: -3.3s; }
+  .cal__day:nth-child(7n + 6) { animation-delay: -3.9s; }
   @keyframes calCell {
-    0%, 88%, 100% { background: var(--mist); }
-    94% { background: var(--coral-tint); }
+    0%, 82%, 100% { background: var(--mist); box-shadow: none; }
+    88% { background: var(--coral-tint); box-shadow: inset 0 0 0 1.5px var(--coral-soft); }
   }
 
   /* ---- Slide 2: podcast editor + clipping ---- */
@@ -1040,27 +1062,31 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
     position: relative; display: flex; align-items: center; gap: 3px; height: 56px;
     padding: 6px 8px; background: var(--mist); border: 1px solid var(--line); border-radius: 10px;
   }
+  /* Static waveform shape (a real waveform doesn't bounce); the playhead
+     scrubs across it and bars light up coral as it passes. */
   .editor__wave span {
-    flex: 1; height: var(--h); border-radius: 2px; background: var(--line-2);
-    transform-origin: center; animation: waveBar 1.1s ease-in-out infinite alternate;
+    position: relative; flex: 1; height: var(--h); border-radius: 2px;
+    background: var(--line-2); transition: background 220ms linear;
   }
-  .editor__wave span:nth-child(3n) { animation-delay: -0.9s; }
-  .editor__wave span:nth-child(3n + 1) { animation-delay: -0.45s; }
-  .editor__wave span:nth-child(4n) { animation-delay: -0.2s; }
-  .editor__wave span.on { background: var(--coral); }
-  @keyframes waveBar {
-    from { transform: scaleY(0.42); }
-    to { transform: scaleY(1); }
-  }
-  /* selection window drifts across the waveform */
+  .editor__wave span.on { background: var(--coral-soft); }
+  .editor__wave span.lit { background: var(--coral); }
+  /* the playhead: a thin vertical line with a dot, travelling L->R on loop */
   .editor__sel {
-    position: absolute; top: 3px; bottom: 3px; width: 27%;
-    border: 2px solid var(--coral); border-radius: 8px; background: rgba(28, 107, 74, 0.1);
-    animation: selDrift 5.5s var(--ease) infinite alternate;
+    position: absolute; top: 2px; bottom: 2px; left: 6%; width: 2px;
+    background: var(--coral); border-radius: 2px;
+    box-shadow: 0 0 8px 1px rgba(28, 107, 74, 0.55);
+    animation: playhead 4.2s linear infinite;
   }
-  @keyframes selDrift {
-    from { left: 8%; }
-    to { left: 62%; }
+  .editor__sel::before {
+    content: ""; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
+    width: 8px; height: 8px; border-radius: 50%; background: var(--coral);
+    box-shadow: 0 0 8px 1px rgba(28, 107, 74, 0.55);
+  }
+  @keyframes playhead {
+    0% { left: 5%; opacity: 0; }
+    6% { opacity: 1; }
+    94% { opacity: 1; }
+    100% { left: 95%; opacity: 0; }
   }
   .editor__clips { display: flex; gap: 8px; }
   .editor__clip { flex: 1; padding: 9px 8px; border-radius: 9px; font-size: 0.64rem; font-family: var(--font-accent); color: #fff; text-align: center; }
@@ -1070,7 +1096,25 @@ const wave = [30, 55, 40, 70, 48, 82, 60, 38, 66, 52, 78, 44, 90, 58, 34, 72, 50
 
   /* ---- Slide 3: thoughtful comment replies ---- */
   .cmts { width: clamp(360px, 31vw, 450px); }
-  .cmts__body { padding: var(--sp-4); display: flex; flex-direction: column; gap: 10px; }
+  .cmts__body {
+    padding: var(--sp-4);
+    height: 264px;
+    overflow: hidden;
+    position: relative;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 13%, #000 87%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 13%, #000 87%, transparent);
+  }
+  .cmts__track {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: cmtsScroll 18s linear infinite;
+  }
+  .cmts:hover .cmts__track { animation-play-state: paused; }
+  @keyframes cmtsScroll {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+  }
   .cmt { position: relative; display: flex; gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--mist); border: 1px solid var(--line); }
   .cmt--reply { background: var(--pink-tint); border-color: transparent; margin-left: 20px; }
   .cmt__ava { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--sand); }
