@@ -23,6 +23,11 @@
   --charcoal-2: #0d281d;
   --charcoal-3: #1d4836;
 
+  /* Neutral dark (light-charcoal) — to balance the deep green */
+  --slate: #35393a;
+  --slate-2: #26292a;
+  --slate-3: #444a4b;
+
   /* --- Major 2: forest green (dominant / CTAs) --- */
   --coral: #1c6b4a;
   --coral-hover: #17593d;
@@ -31,16 +36,16 @@
   --coral-soft: #57977a;
 
   /* --- Accents (complementary to forest) --- */
-  --brand: #e3b24c; /* warm gold */
-  --brand-deep: #cf9a2f;
-  --brand-night: #7a5e18;
-  --brand-tint: #f8edcf;
+  --brand: #c9a25c; /* subdued gold / ochre */
+  --brand-deep: #b0894a;
+  --brand-night: #6e5322;
+  --brand-tint: #f0e7d3;
   --green: #4fa47e; /* fresh mint/emerald */
   --green-tint: #dcefe6;
-  --gold: #e3b24c;
-  --gold-tint: #f8edcf;
-  --plum: #d07b54; /* terracotta */
-  --plum-tint: #f6e2d5;
+  --gold: #c9a25c;
+  --gold-tint: #f0e7d3;
+  --plum: #c07a58; /* terracotta */
+  --plum-tint: #f3e2d7;
 
   --drleaf: #ce5a7a;
   --drleaf-tint: #f8e7ec;
