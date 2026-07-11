@@ -73,6 +73,20 @@ const jsonLd = {
     <Footer />
 
     <script>
+      // Base-path aware: prefix root-relative in-site links with the build base
+      // (no-op when deployed at the root domain).
+      const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
+      if (BASE) {
+        document.querySelectorAll('a[href^="/"]').forEach((a) => {
+          const h = a.getAttribute("href");
+          if (h && !h.startsWith("//") && !h.startsWith(BASE + "/")) {
+            a.setAttribute("href", BASE + h);
+          }
+        });
+      }
+    </script>
+
+    <script>
       // Scroll-entrance reveals (transform/opacity only, respects reduced-motion)
       const prefersReduced = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
