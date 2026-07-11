@@ -2206,6 +2206,9 @@ const comments = [
     font-size: var(--fs-sm);
   }
   .pull__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     color: var(--blue);
     font-weight: 600;
     font-size: var(--fs-sm);
@@ -2507,14 +2510,11 @@ const comments = [
     .hiw__top {
       margin-bottom: var(--sp-6);
     }
+    /* The five steps belong on the Method page; on the home page for mobile
+       keep only the "Five steps, one system" teaser + the "See the full method"
+       CTA, and drop the enumerated list to cut length. */
     .hiw__steps {
-      gap: var(--sp-4);
-    }
-    .hiw__step {
-      padding-top: var(--sp-4);
-    }
-    .hiw__k {
-      font-size: 1.2rem;
+      display: none;
     }
 
     /* ---------- Offer + pull: rein in stacked-card gaps ---------- */
