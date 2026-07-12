@@ -612,9 +612,10 @@ const comments = [
 </Layout>
 
 <script>
-  // Hero carousel: auto-advance, dots, arrows, pointer swipe.
-  // On mobile (<=640px) the hero is a single static slide — skip the carousel
-  // entirely so it never advances to a display:none slide (blank hero).
+  // Hero carousel.
+  //  - Desktop (>640px): full carousel — auto-advance, dots, arrows, pointer swipe.
+  //  - Mobile (<=640px): auto-rotating CROSSFADE through all slides, no dots/arrows/
+  //    swipe UI (see the mobile branch below). Slides are stacked + crossfaded in CSS.
   const car = document.querySelector<HTMLElement>("[data-carousel]");
   const isMobile = window.matchMedia("(max-width: 640px)").matches;
   if (car && !isMobile) {
@@ -673,6 +674,21 @@ const comments = [
 
     render();
     auto();
+  } else if (car && isMobile) {
+    // Mobile: auto-rotating CROSSFADE through all slides. No dots, arrows, or swipe
+    // (those stay display:none). Slides are stacked in one grid cell and crossfaded
+    // via CSS opacity on .is-active — here we only advance the active class on a
+    // timer. Respects prefers-reduced-motion (stays on slide 1, no motion).
+    const mtrack = car.querySelector<HTMLElement>("[data-track]")!;
+    const mslides = Array.from(mtrack.children);
+    const mreduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let mi = 0;
+    if (!mreduce && mslides.length > 1) {
+      setInterval(() => {
+        mi = (mi + 1) % mslides.length;
+        mslides.forEach((s, k) => s.classList.toggle("is-active", k === mi));
+      }, 6000);
+    }
   }
 </script>
 
@@ -2340,24 +2356,35 @@ const comments = [
       padding-top: clamp(5.5rem, 16vw, 6.5rem);
       padding-bottom: var(--sp-6);
     }
-    /* Kill the carousel: only slide 1 shows, no track transform, no swipe UI */
+    /* Auto-rotating CROSSFADE hero: all slides stacked in one grid cell, only the
+       .is-active one visible; the JS advances the active class every few seconds.
+       No track transform, no swipe, no dots/arrows — clean fade, no chrome. */
     .herocar__vp {
-      overflow: visible;
+      overflow: hidden;
       touch-action: auto;
       cursor: default;
     }
     .herocar__track {
-      display: block;
+      display: grid;
+      grid-template-columns: 1fr;
       transform: none !important;
       transition: none !important;
     }
-    .hslide {
-      display: none;
+    .herocar__track > .hslide {
+      grid-column: 1;
+      grid-row: 1;
     }
-    .hslide.is-active {
+    .hslide {
       display: flex;
       min-height: 0;
       border-radius: var(--r-card-lg);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 700ms var(--ease, ease);
+    }
+    .hslide.is-active {
+      opacity: 1;
+      pointer-events: auto;
     }
     /* Remove the entire carousel nav (dots + arrows) — no collision, no clutter */
     .herocar__nav {
