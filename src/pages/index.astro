@@ -148,15 +148,26 @@ const comments = [
                     </div>
                     <div class="cal__grid">
                       {calDays.map((n, i) => (
-                        <span class="cal__day">
+                        <span class={`cal__day cal__day--${i + 1}`}>
                           <span class="cal__num">{i + 1}</span>
                           <span class="cal__dots">
                             {Array.from({ length: n }).map((_, k) => (
                               <i style={`background:${dotPalette[(i + k) % dotPalette.length]}`}></i>
                             ))}
                           </span>
+                          {[3, 12, 18, 24].includes(i + 1) && (
+                            <i
+                              class="cal__post"
+                              style={`background:${dotPalette[(i + 1) % dotPalette.length]}`}
+                            ></i>
+                          )}
                         </span>
                       ))}
+                      <span class="cal__cursor" aria-hidden="true">
+                        <svg viewBox="0 0 12 12" width="12" height="12">
+                          <path d="M1 1 L1 10 L4 7.5 L6 11 L7.5 10 L5.5 6.7 L9.5 6.7 Z"></path>
+                        </svg>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -195,9 +206,10 @@ const comments = [
                     </div>
                     <div class="editor__wave">
                       {wave.map((h, i) => (
-                        <span class={i > 6 && i < 13 ? "on" : ""} style={`--h:${h}%`}></span>
+                        <span style={`--h:${h}%; --i:${i}`}></span>
                       ))}
                       <span class="editor__sel"></span>
+                      <span class="editor__head"></span>
                     </div>
                     <div class="editor__clips">
                       <span class="editor__clip editor__clip--a">Clip 01</span>
@@ -234,15 +246,27 @@ const comments = [
                     <span class="chrome__url">Engagement · in your voice</span>
                   </div>
                   <div class="cmts__body">
-                    <div class="cmts__track">
-                      {[...comments, ...comments].map((c) => (
-                        <div class={`cmt${c.reply ? " cmt--reply" : ""}`}>
-                          <span class={`cmt__ava${c.reply ? " cmt__ava--ilai" : ""}`}></span>
-                          <div class="cmt__txt"><b>{c.who}</b><span>{c.txt}</span></div>
-                          {c.badge && <span class="cmt__badge">{c.badge}</span>}
-                          {c.lead && <span class="cmt__badge cmt__badge--lead">Lead flagged</span>}
+                    <div class="cmts__thread">
+                      <div class="cmt cmt--ctx">
+                        <span class="cmt__ava"></span>
+                        <div class="cmt__txt"><b>@sophie.k</b><span>Saving this to try this week.</span></div>
+                      </div>
+
+                      <div class="cmt cmt--active">
+                        <span class="cmt__ava"></span>
+                        <div class="cmt__txt"><b>@marktrains</b><span>How do I work with you?</span></div>
+                        <span class="cmt__badge cmt__badge--lead">Lead flagged</span>
+                      </div>
+
+                      <div class="cmt cmt--reply cmt--answer">
+                        <span class="cmt__ava cmt__ava--ilai"></span>
+                        <div class="cmt__txt">
+                          <b>Replied in your voice</b>
+                          <span class="cmt__typing" aria-hidden="true"><i></i><i></i><i></i></span>
+                          <span class="cmt__reply-txt">Happy to help. Here's how to start.</span>
                         </div>
-                      ))}
+                        <span class="cmt__badge">1 min</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -275,7 +299,12 @@ const comments = [
                     <span class="news__lines">
                       <i></i><i></i><i style="width:82%"></i><i style="width:64%"></i>
                     </span>
-                    <span class="news__sub">Subscribe</span>
+                    <span class="news__sub">
+                      <span class="news__sub-label news__sub-label--idle">Subscribe</span>
+                      <span class="news__sub-label news__sub-label--done">
+                        <svg class="news__check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Subscribed
+                      </span>
+                    </span>
                   </div>
                 </div>
                 <div class="herofloat glass--light">
@@ -686,7 +715,7 @@ const comments = [
       setInterval(() => {
         mi = (mi + 1) % mslides.length;
         mslides.forEach((s, k) => s.classList.toggle("is-active", k === mi));
-      }, 6000);
+      }, 7000);
     }
   }
 </script>
@@ -772,12 +801,17 @@ const comments = [
     text-transform: uppercase;
     color: var(--pink-ink);
   }
+  /* ---- Slide 4: "an essay written, then published" ----
+     Title draws in, body lines write in left->right, Subscribe presses + confirms. */
   .news__title {
     font-size: 1.14rem;
     font-weight: 700;
     line-height: 1.25;
     color: var(--charcoal);
     max-width: 26ch;
+    transform-origin: left top;
+    animation: news-title 6s ease-in-out infinite;
+    will-change: transform, opacity;
   }
   .news__lines {
     display: flex;
@@ -791,7 +825,15 @@ const comments = [
     height: 7px;
     border-radius: 4px;
     background: rgba(18, 53, 39, 0.12);
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: news-line 6s ease-in-out infinite;
+    will-change: transform;
   }
+  .news__lines i:nth-child(1) { animation-delay: 0.8s; }
+  .news__lines i:nth-child(2) { animation-delay: 1.35s; }
+  .news__lines i:nth-child(3) { animation-delay: 1.9s; }
+  .news__lines i:nth-child(4) { animation-delay: 2.45s; }
   .news__sub {
     align-self: flex-start;
     margin-top: var(--sp-2);
@@ -802,6 +844,61 @@ const comments = [
     background: var(--pink);
     padding: 7px 16px;
     border-radius: var(--r-pill);
+    position: relative;
+    overflow: hidden;
+    transform-origin: center;
+    animation: news-press 6s ease-in-out infinite;
+    will-change: transform, background-color;
+  }
+  .news__sub-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+  .news__sub-label--done {
+    position: absolute;
+    inset: 0;
+    justify-content: center;
+    opacity: 0;
+    animation: news-sub-done 6s ease-in-out infinite;
+  }
+  .news__sub-label--idle { animation: news-sub-idle 6s ease-in-out infinite; }
+  .news__check { width: 13px; height: 13px; flex: none; }
+  .news__check path {
+    stroke-dasharray: 20; stroke-dashoffset: 20;
+    animation: news-check 6s ease-in-out infinite;
+  }
+  @keyframes news-title {
+    0%        { opacity: 0; transform: translateY(6px); }
+    8%, 88%   { opacity: 1; transform: translateY(0); }
+    97%, 100% { opacity: 0; transform: translateY(6px); }
+  }
+  @keyframes news-line {
+    0%        { transform: scaleX(0); }
+    16%, 62%  { transform: scaleX(1); }
+    73%, 100% { transform: scaleX(0); }
+  }
+  @keyframes news-press {
+    0%, 54%   { transform: scale(1); background-color: var(--pink); }
+    58%       { transform: scale(0.93); }
+    63%       { transform: scale(1.02); background-color: var(--coral); }
+    68%, 88%  { transform: scale(1); background-color: var(--coral); }
+    96%, 100% { transform: scale(1); background-color: var(--pink); }
+  }
+  @keyframes news-sub-idle {
+    0%, 56%   { opacity: 1; transform: translateY(0); }
+    62%, 100% { opacity: 0; transform: translateY(-100%); }
+  }
+  @keyframes news-sub-done {
+    0%, 56%   { opacity: 0; transform: translateY(100%); color: #fff; }
+    64%, 88%  { opacity: 1; transform: translateY(0); color: #fff; }
+    96%, 100% { opacity: 0; transform: translateY(100%); color: #fff; }
+  }
+  @keyframes news-check {
+    0%, 60%   { stroke-dashoffset: 20; }
+    70%, 88%  { stroke-dashoffset: 0; }
+    96%, 100% { stroke-dashoffset: 20; }
   }
   .hslide__inner {
     position: relative;
@@ -1057,13 +1154,37 @@ const comments = [
   @media (prefers-reduced-motion: reduce) {
     .hslide__visual { opacity: 1 !important; animation: none !important; }
     .hslide.is-active .herofloat { animation: none !important; }
-    .editor__play,
-    .editor__play::after,
-    .editor__wave span,
-    .editor__sel,
-    .cal__dots i,
-    .cal__day,
-    .cmts__track { animation: none !important; }
+    /* Kill every mock animation and settle each to a finished, readable state. */
+    .cal__cursor, .cal__cursor svg,
+    .cal__day--3, .cal__day--12, .cal__day--18, .cal__day--24,
+    .cal__post,
+    .editor__wave span, .editor__head, .editor__sel, .editor__clip,
+    .cmt--active, .cmt--answer, .cmt__reply-txt, .cmt__typing,
+    .cmt--active .cmt__badge--lead, .cmt--answer .cmt__badge,
+    .news__title, .news__lines i, .news__sub,
+    .news__sub-label--idle, .news__sub-label--done, .news__check path {
+      animation: none !important;
+    }
+    /* Calendar: cursor gone, four posts already placed. */
+    .cal__cursor { display: none; }
+    .cal__post { transform: scale(1); opacity: 1; }
+    /* Editor: waveform neutral, playhead/selection hidden, all three clips shown. */
+    .editor__wave span { background: var(--line-2); }
+    .editor__head { opacity: 0; }
+    .editor__sel { opacity: 1; width: 84%; }
+    .editor__clip { transform: scale(1); opacity: 1; }
+    /* Comments: reply shown, lead pill + timestamp present, no typing dots. */
+    .cmt--active, .cmt--answer, .cmt__reply-txt { opacity: 1; transform: none; }
+    .cmt--active .cmt__badge--lead { opacity: 1; transform: none; }
+    .cmt--answer .cmt__badge { opacity: 1; }
+    .cmt__typing { display: none; }
+    /* Newsletter: title + all lines filled, Subscribe in its idle state. */
+    .news__title { opacity: 1; transform: none; }
+    .news__lines i { transform: scaleX(1); }
+    .news__sub { transform: none; background-color: var(--pink); }
+    .news__sub-label--idle { opacity: 1; transform: none; }
+    .news__sub-label--done { opacity: 0; }
+    .news__check path { stroke-dashoffset: 20; }
   }
   @media (min-width: 940px) and (max-width: 1100px) {
     /* Tablet-landscape band: constrain the copy and shrink the mocks so the
@@ -1175,112 +1296,198 @@ const comments = [
   }
   .cal__num { font-size: 0.5rem; color: var(--muted); line-height: 1; }
   .cal__dots { display: flex; flex-wrap: wrap; gap: 2px; }
-  /* Dots cycle in and out in a rolling wave, like posts being scheduled
-     and refreshed across the month. */
+  /* Static dots = posts already placed earlier in the month (texture, no blink). */
   .cal__dots i {
     width: 5px; height: 5px; border-radius: 50%; display: block;
-    transform-origin: center; animation: dotCycle 4.5s ease-in-out infinite;
-  }
-  .cal__day:nth-child(7n) .cal__dots i { animation-delay: -0.5s; }
-  .cal__day:nth-child(7n + 1) .cal__dots i { animation-delay: -1.1s; }
-  .cal__day:nth-child(7n + 2) .cal__dots i { animation-delay: -1.7s; }
-  .cal__day:nth-child(7n + 3) .cal__dots i { animation-delay: -2.3s; }
-  .cal__day:nth-child(7n + 4) .cal__dots i { animation-delay: -2.9s; }
-  .cal__day:nth-child(7n + 5) .cal__dots i { animation-delay: -3.5s; }
-  .cal__day:nth-child(7n + 6) .cal__dots i { animation-delay: -4.1s; }
-  .cal__dots i:nth-child(2) { animation-delay: -0.7s; }
-  .cal__dots i:nth-child(3) { animation-delay: -1.5s; }
-  @keyframes dotCycle {
-    0% { transform: scale(0); opacity: 0; }
-    14% { transform: scale(1.35); opacity: 1; }
-    24% { transform: scale(1); opacity: 1; }
-    72% { transform: scale(1); opacity: 1; }
-    86% { transform: scale(0.5); opacity: 0.3; }
-    100% { transform: scale(0); opacity: 0; }
-  }
-  /* a soft highlight sweeps diagonally across the month, cell by cell */
-  .cal__grid { position: relative; }
-  .cal__day {
-    position: relative;
-    animation: calCell 4.5s ease-in-out infinite;
-  }
-  .cal__day:nth-child(7n) { animation-delay: -0.3s; }
-  .cal__day:nth-child(7n + 1) { animation-delay: -0.9s; }
-  .cal__day:nth-child(7n + 2) { animation-delay: -1.5s; }
-  .cal__day:nth-child(7n + 3) { animation-delay: -2.1s; }
-  .cal__day:nth-child(7n + 4) { animation-delay: -2.7s; }
-  .cal__day:nth-child(7n + 5) { animation-delay: -3.3s; }
-  .cal__day:nth-child(7n + 6) { animation-delay: -3.9s; }
-  @keyframes calCell {
-    0%, 82%, 100% { background: var(--mist); box-shadow: none; }
-    88% { background: var(--coral-tint); box-shadow: inset 0 0 0 1.5px var(--coral-soft); }
   }
 
+  /* ---- Slide 1: "posts being scheduled, one by one" ----
+     A cursor glides to a day, clicks, and a post-dot lands. 4 days over a 6s loop. */
+  .cal__grid { position: relative; }
+  .cal__day { position: relative; }
+
+  /* The post-dot that "lands" when the cursor clicks a day. Hidden until its beat. */
+  .cal__post {
+    position: absolute; right: 4px; bottom: 4px;
+    width: 6px; height: 6px; border-radius: 50%;
+    transform: scale(0); opacity: 0; transform-origin: center;
+  }
+
+  /* Cursor wrapper fills the grid exactly, so translate() percentages read as
+     percentages of the GRID — positions scale at every mock width. */
+  .cal__cursor {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    pointer-events: none; will-change: transform, opacity; z-index: 3;
+    animation: calCursor 6s cubic-bezier(0.5, 0, 0.2, 1) infinite;
+  }
+  .cal__cursor svg {
+    position: absolute; top: 0; left: 0;
+    fill: var(--coral-ink);
+    filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.28));
+    animation: calPress 6s cubic-bezier(0.5, 0, 0.2, 1) infinite;
+  }
+
+  /* cols(7): c2=35.7% c3=50% c4=64.3% · rows(4): r0=12.5% r1=37.5% r2=62.5% r3=87.5% */
+  @keyframes calCursor {
+    0%   { transform: translate(20%, -12%); opacity: 0; }
+    6%   { transform: translate(29.7%, 6.5%); opacity: 1; }
+    24%  { transform: translate(29.7%, 6.5%); opacity: 1; }
+    38%  { transform: translate(58.3%, 31.5%); opacity: 1; }
+    50%  { transform: translate(58.3%, 31.5%); opacity: 1; }
+    62%  { transform: translate(44%, 56.5%); opacity: 1; }
+    72%  { transform: translate(44%, 56.5%); opacity: 1; }
+    82%  { transform: translate(29.7%, 81.5%); opacity: 1; }
+    90%  { transform: translate(29.7%, 81.5%); opacity: 1; }
+    96%  { transform: translate(24%, 95%); opacity: 0; }
+    100% { transform: translate(20%, -12%); opacity: 0; }
+  }
+  @keyframes calPress {
+    0%, 6%, 24%, 38%, 50%, 62%, 72%, 82%, 90%, 100% { transform: scale(1); }
+    9%, 41%, 65%, 85%   { transform: scale(0.8); }
+    12%, 44%, 68%, 88%  { transform: scale(1); }
+  }
+
+  /* Each target day's post-dot pops in just after its click, all reset at loop end. */
+  .cal__day--3  .cal__post { animation: calDrop 6s ease-out infinite; }
+  .cal__day--12 .cal__post { animation: calDrop2 6s ease-out infinite; }
+  .cal__day--18 .cal__post { animation: calDrop3 6s ease-out infinite; }
+  .cal__day--24 .cal__post { animation: calDrop4 6s ease-out infinite; }
+  @keyframes calDrop {
+    0%, 9% { transform: scale(0); opacity: 0; }
+    12% { transform: scale(1.4); opacity: 1; }
+    16%, 95% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+  }
+  @keyframes calDrop2 {
+    0%, 41% { transform: scale(0); opacity: 0; }
+    44% { transform: scale(1.4); opacity: 1; }
+    48%, 95% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+  }
+  @keyframes calDrop3 {
+    0%, 65% { transform: scale(0); opacity: 0; }
+    68% { transform: scale(1.4); opacity: 1; }
+    72%, 95% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+  }
+  @keyframes calDrop4 {
+    0%, 85% { transform: scale(0); opacity: 0; }
+    88% { transform: scale(1.4); opacity: 1; }
+    92%, 95% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+  }
+
+  /* Soft highlight on the cell as it's selected. */
+  .cal__day--3  { animation: calSelect 6s ease-out infinite; }
+  .cal__day--12 { animation: calSelect2 6s ease-out infinite; }
+  .cal__day--18 { animation: calSelect3 6s ease-out infinite; }
+  .cal__day--24 { animation: calSelect4 6s ease-out infinite; }
+  @keyframes calSelect  { 0%,7%,20%,100% { background: var(--mist); } 10%,16% { background: var(--coral-tint); } }
+  @keyframes calSelect2 { 0%,39%,52%,100% { background: var(--mist); } 42%,48% { background: var(--coral-tint); } }
+  @keyframes calSelect3 { 0%,63%,76%,100% { background: var(--mist); } 66%,72% { background: var(--coral-tint); } }
+  @keyframes calSelect4 { 0%,83%,94%,100% { background: var(--mist); } 86%,92% { background: var(--coral-tint); } }
+
   /* ---- Slide 2: podcast editor + clipping ---- */
-  .editor { width: clamp(420px, 36vw, 540px); }
+  .editor { width: clamp(420px, 36vw, 540px); --edit-cycle: 6.5s; }
   .editor__body { padding: var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-3); }
   .editor__preview {
     position: relative; height: 150px; border-radius: 12px;
     background: linear-gradient(150deg, var(--charcoal), var(--charcoal-3)); display: grid; place-items: center;
   }
+  /* Play button: static, calm (no click loop). */
   .editor__play {
     position: relative; display: grid; place-items: center; width: 46px; height: 46px;
     border-radius: 50%; background: #fff; color: var(--coral);
-    animation: playClick 2.6s var(--ease) infinite;
-  }
-  /* expanding ripple ring — reads as a click/tap */
-  .editor__play::after {
-    content: ""; position: absolute; inset: 0; border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.85);
-    animation: playRipple 2.6s var(--ease-out) infinite;
-  }
-  @keyframes playClick {
-    0%, 62%, 100% { transform: scale(1); }
-    70% { transform: scale(0.86); }
-    80% { transform: scale(1.05); }
-    88% { transform: scale(1); }
-  }
-  @keyframes playRipple {
-    0%, 62% { opacity: 0; transform: scale(1); }
-    70% { opacity: 0.9; transform: scale(1); }
-    100% { opacity: 0; transform: scale(2.1); }
   }
   .editor__tag { position: absolute; bottom: 8px; left: 11px; font-size: 0.64rem; color: rgba(255, 255, 255, 0.82); font-family: var(--font-accent); }
   .editor__wave {
     position: relative; display: flex; align-items: center; gap: 3px; height: 56px;
     padding: 6px 8px; background: var(--mist); border: 1px solid var(--line); border-radius: 10px;
+    overflow: hidden;
   }
-  /* Static waveform shape (a real waveform doesn't bounce); the playhead
-     scrubs across it and bars light up coral as it passes. */
+  /* Each bar lights coral exactly as the playhead passes it: per-bar delay =
+     (i / total) * cycle, so the coral front tracks the head. */
   .editor__wave span {
     position: relative; flex: 1; height: var(--h); border-radius: 2px;
-    background: var(--line-2); transition: background 220ms linear;
+    background: var(--line-2); z-index: 1;
+    animation: barLight var(--edit-cycle) linear infinite;
+    animation-delay: calc(var(--i) / 24 * var(--edit-cycle));
   }
-  .editor__wave span.on { background: var(--coral-soft); }
-  .editor__wave span.lit { background: var(--coral); }
-  /* the playhead: a thin vertical line with a dot, travelling L->R on loop */
-  .editor__sel {
-    position: absolute; top: 2px; bottom: 2px; left: 6%; width: 2px;
+  @keyframes barLight {
+    0%       { background: var(--line-2); }
+    2%       { background: var(--coral); }
+    90%      { background: var(--coral); }
+    96%, 100% { background: var(--line-2); }
+  }
+  /* Playhead: thin line + dot, sweeps across with 3 dwells over each segment. */
+  .editor__head {
+    position: absolute; top: 2px; bottom: 2px; left: 8%; width: 2px; z-index: 3;
     background: var(--coral); border-radius: 2px;
     box-shadow: 0 0 8px 1px rgba(28, 107, 74, 0.55);
-    animation: playhead 4.2s linear infinite;
+    animation: headSweep var(--edit-cycle) ease-in-out infinite;
   }
-  .editor__sel::before {
+  .editor__head::before {
     content: ""; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
     width: 8px; height: 8px; border-radius: 50%; background: var(--coral);
     box-shadow: 0 0 8px 1px rgba(28, 107, 74, 0.55);
   }
-  @keyframes playhead {
-    0% { left: 5%; opacity: 0; }
-    6% { opacity: 1; }
-    94% { opacity: 1; }
-    100% { left: 95%; opacity: 0; }
+  @keyframes headSweep {
+    0%   { left: 8%;  opacity: 0; }
+    5%   { opacity: 1; }
+    24%  { left: 30%; }
+    30%  { left: 30%; }
+    51%  { left: 58%; }
+    57%  { left: 58%; }
+    78%  { left: 86%; }
+    84%  { left: 86%; }
+    92%  { left: 92%; opacity: 1; }
+    97%, 100% { left: 92%; opacity: 0; }
   }
+  /* Selection band: a translucent coral region that snaps over each cut segment. */
+  .editor__sel {
+    position: absolute; top: 3px; bottom: 3px; left: 8%; width: 0; z-index: 2;
+    background: rgba(28, 107, 74, 0.14);
+    border-left: 1.5px solid var(--coral-soft);
+    border-right: 1.5px solid var(--coral-soft);
+    border-radius: 3px; opacity: 0;
+    animation: selBand var(--edit-cycle) ease-in-out infinite;
+  }
+  @keyframes selBand {
+    0%, 6%   { left: 8%;  width: 0;   opacity: 0; }
+    28%      { left: 8%;  width: 22%; opacity: 1; }
+    55%      { left: 8%;  width: 50%; opacity: 1; }
+    82%, 90% { left: 8%;  width: 84%; opacity: 1; }
+    97%, 100% { left: 8%; width: 84%; opacity: 0; }
+  }
+  /* Clips pop in (scale + fade) as each segment is cut; all stay to the end. */
   .editor__clips { display: flex; gap: 8px; }
-  .editor__clip { flex: 1; padding: 9px 8px; border-radius: 9px; font-size: 0.64rem; font-family: var(--font-accent); color: #fff; text-align: center; }
-  .editor__clip--a { background: var(--coral); }
-  .editor__clip--b { background: var(--brand); color: var(--ink); }
-  .editor__clip--c { background: var(--plum); }
+  .editor__clip {
+    flex: 1; padding: 9px 8px; border-radius: 9px; font-size: 0.64rem;
+    font-family: var(--font-accent); color: #fff; text-align: center;
+    transform: scale(0.8); opacity: 0; transform-origin: center;
+    animation: clipPop var(--edit-cycle) var(--ease-out) infinite;
+  }
+  .editor__clip--a { background: var(--coral); animation-name: clipPopA; }
+  .editor__clip--b { background: var(--brand); color: var(--ink); animation-name: clipPopB; }
+  .editor__clip--c { background: var(--plum); animation-name: clipPopC; }
+  @keyframes clipPopA {
+    0%, 26%   { transform: scale(0.8); opacity: 0; }
+    31%       { transform: scale(1.06); opacity: 1; }
+    35%, 92%  { transform: scale(1); opacity: 1; }
+    97%, 100% { transform: scale(0.9); opacity: 0; }
+  }
+  @keyframes clipPopB {
+    0%, 53%   { transform: scale(0.8); opacity: 0; }
+    58%       { transform: scale(1.06); opacity: 1; }
+    62%, 92%  { transform: scale(1); opacity: 1; }
+    97%, 100% { transform: scale(0.9); opacity: 0; }
+  }
+  @keyframes clipPopC {
+    0%, 80%   { transform: scale(0.8); opacity: 0; }
+    85%       { transform: scale(1.06); opacity: 1; }
+    89%, 92%  { transform: scale(1); opacity: 1; }
+    97%, 100% { transform: scale(0.9); opacity: 0; }
+  }
 
   /* ---- Slide 3: thoughtful comment replies ---- */
   .cmts { width: clamp(360px, 31vw, 450px); }
@@ -1292,16 +1499,61 @@ const comments = [
     -webkit-mask-image: linear-gradient(to bottom, transparent, #000 13%, #000 87%, transparent);
     mask-image: linear-gradient(to bottom, transparent, #000 13%, #000 87%, transparent);
   }
-  .cmts__track {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    animation: cmtsScroll 18s linear infinite;
+  /* Fixed 3-beat thread (replaces the marquee): follower comment, a reply typed
+     in your voice, and a Lead-flagged pill that pops as the reply lands. */
+  .cmts__thread { display: flex; flex-direction: column; gap: 10px; }
+  .cmt--ctx { opacity: 0.55; }
+  .cmt--active { animation: cmtRise 6.5s ease-in-out infinite; }
+  .cmt--answer { transform-origin: top left; animation: cmtAnswerIn 6.5s ease-in-out infinite; }
+
+  .cmt__typing {
+    display: inline-flex; align-items: center; gap: 4px; height: 0.95rem;
+    animation: cmtTypingFade 6.5s ease-in-out infinite;
   }
-  .cmts:hover .cmts__track { animation-play-state: paused; }
-  @keyframes cmtsScroll {
-    from { transform: translateY(0); }
-    to { transform: translateY(-50%); }
+  .cmt__typing i {
+    width: 5px; height: 5px; border-radius: 50%; background: var(--pink-ink);
+    opacity: 0.4; animation: cmtDot 1.1s ease-in-out infinite;
+  }
+  .cmt__typing i:nth-child(2) { animation-delay: 0.18s; }
+  .cmt__typing i:nth-child(3) { animation-delay: 0.36s; }
+
+  .cmt__reply-txt { display: block; opacity: 0; animation: cmtReplyReveal 6.5s ease-in-out infinite; }
+
+  .cmt--active .cmt__badge--lead {
+    transform: scale(0.6); opacity: 0; animation: cmtLeadPop 6.5s ease-in-out infinite;
+  }
+  .cmt--answer .cmt__badge { opacity: 0; animation: cmtStampIn 6.5s ease-in-out infinite; }
+
+  @keyframes cmtRise {
+    0% { opacity: 0; transform: translateY(8px); }
+    8%, 100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes cmtAnswerIn {
+    0% { opacity: 0; transform: translateY(10px) scale(0.98); }
+    12% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes cmtDot {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-3px); opacity: 1; }
+  }
+  @keyframes cmtTypingFade {
+    0%, 12% { opacity: 0; }
+    14%, 30% { opacity: 1; }
+    36%, 100% { opacity: 0; display: none; }
+  }
+  @keyframes cmtReplyReveal {
+    0%, 32% { opacity: 0; transform: translateY(3px); }
+    42%, 100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes cmtLeadPop {
+    0%, 36% { opacity: 0; transform: scale(0.6); }
+    43% { opacity: 1; transform: scale(1.12); }
+    48%, 100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes cmtStampIn {
+    0%, 38% { opacity: 0; }
+    46%, 100% { opacity: 1; }
   }
   .cmt { position: relative; display: flex; gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--mist); border: 1px solid var(--line); }
   .cmt--reply { background: var(--pink-tint); border-color: transparent; margin-left: 20px; }
@@ -2382,7 +2634,7 @@ const comments = [
       border-radius: var(--r-card-lg);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 700ms var(--ease, ease);
+      transition: opacity 1300ms cubic-bezier(0.45, 0, 0.55, 1);
       /* Reserve room at the base for the absolutely-pinned CTA (see
          .hslide__actions) so the mock never sits under the buttons. */
       padding-bottom: 150px;
@@ -2431,6 +2683,12 @@ const comments = [
       left: var(--sp-4);
       right: auto;
       bottom: var(--sp-2);
+    }
+    /* Slide 4: keep the badge clear of the left-aligned Subscribe button (the
+       animated payoff) by anchoring it bottom-right instead. */
+    .hslide--4 .herofloat {
+      left: auto;
+      right: var(--sp-4);
     }
     .herofloat__num { font-size: 1.35rem; }
     .herofloat { padding: 10px 14px; }
