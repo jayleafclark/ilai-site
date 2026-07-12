@@ -2376,6 +2376,9 @@ const comments = [
     }
     .hslide {
       display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
       min-height: 0;
       border-radius: var(--r-card-lg);
       opacity: 0;
@@ -2390,10 +2393,47 @@ const comments = [
     .herocar__nav {
       display: none;
     }
+
+    /* --- Animated artifact on mobile: the same living mock the desktop hero has,
+       stacked UNDER the copy inside the card and sized to fit the phone. Keeps all
+       the looping animations (calendar dots, editor playhead, scrolling replies,
+       floating stat badge); only the desktop absolute-positioning is undone. --- */
+    .hslide__visual {
+      display: block;
+      position: relative;      /* anchor for the floating stat badge */
+      transform: none;
+      opacity: 1;
+      padding: 0 var(--sp-5) var(--sp-6);
+    }
+    /* Every mock spans the card width (they're built at 360–540px for desktop). */
+    .hslide__visual .chrome,
+    .cal,
+    .editor,
+    .cmts,
+    .news {
+      width: 100% !important;
+      max-width: 300px;
+      margin-inline: auto;
+    }
+    /* Trim the two tallest internals so the card stays a sensible height. */
+    .cmts__body { height: 176px; }
+    .editor__preview { height: 108px; }
+    /* Floating stat badge: keep it, but anchor it INSIDE the card at the mock's
+       lower-left (no off-card overflow / clipping on a narrow screen). */
+    .hslide__visual .herofloat,
+    .hslide--2 .herofloat,
+    .hslide--4 .herofloat {
+      left: var(--sp-4);
+      right: auto;
+      bottom: calc(var(--sp-6) - 12px);
+    }
+    .herofloat__num { font-size: 1.35rem; }
+    .herofloat { padding: 10px 14px; }
     .hslide__inner {
       /* sp-7 doesn't exist -> the whole padding collapsed to 0 and the content
-         jammed against the card edges. Real, comfortable inner padding: */
-      padding: var(--sp-6) var(--sp-5) var(--sp-8);
+         jammed against the card edges. Real, comfortable inner padding. Bottom is
+         tighter now because the animated visual sits directly below the copy. */
+      padding: var(--sp-6) var(--sp-5) var(--sp-5);
     }
     .hslide__title {
       margin-top: var(--sp-3);
