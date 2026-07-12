@@ -85,6 +85,26 @@ const hiw = [
   { k: "Measure", d: "A live dashboard where you watch it work." },
 ];
 
+// HOW-IT-WORKS grid — the 15 named pieces one recording fans out into.
+// Weighted so short-form video dominates, tailing into written long-form.
+const hiwPieces = [
+  { label: "Reel",       icon: `<rect x="4.5" y="3" width="11" height="14" rx="2.4" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 7.4l4 2.6-4 2.6z" fill="currentColor"/>` },
+  { label: "Reel",       icon: `<rect x="4.5" y="3" width="11" height="14" rx="2.4" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 7.4l4 2.6-4 2.6z" fill="currentColor"/>` },
+  { label: "Short",      icon: `<rect x="6" y="2.5" width="8" height="15" rx="2.2" stroke="currentColor" stroke-width="1.5"/><path d="M8.6 10l2.8-1.7v3.4L8.6 10z" fill="currentColor"/>` },
+  { label: "Clip",       icon: `<rect x="3" y="5.5" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M17 8l2.2-1.3v6.6L17 12" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>` },
+  { label: "Clip",       icon: `<rect x="3" y="5.5" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M17 8l2.2-1.3v6.6L17 12" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>` },
+  { label: "Video",      icon: `<circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8.2 6.8l5 3.2-5 3.2z" fill="currentColor"/>` },
+  { label: "Tweet",      icon: `<path d="M4 5.5h12M4 9h12M4 12.5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>` },
+  { label: "Thread",     icon: `<circle cx="6" cy="5.5" r="1.7" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="14.5" r="1.7" stroke="currentColor" stroke-width="1.4"/><path d="M6 7.2v5.6" stroke="currentColor" stroke-width="1.4"/><path d="M8 5.5h8M8 14.5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>` },
+  { label: "Quote",      icon: `<path d="M8 12H4.5V8.5C4.5 6.6 6 5.5 8 5.5M15.5 12H12V8.5c0-1.9 1.5-3 3.5-3" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>` },
+  { label: "Carousel",   icon: `<rect x="6" y="4.5" width="8" height="11" rx="1.6" stroke="currentColor" stroke-width="1.5"/><path d="M3.5 6.5v7M16.5 6.5v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>` },
+  { label: "Post",       icon: `<rect x="4" y="4" width="12" height="12" rx="2.4" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="2.6" stroke="currentColor" stroke-width="1.5"/>` },
+  { label: "Story",      icon: `<circle cx="10" cy="10" r="6.5" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2.4 2.2"/><circle cx="10" cy="10" r="2.4" fill="currentColor"/>` },
+  { label: "Newsletter", icon: `<rect x="3.5" y="5" width="13" height="10" rx="1.8" stroke="currentColor" stroke-width="1.5"/><path d="M4 6l6 4.5L16 6" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>` },
+  { label: "Article",    icon: `<rect x="4" y="3.5" width="12" height="13" rx="1.8" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 7h7M6.5 10h7M6.5 13h4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>` },
+  { label: "Blog",       icon: `<path d="M4 4.5h8.5L16 8v7.5a1 1 0 01-1 1H5a1 1 0 01-1-1z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 4.5V8h4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>` },
+];
+
 // Latest 3 real blog posts, with their real covers
 const posts = (await getCollection("blog", ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
@@ -466,7 +486,18 @@ const comments = [
               )}
               {s.viz === "grid" && (
                 <div class="viz-grid">
-                  {Array.from({ length: 6 }).map((_, k) => <span class={k === 2 ? "on" : ""}></span>)}
+                  {[
+                    { p: "Instagram", icon: `<rect x="3.5" y="3.5" width="13" height="13" rx="3.5" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="3.1" stroke="currentColor" stroke-width="1.5"/><circle cx="13.6" cy="6.4" r="0.9" fill="currentColor"/>` },
+                    { p: "TikTok",    icon: `<path d="M11.5 3.5v8.2a2.8 2.8 0 11-2.4-2.77" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.5 4.2c.5 1.7 1.8 2.7 3.4 2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>` },
+                    { p: "X",         icon: `<path d="M4.5 4.5l11 11M15.5 4.5l-11 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>` },
+                    { p: "YouTube",   icon: `<rect x="2.5" y="5" width="15" height="10" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 7.6l4 2.4-4 2.4z" fill="currentColor"/>` },
+                    { p: "LinkedIn",  icon: `<rect x="3.5" y="3.5" width="13" height="13" rx="2.4" stroke="currentColor" stroke-width="1.5"/><path d="M6.4 8.5v5M6.4 6.3v.02" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9.4 13.5v-3a1.9 1.9 0 013.8 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>` },
+                    { p: "Substack",  icon: `<path d="M5 5.5h10M5 8.5h10M5 11.2l5 3 5-3v4.3l-5 3-5-3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>` },
+                  ].map((pl, k) => (
+                    <span style={`--d:${k * 0.35}s`}>
+                      <svg class="viz-grid__ico" width="16" height="16" viewBox="0 0 20 20" fill="none" set:html={pl.icon} aria-hidden="true" />
+                    </span>
+                  ))}
                 </div>
               )}
               {s.viz === "chart" && (
@@ -522,8 +553,11 @@ const comments = [
             </div>
             <div class="hiwviz__flow" aria-hidden="true"><span class="hiwviz__signal"></span></div>
             <div class="hiwviz__grid">
-              {Array.from({ length: 15 }).map((_, k) => (
-                <span class="hiwviz__cell" style={`--i:${k}`}></span>
+              {hiwPieces.map((piece, k) => (
+                <span class="hiwviz__cell" style={`--i:${k}`}>
+                  <svg class="hiwviz__ico" width="18" height="18" viewBox="0 0 20 20" fill="none" set:html={piece.icon} aria-hidden="true" />
+                  <span class="hiwviz__lbl">{piece.label}</span>
+                </span>
               ))}
             </div>
             <div class="hiwviz__foot">
@@ -1988,48 +2022,38 @@ const comments = [
   }
   .viz-grid span {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     aspect-ratio: 1;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.16);
     border: 1px solid rgba(255, 255, 255, 0.28);
+    color: #fff;
     animation: vizGridCell 4.2s var(--ease) infinite;
+    animation-delay: var(--d, 0s);
   }
-  /* the persisting "published" check-dot inside each cell */
-  .viz-grid span::after {
-    content: "";
-    position: absolute; top: 50%; left: 50%;
-    width: 8px; height: 8px; border-radius: 50%;
-    background: #fff;
-    transform: translate(-50%, -50%) scale(0);
+  /* platform glyph publishes in and HOLDS, then clears on loop reset */
+  .viz-grid__ico {
+    display: block;
+    width: 16px; height: 16px;
     opacity: 0;
-    animation: vizGridDot 4.2s var(--ease) infinite;
+    transform: scale(0.4);
+    animation: vizGridIco 4.2s var(--ease) infinite;
+    animation-delay: var(--d, 0s);
   }
-  .viz-grid span:nth-child(1),
-  .viz-grid span:nth-child(1)::after { animation-delay: 0s; }
-  .viz-grid span:nth-child(2),
-  .viz-grid span:nth-child(2)::after { animation-delay: 0.35s; }
-  .viz-grid span:nth-child(3),
-  .viz-grid span:nth-child(3)::after { animation-delay: 0.7s; }
-  .viz-grid span:nth-child(4),
-  .viz-grid span:nth-child(4)::after { animation-delay: 1.05s; }
-  .viz-grid span:nth-child(5),
-  .viz-grid span:nth-child(5)::after { animation-delay: 1.4s; }
-  .viz-grid span:nth-child(6),
-  .viz-grid span:nth-child(6)::after { animation-delay: 1.75s; }
-  /* cell fills to a soft pink tint on publish and HOLDS, then resets */
   @keyframes vizGridCell {
-    0% { background: rgba(255, 255, 255, 0.18); }
-    6% { background: rgba(230, 169, 196, 0.55); }
-    90% { background: rgba(230, 169, 196, 0.55); }
-    97%, 100% { background: rgba(255, 255, 255, 0.18); }
+    0% { background: rgba(255, 255, 255, 0.16); }
+    6% { background: rgba(255, 255, 255, 0.42); }
+    90% { background: rgba(255, 255, 255, 0.42); }
+    97%, 100% { background: rgba(255, 255, 255, 0.16); }
   }
-  /* the dot pops in on publish and stays until the loop resets */
-  @keyframes vizGridDot {
-    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-    5% { transform: translate(-50%, -50%) scale(1.25); opacity: 1; }
-    9% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-    90% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-    97%, 100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  @keyframes vizGridIco {
+    0% { opacity: 0; transform: scale(0.4); }
+    5% { opacity: 1; transform: scale(1.2); }
+    9% { opacity: 1; transform: scale(1); }
+    90% { opacity: 1; transform: scale(1); }
+    97%, 100% { opacity: 0; transform: scale(0.4); }
   }
   /* Research chart — data populates L->R, holds as a readable chart, then the
      top performer is highlighted (the strategy call), then resets and loops.
@@ -2126,14 +2150,14 @@ const comments = [
   }
   @media (prefers-reduced-motion: reduce) {
     .viz-wave span, .viz-wave span::after, .viz-wave__head,
-    .viz-grid span, .viz-grid span::after, .viz-chart span, .viz-reel__play,
+    .viz-grid span, .viz-grid__ico, .viz-chart span, .viz-reel__play,
     .viz-reel__play::after, .viz-reel__bar::before, .viz-doc__s,
     .viz-swatch__aa, .viz-swatch__row i { animation: none; }
     /* resting states so the frozen frame still reads correctly */
     .viz-wave__head { opacity: 0; }
     .viz-wave span::after { opacity: 0; }
-    .viz-grid span { background: rgba(230, 169, 196, 0.55); }
-    .viz-grid span::after { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    .viz-grid span { background: rgba(255, 255, 255, 0.42); }
+    .viz-grid__ico { opacity: 1; transform: scale(1); }
     .viz-swatch__aa { color: #fff; }
     .viz-swatch__row i { transform: none; }
     .viz-chart span { transform: scaleY(1); background: rgba(255, 255, 255, 0.55); }
@@ -2312,6 +2336,61 @@ const comments = [
       transform: scale(1);
     }
   }
+  /* Each tile is a named content piece: icon over a tiny label, both light on
+     the dark card, revealed as the tile is "made" (synced to the cascade). */
+  .hiwviz__cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 4px 2px;
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .hiwviz__ico {
+    display: block;
+    width: 18px; height: 18px;
+    flex: none;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: hiwIco var(--loop) var(--ease) infinite;
+    animation-delay: calc(1.2s + var(--i) * 0.08s);
+  }
+  .hiwviz__lbl {
+    font-family: var(--font-accent);
+    font-size: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.62);
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0;
+    animation: hiwLbl var(--loop) var(--ease) infinite;
+    animation-delay: calc(1.2s + var(--i) * 0.08s);
+  }
+  @keyframes hiwIco {
+    0% { opacity: 0; transform: scale(0.5); }
+    3% { opacity: 1; transform: scale(1.12); }
+    8% { opacity: 1; transform: scale(1); }
+    82% { opacity: 1; transform: scale(1); }
+    94%, 100% { opacity: 0; transform: scale(1); }
+  }
+  @keyframes hiwLbl {
+    0%, 3% { opacity: 0; }
+    10% { opacity: 1; }
+    82% { opacity: 1; }
+    94%, 100% { opacity: 0; }
+  }
+  /* Tightest tiles (stacked layout): keep the icon, drop the label to avoid clipping. */
+  @media (max-width: 899px) {
+    .hiwviz__lbl { display: none; }
+    .hiwviz__cell { gap: 0; }
+  }
   .hiwviz__foot {
     position: relative; z-index: 1;
     display: flex; align-items: center; gap: 9px;
@@ -2350,6 +2429,8 @@ const comments = [
     .hiwviz__pulse::after,
     .hiwviz__signal,
     .hiwviz__cell,
+    .hiwviz__ico,
+    .hiwviz__lbl,
     .hiwviz__foot,
     .hiwviz__dot { animation: none; }
     .hiwviz__signal { opacity: 0; }
@@ -2357,6 +2438,8 @@ const comments = [
       background: rgba(255, 255, 255, 0.16);
       border-color: rgba(255, 255, 255, 0.2);
     }
+    .hiwviz__ico { opacity: 1; transform: scale(1); }
+    .hiwviz__lbl { opacity: 1; }
   }
   .hiw__head .lead {
     margin-top: var(--sp-4);

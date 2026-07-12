@@ -231,8 +231,23 @@ const pricing = [
                 <span class="wwd-hmock__srctx">1 recording</span>
               </div>
               <div class="wwd-hmock__grid">
-                {["a","b","c","a","c","b","b","a","c","b","a","c"].map((t) => (
-                  <span class={`wwd-hmock__cell wwd-hmock__cell--${t}`}></span>
+                {[
+                  { t: "a", icon: `<rect x="4.5" y="3" width="11" height="14" rx="2.4" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 7.4l4 2.6-4 2.6z" fill="currentColor"/>` },
+                  { t: "b", icon: `<rect x="3" y="5.5" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M17 8l2.2-1.3v6.6L17 12" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>` },
+                  { t: "c", icon: `<path d="M4 5.5h12M4 9h12M4 12.5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>` },
+                  { t: "a", icon: `<rect x="6" y="2.5" width="8" height="15" rx="2.2" stroke="currentColor" stroke-width="1.5"/><path d="M8.6 10l2.8-1.7v3.4L8.6 10z" fill="currentColor"/>` },
+                  { t: "c", icon: `<path d="M8 12H4.5V8.5C4.5 6.6 6 5.5 8 5.5M15.5 12H12V8.5c0-1.9 1.5-3 3.5-3" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>` },
+                  { t: "b", icon: `<rect x="6" y="4.5" width="8" height="11" rx="1.6" stroke="currentColor" stroke-width="1.5"/><path d="M3.5 6.5v7M16.5 6.5v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>` },
+                  { t: "b", icon: `<rect x="3.5" y="5" width="13" height="10" rx="1.8" stroke="currentColor" stroke-width="1.5"/><path d="M4 6l6 4.5L16 6" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>` },
+                  { t: "a", icon: `<circle cx="6" cy="5.5" r="1.7" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="14.5" r="1.7" stroke="currentColor" stroke-width="1.4"/><path d="M6 7.2v5.6" stroke="currentColor" stroke-width="1.4"/><path d="M8 5.5h8M8 14.5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>` },
+                  { t: "c", icon: `<circle cx="10" cy="10" r="6.5" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2.4 2.2"/><circle cx="10" cy="10" r="2.4" fill="currentColor"/>` },
+                  { t: "b", icon: `<rect x="4" y="3.5" width="12" height="13" rx="1.8" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 7h7M6.5 10h7M6.5 13h4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>` },
+                  { t: "a", icon: `<rect x="4" y="4" width="12" height="12" rx="2.4" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="2.6" stroke="currentColor" stroke-width="1.5"/>` },
+                  { t: "c", icon: `<rect x="4.5" y="3" width="11" height="14" rx="2.4" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 7.4l4 2.6-4 2.6z" fill="currentColor"/>` },
+                ].map((c) => (
+                  <span class={`wwd-hmock__cell wwd-hmock__cell--${c.t}`}>
+                    <svg class="wwd-hmock__ico" width="15" height="15" viewBox="0 0 20 20" fill="none" set:html={c.icon} aria-hidden="true" />
+                  </span>
                 ))}
               </div>
               <div class="wwd-hmock__foot">
@@ -717,10 +732,15 @@ const pricing = [
   .wwd-hmock__cell {
     aspect-ratio: 1;
     border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
     opacity: 0;
     transform: scale(0.7);
     transition: opacity var(--dur-base) var(--ease), transform var(--dur-base) var(--ease);
   }
+  .wwd-hmock__ico { display: block; width: 15px; height: 15px; }
   .is-visible .wwd-hmock__cell { opacity: 1; transform: none; }
   .wwd-hmock__cell--a { background: color-mix(in srgb, var(--green) 60%, white); }
   .wwd-hmock__cell--b { background: color-mix(in srgb, var(--brand) 62%, white); }
