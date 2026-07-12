@@ -66,7 +66,7 @@ Cadence by platform matters too. Short-video platforms reward frequency and rewa
 
 Batching is the difference between a calendar that runs and one that guilts you. Instead of making one post a day, you make a week or two of posts in one focused session.
 
-- **Pick one recording or writing block per week.** Fill several slots at once while you are already in the headspace.
+- **Set a regular recording or writing block.** Fill several slots at once while you are already in the headspace, and keep the block on the calendar so the material never runs dry.
 - **Separate creation from scheduling.** Draft everything first, then load it into the calendar in a second pass. Switching between the two is where the time goes.
 - **Keep a running idea list per pillar.** When a slot comes up, you pull from a stocked shelf, not a blank page.
 

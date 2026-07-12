@@ -86,31 +86,69 @@ const pricing = [
 
           <div class="capacity">
             <p class="capacity__p">
-              Leave your email and a line about your work, and we'll send a free teardown of
-              your brand, market, and audience, yours to keep whether or not we work together.
-              If a spot is open, we'll map out your pilot month.
+              Leave a few details and we'll send a free teardown of your brand, market, and
+              audience, yours to keep whether or not we work together. If a spot is open, we'll
+              map out your pilot month.
             </p>
-            <a
-              class="btn btn--pink capacity__cta"
-              href="mailto:hello@ilaicollective.com?subject=Ilai%20free%20teardown&body=Tell%20us%20about%20your%20work%2C%20who%20you%20sell%20to%2C%20and%20where%20you%20want%20to%20grow.%0A%0AWebsite%20or%20main%20platform%3A%0A"
+
+            <form
+              class="lead-form"
+              data-lead-form
+              data-endpoint="https://ilai-lead.REPLACE.workers.dev"
+              novalidate
             >
-              Get your free teardown
-              <span class="btn__arrow" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path
-                    d="M3 11L11 3M11 3H5M11 3V9"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"></path>
-                </svg>
+              <!-- Honeypot: hidden from people, tempting to bots -->
+              <input
+                type="text"
+                name="company"
+                class="hp"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+              />
+              <div class="field">
+                <label for="lf-name">Your name</label>
+                <input id="lf-name" type="text" name="name" required autocomplete="name" placeholder="Jane Doe" />
+              </div>
+              <div class="field">
+                <label for="lf-email">Email</label>
+                <input id="lf-email" type="email" name="email" required autocomplete="email" placeholder="you@yourbrand.com" />
+              </div>
+              <div class="field">
+                <label for="lf-about">About your work</label>
+                <textarea id="lf-about" name="about" rows="3" required placeholder="What you do, who you sell to, and where you want to grow."></textarea>
+              </div>
+              <div class="field">
+                <label for="lf-budget">Monthly budget <span class="field__opt">(optional)</span></label>
+                <div class="select-wrap">
+                  <select id="lf-budget" name="budget">
+                    <option value="">Prefer not to say</option>
+                    {budgets.map((b) => <option value={b}>{b}</option>)}
+                  </select>
+                  <span class="select-caret" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5l3.5 3.5L10.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                </div>
+              </div>
+              <button type="submit" class="btn btn--pink lead-form__submit">
+                <span class="lead-form__submit-lab">Get your free teardown</span>
+                <span class="btn__arrow" aria-hidden="true" set:html={arrow} />
+              </button>
+              <p class="lead-form__status" data-form-status role="status" aria-live="polite" hidden></p>
+              <p class="lead-form__mail">
+                Prefer email? <a href="mailto:hello@ilaicollective.com">hello@ilaicollective.com</a>
+              </p>
+            </form>
+
+            <div class="lead-done" data-lead-done hidden>
+              <span class="lead-done__mark" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 11.5l4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
-            </a>
-            <p class="lead-form__mail">
-              Prefer to reach us directly? <a href="mailto:hello@ilaicollective.com"
-                >hello@ilaicollective.com</a
-              >
-            </p>
+              <div>
+                <p class="lead-done__t">Got it. We're on it.</p>
+                <p class="lead-done__s">We'll be in touch within one business day with your free teardown. If a spot is open, we'll include next steps.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -229,29 +267,6 @@ const pricing = [
           </p>
         </div>
 
-        <!-- Optional: embed Calendly inline widget here -->
-        <div class="scheduler" aria-hidden="true">
-          <span class="scheduler__icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <rect
-                x="3.5"
-                y="4.5"
-                width="17"
-                height="16"
-                rx="3"
-                stroke="currentColor"
-                stroke-width="1.5"></rect>
-              <path
-                d="M3.5 9H20.5M8 3v3M16 3v3"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"></path>
-            </svg>
-          </span>
-          <span class="scheduler__text"
-            >Tell us about your work and we'll send your free teardown.</span
-          >
-        </div>
       </aside>
     </div>
   </section>
@@ -298,7 +313,7 @@ const pricing = [
     z-index: -1;
     background:
       radial-gradient(46% 40% at 88% 4%, rgba(28, 107, 74, 0.1), transparent 60%),
-      radial-gradient(40% 34% at 4% 30%, rgba(201, 162, 92, 0.08), transparent 62%);
+      radial-gradient(40% 34% at 4% 30%, rgba(230, 169, 196, 0.08), transparent 62%);
     pointer-events: none;
   }
   .contact__grid {
@@ -500,6 +515,54 @@ const pricing = [
   .lead-form__mail a:hover {
     color: var(--signal-hover);
   }
+  /* [hidden] must win over the display rules below when JS toggles them. */
+  .lead-form[hidden],
+  .lead-done[hidden] {
+    display: none !important;
+  }
+  .lead-form__submit[disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .lead-form__status {
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  /* Success state, replaces the form on submit */
+  .lead-done {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-4);
+    padding: var(--sp-5);
+    border-radius: var(--r-input);
+    background: var(--signal-tint, rgba(28, 107, 74, 0.08));
+    border: 1px solid var(--line);
+  }
+  .lead-done__mark {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--green, #1c6b4a);
+    color: #fff;
+  }
+  .lead-done__t {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin: 0 0 4px;
+  }
+  .lead-done__s {
+    font-size: var(--fs-sm);
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 44ch;
+  }
 
   /* ---------- Right column ---------- */
   .side-col {
@@ -601,7 +664,7 @@ const pricing = [
     border-radius: var(--r-card-lg);
     padding: clamp(1rem, 2.4vw, 1.5rem);
     background:
-      radial-gradient(80% 120% at 85% 8%, rgba(201, 162, 92, 0.3), transparent 60%),
+      radial-gradient(80% 120% at 85% 8%, rgba(230, 169, 196, 0.3), transparent 60%),
       linear-gradient(150deg, var(--charcoal), var(--charcoal-2) 60%, var(--charcoal-3));
     box-shadow: var(--shadow-float);
     overflow: hidden;
@@ -905,7 +968,7 @@ const pricing = [
     padding: clamp(1.75rem, 4vw, 2.5rem);
     border-radius: var(--r-card-lg);
     background:
-      radial-gradient(70% 90% at 85% 12%, rgba(201, 162, 92, 0.34), transparent 60%),
+      radial-gradient(70% 90% at 85% 12%, rgba(230, 169, 196, 0.34), transparent 60%),
       linear-gradient(150deg, var(--charcoal), var(--charcoal-2));
     box-shadow: var(--shadow-float);
     text-align: left;
@@ -1000,3 +1063,72 @@ const pricing = [
     }
   }
 </style>
+
+<script>
+  // Lead form: POST to the Cloudflare Worker; if the endpoint is not set yet or
+  // the request fails, fall back to a pre-filled email so a visitor is never
+  // stuck. Honeypot ("company") silently drops bots.
+  const form = document.querySelector<HTMLFormElement>("[data-lead-form]");
+  if (form) {
+    const statusEl = form.querySelector<HTMLElement>("[data-form-status]");
+    const doneEl = document.querySelector<HTMLElement>("[data-lead-done]");
+    const btn = form.querySelector<HTMLButtonElement>(".lead-form__submit");
+    const lab = form.querySelector<HTMLElement>(".lead-form__submit-lab");
+    const endpoint = form.getAttribute("data-endpoint") || "";
+    const val = (n: string) =>
+      (form.querySelector(`[name="${n}"]`) as HTMLInputElement | null)?.value.trim() || "";
+
+    const mailtoFallback = (d: Record<string, string>) => {
+      const subject = encodeURIComponent("Ilai free teardown");
+      const body = encodeURIComponent(
+        `Name: ${d.name}\nEmail: ${d.email}\nBudget: ${d.budget || "Not specified"}\n\nAbout the work:\n${d.about}\n`,
+      );
+      window.location.href = `mailto:hello@ilaicollective.com?subject=${subject}&body=${body}`;
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (val("company")) return; // honeypot tripped -> silently ignore
+      const data = {
+        name: val("name"),
+        email: val("email"),
+        about: val("about"),
+        budget: val("budget"),
+      };
+      if (!data.name || !data.email || !data.about) {
+        if (statusEl) {
+          statusEl.hidden = false;
+          statusEl.textContent = "Please add your name, email, and a line about your work.";
+        }
+        return;
+      }
+      const original = lab?.textContent || "Get your free teardown";
+      if (btn) btn.disabled = true;
+      if (lab) lab.textContent = "Sending…";
+      if (statusEl) statusEl.hidden = true;
+
+      const endpointReady =
+        endpoint && !endpoint.includes("REPLACE") && !endpoint.includes("example");
+
+      try {
+        if (!endpointReady) throw new Error("endpoint-not-configured");
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error("bad-status");
+        form.hidden = true;
+        if (doneEl) doneEl.hidden = false;
+      } catch (err) {
+        if (btn) btn.disabled = false;
+        if (lab) lab.textContent = original;
+        if (statusEl) {
+          statusEl.hidden = false;
+          statusEl.textContent = "Opening your email app so you can send this to us directly.";
+        }
+        mailtoFallback(data);
+      }
+    });
+  }
+</script>

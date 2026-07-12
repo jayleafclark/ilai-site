@@ -8,7 +8,7 @@
   /* --- Neutrals (forest green brand: cool greyish-white) --- */
   --ink: #1d2a23; /* dark forest-charcoal text */
   --ink-2: #49554d;
-  --muted: #79847b;
+  --muted: #5f6a61; /* darkened for WCAG AA (>=4.5:1) on paper */
   --canvas: #f1f3ee; /* light greyish-white, cool (low yellow) */
   --paper: #ffffff;
   --mist: #e8ede5; /* light green-grey panel */

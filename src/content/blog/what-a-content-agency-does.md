@@ -14,7 +14,7 @@ A content creation agency takes an expert or personal brand from a blank calenda
 Most people picture "posting" when they hear content. Posting is the last five percent. A full-service content creation agency owns the whole pipeline, and each stage has a concrete deliverable you can inspect.
 
 - **Strategy.** A positioning line, three to five content pillars tied to what the expert actually knows, and a channel plan that says where the work goes and why. Without this, everything downstream is guesswork.
-- **Production.** The raw asset creation across formats: short-form video, long-form video, carousels, written articles, quote cards, and audio. One recording session or interview can feed a month of assets when it is planned that way.
+- **Production.** The raw asset creation across formats: short-form video, long-form video, carousels, written articles, quote cards, and audio. A steady stream of recordings or interviews feeds a month of assets when production is planned around that cadence.
 - **Editing.** Cutting long footage into clips, captioning, color and audio cleanup, motion graphics, and design work that keeps every asset on-brand.
 - **Publishing.** Scheduling to each platform at the right size and aspect ratio, with titles, descriptions, and tags written for how each platform surfaces content.
 - **Engagement.** Replying in comments and DMs in the brand voice, because reach on most platforms now rewards conversation in the first hour.
@@ -74,7 +74,7 @@ It varies with scope, format mix, and cadence. The useful frame is not price per
 
 ### Can a content agency work with my existing recordings and material?
 
-Yes, and the best ones prefer it. Talks, interviews, podcasts, and books are ideal source material. A studio built around a production system can turn one session into a month of assets across formats, which is usually the fastest path to consistent output.
+Yes, and the best ones prefer it. Talks, interviews, podcasts, and books are ideal source material. A studio built around a production system turns each recording into dozens of assets across formats, and a steady recording cadence keeps a month of output filled, which is usually the fastest path to consistent presence.
 
 ### What is the difference between a content agency and a freelancer?
 

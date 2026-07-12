@@ -7,6 +7,11 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://ilaicollective.com',
   base: process.env.BASE ?? '/ilai-site',
+  redirects: {
+    // Retired post reframed onto the correct model (no "record once").
+    '/blog/one-recording-content-system':
+      '/blog/how-experts-are-everywhere-without-living-online',
+  },
   server: {
     port: Number(process.env.PORT) || 4321,
     host: true,

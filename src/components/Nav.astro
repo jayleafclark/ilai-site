@@ -29,6 +29,7 @@ const links = [
         </svg>
       </span>
     </a>
+    <a href="/contact" class="btn btn--pink nav__ctam">Free teardown</a>
     <button class="nav__burger" aria-label="Open menu" aria-expanded="false" data-burger>
       <span></span><span></span>
     </button>
@@ -115,6 +116,12 @@ const links = [
   .nav__cta .btn__arrow {
     width: 26px;
     height: 26px;
+  }
+
+  /* Compact mobile-only CTA in the pill so the primary action is always
+     visible on phones (not hidden behind the burger). */
+  .nav__ctam {
+    display: none;
   }
 
   .nav__burger {
@@ -208,6 +215,28 @@ const links = [
        opaque surface when the menu is down. */
     .nav__mobile {
       background: #f7f9f4;
+    }
+    /* Show the compact CTA, push it + the burger to the right of the logo. */
+    .nav__ctam {
+      display: inline-flex;
+      margin-left: auto;
+      padding: 9px 15px;
+      font-size: 0.92rem;
+      white-space: nowrap;
+    }
+    .nav__burger {
+      margin-left: var(--sp-3);
+    }
+  }
+  @media (max-width: 380px) {
+    /* Very narrow phones: trim so logo + CTA + burger never crowd. */
+    .nav__ctam {
+      padding: 9px 12px;
+      font-size: 0.86rem;
+    }
+    .nav__pill {
+      gap: var(--sp-3);
+      padding-left: 14px;
     }
   }
 

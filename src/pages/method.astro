@@ -51,11 +51,11 @@ const steps = [
     body: "Ilai writes the scripts, shot lists, captions, and copy, so you know exactly what to say on camera. You bring the expertise, and every piece comes back to you for approval. Nothing goes public until a human on your side signs off. The gate is yours, always.",
     get: [
       "Scripts, shot lists, captions, and copy",
-      "A structured one-session shoot plan",
+      "A shoot plan for your recording sessions",
       "An approval gate on every single piece",
     ],
-    you: ["Film one sitting", "Review each piece", "Approve, or send it back"],
-    outcome: "A month of material from one afternoon on camera.",
+    you: ["Record your episodes", "Review each piece", "Approve, or send it back"],
+    outcome: "A month of content from the episodes you record.",
     art: "direct",
   },
   {
@@ -63,7 +63,7 @@ const steps = [
     name: "Distribute",
     accent: "var(--plum)",
     promise: "One approval becomes a presence on every platform.",
-    body: "Once you approve, one filming session becomes 120+ pieces a month and 350+ posts across up to 13 platforms, all in one voice, on a schedule built for how each place rewards content. Then we turn on the engagement engine: real replies to your community in the first minutes after a post lands, while that early response still decides whether it travels.",
+    body: "Once you approve, the episodes you record become 120+ pieces a month and 350+ posts across up to 13 platforms, all in one voice, on a schedule built for how each place rewards content. Then we turn on the engagement engine: real replies to your community in the first minutes after a post lands, while that early response still decides whether it travels.",
     get: [
       "Publishing across up to 13 platforms",
       "One voice, on schedule, per platform",
@@ -104,8 +104,8 @@ const why = [
     icon: `<path d="M10 2l6 2.5v5c0 4-2.7 6.3-6 7.5-3.3-1.2-6-3.5-6-7.5v-5L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.2 10l2 2 3.6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
   {
-    t: "Film once, run a quarter",
-    s: "One filming session becomes 120+ pieces a month across up to 13 platforms. You spend an afternoon on camera. We keep you visible for months after it is over.",
+    t: "You record; we do the rest",
+    s: "The episodes you record become 120+ pieces a month across up to 13 platforms. You focus on the work. We keep you visible between recordings.",
     c: "var(--brand)",
     icon: `<rect x="2.5" y="5" width="11" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M13.5 8.5L18 6v8l-4.5-2.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>`,
   },
@@ -113,7 +113,7 @@ const why = [
 ---
 
 <Layout
-  title="How it works — Ilai Collective"
+  title="How it works · Ilai Collective"
   description="How Ilai works: a repeatable system that learns your audience and voice, then creates, publishes, and engages everywhere. Decode, Define, Direct, Distribute, Measure. Research-led, human-gated, tracked on a live dashboard."
   path="/method"
 >
@@ -343,7 +343,7 @@ const why = [
                     {s.art === "distribute" && (
                       <div class="viz viz--distribute">
                         <div class="dis__fig">
-                          <span class="dis__src">1 recording</span>
+                          <span class="dis__src">your long-form</span>
                           <span class="dis__eq">becomes</span>
                           <span class="dis__out" style={`--ac:${s.accent}`}>30+ posts</span>
                         </div>
@@ -466,7 +466,7 @@ const why = [
     color: #fff;
     box-shadow: var(--shadow-float);
     background:
-      radial-gradient(78% 120% at 86% 8%, rgba(201, 162, 92, 0.42), transparent 58%),
+      radial-gradient(78% 120% at 86% 8%, rgba(230, 169, 196, 0.42), transparent 58%),
       radial-gradient(70% 100% at 6% 96%, rgba(13, 40, 29, 0.9), transparent 62%),
       linear-gradient(135deg, var(--charcoal-2), var(--charcoal) 55%, var(--charcoal-3));
   }
@@ -475,7 +475,7 @@ const why = [
     inset: -30% -10% auto auto;
     width: 60%;
     height: 80%;
-    background: radial-gradient(50% 50% at 70% 30%, rgba(201, 162, 92, 0.28), transparent 70%);
+    background: radial-gradient(50% 50% at 70% 30%, rgba(230, 169, 196, 0.28), transparent 70%);
     filter: blur(10px);
     pointer-events: none;
   }
@@ -574,9 +574,9 @@ const why = [
     margin-left: auto;
   }
   .flowviz__node.is-active .flowviz__pill {
-    background: rgba(201, 162, 92, 0.16);
-    border-color: rgba(201, 162, 92, 0.5);
-    box-shadow: 0 0 0 1px rgba(201, 162, 92, 0.3), 0 10px 30px -14px rgba(201, 162, 92, 0.6);
+    background: rgba(230, 169, 196, 0.16);
+    border-color: rgba(230, 169, 196, 0.5);
+    box-shadow: 0 0 0 1px rgba(230, 169, 196, 0.3), 0 10px 30px -14px rgba(230, 169, 196, 0.6);
   }
 
   /* Traveling signal: the highlight moves through 01 -> 05 and loops.
@@ -588,14 +588,14 @@ const why = [
   }
   @keyframes flowpill {
     0%, 20% {
-      background: rgba(201, 162, 92, 0.16);
-      border-color: rgba(201, 162, 92, 0.5);
-      box-shadow: 0 0 0 1px rgba(201, 162, 92, 0.3), 0 10px 30px -14px rgba(201, 162, 92, 0.6);
+      background: rgba(230, 169, 196, 0.16);
+      border-color: rgba(230, 169, 196, 0.5);
+      box-shadow: 0 0 0 1px rgba(230, 169, 196, 0.3), 0 10px 30px -14px rgba(230, 169, 196, 0.6);
     }
     26%, 100% {
       background: rgba(255, 255, 255, 0.07);
       border-color: rgba(255, 255, 255, 0.14);
-      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0), 0 0 0 rgba(201, 162, 92, 0);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0), 0 0 0 rgba(230, 169, 196, 0);
     }
   }
   @media (min-width: 900px) {
@@ -655,7 +655,7 @@ const why = [
     .flowviz__node.is-active::before {
       background: var(--gold);
       border-color: var(--gold);
-      box-shadow: 0 0 0 5px rgba(201, 162, 92, 0.25);
+      box-shadow: 0 0 0 5px rgba(230, 169, 196, 0.25);
     }
     /* Traveling node: the filled dot moves along the connector in step
        with the pill highlight (same 10.5s loop, same --i stagger). */
@@ -667,12 +667,12 @@ const why = [
       0%, 20% {
         background: var(--gold);
         border-color: var(--gold);
-        box-shadow: 0 0 0 5px rgba(201, 162, 92, 0.25);
+        box-shadow: 0 0 0 5px rgba(230, 169, 196, 0.25);
       }
       26%, 100% {
         background: var(--charcoal);
         border-color: rgba(255, 255, 255, 0.3);
-        box-shadow: 0 0 0 0 rgba(201, 162, 92, 0);
+        box-shadow: 0 0 0 0 rgba(230, 169, 196, 0);
       }
     }
     .flowviz__pill {
