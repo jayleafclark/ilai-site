@@ -471,7 +471,9 @@ const comments = [
               )}
               {s.viz === "chart" && (
                 <div class="viz-chart">
-                  {[42, 66, 54, 88, 72].map((h) => <span style={`--h:${h}%`}></span>)}
+                  {[42, 66, 54, 88, 72].map((h, k) => (
+                    <span class={k === 3 ? "win" : ""} style={`--h:${h}%`}></span>
+                  ))}
                 </div>
               )}
               {s.viz === "doc" && (
@@ -1937,16 +1939,27 @@ const comments = [
     border-radius: 50%;
     background: #fff;
     color: var(--coral);
-    animation: vizReelPlay 2.4s var(--ease) infinite;
+    animation: vizReelPlay 3.4s var(--ease) infinite;
   }
   .viz-reel__play::after {
     content: "";
     position: absolute; inset: 0; border-radius: 50%;
     border: 2px solid rgba(255, 255, 255, 0.8);
-    animation: vizReelRipple 2.4s var(--ease-out) infinite;
+    animation: vizReelRipple 3.4s var(--ease-out) infinite;
   }
-  @keyframes vizReelPlay { 0%, 62%, 100% { transform: scale(1); } 72% { transform: scale(0.86); } 82% { transform: scale(1.06); } }
-  @keyframes vizReelRipple { 0%, 62% { opacity: 0; transform: scale(1); } 72% { opacity: 0.9; } 100% { opacity: 0; transform: scale(1.9); } }
+  /* one deliberate press once the clip finishes rendering (bar full ~86%), then a
+     single confirming ring — no idle throb */
+  @keyframes vizReelPlay {
+    0%, 86% { transform: scale(1); }
+    90% { transform: scale(0.9); }
+    95% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+  }
+  @keyframes vizReelRipple {
+    0%, 88% { opacity: 0; transform: scale(1); }
+    91% { opacity: 0.85; }
+    100% { opacity: 0; transform: scale(1.85); }
+  }
   .viz-reel__bar,
   .viz-reel__cap {
     width: 100%;
@@ -2018,19 +2031,38 @@ const comments = [
     90% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
     97%, 100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
   }
-  /* Research chart — live rolling data */
+  /* Research chart — data populates L->R, holds as a readable chart, then the
+     top performer is highlighted (the strategy call), then resets and loops.
+     Each bar grows once and holds; no perpetual bounce. */
   .viz-chart { display: flex; align-items: flex-end; gap: 6px; height: 78px; }
   .viz-chart span {
     width: 13px; height: var(--h); border-radius: 4px 4px 2px 2px;
-    background: rgba(255, 255, 255, 0.88); transform-origin: bottom;
-    animation: vizchart 1.9s var(--ease) infinite alternate;
+    background: rgba(255, 255, 255, 0.55); transform-origin: bottom;
+    transform: scaleY(0);
+    animation: vizChartGrow 6s var(--ease) infinite;
   }
-  .viz-chart span:nth-child(1) { animation-delay: -1.5s; }
-  .viz-chart span:nth-child(2) { animation-delay: -1.1s; }
-  .viz-chart span:nth-child(3) { animation-delay: -0.7s; }
-  .viz-chart span:nth-child(4) { animation-delay: -0.3s; }
-  .viz-chart span:nth-child(5) { animation-delay: 0s; }
-  @keyframes vizchart { from { transform: scaleY(0.4); } to { transform: scaleY(1); } }
+  .viz-chart span:nth-child(1) { animation-delay: 0s; }
+  .viz-chart span:nth-child(2) { animation-delay: 0.18s; }
+  .viz-chart span:nth-child(3) { animation-delay: 0.36s; }
+  .viz-chart span:nth-child(4) { animation-delay: 0.54s; }
+  .viz-chart span:nth-child(5) { animation-delay: 0.72s; }
+  /* the winning column brightens once the chart has settled = the pick */
+  .viz-chart span.win {
+    animation: vizChartGrow 6s var(--ease) infinite, vizChartPick 6s var(--ease) infinite;
+    animation-delay: 0.54s, 0s;
+  }
+  @keyframes vizChartGrow {
+    0% { transform: scaleY(0); }
+    14% { transform: scaleY(1); }
+    92% { transform: scaleY(1); }
+    97%, 100% { transform: scaleY(0); }
+  }
+  @keyframes vizChartPick {
+    0%, 40% { background: rgba(255, 255, 255, 0.55); }
+    50% { background: #fff; }
+    92% { background: #fff; }
+    97%, 100% { background: rgba(255, 255, 255, 0.55); }
+  }
   /* Writing / quote doc — a line types itself out */
   .viz-doc {
     position: relative; width: 128px; display: flex; flex-direction: column; gap: 9px;
@@ -2045,10 +2077,18 @@ const comments = [
   .viz-doc span:nth-child(2) { width: 100%; }
   .viz-doc span:nth-child(3) { width: 84%; }
   .viz-doc__s {
-    width: 58%; transform-origin: left;
-    animation: vizType 3.6s steps(24) infinite;
+    width: 58%; transform-origin: left; transform: scaleX(0);
+    animation: vizType 5.4s infinite;
   }
-  @keyframes vizType { 0% { transform: scaleX(0); } 55% { transform: scaleX(1); } 92% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+  /* type the line in (stepped, like a cursor), hold it as finished text, then
+     fade out cleanly to reset — never visibly un-types */
+  @keyframes vizType {
+    0% { transform: scaleX(0); opacity: 1; animation-timing-function: steps(18); }
+    38% { transform: scaleX(1); opacity: 1; }
+    88% { transform: scaleX(1); opacity: 1; }
+    96% { transform: scaleX(1); opacity: 0; }
+    100% { transform: scaleX(0); opacity: 0; }
+  }
   /* Brand swatches — the "Aa" glyph adopts each palette colour in turn as its
      swatch activates (the swatch "paints" the letter): one brand, applied
      consistently. The letter cycles pink -> white -> coral -> charcoal. */
@@ -2096,6 +2136,9 @@ const comments = [
     .viz-grid span::after { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     .viz-swatch__aa { color: #fff; }
     .viz-swatch__row i { transform: none; }
+    .viz-chart span { transform: scaleY(1); background: rgba(255, 255, 255, 0.55); }
+    .viz-chart span.win { background: #fff; }
+    .viz-doc__s { transform: scaleX(1); opacity: 1; }
   }
   .svc__body {
     background: var(--paper);
@@ -2233,39 +2276,41 @@ const comments = [
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.14);
     transform-origin: center;
-    /* cascade begins once the signal reaches the grid (~14% of the loop) and
-       each tile "produces" in sequence; delay derived from tile index */
+    /* cascade starts the instant the signal reaches the grid (~16% = 1.2s) and
+       flows outward; tighter step so the effect tracks its cause (the signal) */
     animation: hiwCell var(--loop) var(--ease) infinite;
-    animation-delay: calc(0.9s + var(--i) * 0.16s);
+    animation-delay: calc(1.2s + var(--i) * 0.08s);
   }
   @keyframes hiwCell {
-    /* percentages are small because the active flash is a brief moment inside
-       the long shared loop; the rest of the time the tile rests dim */
+    /* rest -> the piece is "made" (coral flash) -> settles into a stable
+       produced tile and holds until the loop resets, then clears. No pink strobe. */
     0%, 100% {
       background: rgba(255, 255, 255, 0.08);
       border-color: rgba(255, 255, 255, 0.14);
       transform: scale(1);
     }
-    4% {
+    3% {
       background: var(--coral);
       border-color: transparent;
       transform: scale(1.14);
       box-shadow: 0 4px 14px -4px rgba(28, 107, 74, 0.7);
     }
-    9% {
-      background: rgba(230, 169, 196, 0.55);
-      border-color: rgba(230, 169, 196, 0.5);
-      transform: scale(1.04);
+    8% {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.22);
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(28, 107, 74, 0);
     }
-    26% {
-      background: rgba(255, 255, 255, 0.16);
-      border-color: rgba(255, 255, 255, 0.2);
+    82% {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.22);
       transform: scale(1);
     }
-    /* hold the "produced" state until the loop resets, so the eye sees the
-       grid fill up, then gently clear */
-    82% { background: rgba(255, 255, 255, 0.16); transform: scale(1); }
-    94% { background: rgba(255, 255, 255, 0.08); transform: scale(1); }
+    94% {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.14);
+      transform: scale(1);
+    }
   }
   .hiwviz__foot {
     position: relative; z-index: 1;
@@ -2277,8 +2322,8 @@ const comments = [
   }
   /* the total lights up softly once the cascade has filled the grid */
   @keyframes hiwFoot {
-    0%, 46% { color: rgba(255, 255, 255, 0.7); }
-    58% { color: rgba(255, 255, 255, 0.98); }
+    0%, 34% { color: rgba(255, 255, 255, 0.7); }
+    42% { color: rgba(255, 255, 255, 0.98); }
     82% { color: rgba(255, 255, 255, 0.98); }
     94%, 100% { color: rgba(255, 255, 255, 0.7); }
   }
@@ -2288,8 +2333,8 @@ const comments = [
     animation: hiwFootDot var(--loop) var(--ease) infinite;
   }
   @keyframes hiwFootDot {
-    0%, 46% { box-shadow: 0 0 0 4px rgba(28, 107, 74, 0.3); transform: scale(1); }
-    58% { box-shadow: 0 0 0 6px rgba(28, 107, 74, 0.45); transform: scale(1.25); }
+    0%, 34% { box-shadow: 0 0 0 4px rgba(28, 107, 74, 0.3); transform: scale(1); }
+    42% { box-shadow: 0 0 0 6px rgba(28, 107, 74, 0.45); transform: scale(1.25); }
     82% { box-shadow: 0 0 0 6px rgba(28, 107, 74, 0.45); transform: scale(1.15); }
     94%, 100% { box-shadow: 0 0 0 4px rgba(28, 107, 74, 0.3); transform: scale(1); }
   }

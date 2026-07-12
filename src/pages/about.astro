@@ -323,18 +323,7 @@ const stats = [
       radial-gradient(38% 50% at 82% 10%, rgba(230, 169, 196, 0.30), transparent 72%),
       radial-gradient(30% 40% at 60% 30%, rgba(230, 169, 196, 0.14), transparent 70%);
     filter: blur(10px);
-    animation: drift 20s var(--ease) infinite alternate;
     pointer-events: none;
-  }
-  @keyframes drift {
-    to {
-      transform: translate3d(0, 22px, 0) scale(1.05);
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .hero__mesh {
-      animation: none;
-    }
   }
   .hero__inner {
     position: relative;
@@ -581,15 +570,19 @@ const stats = [
   }
   .tcv__merge span:first-child { transform: rotate(22deg); }
   .tcv__merge span:last-child { transform: rotate(-22deg); }
-  .is-visible .tcv__merge span:first-child { animation: tcvNudgeR 2.4s var(--ease) 1s infinite; }
-  .is-visible .tcv__merge span:last-child { animation: tcvNudgeL 2.4s var(--ease) 1s infinite; }
-  @keyframes tcvNudgeR {
-    0%, 100% { transform: rotate(22deg) translateX(0); }
-    50% { transform: rotate(22deg) translateX(2px); }
+  /* The two chevrons press inward once, seating together right as the nodes
+     finish converging, then hold. A completed merge, not a perpetual twitch. */
+  .is-visible .tcv__merge span:first-child { animation: tcvSeatR 0.9s var(--ease) 0.95s both; }
+  .is-visible .tcv__merge span:last-child { animation: tcvSeatL 0.9s var(--ease) 0.95s both; }
+  @keyframes tcvSeatR {
+    0% { transform: rotate(22deg) translateX(5px); }
+    60% { transform: rotate(22deg) translateX(-1px); }
+    100% { transform: rotate(22deg) translateX(0); }
   }
-  @keyframes tcvNudgeL {
-    0%, 100% { transform: rotate(-22deg) translateX(0); }
-    50% { transform: rotate(-22deg) translateX(-2px); }
+  @keyframes tcvSeatL {
+    0% { transform: rotate(-22deg) translateX(-5px); }
+    60% { transform: rotate(-22deg) translateX(1px); }
+    100% { transform: rotate(-22deg) translateX(0); }
   }
   /* Result chip resolves in after the two nodes meet */
   .tcv__out {

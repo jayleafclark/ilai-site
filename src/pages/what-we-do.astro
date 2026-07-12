@@ -760,7 +760,7 @@ const pricing = [
     display: flex; flex-direction: column; gap: 2px;
     padding: 14px 18px;
     border-radius: 16px;
-    animation: wwd-float 6s var(--ease) infinite alternate;
+    animation: wwd-herotick 7s var(--ease) infinite;
   }
   .wwd-herofloat__num {
     font-family: var(--font-accent); font-weight: 700; font-size: 1.6rem;
@@ -768,7 +768,13 @@ const pricing = [
   }
   .wwd-herofloat__u { color: var(--coral); }
   .wwd-herofloat__lab { font-size: 0.74rem; color: var(--muted); }
-  @keyframes wwd-float { to { transform: translateY(-9px); } }
+  /* Chip holds still, then gives one discrete "counted" nudge each cycle, as if
+     another piece was just logged to the tally. Not a float. */
+  @keyframes wwd-herotick {
+    0%, 82%   { transform: translateY(0) scale(1); }
+    88%       { transform: translateY(-3px) scale(1.015); }
+    94%, 100% { transform: translateY(0) scale(1); }
+  }
   @media (prefers-reduced-motion: reduce) {
     .wwd-herofloat { animation: none; }
     .wwd-hmock__cell { opacity: 1; transform: none; }
@@ -1081,11 +1087,20 @@ const pricing = [
     height: var(--h);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.9);
-    animation: wwd-wave 1.5s var(--ease) infinite alternate;
+    transform-origin: center;
+    animation: wwd-wave 1.6s var(--ease) infinite;
   }
-  .wwd-vwave span:nth-child(3n) { animation-delay: 0.2s; opacity: 0.75; }
-  .wwd-vwave span:nth-child(3n+1) { animation-delay: 0.4s; opacity: 0.85; }
-  @keyframes wwd-wave { to { transform: scaleY(0.45); } }
+  /* Five phase buckets so neighbouring bars never bottom out together — reads as
+     live audio levels moving under a playhead, not a uniform pulse. */
+  .wwd-vwave span:nth-child(5n)   { animation-delay: -0.2s; opacity: 0.75; }
+  .wwd-vwave span:nth-child(5n+1) { animation-delay: -0.6s; opacity: 0.9;  }
+  .wwd-vwave span:nth-child(5n+2) { animation-delay: -1.0s; opacity: 0.8;  }
+  .wwd-vwave span:nth-child(5n+3) { animation-delay: -1.4s; opacity: 0.95; }
+  .wwd-vwave span:nth-child(5n+4) { animation-delay: -0.8s; opacity: 0.7;  }
+  @keyframes wwd-wave {
+    0%, 100% { transform: scaleY(1); }
+    50%      { transform: scaleY(0.4); }
+  }
 
   /* Earned media / guesting: outlet rows whose status flips Pitched -> Booked on reveal */
   .wwd-vguest { width: 100%; max-width: 300px; display: grid; gap: 10px; }
@@ -1340,8 +1355,9 @@ const pricing = [
     97% { opacity: 0; transform: translateX(-8px); }
     100% { opacity: 0; }
   }
-  .wwd-valert__dot { flex: none; width: 9px; height: 9px; border-radius: 50%; animation: wwd-dotpulse 1.8s var(--ease) infinite; }
-  @keyframes wwd-dotpulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.55); opacity: 0.5; } }
+  .wwd-valert__dot { flex: none; width: 9px; height: 9px; border-radius: 50%; animation: wwd-dotblink 2.4s steps(1, end) infinite; }
+  /* Steady "live/unread" indicator that blinks once per cycle, not a throb. */
+  @keyframes wwd-dotblink { 0%, 86%, 100% { opacity: 1; } 90%, 96% { opacity: 0.25; } }
   .wwd-valert b { display: block; font-size: 0.82rem; color: var(--ink); font-weight: 600; }
   .wwd-valert span { font-size: 0.72rem; color: var(--muted); }
 
@@ -1371,9 +1387,22 @@ const pricing = [
     background: var(--green-tint); color: var(--coral-ink);
     font-family: var(--font-accent); font-size: 0.6rem; font-weight: 700;
     letter-spacing: 0.08em; text-transform: uppercase;
-    animation: wwd-badgepulse 3.8s var(--ease) infinite;
+    animation: wwd-badgeconfirm 6s var(--ease) infinite;
   }
-  @keyframes wwd-badgepulse { 0%, 58%, 100% { transform: scale(1); box-shadow: none; } 66% { transform: scale(1.12); box-shadow: 0 0 0 4px var(--green-tint); } }
+  /* A status confirmation LANDING once per cycle: a brief press-in, then a ring
+     flashes out and it rests — like a result just being confirmed/saved. */
+  @keyframes wwd-badgeconfirm {
+    0%, 70%, 100% { transform: scale(1);    box-shadow: 0 0 0 0 transparent; }
+    78%           { transform: scale(0.94); box-shadow: 0 0 0 0 var(--green-tint); }
+    86%           { transform: scale(1.05); box-shadow: 0 0 0 4px var(--green-tint); }
+    93%           { transform: scale(1);    box-shadow: 0 0 0 9px transparent; }
+  }
+  @keyframes wwd-saveconfirm {
+    0%, 74%, 100% { transform: scale(1);    box-shadow: 0 0 0 0 transparent; }
+    82%           { transform: scale(0.94); box-shadow: 0 0 0 0 var(--plum-tint); }
+    90%           { transform: scale(1.05); box-shadow: 0 0 0 4px var(--plum-tint); }
+    97%           { transform: scale(1);    box-shadow: 0 0 0 9px transparent; }
+  }
   .wwd-vsearch__title { height: 11px; width: 82%; border-radius: 999px; background: var(--coral); opacity: 0.85; }
   .wwd-vsearch__url { height: 7px; width: 46%; border-radius: 999px; background: var(--green); opacity: 0.6; }
   .wwd-vsearch__snip { height: 7px; width: 100%; border-radius: 999px; background: var(--line-2); }
@@ -1405,7 +1434,7 @@ const pricing = [
     background: var(--plum-tint); color: var(--plum);
     font-family: var(--font-accent); font-size: 0.62rem; font-weight: 700;
     letter-spacing: 0.06em; text-transform: uppercase;
-    animation: wwd-badgepulse 4.2s var(--ease) infinite;
+    animation: wwd-saveconfirm 7s var(--ease) infinite;
   }
   .wwd-vessay__meta { font-size: 0.72rem; color: var(--muted); }
 
