@@ -362,7 +362,8 @@ const indLen = 1400;
           <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" role="img" aria-label="Dr. Leaf's reach roughly tripled over twelve months while the industry average declined">
             <defs>
               <linearGradient id="dsHerFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="var(--pink)" stop-opacity="0.30" />
+                <stop offset="0" stop-color="var(--brand)" stop-opacity="0.38" />
+                <stop offset="0.55" stop-color="var(--pink)" stop-opacity="0.16" />
                 <stop offset="1" stop-color="var(--pink)" stop-opacity="0" />
               </linearGradient>
             </defs>
@@ -371,8 +372,8 @@ const indLen = 1400;
               <line x1={PAD} x2={W - PAD} y1={PAD + g * (H - PAD * 2)} y2={PAD + g * (H - PAD * 2)} stroke="var(--line-2)" stroke-width="1" stroke-dasharray="3 5" />
             ))}
             <path class="ds-graph__area" d={herArea} fill="url(#dsHerFill)" />
-            <path class="ds-graph__ind" d={indPath} fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 6" style={`--len:${indLen}`} />
-            <path class="ds-graph__her" d={herPath} fill="none" stroke="var(--pink-ink)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style={`--len:${herLen}`} />
+            <path class="ds-graph__ind" d={indPath} fill="none" stroke="var(--ink-2)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 6" style={`--len:${indLen}`} />
+            <path class="ds-graph__her" d={herPath} fill="none" stroke="var(--brand)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style={`--len:${herLen}`} />
             <circle class="ds-graph__enddot" cx={xAt(n - 1)} cy={yAt(herPts[n - 1])} r="6" fill="var(--pink-ink)" />
           </svg>
           <span class="ds-graph__endtag ds-graph__endtag--her">+204% reach</span>
@@ -860,9 +861,11 @@ const indLen = 1400;
   }
   .ds-stat__label {
     margin-top: var(--sp-3);
-    font-size: var(--fs-sm);
-    color: var(--muted);
-    max-width: 20ch;
+    font-size: var(--fs-body);
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--ink-2);
+    max-width: 22ch;
   }
   .ds-band__source {
     margin-top: var(--sp-8);
@@ -1072,14 +1075,14 @@ const indLen = 1400;
   }
   .ds-bar__base {
     width: 33%;
-    background: var(--line-2);
-    color: var(--ink-2);
+    background: color-mix(in srgb, var(--charcoal) 12%, transparent);
+    color: var(--ink);
   }
   .ds-bar__fill {
     width: 33%;
-    background: linear-gradient(90deg, var(--pink), var(--pink-ink));
+    background: linear-gradient(90deg, var(--pink-ink), var(--brand-deep));
     transition: width 1200ms var(--ease);
-    box-shadow: 0 10px 24px -14px var(--pink-ink);
+    box-shadow: 0 10px 24px -14px var(--brand-deep);
   }
   /* This year = (100 + grow), scaled against ~305 */
   [data-reveal].is-visible .ds-bar__fill {
@@ -1232,9 +1235,9 @@ const indLen = 1400;
     height: 4px;
     border-radius: 999px;
   }
-  .ds-graph__key--her .ds-graph__swatch { background: var(--pink-ink); }
+  .ds-graph__key--her .ds-graph__swatch { background: var(--brand); }
   .ds-graph__key--ind .ds-graph__swatch {
-    background: repeating-linear-gradient(90deg, var(--muted) 0 5px, transparent 5px 11px);
+    background: repeating-linear-gradient(90deg, var(--ink-2) 0 5px, transparent 5px 11px);
   }
   .ds-graph__plot {
     position: relative;

@@ -5,7 +5,7 @@ pubDate: 2026-04-14
 author: "Ilai Collective"
 tags: ["content system", "repurposing", "founders", "podcast"]
 draft: false
-cover: "/blog/covers/one-recording-content-system.png"
+cover: "/blog/covers/how-experts-are-everywhere-without-living-online.png"
 ---
 
 Most experts assume that showing up on every platform means being online all day. It does not. The people who seem to be everywhere are rarely typing in real time. They record on a steady schedule, and a production team turns each recording into everything else.

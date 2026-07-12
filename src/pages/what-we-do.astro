@@ -25,12 +25,27 @@ const stats = [
   },
 ];
 
-// Eight services. tone drives the card surface (colored / slate / white variety).
+// Six services. tone drives the card surface (colored / slate / white variety).
 // viz drives the unique mini mockup rendered in the media panel.
 const services = [
   {
     n: "01",
-    eyebrow: "Podcast production & scripts",
+    eyebrow: "Research & strategy",
+    title: "We aim every piece before we make it",
+    body: "Before we make anything, we learn your world: who you sell to, what your competitors publish, and which hooks, formats, and topics are actually earning engagement in your niche right now. We pull thousands of data points on you, your market, and your competitors, then hand them back as a plain-English report you keep. Every script and caption is pointed at a real audience instead of guessed at. It starts with a free teardown, so you see the work before you commit a dollar.",
+    bullets: [
+      "Thousands of data points on you, your market, and your competitors, in one report",
+      "A map of your audience: who they are, what they want, where they spend time",
+      "A read on your competitors and the gaps they leave open",
+      "The hooks, formats, and topics already proven to travel in your niche",
+      "A free teardown before you commit a dollar",
+    ],
+    c: "var(--green)", tone: "white", viz: "chart",
+    icon: `<circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M13.5 13.5L17.5 17.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6.5 9.5l1.7 1.7L12 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
+  },
+  {
+    n: "02",
+    eyebrow: "Podcasts, video & scripts",
     title: "We script it, produce it, and cut it into a month of content.",
     body: "Before the camera rolls we write the episode scripts and shot lists so you always know what to say. Then we go to work: a clean long-form edit with filler and false starts cut, studio-grade sound design, dynamic motion graphics, burned-in captions, show notes, chapters, and up to 50 vertical clips hand-cut from each long-form to carry the show across every feed all month. It is a lot of expert work. That is the point of hiring a studio.",
     bullets: [
@@ -44,7 +59,7 @@ const services = [
     icon: `<path d="M10 2.5a3 3 0 013 3v5a3 3 0 11-6 0v-5a3 3 0 013-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4.5 9.5v.6a5.5 5.5 0 0011 0v-.6M10 15.6V18M7 18h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
   },
   {
-    n: "02",
+    n: "03",
     eyebrow: "Short-form & reels",
     title: "Clips built to get watched, in your voice",
     body: "Every episode is mined for its sharpest moments and cut into vertical clips built to travel. Each one gets a hook, captions, and a rhythm tuned to the platform it lands on, so the same idea earns attention on TikTok, Reels, and Shorts alike.",
@@ -58,47 +73,32 @@ const services = [
     icon: `<rect x="3.5" y="3.5" width="13" height="13" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 7.2l4 2.8-4 2.8z" fill="currentColor"/>`,
   },
   {
-    n: "03",
+    n: "04",
     eyebrow: "Multi-platform publishing",
     title: "One idea, adapted for up to 13 platforms",
-    body: "A post that lands on Instagram falls flat on LinkedIn. We take one idea and rewrite it for each platform's format, length, and audience, then publish it on a schedule built for your stage. Whether you are starting from zero followers or already have an audience, the cadence is tuned to one thing: finding you engagement. You show up daily on every channel without touching a scheduler.",
+    body: "A post that lands on Instagram falls flat on LinkedIn. We take one idea and rewrite it for each platform's format, length, and audience, then publish it on a schedule built for your stage. Whether you are starting from zero followers or already have an audience, the cadence is tuned to one thing: finding you engagement. You show up daily on every channel without touching a scheduler, and every number lands in a live dashboard you can open any time.",
     bullets: [
       "YouTube, Instagram, TikTok, X, Threads, Bluesky, Facebook, LinkedIn, Substack, and Pinterest",
       "Format, caption, and hook rewritten per platform, never copy-pasted",
       "A bespoke posting schedule built for your stage, from zero followers to established",
-      "One documented voice across every account, tuned toward engagement",
+      "A live dashboard on your own subdomain, every metric pulled from the platform APIs and refreshed on the hour",
     ],
     c: "var(--brand)", tone: "slate", viz: "scheduler",
     icon: `<rect x="3" y="4.5" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 8h14M6.5 3v3M13.5 3v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
   },
   {
-    n: "04",
-    eyebrow: "Audience, market & competitor research",
-    title: "We aim every piece before we make it",
-    body: "Before we make anything, we learn your world: who you sell to, what your competitors publish, and which hooks, formats, and topics are actually earning engagement in your niche right now. We pull thousands of data points on you, your market, and your competitors, then hand them back as a plain-English report you keep. Then every script and caption is pointed at a real audience instead of guessed at. It starts with a free teardown, so you see the work before you commit a dollar.",
-    bullets: [
-      "Thousands of data points on you, your market, and your competitors, in one report",
-      "A map of your audience: who they are, what they want, where they spend time",
-      "A read on your competitors and the gaps they leave open",
-      "The hooks, formats, and topics already proven to travel in your niche",
-      "A free teardown before you commit a dollar",
-    ],
-    c: "var(--green)", tone: "white", viz: "chart",
-    icon: `<circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M13.5 13.5L17.5 17.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6.5 9.5l1.7 1.7L12 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
-  },
-  {
     n: "05",
-    eyebrow: "Brand, voice & templates",
-    title: "A voice we document and a look that's unmistakably yours",
-    body: "We learn how you actually sound and write it down, so every line reads like you on your best day. Then we build the look around it: on-brand templates matched to your exact typography and color, quote cards, carousel frames, thumbnails, content categories, and a hook library your whole feed pulls from. It holds up across 350 posts a month.",
+    eyebrow: "Writing at scale",
+    title: "Your ideas, written in your voice and built to keep",
+    body: "This is the writing engine behind the feed. We learn how you actually sound and write it down, so every caption, carousel, and essay reads like you on your best day. Newsletter and Substack essays turn your strongest thinking into something a reader saves and forwards. Carousels and quote cards go out on on-brand templates matched to your exact typography and color, all pulling from a hook library your whole feed shares. It holds up across 350+ posts a month.",
     bullets: [
       "A documented voice guide, built with you and signed off by you",
-      "On-brand templates matched to your exact typography and color",
-      "Quote cards, carousel frames, and thumbnail systems that always look like you",
+      "Long-form essays for Substack and your newsletter that readers save and forward",
+      "Carousels, quote cards, and thumbnails on templates matched to your typography and color",
       "Named content categories and a growing hook library every post draws from",
     ],
-    c: "var(--brand)", tone: "white", viz: "brand",
-    icon: `<path d="M4 16l6-11 6 11M6.5 12h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
+    c: "var(--plum)", tone: "terra", viz: "essay",
+    icon: `<path d="M5 3.5h7l3 3v10a1 1 0 01-1 1H5a1 1 0 01-1-1v-12a1 1 0 011-1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 9h6M7 12h6M7 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
   },
   {
     n: "06",
@@ -113,62 +113,6 @@ const services = [
     ],
     c: "var(--coral)", tone: "dark", viz: "alerts",
     icon: `<path d="M10 3a6 6 0 016 6v3l1.5 3H2.5L4 12V9a6 6 0 016-6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 16.5a2 2 0 004 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
-  },
-  {
-    n: "07",
-    eyebrow: "SEO & GEO content",
-    title: "Found by Google, cited by AI assistants",
-    body: "We write keyword-researched articles built to rank, then add the layer that gets you quoted by AI. On-page SEO, structured data, and an llms.txt file mean the major assistants can find, read, and cite you when someone asks about your field.",
-    bullets: [
-      "Keyword-researched articles aimed at real search demand",
-      "On-page SEO plus structured data for rich results",
-      "An llms.txt file so assistants can read and cite your pages",
-      "Found on Google and cited when someone asks about your field",
-    ],
-    c: "var(--green)", tone: "white", viz: "search",
-    icon: `<circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.6"/><path d="M12.8 12.8L17.5 17.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
-  },
-  {
-    n: "08",
-    eyebrow: "Newsletter & long-form essays",
-    title: "Your best ideas, made to keep",
-    body: "Some ideas deserve more than a caption. We turn your strongest thinking into Substack and newsletter essays a reader saves, forwards, and comes back to. It is the format that builds the deepest trust with the audience you are growing.",
-    bullets: [
-      "Long-form essays for Substack and your newsletter",
-      "Built from the ideas already proving out in your short-form",
-      "Written in your documented voice, edited to publish-ready",
-      "The channel that turns followers into a subscriber list you own",
-    ],
-    c: "var(--plum)", tone: "terra", viz: "essay",
-    icon: `<path d="M5 3.5h7l3 3v10a1 1 0 01-1 1H5a1 1 0 01-1-1v-12a1 1 0 011-1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 9h6M7 12h6M7 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
-  },
-  {
-    n: "09",
-    eyebrow: "Live analytics dashboard",
-    title: "Watch it work in real time",
-    body: "You get a branded portal where every number is pulled straight from the platform APIs and refreshed on the hour. No screenshots, no monthly slide deck, no waiting on a report. Open it whenever you want and see exactly what is moving.",
-    bullets: [
-      "A branded portal on your own subdomain",
-      "Every metric pulled straight from the platform APIs",
-      "Refreshed on the hour, never typed in by hand",
-      "One view across every platform we run for you",
-    ],
-    c: "var(--brand)", tone: "dashboard", viz: "dashboard",
-    icon: `<rect x="3" y="4" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 12.5v-2M10 12.5v-4M13.5 12.5v-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
-  },
-  {
-    n: "10",
-    eyebrow: "Earned media & podcast guesting",
-    title: "Booked on the shows your audience already trusts",
-    body: "Beyond your own channels, we pitch and place you as a guest on podcasts and in press your buyers already follow. Hosts rank topic relevance over follower count, so guesting is one of the fastest ways to borrow an established audience and earn real links back to you. We build the target list, write the pitches in your voice, prep your talking points, and repurpose every appearance into clips and posts for your own feeds.",
-    bullets: [
-      "A target list of podcasts and outlets your audience already trusts",
-      "Pitches written and sent in your voice",
-      "Talking points and prep so every appearance lands",
-      "Each appearance repurposed into clips and posts for your feeds",
-    ],
-    c: "var(--coral)", tone: "dark", viz: "guesting",
-    icon: `<path d="M10 2.5a3 3 0 013 3v5a3 3 0 11-6 0v-5a3 3 0 013-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4.5 9.5v.6a5.5 5.5 0 0011 0v-.6M10 15.6V18M7 18h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`,
   },
 ];
 
@@ -193,7 +137,7 @@ const pricing = [
 
 <Layout
   title="What we do · Ilai Collective"
-  description="Ilai Collective runs your entire content operation: podcast production, short-form and reels, publishing across up to 13 platforms, audience and competitor research, brand and voice, community engagement, SEO and GEO articles, newsletters, and a live analytics dashboard. Human-led, research-driven. Starts with a free teardown."
+  description="Ilai Collective runs your entire content operation: audience and competitor research, podcast production, short-form and reels, writing at scale from carousels to newsletters, publishing across up to 13 platforms with a live dashboard, and community engagement. Human-led, research-driven. Starts with a free teardown."
   path="/what-we-do"
 >
   <!-- ============ HERO ============ -->
@@ -207,7 +151,7 @@ const pricing = [
             Your entire content operation,<br /><span class="hl-gold">run by real people.</span>
           </h1>
           <p class="wwd-herocard__lead">
-            Ten services, one studio. We learn your audience and your voice, then turn each
+            Six services, one studio. We learn your audience and your voice, then turn each
             long-form you record into 120+ original pieces a month, published across up to 13 platforms
             and measured on a dashboard you can watch live. People direct, judge, and sign off
             on every piece. The software we built handles the busywork, so people can make every call.
@@ -412,43 +356,11 @@ const pricing = [
               </div>
             )}
 
-            {s.viz === "brand" && (
-              <div class="wwd-vbrand">
-                <div class="wwd-vbrand__swatches">
-                  {["var(--coral)","var(--charcoal)","var(--brand)","var(--green)","var(--plum)"].map((c) => (
-                    <span style={`background:${c}`}></span>
-                  ))}
-                </div>
-                <div class="wwd-vbrand__type">
-                  <span class="wwd-vbrand__aa">Aa</span>
-                  <div class="wwd-vbrand__lines">
-                    <span></span><span></span><span class="wwd-vbrand__lines--s"></span>
-                  </div>
-                </div>
-              </div>
-            )}
-
             {s.viz === "alerts" && (
               <div class="wwd-valerts">
                 <div class="wwd-valert"><span class="wwd-valert__dot" style="background:var(--green)"></span><div><b>Replied to a comment</b><span>Instagram · 2 min</span></div></div>
                 <div class="wwd-valert"><span class="wwd-valert__dot" style="background:var(--brand)"></span><div><b>First-response sent</b><span>TikTok · in your voice</span></div></div>
                 <div class="wwd-valert"><span class="wwd-valert__dot" style="background:var(--plum)"></span><div><b>Intent signal flagged</b><span>from a DM · sent to you</span></div></div>
-              </div>
-            )}
-
-            {s.viz === "search" && (
-              <div class="wwd-vsearch">
-                <div class="wwd-vsearch__bar">
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                  <span class="wwd-vsearch__q"></span>
-                </div>
-                <div class="wwd-vsearch__result">
-                  <span class="wwd-vsearch__badge">Cited</span>
-                  <span class="wwd-vsearch__title"></span>
-                  <span class="wwd-vsearch__url"></span>
-                  <span class="wwd-vsearch__snip"></span>
-                  <span class="wwd-vsearch__snip wwd-vsearch__snip--s"></span>
-                </div>
               </div>
             )}
 
@@ -467,63 +379,6 @@ const pricing = [
               </div>
             )}
 
-            {s.viz === "dashboard" && (
-              <div class="wwd-vdash">
-                <div class="wwd-vdash__bar">
-                  <span class="chrome__dot"></span><span class="chrome__dot"></span><span class="chrome__dot"></span>
-                  <span class="wwd-vdash__url">yourbrand.ilaicollective.com</span>
-                </div>
-                <div class="wwd-vdash__body">
-                  <div class="wwd-vdash__stats">
-                    <div class="wwd-vdash__stat">
-                      <span class="wwd-vdash__lbl">Posts this month</span>
-                      <span class="wwd-vdash__num"><span data-count="350" data-suffix="+" data-decimals="0">0</span></span>
-                    </div>
-                    <div class="wwd-vdash__stat">
-                      <span class="wwd-vdash__lbl">Platforms live</span>
-                      <span class="wwd-vdash__num"><span data-count="13" data-decimals="0">0</span></span>
-                    </div>
-                  </div>
-                  <div class="wwd-vdash__chart">
-                    {[38,52,44,67,59,81,73,96].map((h) => <span style={`height:${h}%`}></span>)}
-                  </div>
-                  <div class="wwd-vdash__foot">
-                    <span class="wwd-vdash__live">Live</span>
-                    <span class="wwd-vdash__refresh">Refreshed on the hour</span>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {s.viz === "guesting" && (
-              <div class="wwd-vguest">
-                {[
-                  { show: "The Growth Room", meta: "Podcast · 120k listeners", g: "var(--coral)" },
-                  { show: "Founder Field Notes", meta: "Podcast · weekly", g: "var(--brand)" },
-                  { show: "Modern Health Mag", meta: "Press feature", g: "var(--plum)" },
-                ].map((r) => (
-                  <div class="wwd-vguest__row">
-                    <span class="wwd-vguest__badge" style={`--g:${r.g}`}>
-                      <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
-                        <path d="M10 2.5a3 3 0 013 3v5a3 3 0 11-6 0v-5a3 3 0 013-3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-                        <path d="M4.5 9.5v.6a5.5 5.5 0 0011 0v-.6M10 15.6V18M7 18h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-                      </svg>
-                    </span>
-                    <span class="wwd-vguest__txt">
-                      <b>{r.show}</b>
-                      <span>{r.meta}</span>
-                    </span>
-                    <span class="wwd-vguest__status">
-                      <span class="wwd-vguest__pitched">Pitched</span>
-                      <span class="wwd-vguest__booked">
-                        <svg width="11" height="11" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L6 11L11.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        Booked
-                      </span>
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
         </div>
       </div>
@@ -702,7 +557,7 @@ const pricing = [
   .btn--ghost-dark:hover {
     background: rgba(255, 255, 255, 0.1);
   }
-  /* Hero mock: 1 recording -> many */
+  /* Hero mock: your long-form -> many */
   .wwd-hmock {
     max-width: 420px;
     margin-inline: auto;
@@ -892,7 +747,8 @@ const pricing = [
   }
 
   /* ============ Service block ============ */
-  .wwd-svc { scroll-margin-top: 5rem; }
+  /* Modestly tighter vertical rhythm now that there are six sections, not ten. */
+  .wwd-svc { scroll-margin-top: 5rem; padding-block: clamp(3.25rem, 6vw, 5rem); }
   .wwd-svc__grid {
     display: grid;
     gap: var(--sp-8);
@@ -1676,11 +1532,11 @@ const pricing = [
     /* Hide the viz mocks entirely on mobile — they were the main length tax. */
     .wwd-svc__aside { display: none; }
 
-    /* Hide the 01-10 index strip: the accordion titles now list every service. */
+    /* Hide the 01-06 index strip: the accordion titles now list every service. */
     .wwd-index { display: none; }
 
     /* Collapse the per-service section chrome into a tight stacked list so all
-       ten summary rows sit close together, divided by a hairline. */
+       six summary rows sit close together, divided by a hairline. */
     .section.wwd-svc {
       padding-block: 0;
       background: none;
@@ -1763,7 +1619,7 @@ const pricing = [
 </style>
 
 <script>
-  // Mobile accordion controller for the ten service blocks.
+  // Mobile accordion controller for the six service blocks.
   // - Desktop (>=760px): every <details> is forced open and stays open, so the
   //   CSS `display:contents` bypass renders the original side-by-side layout.
   // - Mobile (<=760px): blocks start collapsed; opening one closes the others

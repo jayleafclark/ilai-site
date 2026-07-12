@@ -51,7 +51,7 @@ const stats = [
     icon: `<rect x="3" y="3" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="12.5" y="3" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="12.5" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/><rect x="12.5" y="12.5" width="6.5" height="6.5" rx="1.6" stroke="currentColor" stroke-width="1.6"/>`,
   },
   {
-    value: 8, suffix: "", label: "Engagement-engine platforms", c: "var(--charcoal)", bg: "var(--plum-tint)",
+    value: 8, suffix: "", label: "Platforms we engage on", c: "var(--charcoal)", bg: "var(--plum-tint)",
     icon: `<path d="M4 5.5h16v9H10l-4 3.5v-3.5H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>`,
   },
 ];
@@ -1819,26 +1819,51 @@ const comments = [
   .stats-sec {
     padding-bottom: var(--section-y);
   }
+  /* Outer tray: an elevated mist "aluminium" plate that holds the nested
+     paper stat cards (double-bezel), instead of a flat band. */
   .statspanel {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--sp-6);
-    padding: clamp(1.75rem, 4vw, 3rem);
+    gap: clamp(0.75rem, 1.6vw, 1rem);
+    padding: clamp(0.75rem, 1.6vw, 1rem);
     background: var(--mist);
     border-radius: var(--r-card-lg);
+    box-shadow: var(--shadow-card);
   }
+  /* Inner core: each stat is its own floating paper card with an inset
+     highlight and soft ambient shadow — the concentric radius nests it in
+     the tray. */
   .statp {
+    position: relative;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     gap: var(--sp-4);
+    padding: clamp(1.25rem, 2.4vw, 1.75rem);
+    background: var(--paper);
+    border-radius: var(--r-card);
+    box-shadow:
+      var(--inset-highlight),
+      var(--shadow-card);
+    transition:
+      transform var(--dur-base) var(--ease),
+      box-shadow var(--dur-base) var(--ease);
+  }
+  @media (hover: hover) {
+    .statp:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        var(--inset-highlight),
+        var(--shadow-float);
+    }
   }
   .statp__ico {
     flex: none;
     display: grid;
     place-items: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 15px;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
     color: #fff;
     background: linear-gradient(140deg, var(--ic), color-mix(in srgb, var(--ic) 55%, #ffffff));
     box-shadow:
@@ -1848,15 +1873,18 @@ const comments = [
   .statp__num {
     font-family: var(--font-accent);
     font-weight: 700;
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    letter-spacing: -0.03em;
-    line-height: 1;
-    color: var(--navy);
+    font-size: clamp(2.15rem, 3.4vw, 3rem);
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    color: var(--charcoal);
   }
   .statp__lab {
-    margin-top: 4px;
+    margin-top: 6px;
     font-size: var(--fs-sm);
-    color: var(--muted);
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--ink-2);
+    max-width: 22ch;
   }
   @media (min-width: 860px) {
     .statspanel {
@@ -2934,12 +2962,12 @@ const comments = [
 
     /* ---------- Stats panel (KEPT — the single canonical numbers block) ---------- */
     .statspanel {
-      gap: var(--sp-5);
-      padding: var(--sp-6);
+      gap: var(--sp-3);
+      padding: var(--sp-3);
     }
     .statp {
-      align-items: flex-start;
       gap: var(--sp-3);
+      padding: var(--sp-4);
     }
     .statp__ico {
       width: 44px;
