@@ -2400,10 +2400,12 @@ const comments = [
        floating stat badge); only the desktop absolute-positioning is undone. --- */
     .hslide__visual {
       display: block;
+      order: -1;               /* mock sits ABOVE the copy */
+      flex: 0 0 auto;
       position: relative;      /* anchor for the floating stat badge */
       transform: none;
       opacity: 1;
-      padding: 0 var(--sp-5) var(--sp-6);
+      padding: var(--sp-5) var(--sp-5) var(--sp-4);
     }
     /* Every mock spans the card width (they're built at 360–540px for desktop). */
     .hslide__visual .chrome,
@@ -2425,15 +2427,19 @@ const comments = [
     .hslide--4 .herofloat {
       left: var(--sp-4);
       right: auto;
-      bottom: calc(var(--sp-6) - 12px);
+      bottom: var(--sp-2);
     }
     .herofloat__num { font-size: 1.35rem; }
     .herofloat { padding: 10px 14px; }
     .hslide__inner {
-      /* sp-7 doesn't exist -> the whole padding collapsed to 0 and the content
-         jammed against the card edges. Real, comfortable inner padding. Bottom is
-         tighter now because the animated visual sits directly below the copy. */
-      padding: var(--sp-6) var(--sp-5) var(--sp-5);
+      /* The animated mock sits ABOVE (order:-1); the copy fills the rest of the
+         card and the CTA is pinned to the very bottom (see .hslide__actions), so
+         the buttons line up across all four slides. sp-7/sp-9 don't exist. */
+      order: 0;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      padding: var(--sp-3) var(--sp-5) var(--sp-6);
     }
     .hslide__title {
       margin-top: var(--sp-3);
@@ -2441,12 +2447,14 @@ const comments = [
       line-height: 1.08;
     }
     .hslide__lead {
-      margin-top: var(--sp-4);
-      font-size: 1.02rem;
+      margin-top: var(--sp-3);
+      font-size: 0.95rem;
+      line-height: 1.42;
     }
     /* Two hero CTAs: stacked, full-width, comfortable 48px tap targets */
     .hslide__actions {
-      margin-top: var(--sp-5);
+      margin-top: auto;        /* pin the CTA to the very bottom of the card */
+      padding-top: var(--sp-5);
       flex-direction: column;
       align-items: stretch;
       gap: var(--sp-4);
