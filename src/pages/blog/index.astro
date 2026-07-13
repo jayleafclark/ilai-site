@@ -59,13 +59,19 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
             >
               {post.data.cover && (
                 <span class="postcard__cover">
-                  <img src={`${base}${post.data.cover}?v=3`} alt="" loading="lazy" width="1200" height="630" />
+                  <img src={`${base}${post.data.cover}?v=4`} alt={post.data.title} loading="lazy" width="1200" height="630" />
                 </span>
               )}
-              {post.data.tags?.[0] && (
+              {/* The cover art carries the category + title, so we don't repeat
+                  them visually. The chip + heading stay in the DOM (heading
+                  screen-reader-only) for SEO and accessibility. If a post ever
+                  lacks a cover, both fall back to visible. */}
+              {post.data.tags?.[0] && !post.data.cover && (
                 <span class="postcard__chip">{post.data.tags[0]}</span>
               )}
-              <h2 class="postcard__title">{post.data.title}</h2>
+              <h2 class:list={["postcard__title", post.data.cover && "sr-only"]}>
+                {post.data.title}
+              </h2>
               <p class="postcard__desc muted">{post.data.description}</p>
               <div class="postcard__meta">
                 <time datetime={post.data.pubDate.toISOString()}>

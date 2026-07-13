@@ -28,7 +28,6 @@ const readMins = Math.max(1, Math.round(words / 220));
 
 const site = "https://ilaicollective.com";
 const path = `/blog/${post.slug}`;
-const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 // Article JSON-LD — the GEO layer, so AI assistants can cite the piece.
 const articleLd = {
@@ -69,6 +68,7 @@ const breadcrumbLd = {
   title={`${data.title} · Ilai Collective`}
   description={data.description}
   path={path}
+  image={data.cover ? `${data.cover}?v=4` : undefined}
   schemas={[articleLd, breadcrumbLd]}
 >
 
@@ -90,11 +90,9 @@ const breadcrumbLd = {
         </div>
       </header>
 
-      {data.cover && (
-        <figure class="post__cover" data-reveal>
-          <img src={`${base}${data.cover}?v=3`} alt="" width="1200" height="630" />
-        </figure>
-      )}
+      {/* The branded cover carries the title, so it is used as the blog-card
+          art and the social/OG share image (see image= on Layout) rather than
+          repeated here under the <h1> — no double title on the article page. */}
 
       <div class="prose" data-reveal data-reveal-delay="1">
         <Content />
