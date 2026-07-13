@@ -120,6 +120,11 @@ const allSchemas = [orgLd, ...schemas];
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Mark JS as active BEFORE first paint so the scroll-reveal hidden state
+         (opacity:0) only applies when we can guarantee it gets animated back
+         in. If this never runs, [data-reveal] content stays visible rather
+         than stuck invisible. -->
+    <script is:inline>document.documentElement.classList.add("reveal-js");</script>
     <!-- Neutralize any service worker + caches left by a previous site on this
          domain (e.g. the old Lovable app), so returning visitors always get the
          current site. The new site registers no service worker, so this is a
@@ -247,7 +252,10 @@ const allSchemas = [orgLd, ...schemas];
           }
           [...pending].forEach((el) => {
             const r = el.getBoundingClientRect();
-            if (r.top < window.innerHeight && r.bottom > 0) reveal(el);
+            // Reveal anything in the viewport OR already scrolled past above it
+            // (r.top < innerHeight covers both). Catches fast/fling scrolls that
+            // jump an element from below to above without a sweep landing on it.
+            if (r.top < window.innerHeight) reveal(el);
           });
         };
         let ticking = false;
@@ -269,6 +277,11 @@ const allSchemas = [orgLd, ...schemas];
         window.addEventListener("scrollend", sweep, { passive: true });
         window.addEventListener("load", sweep, { once: true });
         sweep();
+        // Re-sweep as layout settles: the first sweep can run before lazy
+        // cover images load and push cards into view, leaving in-viewport
+        // content stuck hidden until a scroll. These timed passes reveal
+        // anything already on screen without needing the user to scroll.
+        [120, 400, 1000, 2500].forEach((t) => setTimeout(sweep, t));
       }
 
       // Animated metric counters
