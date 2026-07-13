@@ -164,27 +164,36 @@ def make_cover(slug, title, category, out_path):
     eb_font = _font(24, "SemiBold")
     eb_track = 4
 
-    # Fit the title: largest size that wraps into <= 4 lines.
-    title_font = None
-    lines = []
-    for size in (86, 78, 70, 62, 54, 48):
-        title_font = _font(size, "SemiBold")
-        lines = _wrap(draw, title, title_font, max_w)
-        if len(lines) <= 4:
-            break
-    ascent, descent = title_font.getmetrics()
-    lh = int((ascent + descent) * 1.06)
-
     BAR_H = 5
     BAR_GAP = 20          # bar -> eyebrow
     EB_H = 26
     EB_GAP = 24           # eyebrow -> title
     pre_title = BAR_H + BAR_GAP + EB_H + EB_GAP
-    group_h = pre_title + len(lines) * lh
 
-    top_limit = lock_y + mark_h + 44
-    bot_limit = H - 116
-    gy = top_limit + max(0, (bot_limit - top_limit - group_h) // 2)
+    # The title must sit fully inside the band between the lockup and the footer.
+    # A ~5% object-fit:cover crop on small cards trims the outer margins, so keep
+    # a safe band well inside the image edges.
+    top_limit = lock_y + mark_h + 44   # below the brand lockup
+    bot_limit = H - 120                # above the domain footer (H-74)
+    band = bot_limit - top_limit
+    title_budget = band - pre_title
+
+    # Fit the title: the largest size that wraps to <= 4 lines AND whose block
+    # fits the vertical budget — so long (3-4 line) titles shrink instead of
+    # overflowing down onto the footer / off the bottom edge.
+    title_font = None
+    lines = []
+    lh = 0
+    for size in (86, 78, 70, 64, 58, 52, 46, 42):
+        title_font = _font(size, "SemiBold")
+        lines = _wrap(draw, title, title_font, max_w)
+        ascent, descent = title_font.getmetrics()
+        lh = int((ascent + descent) * 1.04)
+        if len(lines) <= 4 and len(lines) * lh <= title_budget:
+            break
+
+    group_h = pre_title + len(lines) * lh
+    gy = top_limit + max(0, (band - group_h) // 2)
 
     # accent bar
     draw.rounded_rectangle([PAD, gy, PAD + 62, gy + BAR_H], radius=3, fill=bar_c)
