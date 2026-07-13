@@ -5,6 +5,7 @@ import "../styles/global.css";
 
 export interface Props {
   title?: string;
+  ogTitle?: string;
   description?: string;
   image?: string;
   path?: string;
@@ -15,7 +16,8 @@ export interface Props {
 }
 
 const {
-  title = "Ilai Collective · Everywhere your audience is, in your voice",
+  title = "Ilai Collective · Content studio for experts and personal brands",
+  ogTitle = title,
   description = "We learn your audience and your voice, then create and publish a month of content that sounds like you across every platform, and engage your community. Made by real people. No AI slop.",
   image = "/og.png?v=3",
   path = "",
@@ -155,7 +157,7 @@ const allSchemas = [orgLd, ...schemas];
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={site + image} />
