@@ -2,13 +2,13 @@ name: Google Indexing API ping
 
 # Notifies Google's Indexing API of all sitemap URLs so it (re)crawls sooner.
 # Dormant until the GOOGLE_INDEXING_SA_KEY repo secret is set (the script
-# no-ops without it). Runs weekly + on demand. Manually trigger it after a
+# no-ops without it). Runs daily + on demand. Manually trigger it after a
 # big content push via the Actions tab -> "Run workflow".
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 15 * * 1" # Mondays 15:00 UTC
+    - cron: "0 15 * * *" # daily 15:00 UTC (~1h after the blog auto-poster runs)
 
 permissions:
   contents: read

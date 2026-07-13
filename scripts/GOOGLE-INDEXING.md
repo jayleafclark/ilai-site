@@ -1,6 +1,6 @@
 # Google Indexing API automation
 
-Auto-notifies Google to (re)crawl every URL in the sitemap. Runs weekly and on
+Auto-notifies Google to (re)crawl every URL in the sitemap. Runs daily and on
 demand via `.github/workflows/google-index.yml` → `scripts/google-index.mjs`.
 
 It is **dormant until you add the service-account key** — the script no-ops
@@ -22,7 +22,7 @@ without `GOOGLE_INDEXING_SA_KEY`, so the workflow is safe to have committed.
    **`GOOGLE_INDEXING_SA_KEY`** (GitHub → repo → Settings → Secrets and
    variables → Actions → New repository secret).
 
-Done. It now runs weekly; trigger it any time from the Actions tab → this
+Done. It now runs daily; trigger it any time from the Actions tab → this
 workflow → **Run workflow**.
 
 ## Notes / caveats
