@@ -19,9 +19,9 @@ export const GET: APIRoute = async () => {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
 
   const entries: { loc: string; lastmod?: string }[] = [
-    ...staticRoutes.map((r) => ({ loc: `${SITE}${r}` })),
+    ...staticRoutes.map((r) => ({ loc: r === "/" ? `${SITE}/` : `${SITE}${r}/` })),
     ...posts.map((p) => ({
-      loc: `${SITE}/blog/${p.slug}`,
+      loc: `${SITE}/blog/${p.slug}/`,
       lastmod: (p.data.updatedDate ?? p.data.pubDate)
         .toISOString()
         .slice(0, 10),

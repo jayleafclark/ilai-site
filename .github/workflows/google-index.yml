@@ -1,9 +1,9 @@
-name: Google Indexing API ping
+name: Search-engine indexing ping
 
-# Notifies Google's Indexing API of all sitemap URLs so it (re)crawls sooner.
-# Dormant until the GOOGLE_INDEXING_SA_KEY repo secret is set (the script
-# no-ops without it). Runs daily + on demand. Manually trigger it after a
-# big content push via the Actions tab -> "Run workflow".
+# Notifies IndexNow (Bing/Yandex, always) + Google's Indexing API (when the
+# GOOGLE_INDEXING_SA_KEY secret is set) of all sitemap URLs so they (re)crawl
+# sooner. Runs daily + on demand. Manually trigger it after a big content push
+# via the Actions tab -> "Run workflow".
 
 on:
   workflow_dispatch:
@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Submit sitemap URLs to the Google Indexing API
+      - name: Submit sitemap URLs to IndexNow + Google Indexing API
         env:
           GOOGLE_INDEXING_SA_KEY: ${{ secrets.GOOGLE_INDEXING_SA_KEY }}
           SITEMAP_URL: https://ilaicollective.com/sitemap.xml

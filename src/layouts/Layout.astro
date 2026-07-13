@@ -23,7 +23,11 @@ const {
 } = Astro.props;
 
 const site = "https://ilaicollective.com";
-const canonical = site + path;
+// GitHub Pages serves directory URLs with a trailing slash and 301-redirects
+// the slashless form, so canonical + og:url must use the trailing-slash form
+// (the real 200 URL) to avoid Google crawling redirects.
+const canonical =
+  path && path !== "/" ? site + path.replace(/\/+$/, "") + "/" : site + "/";
 
 // Site-wide identity node. Ilai is a US, human-led content studio for experts.
 // ProfessionalService + Organization so both general and local/service search
