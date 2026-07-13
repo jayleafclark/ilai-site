@@ -60,4 +60,4 @@ There is a compounding effect too. Long-form pieces get found in search months l
 
 ## The takeaway
 
-You do not have to live online to be everywhere. Record on a schedule you can keep, then put a team around the rest. That is exactly [what we do](/what-we-do), and a month built from your recordings is the teardown we bring to a [first call](/contact).
+You do not have to live online to be everywhere. Record on a schedule you can keep, then put a team around the rest. That is exactly [what we do](/what-we-do), and a month built from your recordings is the game plan we bring to a [first call](/contact).

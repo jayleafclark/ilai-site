@@ -22,7 +22,7 @@ const steps = [
   {
     n: "02",
     t: "You see what we found",
-    d: "On the call we walk you through the teardown and where your audience is, platform by platform, and what we'd post first.",
+    d: "On the call we walk you through the game plan and where your audience is, platform by platform, and what we'd post first.",
     c: "var(--brand)",
     icon: `<path d="M4 15.5V9M9.5 15.5V4.5M15 15.5v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M3 17.5h13.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>`,
   },
@@ -35,8 +35,8 @@ const steps = [
   },
 ];
 
-// The free teardown preview: a small checklist mock for visual interest.
-const teardown = [
+// The free game plan preview: a small checklist mock for visual interest.
+const gamePlan = [
   "Audience map, platform by platform",
   "Where the attention already is",
   "The first month of posts, outlined",
@@ -45,7 +45,7 @@ const teardown = [
 
 // Starts-at rows. Numeric ones animate with the shared counter.
 const pricing = [
-  { k: "Free teardown", free: true, note: "yours to keep" },
+  { k: "Free game plan", free: true, note: "yours to keep" },
   { k: "Social", value: 5500, prefix: "from $", suffix: "/mo", note: "" },
   { k: "Podcast production", value: 5500, prefix: "from $", suffix: "/mo", note: "" },
   { k: "Community engagement", text: "Add-on", note: "" },
@@ -53,16 +53,16 @@ const pricing = [
 ---
 
 <Layout
-  title="Get your free teardown | Ilai Collective"
-  description="Get a free teardown of your brand, market, and audience from Ilai Collective, a real US team building human-led content that grows your audience. Social or podcast production from $5,500/mo, community engagement as an add-on."
+  title="Get your free game plan | Ilai Collective"
+  description="Get a free game plan for your brand, market, and audience from Ilai Collective, a real US team building human-led content that grows your audience. Social or podcast production from $5,500/mo, community engagement as an add-on."
   path="/contact"
 >
   <section class="contact section">
     <div class="container contact__grid">
       <!-- ============ LEFT: THE FORM ============ -->
       <div class="form-col" data-reveal>
-        <span class="eyebrow eyebrow--pill">Start with a free teardown</span>
-        <h1 class="form-col__title">Get your free <br />teardown.</h1>
+        <span class="eyebrow eyebrow--pill">Start with a free game plan</span>
+        <h1 class="form-col__title">Get your free <br />game plan.</h1>
         <p class="lead form-col__lead">
           We research your brand, market, and audience and show you where the attention is. It
           is free, and yours to keep whether or not we work together. We take a handful of
@@ -132,7 +132,7 @@ const pricing = [
                 </div>
               </div>
               <button type="submit" class="btn btn--pink lead-form__submit">
-                <span class="lead-form__submit-lab">Get your free teardown</span>
+                <span class="lead-form__submit-lab">Get your free game plan</span>
                 <span class="btn__arrow" aria-hidden="true" set:html={arrow} />
               </button>
               <p class="lead-form__status" data-form-status role="status" aria-live="polite" hidden></p>
@@ -147,7 +147,7 @@ const pricing = [
               </span>
               <div>
                 <p class="lead-done__t">Got it. We're on it.</p>
-                <p class="lead-done__s">We'll be in touch within one business day with your free teardown. If a spot is open, we'll include next steps.</p>
+                <p class="lead-done__s">We'll be in touch within one business day with your free game plan. If a spot is open, we'll include next steps.</p>
               </div>
             </div>
           </div>
@@ -177,20 +177,20 @@ const pricing = [
           </ol>
         </div>
 
-        <!-- Teardown preview mini-mock (glass over dark) -->
+        <!-- Game plan preview mini-mock (glass over dark) -->
         <div class="preview" data-reveal data-reveal-delay="2" aria-hidden="true">
           <span class="preview__glow"></span>
           <div class="preview__bar">
             <span class="preview__dot"></span>
             <span class="preview__dot"></span>
             <span class="preview__dot"></span>
-            <span class="preview__url">your free teardown</span>
+            <span class="preview__url">your free game plan</span>
           </div>
           <div class="preview__body glass">
-            <span class="preview__label">Included in your teardown</span>
+            <span class="preview__label">Included in your game plan</span>
             <ul class="checklist">
               {
-                teardown.map((t) => (
+                gamePlan.map((t) => (
                   <li class="checklist__item">
                     <span class="checklist__mark">
                       <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
@@ -652,7 +652,7 @@ const pricing = [
     font-size: var(--fs-sm);
   }
 
-  /* Teardown preview mini-mock */
+  /* Game plan preview mini-mock */
   .preview {
     position: relative;
     border-radius: var(--r-card-lg);
@@ -966,7 +966,7 @@ const pricing = [
       align-items: flex-start;
     }
 
-    /* Cut the decorative "your free teardown" browser-chrome mock on mobile.
+    /* Cut the decorative "your free game plan" browser-chrome mock on mobile.
        Its checklist and "Cost: Free" line duplicate the stepper + pricing card,
        and the browser frame is pure decoration on a phone. */
     .preview {
@@ -1003,7 +1003,7 @@ const pricing = [
       (form.querySelector(`[name="${n}"]`) as HTMLInputElement | null)?.value.trim() || "";
 
     const mailtoFallback = (d: Record<string, string>) => {
-      const subject = encodeURIComponent("Ilai free teardown");
+      const subject = encodeURIComponent("Ilai free game plan");
       const body = encodeURIComponent(
         `Name: ${d.name}\nEmail: ${d.email}\nBudget: ${d.budget || "Not specified"}\n\nAbout the work:\n${d.about}\n`,
       );
@@ -1026,7 +1026,7 @@ const pricing = [
         }
         return;
       }
-      const original = lab?.textContent || "Get your free teardown";
+      const original = lab?.textContent || "Get your free game plan";
       if (btn) btn.disabled = true;
       if (lab) lab.textContent = "Sending…";
       if (statusEl) statusEl.hidden = true;
@@ -1043,7 +1043,7 @@ const pricing = [
           },
           body: JSON.stringify({
             access_key: accessKey,
-            subject: "New free teardown request from the Ilai site",
+            subject: "New free game plan request from the Ilai site",
             from_name: data.name,
             name: data.name,
             email: data.email,

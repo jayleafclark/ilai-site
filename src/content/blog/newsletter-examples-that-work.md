@@ -39,18 +39,18 @@ Three moves separate a good roundup from a link dump:
 
 Roundups also solve the blank-page problem. On a week when you have no original argument ready, you still have a defensible point of view on what happened in your field. That reliability is what keeps a cadence alive.
 
-## The teardown: show the work, not just the verdict
+## The game plan: show the work, not just the verdict
 
-The teardown takes one thing apart in public: a campaign, a page, a piece of writing, a decision. It walks through what was tried, what happened, and what you would change. Readers stay for teardowns because they are watching a specialist apply a method in real time.
+The game plan takes one thing apart in public: a campaign, a page, a piece of writing, a decision. It walks through what was tried, what happened, and what you would change. Readers stay for game plans because they are watching a specialist apply a method in real time.
 
-### What a teardown needs
+### What a game plan needs
 
 - **A named subject.** A real example, described specifically enough to be useful.
 - **A visible method.** State the lens you are judging by before you judge.
 - **A verdict with a reason.** "This worked because" beats "this is good."
 - **A takeaway the reader can port to their own work.**
 
-Teardowns are the closest a newsletter gets to a portfolio piece. They demonstrate the reasoning a reader would pay for. If you want to see how a specialist's process reads on the page, our [approach to method](/method) follows the same logic: show the steps, not just the polish.
+Game plans are the closest a newsletter gets to a portfolio piece. They demonstrate the reasoning a reader would pay for. If you want to see how a specialist's process reads on the page, our [approach to method](/method) follows the same logic: show the steps, not just the polish.
 
 ## The personal note: proximity that a feed cannot fake
 
@@ -63,7 +63,7 @@ The personal note has the loosest structure of the four, but it still needs disc
 Most experts fail at newsletters for one reason: they choose a cadence they cannot sustain, rather than the wrong format. The fix is to match the format to the time you honestly have.
 
 - **Weekly and busy?** Alternate the roundup (lower effort, judgment-driven) with the personal note (short, high-signal).
-- **Every other week?** Build toward one essay or one teardown per issue. The longer gap buys you the thinking time these formats need.
+- **Every other week?** Build toward one essay or one game plan per issue. The longer gap buys you the thinking time these formats need.
 - **Just starting?** Commit to the roundup for the first two months. It teaches you your own voice with the least friction, and it never leaves you staring at an empty draft.
 
 The point is to publish something complete on a rhythm your readers can predict. A predictable, finished piece every two weeks beats an ambitious one that arrives twice and stops. The sophisticated software and research engines that support a studio like ours help with the sourcing and the sorting, but the argument, the ranking, and the voice are decided and gated by a person. That is what makes the reader trust the send.
@@ -74,7 +74,7 @@ If a consistent, long-form newsletter is the channel you want to own, [tell us w
 
 ### How long should a newsletter be to hold attention?
 
-For expert audiences, 800 to 1,500 words is the range where essays and teardowns land. Roundups and personal notes can run shorter, around 400 to 700 words. The number that matters is completion: the piece should resolve one idea, not trail off.
+For expert audiences, 800 to 1,500 words is the range where essays and game plans land. Roundups and personal notes can run shorter, around 400 to 700 words. The number that matters is completion: the piece should resolve one idea, not trail off.
 
 ### How often should I send a newsletter?
 
