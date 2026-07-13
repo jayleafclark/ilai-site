@@ -209,27 +209,6 @@ const pricing = [
     </div>
   </section>
 
-  <!-- ============ CAPABILITY STAT BAND ============ -->
-  <section class="wwd-statsec">
-    <div class="container">
-      <div class="wwd-statpanel" data-reveal>
-        {stats.map((s) => (
-          <div class="wwd-statp">
-            <span class="wwd-statp__ico" aria-hidden="true" style={`--ic:${s.c}`}>
-              <svg width="22" height="22" viewBox="0 0 20 20" fill="none" set:html={s.icon} />
-            </span>
-            <div>
-              <div class="wwd-statp__num" data-count={s.value} data-decimals="0" data-suffix={s.suffix}>
-                {s.value.toLocaleString("en-US") + s.suffix}
-              </div>
-              <div class="wwd-statp__lab">{s.label}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <!-- Scroll anchor for "See every service" — lives with the services so it
        still works on mobile where the index strip below is hidden. -->
   <span id="services" class="wwd-anchor" aria-hidden="true"></span>
