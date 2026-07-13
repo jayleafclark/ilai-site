@@ -36,24 +36,41 @@ const articleLd = {
   "@type": "BlogPosting",
   headline: data.title,
   description: data.description,
+  inLanguage: "en-US",
   datePublished: data.pubDate.toISOString(),
   ...(data.updatedDate
     ? { dateModified: data.updatedDate.toISOString() }
     : { dateModified: data.pubDate.toISOString() }),
+  ...(data.cover ? { image: site + data.cover } : {}),
   author: { "@type": "Organization", name: "Ilai Collective", url: site },
   publisher: {
     "@type": "Organization",
     name: "Ilai Collective",
     url: site,
+    logo: { "@type": "ImageObject", url: site + "/logo-mark.png" },
   },
   mainEntityOfPage: { "@type": "WebPage", "@id": site + path },
   ...(data.tags ? { keywords: data.tags.join(", ") } : {}),
 };
+
+// Breadcrumb trail — helps both search and AI place the article in the site.
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: site + "/" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: site + "/blog" },
+    { "@type": "ListItem", position: 3, name: data.title, item: site + path },
+  ],
+};
 ---
 
-<Layout title={`${data.title} — Ilai Collective`} description={data.description} path={path}>
-  <!-- Article JSON-LD (GEO layer). ld+json is valid in body and read by crawlers/AI. -->
-  <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
+<Layout
+  title={`${data.title} · Ilai Collective`}
+  description={data.description}
+  path={path}
+  schemas={[articleLd, breadcrumbLd]}
+>
 
   <article class="post">
     <div class="container post__inner">

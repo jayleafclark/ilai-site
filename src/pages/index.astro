@@ -131,9 +131,32 @@ const comments = [
   { reply: true, who: "Replied in your voice", txt: "Love that. Start with the first step and tell me how it goes.", badge: "1 min" },
   { who: "@dan_wole", txt: "Is there something for total beginners?" },
 ];
+
+// FAQ source of truth for BOTH the FAQPage schema (GEO — lets AI assistants
+// lift and cite answers) and the rendered <details> list below. Keep the two
+// in sync: edit here and mirror any change in the FAQ section markup.
+const faqs = [
+  { q: "What do I actually have to do?", a: "Record your episodes on your normal cadence and approve the work. Plan on about two hours a week. We handle the scripts, editing, clips, writing, publishing, and community engagement." },
+  { q: "What if I don't have a podcast?", a: "Any source works: a talk, an interview, a webinar, or a short monthly recording session. We build the system around what you already do, so it fits your week instead of adding to it." },
+  { q: "Do you use AI to write it?", a: "No AI slop. Software handles the busywork; a real US team writes, edits, and finishes every piece, and a person makes every call. That human gate is what keeps it in your voice." },
+  { q: "Do I have to manage any AI tools or credits?", a: "No. There is nothing for you to run, learn, or top up. No AI dashboards, no credits or tokens, no tools to master. You do what you are good at, and we handle all of it." },
+  { q: "Is any of this against platform rules?", a: "Yes, entirely above board. Real accounts, official publishing tools, real people writing and replying. No bots, no bought followers, no fake engagement." },
+  { q: "Do I own the content?", a: "Yes. Everything we make is yours to keep. You approve each piece before it ships, and nothing goes public without your yes." },
+  { q: "Is there a long contract?", a: "No lock-in. Start with a free teardown, then pick what you need. Social and podcast production each start at $5,500 a month, and community engagement is an add-on. Combine them or start with one." },
+];
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
 ---
 
-<Layout>
+<Layout schemas={[faqLd]}>
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="container hero__wrap">

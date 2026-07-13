@@ -19,9 +19,17 @@ everything. Sophisticated software and research engines support the work; people
 - SEO and GEO content: keyword-researched articles built to be found by Google and by AI assistants.
 - Live analytics dashboard: every metric API-sourced and refreshed automatically.
 
+## Pricing
+Modular and starts with a free teardown of your brand, market, and audience.
+- Social content production: from $5,500/mo.
+- Podcast production: from $5,500/mo.
+- Community engagement: an add-on to a production line.
+Combine services or start with one. No long lock-in. Each line costs less than a single
+in-house hire.
+
 ## The Signal Method
-Decode (research audience, competitors, offer) → Define (voice, look, content system) →
-Direct (we write, you film, you approve) → Distribute (publish everywhere, engage) →
+Decode (research audience, competitors, offer) then Define (voice, look, content system) then
+Direct (we write, you film, you approve) then Distribute (publish everywhere, engage) then
 Measure (a live dashboard you watch it on).
 
 ## Proof
@@ -30,6 +38,21 @@ Case study: Dr. Caroline Leaf (neuroscientist and author). Over 12 months with I
 year, reach grew about 204% and engagement about 210%, in a year the average account's organic
 reach and engagement fell. Managed across Facebook, Instagram, YouTube, TikTok, X, Threads,
 Bluesky, and Substack, with no paid amplification.
+
+## Common questions
+- Do you use AI to write it? No AI slop. Software handles the busywork; a real US team writes,
+  edits, and finishes every piece, and a person makes every call.
+- What do clients have to do? Record on a normal cadence and approve the work, about two hours
+  a week. Ilai handles scripts, editing, clips, writing, publishing, and engagement.
+- Who owns the content? The client. Everything is theirs to keep, approved before it ships.
+
+## Key pages
+- Home: https://ilaicollective.com/
+- What we do: https://ilaicollective.com/what-we-do
+- How it works (The Signal Method): https://ilaicollective.com/method
+- About: https://ilaicollective.com/about
+- Case study, Dr. Caroline Leaf: https://ilaicollective.com/work/dr-caroline-leaf
+- Blog: https://ilaicollective.com/blog
 
 ## Contact
 Book a call: https://ilaicollective.com/contact

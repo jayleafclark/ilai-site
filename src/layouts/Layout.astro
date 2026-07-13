@@ -8,6 +8,10 @@ export interface Props {
   description?: string;
   image?: string;
   path?: string;
+  // Extra JSON-LD graph objects for a given page (FAQPage, BlogPosting,
+  // BreadcrumbList, etc.). Each is emitted as its own ld+json block, on top of
+  // the site-wide Organization node below.
+  schemas?: Record<string, unknown>[];
 }
 
 const {
@@ -15,21 +19,94 @@ const {
   description = "We learn your audience and your voice, then create and publish a month of content that sounds like you across every platform, and engage your community. Made by real people. No AI slop.",
   image = "/og.png?v=3",
   path = "",
+  schemas = [],
 } = Astro.props;
 
 const site = "https://ilaicollective.com";
 const canonical = site + path;
-const jsonLd = {
+
+// Site-wide identity node. Ilai is a US, human-led content studio for experts.
+// ProfessionalService + Organization so both general and local/service search
+// (and AI assistants) resolve the entity, its offer model, and how to reach it.
+// sameAs is intentionally empty until real, owned social URLs are confirmed —
+// do not invent profiles.
+const orgLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["Organization", "ProfessionalService"],
+  "@id": site + "/#org",
   name: "Ilai Collective",
   url: site,
   description,
   slogan: "Proven to spread.",
-  areaServed: "US",
+  logo: site + "/logo-mark.png",
+  image: site + "/og.png?v=3",
   email: "hello@ilaicollective.com",
+  areaServed: { "@type": "Country", name: "United States" },
+  address: { "@type": "PostalAddress", addressCountry: "US" },
+  priceRange: "From $5,500/mo per service line",
+  knowsAbout: [
+    "Content strategy",
+    "Podcast production",
+    "Short-form video",
+    "Social media marketing",
+    "Community engagement",
+    "Search engine optimization",
+    "Generative engine optimization",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "sales",
+    email: "hello@ilaicollective.com",
+    areaServed: "US",
+    availableLanguage: "English",
+  },
+  makesOffer: [
+    {
+      "@type": "Offer",
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        priceCurrency: "USD",
+        price: 5500,
+        minPrice: 5500,
+        unitText: "MONTH",
+      },
+      itemOffered: {
+        "@type": "Service",
+        name: "Social content production",
+        description:
+          "Research, writing, editing, and multi-platform publishing of short-form and long-form content in your voice.",
+      },
+    },
+    {
+      "@type": "Offer",
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        priceCurrency: "USD",
+        price: 5500,
+        minPrice: 5500,
+        unitText: "MONTH",
+      },
+      itemOffered: {
+        "@type": "Service",
+        name: "Podcast production",
+        description:
+          "Full episode editing, clips and reels, long-form video, show notes, and SEO from a single recording cadence.",
+      },
+    },
+    {
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: "Community engagement",
+        description:
+          "First-response community engagement in your voice, offered as an add-on to a production line.",
+      },
+    },
+  ],
   sameAs: [],
 };
+
+const allSchemas = [orgLd, ...schemas];
 ---
 
 <!doctype html>
@@ -92,7 +169,9 @@ const jsonLd = {
       rel="stylesheet"
     />
 
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {allSchemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
 
     <!-- Mobile-only: ensure anchored headings clear the fixed pill header
          (pill ~46px + top padding), so a jumped-to heading never lands
