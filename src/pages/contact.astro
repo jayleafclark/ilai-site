@@ -94,7 +94,8 @@ const pricing = [
             <form
               class="lead-form"
               data-lead-form
-              data-endpoint="https://ilai-lead.REPLACE.workers.dev"
+              data-endpoint="https://api.web3forms.com/submit"
+              data-access-key="YOUR_WEB3FORMS_ACCESS_KEY"
               novalidate
             >
               <!-- Honeypot: hidden from people, tempting to bots -->
@@ -281,7 +282,7 @@ const pricing = [
           creates, and hand off at your funnel so your team can close.
         </p>
         <a href="/work/dr-caroline-leaf" class="reassure__link">
-          See how it works
+          See the results
           <span class="btn__arrow reassure__arrow" aria-hidden="true" set:html={arrow} />
         </a>
       </div>
@@ -292,7 +293,7 @@ const pricing = [
           data-decimals="0"
           data-suffix="%"
         >100%</span>
-        <span class="reassure__lab">human-led, human-gated. No AI slop.</span>
+        <span class="reassure__lab">human-led, human-gated.</span>
       </div>
     </div>
   </section>
@@ -1065,9 +1066,9 @@ const pricing = [
 </style>
 
 <script>
-  // Lead form: POST to the Cloudflare Worker; if the endpoint is not set yet or
-  // the request fails, fall back to a pre-filled email so a visitor is never
-  // stuck. Honeypot ("company") silently drops bots.
+  // Lead form: POST to Web3Forms, which emails the submission straight to us.
+  // If the access key is not set yet or the request fails, fall back to a
+  // pre-filled email so a visitor is never stuck. Honeypot drops bots.
   const form = document.querySelector<HTMLFormElement>("[data-lead-form]");
   if (form) {
     const statusEl = form.querySelector<HTMLElement>("[data-form-status]");
@@ -1075,6 +1076,7 @@ const pricing = [
     const btn = form.querySelector<HTMLButtonElement>(".lead-form__submit");
     const lab = form.querySelector<HTMLElement>(".lead-form__submit-lab");
     const endpoint = form.getAttribute("data-endpoint") || "";
+    const accessKey = form.getAttribute("data-access-key") || "";
     const val = (n: string) =>
       (form.querySelector(`[name="${n}"]`) as HTMLInputElement | null)?.value.trim() || "";
 
@@ -1107,17 +1109,28 @@ const pricing = [
       if (lab) lab.textContent = "Sending…";
       if (statusEl) statusEl.hidden = true;
 
-      const endpointReady =
-        endpoint && !endpoint.includes("REPLACE") && !endpoint.includes("example");
+      const configured = !!endpoint && !!accessKey && !accessKey.includes("YOUR_");
 
       try {
-        if (!endpointReady) throw new Error("endpoint-not-configured");
+        if (!configured) throw new Error("not-configured");
         const res = await fetch(endpoint, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            access_key: accessKey,
+            subject: "New free teardown request from the Ilai site",
+            from_name: data.name,
+            name: data.name,
+            email: data.email,
+            budget: data.budget || "Not specified",
+            message: data.about,
+          }),
         });
-        if (!res.ok) throw new Error("bad-status");
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || !json.success) throw new Error("bad-status");
         form.hidden = true;
         if (doneEl) doneEl.hidden = false;
       } catch (err) {
