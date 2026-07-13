@@ -1,6 +1,6 @@
 ---
 title: "How Experts Are Everywhere Without Living Online"
-description: "The real system behind experts who show up on every platform: a steady recording cadence turned into 120+ pieces a month across up to 13 channels, run by people."
+description: "The real system behind experts who show up on every platform: a steady recording cadence turned into 350+ posts a month across up to 13 channels, run by people."
 pubDate: 2026-04-14
 author: "Ilai Collective"
 tags: ["content system", "repurposing", "founders", "podcast"]
@@ -22,7 +22,7 @@ The point of the cadence is that the expert only has to do the part that needs t
 
 This is where the volume comes from. A single long-form recording holds far more than one video. Worked through properly, one episode yields up to 50 vertical clips, each a self-contained idea with captions, framing, and a first second that holds attention.
 
-Around those clips the team builds the rest: carousels that walk through an argument, quote cards from the sharpest lines, a written article for search, and a newsletter. Stack that across a month of recordings and it adds up to 120+ original pieces, published as 350+ posts across up to 13 platforms.
+Around those clips the team builds the rest: carousels that walk through an argument, quote cards from the sharpest lines, a written article for search, and a newsletter. Stack that across a month of recordings and it adds up to 350+ posts a month across up to 13 platforms.
 
 The same idea can appear on that many platforms because each one gets its own shape. A short for TikTok is framed and captioned differently from the same moment on LinkedIn. The team adapts every piece to where it lives instead of copying one file everywhere.
 
