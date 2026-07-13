@@ -45,15 +45,16 @@ const teardown = [
 
 // Starts-at rows. Numeric ones animate with the shared counter.
 const pricing = [
-  { k: "Teardown", free: true, note: "yours to keep" },
-  { k: "Pilot month", value: 1950, prefix: "$", note: "fully credited" },
-  { k: "Engagements", value: 5500, prefix: "from $", suffix: "/mo", note: "" },
+  { k: "Free teardown", free: true, note: "yours to keep" },
+  { k: "Social", value: 5500, prefix: "from $", suffix: "/mo", note: "" },
+  { k: "Podcast production", value: 5500, prefix: "from $", suffix: "/mo", note: "" },
+  { k: "Community engagement", text: "Add-on", note: "" },
 ];
 ---
 
 <Layout
   title="Get your free teardown | Ilai Collective"
-  description="Get a free teardown of your brand, market, and audience from Ilai Collective, a real US team building human-led content that grows the audience you'll sell to. Pilot month $1,950 fully credited, engagements from $5,500/mo."
+  description="Get a free teardown of your brand, market, and audience from Ilai Collective, a real US team building human-led content that grows your audience. Social or podcast production from $5,500/mo, community engagement as an add-on."
   path="/contact"
 >
   <section class="contact section">
@@ -88,7 +89,7 @@ const pricing = [
             <p class="capacity__p">
               Leave a few details and we'll send a free teardown of your brand, market, and
               audience, yours to keep whether or not we work together. If a spot is open, we'll
-              map out your pilot month.
+              map out where we'd start.
             </p>
 
             <form
@@ -217,7 +218,12 @@ const pricing = [
               pricing.map((p) => (
                 <li class="starts__row">
                   <span class="starts__k">{p.k}</span>
-                  {p.free ? (
+                  {p.text ? (
+                    <span class="starts__v">
+                      <span class="starts__v--free">{p.text}</span>
+                      {p.note && <span class="starts__note"> {p.note}</span>}
+                    </span>
+                  ) : p.free ? (
                     <span class="starts__v">
                       <span class="starts__v--free">Free</span>
                       {p.note && <span class="starts__note"> {p.note}</span>}
@@ -239,19 +245,7 @@ const pricing = [
               ))
             }
           </ul>
-          <div class="starts__scale" aria-hidden="true">
-            <div class="starts__track">
-              <span class="starts__seg starts__seg--free" style="--w:35%;background:var(--green)"></span>
-              <span class="starts__seg starts__seg--pilot" style="--w:35%;background:var(--brand)"></span>
-              <span class="starts__seg starts__seg--ongoing" style="--w:100%;background:var(--coral)"></span>
-            </div>
-            <div class="starts__ticks">
-              <span class="starts__tick"><b style="color:var(--green)">Free</b> Teardown</span>
-              <span class="starts__tick"><b style="color:var(--brand)">$1,950</b> Pilot</span>
-              <span class="starts__tick"><b style="color:var(--coral)">from $5,500/mo</b> Ongoing</span>
-            </div>
-          </div>
-          <p class="starts__hint">The pilot is credited back in full when you continue.</p>
+          <p class="starts__hint">Combine services or start with one. Each line is less than a single in-house hire.</p>
         </div>
 
         <!-- Trust card -->
@@ -278,8 +272,8 @@ const pricing = [
       <div class="reassure__copy">
         <span class="eyebrow eyebrow--star">Why it's worth the call</span>
         <p class="reassure__line">
-          We build the audience you'll sell to, track the interest and intent it
-          creates, and hand off at your funnel so your team can close.
+          We grow your audience and keep it engaged, show you the interest that
+          builds, and hand off cleanly at your funnel. You own the selling.
         </p>
         <a href="/work/dr-caroline-leaf" class="reassure__link">
           See the results
@@ -801,72 +795,6 @@ const pricing = [
     color: var(--muted);
     letter-spacing: 0;
   }
-  .starts__scale {
-    margin-top: var(--sp-6);
-  }
-  .starts__track {
-    position: relative;
-    height: 8px;
-  }
-  .starts__seg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 0;
-    border-radius: 999px;
-    transition: width 1.1s var(--ease);
-  }
-  /* Painted back-to-front so each price reads against a shared 0-100% track:
-     Ongoing (from $5,500 = 100%), Pilot ($1,950 ≈ 35%), Free teardown (start marker). */
-  .starts__seg--ongoing {
-    z-index: 1;
-    opacity: 0.9;
-  }
-  .starts__seg--pilot {
-    z-index: 2;
-  }
-  .starts__seg--free {
-    z-index: 3;
-    max-width: 10px;
-    transition-duration: 0.7s;
-  }
-  .starts.is-visible .starts__seg {
-    width: var(--w);
-  }
-  .starts__ticks {
-    margin-top: var(--sp-3);
-    display: flex;
-    justify-content: space-between;
-    gap: var(--sp-2);
-  }
-  .starts__tick {
-    flex: 1 1 0;
-    min-width: 0;
-    font-size: 0.75rem;
-    line-height: 1.35;
-    color: var(--muted);
-    display: flex;
-    flex-direction: column;
-  }
-  .starts__tick:nth-child(2) {
-    text-align: center;
-  }
-  .starts__tick:last-child {
-    text-align: right;
-  }
-  .starts__tick b {
-    font-family: var(--font-accent);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    /* allow the longest price ("from $5,500/mo") to wrap instead of overflowing */
-    overflow-wrap: anywhere;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .starts__seg {
-      transition: none;
-    }
-  }
   .starts__hint {
     margin-top: var(--sp-4);
     font-size: var(--fs-sm);
@@ -1046,13 +974,8 @@ const pricing = [
       display: none;
     }
 
-    /* Keep ONE pricing statement: the 3-row card. Hide the tick-scale bar —
-       it restates the same three prices as decorative labels. */
     .starts {
       padding: var(--sp-5);
-    }
-    .starts__scale {
-      display: none;
     }
 
     /* Merge the two reassurance bands into one on mobile: the footer

@@ -123,14 +123,14 @@ const pricing = [
     d: "A read on your brand, market, and audience. Yours to keep whether or not we work together.",
   },
   {
-    k: "Pilot month",
-    v: "$1,950",
-    d: "One month to watch the operation run on your account. Fully credited toward your first engagement.",
+    k: "Social",
+    v: "from $5,500/mo",
+    d: "Research, writing, publishing across up to 13 platforms, and your live dashboard.",
   },
   {
-    k: "Engagements",
+    k: "Podcast production",
     v: "from $5,500/mo",
-    d: "The full studio: research, production, publishing across up to 13 platforms, engagement, and your live dashboard.",
+    d: "Full episode production, scripts, editing, and up to 50 clips from each long-form.",
   },
 ];
 ---
@@ -398,12 +398,12 @@ const pricing = [
       <div class="wwd-scope__copy" data-reveal>
         <span class="eyebrow eyebrow--star eyebrow--ondark">Where we hand off</span>
         <h2 class="wwd-scope__title">
-          We bring the attention and show you who's ready to buy.
+          We bring the attention and hand you the interest it creates.
         </h2>
         <p class="wwd-scope__body">
-          We grow the audience, earn the attention, and flag the people who look ready
-          to buy. Where your funnel begins, we hand off. You close it.
-          We report interest and intent. We never claim your sales as ours.
+          We grow the audience, earn the attention, and show you the interest it
+          creates. Where your funnel begins, we hand off. You close it. We report
+          interest and intent, and never claim your sales as ours.
         </p>
       </div>
       <div class="wwd-funnel" data-reveal data-reveal-delay="1">
@@ -420,7 +420,7 @@ const pricing = [
             <span class="wwd-fstep__who">Us</span>
             <span class="wwd-fstep__k">Interest</span>
           </div>
-          <span class="wwd-fstep__d">Engagement and buying-intent signals surfaced.</span>
+          <span class="wwd-fstep__d">Engagement and interest signals surfaced.</span>
           <span class="wwd-fstep__bar"><i style="--w:66%"></i></span>
         </div>
         <div class="wwd-fstep wwd-fstep--close">
@@ -442,14 +442,13 @@ const pricing = [
         <span class="eyebrow eyebrow--star">Starts at</span>
         <h2 class="wwd-price__h">See it run <span class="hl">before you commit.</span></h2>
         <p class="lead wwd-price__lead">
-          Every engagement opens with a free teardown, then a pilot month you can walk away
-          from. No annual contract, no lock-in on day one.
+          Every engagement opens with a free teardown. Pick one service or combine them.
+          No annual contract, no lock-in.
         </p>
       </div>
       <div class="wwd-price__grid">
         {pricing.map((p, i) => (
-          <div class={`wwd-price ${i === 2 ? "wwd-price--feature" : ""}`} data-reveal data-reveal-delay={String(i + 1)}>
-            {i === 2 && <span class="wwd-price__flag">The full studio</span>}
+          <div class="wwd-price" data-reveal data-reveal-delay={String(i + 1)}>
             <span class="wwd-price__k">{p.k}</span>
             <span class="wwd-price__v">{p.v}</span>
             <p class="wwd-price__d muted">{p.d}</p>
@@ -461,7 +460,7 @@ const pricing = [
           Get your free teardown<span class="btn__arrow" aria-hidden="true" set:html={arrow} />
         </a>
         <p class="wwd-price__fine muted">
-          The pilot month is fully credited toward your first engagement.
+          Community engagement is an add-on to either service. No annual contract.
         </p>
       </div>
     </div>
