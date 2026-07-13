@@ -3086,6 +3086,17 @@ const faqLd = {
       justify-content: center;
       min-height: 48px;
     }
+    /* Price: stack the amount over its caption so "$5,500/mo" doesn't crush
+       the "per service line…" note into a narrow 4-line column beside it. */
+    .startcard__price {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--sp-1);
+      margin-top: var(--sp-5);
+    }
+    .startcard__per {
+      max-width: 34ch;
+    }
 
     /* ---------- 3c. BLOG -> 2 cards, tighter header ---------- */
     .blog__grid {
